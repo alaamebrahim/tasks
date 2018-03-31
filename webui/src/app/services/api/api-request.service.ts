@@ -24,7 +24,7 @@ export class ApiRequestService {
         const token = this.userInfoService.getStoredToken();
         headers = headers.append('Content-Type', 'application/json');
         if (token !== null) {
-            headers = headers.append('token', token);
+            headers = headers.append('Authorization', 'Bearer ' +  token);
         }
         return headers;
     }
