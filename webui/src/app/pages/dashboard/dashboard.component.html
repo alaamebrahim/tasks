@@ -1,0 +1,44 @@
+<div class="container">
+    <div class="row">
+        <div class="col col-12 col-md-6 mb-4">
+            <div class="card" (click)="navigateUserTo('verses')">
+                <img src="assets/images/cards/quran.png" class="card-img-top" />
+                <div class="card-body verses-desc text-center">
+                    {{'dashboard.verses.description' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6 mb-4">
+            <div class="card" (click)="navigateUserTo('pray')">
+                <img src="assets/images/cards/pray.png" class="card-img-top" />
+                <div class="card-body pray-desc text-center">
+                    {{'dashboard.pray.description' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6 mb-4">
+            <div class="card" (click)="navigateUserTo('prayer')">
+                <img src="assets/images/cards/prayertimes.png" class="card-img-top" />
+                <div class="card-body prayertimes-desc text-center">
+                    {{'dashboard.prayer.description' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6 mb-4">
+            <div class="card" (click)="navigateUserTo('qibla')">
+                <img src="assets/images/cards/compass.png" class="card-img-top" />
+                <div class="card-body qibla-desc text-center">
+                    {{'dashboard.qibla.description' | translate}}
+                </div>
+            </div>
+        </div>
+        <div class="col col-12 col-md-6 mx-auto mb-4">
+            <div class="card" (click)="navigateUserTo('contact')">
+                <img src="assets/images/cards/contactus.png" class="card-img-top" />
+                <div class="card-body contact-desc text-center">
+                    {{'dashboard.contact.description' | translate}}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

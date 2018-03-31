@@ -1,0 +1,140 @@
+{
+    "general": {
+        "save": "Save",
+        "send": "Send Mail",
+        "reset": "Reset",
+        "listen": "Listen",
+        "listen2": "Listen yourself",
+        "listenUrSelf": "That was great ! You can listen to yourself by pressing 'LISTEN' button.",
+        "finalGreat": "Nice, Let's go for next Aya. Or if you want you can repeat it again one more time, that would be agood idea.",
+        "listenAgain": "Listen again!",
+        "pause": "Pause",
+        "stop": "Stop",
+        "record": "Try to Say it.",
+        "recordAgain": "Say it again.",
+        "niceMessage": "That was such a great prgoress! , Keep going :)",
+        "nextAya": "Go to next aya"
+    },
+    "user": {
+        "table": {
+            "fields": {
+                "id": "#",
+                "username": "User name",
+                "fullName": "Full name",
+                "password": "Password",
+                "lastName": "Last name",
+                "email": "Email",
+                "phone": "Phone",
+                "address1": "Address 1",
+                "address2": "Address 2",
+                "country": "Country",
+                "postal": "Postal code",
+                "isActive": "Activated",
+                "isBlocked": "Blocked",
+                "roles": "Authorizations",
+                "Authorization": "Authorization"
+            },
+            "head": {
+                "title": "Users",
+                "socialUserRegister": "One more step and we are done!"
+            },
+            "popovers": {
+                "audioList": "View user records"
+            }
+        },
+        "buttons": {
+            "login": "Login!",
+            "facebookLogin": "Facebook login!",
+            "logout": "Logout!"
+        },
+        "profile": {
+            "edit": {
+                "head": "Edit your profile data."
+            }
+        },
+        "unauthorized": "You do not have enough permissions to access that page.",
+        "errors": {
+            "required": "Name is required.",
+            "minlength": "Name must be at least 3 characters long.",
+            "email": "Email that you entered is not valid email",
+            "email-required": "Email field is required",
+            "profile-update-error": "Ow, something went wrong, please try again."
+        },
+        "success": {
+            "profile-updated": "You have successfully updated your profile"
+        }
+    },
+    "dashboard": {
+        "verses": {
+            "title": "VERSOS CORTOS",
+            "description": "Listen and say some short verses."
+        },
+        "pray": {
+            "title": "HOW TO PRAY",
+            "description": "Learn how to pray."
+        },
+        "prayer": {
+            "title": "PRAYER TIMES",
+            "description": "Check prayer times and qibla directions."
+        },
+        "contact": {
+            "title": "CONTACT US",
+            "description": "Feel free to contact us for any type of help."
+        }
+    },
+    "verses": {
+        "fateha": "Al-Fatihah",
+        "fateha-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "nasr": "An-Nasr",
+        "nasr-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "falaq": "Al-Falaq",
+        "falaq-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "ekhlas": "Al-ikhlas",
+        "ekhlas-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "kaferoon": "Al-kaferun",
+        "kaferoon-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "nas": "An-Nas",
+        "nas-description": "Lorem Ipsum is simply dummy text of the printing and typesetting industry.",
+        "listen": "Listen it, then say it"
+    },
+    "verse": {
+        "name": "Verse name: ",
+        "description": "About this verse",
+        "tokensNo": "Number of tokens",
+        "start": "Start"
+    },
+    "token": {
+        "firstStatement": "Now let us help you to say it well, Press 'Try to say it' button and try to say what you have listened."
+    },
+    "contact": {
+        "pageTitle": "Contact us",
+        "name": "Your name ",
+        "email": "Your e-mail ",
+        "subject": "Your message ",
+        "errors": {
+            "name": {
+                "length": "Your name must be at least 3 characters to 40 characters."
+            },
+            "mail": "Please enter a valid email.",
+            "subject": "Your message must be descriptive enough so we can help you."
+        },
+        "success": "Your mail was sent successfuly, we will work on replying to you as soon as possible.",
+        "fail": "Unfortunatly, your mail was not sent, please try again later, or you can send us mail at alaamebrahim91@gmail.com."
+    },
+    "prayerTimes": {
+        "geolocation":{
+            "not-supported": "We do not have permission to get your location, Please enable it from your browser settings to get the application to work!"
+        },
+        "today-title": "Prayer Times Today",
+        "upcoming": "Upcoming prayer",
+        "calcMethods": {
+            "title":"Calculation methods",
+            "MWL": "Muslim World League",
+            "ISNA": "Islamic Society of North America",
+            "Egypt": "Egyptian General Authority of Survey",
+            "Makkah": "Umm al-Qura University, Makkah",
+            "Karachi": "University of Islamic Sciences, Karachi"
+        },
+        "settings": "Settings"
+    }
+}

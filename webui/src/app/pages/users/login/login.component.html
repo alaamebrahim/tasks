@@ -1,0 +1,48 @@
+<nb-layout>
+    <nb-layout-column>
+        <div class="container">
+            <div class="row">
+                <div class="col col-12 text-center"><h1>NEW MUSLIMS</h1></div>
+            </div>
+            <div class="row justify-content-center">
+                <div class="col col-md-6 self-align-center">
+                    <nb-card>
+                        <nb-card-header>
+                            Login to site
+                        </nb-card-header>
+                        <nb-card-body scrollable>
+                            <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
+                                <div class="form-group">
+                                    <label class="legend-label-color" for="username" [translate]="'user.table.fields.username'"></label>
+                                    <input class="form-control" type="email" placeholder="email" id="username" name="email" [(ngModel)]="model.email"
+                                        #username="ngModel" required/>
+                                </div>
+                                <div class="form-group">
+                                    <label class="legend-label-color" for="password" [translate]="'user.table.fields.password'"></label>
+                                    <input class="form-control" id="password" type="password" placeholder="Password" name="password" [(ngModel)]="model.password"
+                                        #password="ngModel" required/>
+                                </div>
+                                <div class="form-group">
+                                    <button type="submit" class="btn btn-info btn-sm self-align-center" [translate]="'user.buttons.login'">LOG IN</button>
+                                </div>
+                            </form>
+                            <!--div class="container">
+                                <div class="row">
+                                    <div class="col col-12 text-center m-2">
+                                        <button class="btn btn-primary btn-sm text-center animated bounce" (click)="socialSignIn('facebook')">
+                                            <i class="fa fa-facebook fa-sm"></i> LOGIN USING FACEBOOK</button>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="s-login-pg-foot text-center m-2">
+                                <div *ngIf="errMsg" style="color:indianred; font-weight: bold">{{errMsg}}</div>
+                            </div-->
+                        </nb-card-body>
+                    </nb-card>
+                </div>
+            </div>
+        </div>
+        <ng-snotify></ng-snotify>
+        <ngx-loading-bar></ngx-loading-bar>
+    </nb-layout-column>
+</nb-layout>

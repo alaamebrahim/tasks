@@ -1,0 +1,98 @@
+@import '../../../themes';
+// @import '../../../styles';
+@include nb-install-component() {
+
+  .verses-desc {
+    color: #56d2c4;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .pray-desc {
+    color: #af927a;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .prayertimes-desc {
+    color: #fe7230;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .contact-desc {
+    color: #b87870;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  .qibla-desc {
+    color: #907eb1;
+    font-size: 20px;
+    font-weight: bold;
+    text-transform: capitalize;
+  }
+  nb-card-body {
+    display: flex;
+    flex-direction: column;
+    padding: 0;
+    font-family: 'Exo';
+  }
+
+  .picture {
+    background-position: bottom center;
+    background-repeat: no-repeat;
+    background-size: cover;
+    position: relative;
+    border-top-left-radius: nb-theme(card-border-radius);
+    border-top-right-radius: nb-theme(card-border-radius);
+    flex: 1;
+  }
+
+  .details {
+    padding: 1.25rem 1.25rem 0;
+
+    .title {
+      font-family: nb-theme(font-secondary);
+      font-weight: nb-theme(font-weight-bold);
+      color: nb-theme(color-fg-heading);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      color: royalblue;
+
+      @include nb-for-theme(cosmic) {
+        font-weight: nb-theme(font-weight-bolder);
+      }
+    }
+
+    .description {
+      text-align: justify;
+      color: nb-theme(color-fg-text);
+      font-weight: nb-theme(font-weight-light);
+
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-height: calc(1rem * 8 * #{nb-theme(line-height)});
+    }
+  }
+
+  nb-card-footer {
+    display: flex;
+    justify-content: space-around;
+    padding: 0.75rem 0;
+    border: none;
+
+    a {
+      text-decoration: none;
+      color: nb-theme(color-fg);
+
+      &:hover {
+        color: nb-theme(color-fg-heading);
+      }
+
+      i {
+        font-size: 1.75rem;
+      }
+    }
+  }
+}

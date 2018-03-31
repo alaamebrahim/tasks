@@ -1,0 +1,109 @@
+<div class="row">
+    <div class="col-md-12">
+        <nb-card>
+            <nb-card-header [translate]="'user.table.head.title'"></nb-card-header>
+            <!--nb-card-body>
+                <ngx-datatable
+                        [rows]="rows"
+                        [columns]="columns"
+                        [headerHeight]="45"
+                        (activate)="onUserEvent($event)"
+                        [rowHeight]="'auto'"
+                        [columnMode]="'flex'"
+                        [scrollbarV]="false"
+                >
+                </ngx-datatable>
+            </nb-card-body-->
+            <nb-card-body>
+                <div class="container">
+                    <div class="row" *ngFor="let c of rows">
+                        <div class="col col-12 contact">
+                            <nb-user [picture]="c.image" [name]="c.fullName" [title]="c.email" size="large"></nb-user>
+                            <nb-checkbox [(ngModel)]="c.active" (change)="changeStatus(c,'active')" [status]="c.active ? 'success' : 'danger'">Enabled</nb-checkbox>
+                            <nb-checkbox [(ngModel)]="c.blocked" (change)="changeStatus(c,'block')" [status]="c.blocked ? 'success' : 'danger'">Blocked</nb-checkbox>
+                            <button [class]="c.show === true ? 'btn btn-xs btn-hero-danger' : 'btn btn-xs btn-hero-info'" (click)="c.show = (c.show === false) ? true : false">
+                                <i *ngIf="!c.show" class="fa fa-expand"></i>
+                                <i *ngIf="c.show" class="fa fa-compress"></i>
+                            </button>
+                        </div>
+                        <nb-tabset *ngIf="c.show" style="width:100%" class="p-3">
+                            <nb-tab tabTitle="Records">
+                                <div class="col col-12">
+                                    <div *ngFor="let record of c.records">
+                                        <div class="d-inline">
+                                            <div class="row mt-1">
+                                                <div class="col col-1">
+                                                    <button (click)="playAudio(record)" class="btn w-100 h-100 btn-hero-success">
+                                                        <i class="fa fa-play"></i>
+                                                    </button>
+                                                </div>
+                                                <div class="col border-bottom">
+                                                    <div class=" align-middle text-center pt-1 ">{{record.createdAt | date:'dd/MM/yyyy'}}</div>
+                                                    <div class="align-middle text-center pt-1 text-info">{{record.token.text}}</div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </nb-tab>
+                            <nb-tab tabTitle="User info">
+                              <div class="container">
+                                  <div class="row">
+                                    <div class="col col-12">
+                                        <h5>{{'user.table.fields.country' | translate}}</h5>
+                                        <p>{{c.country}}</p>
+                                    </div>
+                                    <div class="col col-12">
+                                        <h5>{{'user.table.fields.phone' | translate}}</h5>
+                                        <p>{{c.phone}}</p>
+                                    </div>
+                                    <div class="col col-12">
+                                        <h5>{{'user.table.fields.address1' | translate}}</h5>
+                                        <p>{{c.address1}}</p>
+                                    </div>
+                                    <div class="col col-12">
+                                        <h5>{{'user.table.fields.address2' | translate}}</h5>
+                                        <p>{{c.address2}}</p>
+                                    </div>
+                                    <div class="col col-12">
+                                        <h5>{{'user.table.fields.postal' | translate}}</h5>
+                                        <p>{{c.postal}}</p>
+                                    </div>
+                                    <div class="col col-12">
+                                        <h5>{{'user.table.fields.roles' | translate}}</h5>
+                                        <p *ngFor="let r of c.role">
+                                            {{r.name}}
+                                        </p>
+                                    </div>
+                                  </div>
+                              </div>
+                            </nb-tab>
+                           </nb-tabset>
+                        
+                    </div>
+                </div>
+            </nb-card-body>
+        </nb-card>
+    </div>
+</div>
+<ng-template #userEdit let-row="row " let-value="value " let-i="index " ngx-datatable-cell-template>
+    <a routerLink="/home/users/edit/{{value}} " attr.data-itemid="{{value}} ">
+        <i class="fa fa-edit fa-2x "></i>
+    </a>
+</ng-template>
+<ng-template #isActive let-row="row " let-value="value " let-i="index " ngx-datatable-cell-template>
+    <div *ngIf="value " class="fa fa-check fa-2x text-success " (click)="changeUserState(row, 'deactivate') "></div>
+    <div *ngIf="!value " class="fa fa-exclamation fa-2x text-danger " (click)="changeUserState(row, 'activate') "></div>
+</ng-template>
+<ng-template #isBlocked let-row="row " let-value="value " let-i="index " ngx-datatable-cell-template>
+    <div *ngIf="value " class="fa fa-check fa-2x text-success " (click)="changeUserState(row, 'unblock') "></div>
+    <div *ngIf="!value " class="fa fa-exclamation fa-2x text-danger " (click)="changeUserState(row, 'block') "></div>
+</ng-template>
+<ng-template #role let-row="row " let-value="value " let-i="index " ngx-datatable-cell-template>
+    <select name="role " (change)="changeUserRole($event.target.value) ">
+        <option *ngFor="let role of roles " [value]="role ">{{role.name}}</option>
+    </select>
+</ng-template>
+<audio #userAudio>
+    <source>
+</audio>

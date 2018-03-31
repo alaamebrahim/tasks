@@ -1,0 +1,56 @@
+<form (submit)="sendMail()" #f="ngForm" *ngIf="!sent">
+  <nb-card>
+    <nb-card-header>{{'contact.pageTitle' | translate}}</nb-card-header>
+    <nb-card-body>
+      <div class="container">
+        <div class="row">
+          <div class="col col-12">
+            <div class="form-group">
+              <label for="name" class="label-control">{{'contact.name' | translate}}</label>
+              <input type="text" name="fullName" id="name" 
+                [(ngModel)]="user.fullName" 
+                #fullName="ngModel"
+                placeholder="{{'contact.name' | translate}}" 
+                class="form-control" required/>
+                <p class="text-danger" *ngIf="fullName.invalid && ( fullName.touched) && fullName.errors?.required">{{'contact.errors.required' | translate}}</p>
+            </div>
+          </div>
+          <div class="col col-12">
+            <div class="form-group">
+              <label for="email" class="label-control">{{'contact.email' | translate}}</label>
+              <input type="text" name="mail" id="email" [(ngModel)]="user.mail" 
+                placeholder="{{'contact.email' | translate}}" class="form-control"
+                #email="ngModel" email />
+                <p class="text-danger" *ngIf="email.invalid && ( email.touched) && email.errors?.email">{{'contact.errors.mail' | translate}}</p>
+            </div>
+          </div>
+          <div class="col col-12">
+            <div class="form-group">
+              <label for="subject" class="label-control">{{'contact.subject' | translate}}</label>
+              <textarea name="subject" id="subject" [(ngModel)]="user.subject" 
+                placeholder="{{'contact.subject' | translate}}" 
+                class="form-control" rows="5"
+                #subject="ngModel"
+                 required>
+              </textarea>
+              <p class="text-danger" *ngIf="subject.invalid && (subject.touched) && subject.errors?.required">{{'contact.errors.subject' | translate}}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </nb-card-body>
+    <nb-card-footer>
+      <button [disabled]="f.invalid" type="submit" class="btn btn-hero-success">{{'general.send' | translate}}</button>
+    </nb-card-footer>
+  </nb-card>
+</form>
+<nb-card *ngIf="sent && success">
+  <nb-card-body>
+    {{'contact.success' | translate}}
+  </nb-card-body>
+</nb-card>
+<nb-card *ngIf="sent && !success">
+  <nb-card-body>
+    {{'contact.fail' | translate}}
+  </nb-card-body>
+</nb-card>

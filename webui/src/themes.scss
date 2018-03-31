@@ -1,0 +1,31 @@
+// import Nebular Theme System and the default theme
+@import '~@nebular/theme/styles/theming';
+@import '~@nebular/theme/styles/themes/default';
+@import url('https://fonts.googleapis.com/css?family=Exo');
+@font-face {
+    font-family: uthmani;
+    src: url('/assets/fonts/uthmani.otf');
+}
+// and change the variables you need, or simply leave the map empty to use the default values
+// let's make it blue-ish instead of the default white color
+$nb-themes: nb-register-theme((
+    font-main: unquote('"Exo","Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'),
+        header-bg: #56d2c4,
+        color-fg-heading: #56d2c4,
+        color-fg-highlight: #56d2c4,
+        separator: rgb(235, 235, 235),
+        color-fg-text: #000,
+        color-bg: #fcfcfd,
+        header-bg-custom: #56d2c4 url(assets/images/headerbg.png) repeat-x center center,
+        btn-font-size-md: 1.2rem,
+        link-color: #56d2c4,
+        link-color-hover: #4dc9ba,
+        color-success: #56d2c4,
+        footer-height: 3rem,
+), default, default); // let's leave it as default
+
+@mixin linear-gradient($direction, $color-stops...) {
+    background: nth(nth($color-stops, 1), 1);
+    background: -webkit-linear-gradient(legacy-direction($direction), $color-stops);
+    background: linear-gradient($direction, $color-stops);
+  }
