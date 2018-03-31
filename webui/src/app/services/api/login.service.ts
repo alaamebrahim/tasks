@@ -8,8 +8,8 @@ import 'rxjs/add/operator/catch';
 import { UserInfoService, LoginInfoInStorage } from '../user-info.service';
 import { ApiRequestService } from './api-request.service';
 import { SnotifyService } from 'ng-snotify';
-import { Http } from '@angular/http';
-import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { Http, RequestOptions, Headers } from '@angular/http';
+import { HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../../app-config';
 
 export interface LoginRequestParam {
@@ -32,7 +32,7 @@ export class LoginService {
         private router: Router,
         private userInfoService: UserInfoService,
         private apiRequest: ApiRequestService,
-        private http: HttpClient,
+        private http: Http,
         private appConfig: AppConfig,
         private notify: SnotifyService) {
     }
@@ -74,51 +74,14 @@ export class LoginService {
 
     getToken(email: string, password: string) {
         const me = this;
-
         const bodyData: LoginRequestParam = {
             'email': email,
             'password': password,
         };
         if (bodyData !== null) {
-            // Will use this BehaviorSubject to emit data that we want after ajax login attempt
-            const loginDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-            let loginInfoReturn: LoginInfoInStorage; // Object that we want to send back to Login Page
             return this.apiRequest.post('auth/login', bodyData)
                 .toPromise()
-                .then(jsonResp => {
-                    console.log(jsonResp.login);
-                    if (jsonResp !== undefined && jsonResp !== null && jsonResp.login === 'token_generated') {
-                        // Create a success object that we want to send back to login page
-                        console.log(jsonResp);
-                        loginInfoReturn = this.saveUserDataByToken(jsonResp.token);
-
-                        // store username and jwt token in session storage to keep user logged in between page refreshes
-                        this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
-                    } else {
-                        // console.log(jsonResp);
-                        // Here means user exists but credentials fails.
-                        loginInfoReturn = {
-                            'success': false,
-                            'message': 'Login failed',
-                            'landingPage': 'login',
-                            'exists': true
-                        };
-                    }
-                    loginDataSubject.next(loginInfoReturn);
-                    return loginInfoReturn;
-
-                },
-                    err => {
-                        console.log(err);
-                        // New user
-                        return loginInfoReturn = {
-                            'success': false,
-                            'exists': false,
-                            'message': err.url + ' >>> ' + err.statusText + '[' + err.status + ']',
-                            'landingPage': '/social-register'
-                        };
-                    });
-            // return loginDataSubject;
+                .then(jsonResp => jsonResp, err => console.log(err));
         }
     }
 
@@ -126,33 +89,43 @@ export class LoginService {
      * Get logged in user data using token returned from backend
      * @param token
      */
-    saveUserDataByToken(token: string) {
-        let loginInfoReturn: LoginInfoInStorage; // Object that we want to send back to Login Page
-        let headers = new HttpHeaders();
-        headers = headers.append('Content-Type', 'application/json');
+    getUserDataByToken(token: string) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
         if (token !== null) {
-            headers = headers.append('Authorization', 'Bearer ' + token);
+            headers.append('Authorization', 'Bearer ' + token);
         }
-        this.http.get(this.appConfig.baseApiPath + 'auth/user', {headers: headers}).subscribe(Response => {
-            console.log(Response);
-            /*loginInfoReturn = {
+        const opts = new RequestOptions();
+        opts.headers = headers;
+        return this.http.get(this.appConfig.baseApiPath + 'auth/user', opts)
+            .toPromise()
+            .then(resp => resp.json(), error => console.log(error));
+    }
+
+    saveUserDataInSession(userData: any, token: string) {
+        // Will use this BehaviorSubject to emit data that we want after ajax login attempt
+        const loginDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+        let loginInfoReturn: LoginInfoInStorage; // Object that we want to send back to Login Page
+        if (userData.message === 'authenticated_user') {
+            loginInfoReturn = {
                 'success': true,
-                'message': jsonResp.message,
+                'message': userData.message,
                 'landingPage': this.landingPage,
                 'exists': true,
                 'user': {
-                    'id': null,
-                    'userName': null,
-                    'email': null,
-                    'displayName': jsonResp.item.fullName,
-                    'token': jsonResp.item.token,
-                    'role': jsonResp.item.roles,
-                    'image': jsonResp.item.image,
-                    'locale': jsonResp.item.locale,
+                    'id': userData.data.id,
+                    'userName': userData.data.name,
+                    'email': userData.data.email,
+                    'displayName': userData.data.display_name,
+                    'token': token,
+                    'role': userData.data.role_id,
+                    'image': null,
+                    'locale': null,
                 }
-            };*/
-        });
-        return loginInfoReturn;
+            };
+            this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
+            return loginInfoReturn;
+        }
     }
 
 

@@ -1,15 +1,16 @@
-import {Component, OnDestroy, OnInit} from '@angular/core';
-import {LoginService} from '../../../services/api/login.service';
-import {Router} from '@angular/router';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { LoginService } from '../../../services/api/login.service';
+import { Router } from '@angular/router';
 // import {AuthService} from 'angular2-social-login';
 /*import {
     AuthService,
     FacebookLoginProvider,
 } from 'angular5-social-login';*/
-import {TranslateService} from '@ngx-translate/core';
+import { TranslateService } from '@ngx-translate/core';
 import { Snotify, SnotifyService } from 'ng-snotify';
 import { LocaleService } from '../../../services/api/locale.service';
 import { NbSpinnerService } from '@nebular/theme';
+import { LoginInfoInStorage } from '../../../services/user-info.service';
 
 @Component({
     selector: 'app-login',
@@ -29,7 +30,7 @@ export class LoginComponent implements OnInit {
         private loginService: LoginService,
         private translator: LocaleService,
         // private socialAuthService: AuthService,
-        private notify: SnotifyService) {}
+        private notify: SnotifyService) { }
 
     ngOnInit() {
         // reset login status
@@ -55,37 +56,20 @@ export class LoginComponent implements OnInit {
     login() {
         this.loginService.getToken(this.model.email, this.model.password)
             .then(resp => {
-                    console.log(resp);
-                    if (resp) {
-                        if (resp.success !== true) {
-                            console.log(resp.message);
-                            this.errMsg = resp.message;
-                            return;
-                        }
-                        this.router.navigate(['home/dashboard']);
-                        console.log(resp.message);
-                    }
-                },
-                errResponse => {
-                    console.log(errResponse);
-                    switch (errResponse.status) {
-                        case 401:
-                            this.errMsg = 'Username or password is incorrect';
-                            break;
-                        case 404:
-                            this.errMsg = 'Service not found';
-                            break;
-                        case 408:
-                            this.errMsg = 'Request Timedout';
-                            break;
-                        case 500:
-                            this.errMsg = 'Internal Server Error';
-                            break;
-                        default:
-                            this.errMsg = 'Server Error';
-                    }
+                // console.log(resp);
+                if (resp.login === 'token_generated') {
+                    // console.log('Yes, token is generated');
+                    this.loginService.getUserDataByToken(resp.data.token)
+                        .then(userResp => {
+                            // console.log(userResp);
+                            this.loginService.saveUserDataInSession(userResp, resp.data.token);
+                            this.router.navigate(['home/dashboard']);
+                        }, error => console.log(error));
+                    // this.router.navigate(['home/dashboard']);
+                } else {
+
                 }
-            );
+            }, errResponse => errResponse);
     }
 
     onSignUp() {
