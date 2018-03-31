@@ -2,10 +2,10 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {LoginService} from '../../../services/api/login.service';
 import {Router} from '@angular/router';
 // import {AuthService} from 'angular2-social-login';
-import {
+/*import {
     AuthService,
     FacebookLoginProvider,
-} from 'angular5-social-login';
+} from 'angular5-social-login';*/
 import {TranslateService} from '@ngx-translate/core';
 import { Snotify, SnotifyService } from 'ng-snotify';
 import { LocaleService } from '../../../services/api/locale.service';
@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
         private router: Router,
         private loginService: LoginService,
         private translator: LocaleService,
-        private socialAuthService: AuthService,
+        // private socialAuthService: AuthService,
         private notify: SnotifyService) {}
 
     ngOnInit() {
@@ -37,7 +37,7 @@ export class LoginComponent implements OnInit {
     }
 
 
-    public socialSignIn(socialPlatform: string) {
+    /*public socialSignIn(socialPlatform: string) {
         let socialPlatformProvider;
         if (socialPlatform === 'facebook') {
             socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
                 return this.loginService.performLogin(userData);
             }
         );
-    }
+    }*/
 
     login() {
         this.loginService.getToken(this.model.email, this.model.password)

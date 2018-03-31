@@ -1,9 +1,9 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { LocaleService } from '../../services/api/locale.service';
-import {
+/*import {
   AuthService,
   FacebookLoginProvider,
-} from 'angular5-social-login';
+} from 'angular5-social-login';*/
 import { Router } from '@angular/router';
 import { LoginService } from '../../services/api/login.service';
 import { SnotifyService } from 'ng-snotify';
@@ -19,14 +19,14 @@ export class LandingPageComponent implements OnInit {
     private router: Router,
     private loginService: LoginService,
     private translator: LocaleService,
-    private socialAuthService: AuthService,
+    // private socialAuthService: AuthService,
     private notify: SnotifyService
   ) { }
 
   ngOnInit() {
   }
 
-  public socialSignIn(socialPlatform: string) {
+  /*public socialSignIn(socialPlatform: string) {
     let socialPlatformProvider;
     if (socialPlatform === 'facebook') {
         socialPlatformProvider = FacebookLoginProvider.PROVIDER_ID;
@@ -39,6 +39,6 @@ export class LandingPageComponent implements OnInit {
             return this.loginService.performLogin(userData);
         }
     );
-}
+  }*/
 
 }

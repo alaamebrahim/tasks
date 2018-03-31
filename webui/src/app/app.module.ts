@@ -143,7 +143,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         /*{ // Facebook authentication system
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
-        }*/, AuthService, DataContainerService, // Can carry any type of data between routes
+        }, AuthService*/, DataContainerService, // Can carry any type of data between routes
         ProfileResolver, LocalesResolverService,
 
     ],
