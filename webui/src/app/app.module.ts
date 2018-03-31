@@ -45,7 +45,7 @@ import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 // Services
-import { AppConfig, getAuthServiceConfigs } from './app-config';
+import { AppConfig, /*getAuthServiceConfigs*/ } from './app-config';
 import { UserInfoService } from './services/user-info.service';
 import { AuthGuard } from './services/auth_guard.service';
 import { ApiRequestService } from './services/api/api-request.service';
@@ -78,12 +78,12 @@ export class SafePipe implements PipeTransform {
   }
 }
 
-const providers = {
+/*const providers = {
     'facebook': {
         'clientId': '2122500471311729',
         'apiVersion': 'v2.12' // like v2.4
     }
-};
+};*/
 // Angular2SocialLoginModule.loadProvidersScripts(providers);
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -140,10 +140,10 @@ export function HttpLoaderFactory(http: HttpClient) {
         UsersService, { provide: 'SnotifyToastConfig', useValue: ToastDefaults }, SnotifyService, // Notify
         NbSidebarService, NbMenuService, NbSpinnerService, // theme
         ContactUsService,
-        {
+        /*{ // Facebook authentication system
             provide: AuthServiceConfig,
             useFactory: getAuthServiceConfigs
-        }, AuthService, DataContainerService, // Can carry any type of data between routes
+        }*/, AuthService, DataContainerService, // Can carry any type of data between routes
         ProfileResolver, LocalesResolverService,
 
     ],

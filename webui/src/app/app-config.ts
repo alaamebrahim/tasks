@@ -53,8 +53,8 @@ export class AppConfig {
         this.locale = locale;
     }
 }
-
-// Configs
+/*
+// Facebook Login config
 export function getAuthServiceConfigs() {
     const config = new AuthServiceConfig(
         [
@@ -65,4 +65,4 @@ export function getAuthServiceConfigs() {
         ]
     );
     return config;
-}
+}*/
