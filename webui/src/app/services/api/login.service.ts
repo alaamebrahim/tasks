@@ -8,6 +8,9 @@ import 'rxjs/add/operator/catch';
 import { UserInfoService, LoginInfoInStorage } from '../user-info.service';
 import { ApiRequestService } from './api-request.service';
 import { SnotifyService } from 'ng-snotify';
+import { Http } from '@angular/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
+import { AppConfig } from '../../app-config';
 
 export interface LoginRequestParam {
     email: string;
@@ -29,6 +32,8 @@ export class LoginService {
         private router: Router,
         private userInfoService: UserInfoService,
         private apiRequest: ApiRequestService,
+        private http: HttpClient,
+        private appConfig: AppConfig,
         private notify: SnotifyService) {
     }
 
@@ -81,26 +86,11 @@ export class LoginService {
             return this.apiRequest.post('auth/login', bodyData)
                 .toPromise()
                 .then(jsonResp => {
-                    console.log(jsonResp);
-                    if (jsonResp !== undefined && jsonResp !== null && jsonResp.message === 'token_generated') {
+                    console.log(jsonResp.login);
+                    if (jsonResp !== undefined && jsonResp !== null && jsonResp.login === 'token_generated') {
                         // Create a success object that we want to send back to login page
-
-                        loginInfoReturn = {
-                            'success': true,
-                            'message': jsonResp.message,
-                            'landingPage': this.landingPage,
-                            'exists': true,
-                            'user': {
-                                'id': jsonResp.item.id,
-                                'userName': jsonResp.item.userName,
-                                'email': jsonResp.item.email,
-                                'displayName': jsonResp.item.fullName,
-                                'token': jsonResp.item.token,
-                                'role': jsonResp.item.roles,
-                                'image': jsonResp.item.image,
-                                'locale': jsonResp.item.locale,
-                            }
-                        };
+                        console.log(jsonResp);
+                        loginInfoReturn = this.saveUserDataByToken(jsonResp.token);
 
                         // store username and jwt token in session storage to keep user logged in between page refreshes
                         this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
@@ -130,6 +120,39 @@ export class LoginService {
                     });
             // return loginDataSubject;
         }
+    }
+
+    /**
+     * Get logged in user data using token returned from backend
+     * @param token
+     */
+    saveUserDataByToken(token: string) {
+        let loginInfoReturn: LoginInfoInStorage; // Object that we want to send back to Login Page
+        let headers = new HttpHeaders();
+        headers = headers.append('Content-Type', 'application/json');
+        if (token !== null) {
+            headers = headers.append('Authorization', 'Bearer ' + token);
+        }
+        this.http.get(this.appConfig.baseApiPath + 'auth/user', {headers: headers}).subscribe(Response => {
+            console.log(Response);
+            /*loginInfoReturn = {
+                'success': true,
+                'message': jsonResp.message,
+                'landingPage': this.landingPage,
+                'exists': true,
+                'user': {
+                    'id': null,
+                    'userName': null,
+                    'email': null,
+                    'displayName': jsonResp.item.fullName,
+                    'token': jsonResp.item.token,
+                    'role': jsonResp.item.roles,
+                    'image': jsonResp.item.image,
+                    'locale': jsonResp.item.locale,
+                }
+            };*/
+        });
+        return loginInfoReturn;
     }
 
 

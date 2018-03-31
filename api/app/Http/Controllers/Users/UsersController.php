@@ -13,5 +13,7 @@ use Illuminate\Http\Exception\HttpResponseException;
 
 class UsersController extends Controller
 {
-    public function postNewUser()
+    public function postNewUser() {
+        
+    }
 }

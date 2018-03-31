@@ -10,9 +10,12 @@ use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exception\HttpResponseException;
-
 class AuthController extends Controller
 {
+    public function test()
+    {
+        return new JsonResponse(['message' => app('hash')->make('johndoe')]);
+    }
     /**
      * Handle a login request to the application.
      *

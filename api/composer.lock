@@ -4,8 +4,68 @@
         "Read more about it at https://getcomposer.org/doc/01-basic-usage.md#composer-lock-the-lock-file",
         "This file is @generated automatically"
     ],
-    "content-hash": "c8e819239b2339161d13a0bc3f5fac96",
+    "content-hash": "3d494ee102357be874ddd6087b42a117",
     "packages": [
+        {
+            "name": "bosnadev/repositories",
+            "version": "0.13",
+            "source": {
+                "type": "git",
+                "url": "https://github.com/bosnadev/repository.git",
+                "reference": "3a289a137e27ac6b795852a0d72c509a51b70a26"
+            },
+            "dist": {
+                "type": "zip",
+                "url": "https://api.github.com/repos/bosnadev/repository/zipball/3a289a137e27ac6b795852a0d72c509a51b70a26",
+                "reference": "3a289a137e27ac6b795852a0d72c509a51b70a26",
+                "shasum": ""
+            },
+            "require": {
+                "illuminate/console": "^5.2",
+                "illuminate/database": "^5.2",
+                "illuminate/filesystem": "^5.2",
+                "illuminate/support": "^5.2",
+                "php": ">=5.4.0"
+            },
+            "require-dev": {
+                "mockery/mockery": "dev-master@dev"
+            },
+            "type": "library",
+            "extra": {
+                "branch-alias": {
+                    "dev-master": "0.x-dev"
+                }
+            },
+            "autoload": {
+                "psr-4": {
+                    "Bosnadev\\": "src/Bosnadev/"
+                }
+            },
+            "notification-url": "https://packagist.org/downloads/",
+            "license": [
+                "MIT"
+            ],
+            "authors": [
+                {
+                    "name": "Maarten Paauw",
+                    "email": "maartenpaauw@gmail.com"
+                },
+                {
+                    "name": "Mirza Pasic",
+                    "email": "mirza@bosnadev.com"
+                }
+            ],
+            "description": "Laravel Repositories",
+            "homepage": "https://bosnadev.com",
+            "keywords": [
+                "database",
+                "eloquent",
+                "laravel",
+                "repositories",
+                "repository"
+            ],
+            "time": "2016-08-19T13:21:55+00:00"
+        },
         {
             "name": "dingo/api",
             "version": "v1.0.0-beta8",
