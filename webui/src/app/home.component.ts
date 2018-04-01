@@ -20,28 +20,28 @@ import { transition, trigger, query, style, animate, group, animateChild, stagge
     animations: [
         trigger('animRoutes', [
             transition('* => *', [
-              query(':enter', style({ opacity: 0 }), {optional: true}),
-              query(':enter', stagger('300ms', [
-                animate('.6s ease-in', keyframes([
-                  style({opacity: 0, transform: 'translateY(-75%)', offset: 0}),
-                  style({opacity: .5, transform: 'translateY(35px)',  offset: 0.3}),
-                  style({opacity: 1, transform: 'translateY(0)',     offset: 1.0}),
-                ]))]), {optional: true})
+                query(':enter', style({ opacity: 0 }), { optional: true }),
+                query(':enter', stagger('300ms', [
+                    animate('.6s ease-in', keyframes([
+                        style({ opacity: 0, transform: 'translateY(-75%)', offset: 0 }),
+                        style({ opacity: .5, transform: 'translateY(35px)', offset: 0.3 }),
+                        style({ opacity: 1, transform: 'translateY(0)', offset: 1.0 }),
+                    ]))]), { optional: true })
             ])
         ])
-      ],
+    ],
     encapsulation: ViewEncapsulation.None
 })
 export class HomeComponent {
 
     public showAppAlert = false;
     public appHeaderItems = [
-        { label: 'Home', href: '/home', subNav: [] },
-        { label: 'Users', href: '/home/users' }
+        { label: 'الرئيسية', href: '/home', subNav: [] },
+        { label: 'المستخدمبن', href: '/home/users' }
     ];
 
     public menuItems = [
-        { title: 'Home', link: '/home', icon: 'nb-home', },
+        { title: 'الرئيسية', link: '/home', icon: 'nb-home', },
     ];
 
     public userName = '';
@@ -55,37 +55,19 @@ export class HomeComponent {
 
     // tslint:disable-next-line:use-life-cycle-interface
     ngOnInit() {
-        if (this.userInfoService.getUserInfo().role['name'] === 'admin') {
+        if (this.userInfoService.getUserInfo().role === 'admin' || this.userInfoService.getUserInfo().role === 'root') {
             const users = {
-                title: 'Users',
+                title: 'المستخدمين',
                 link: '/home/users',
                 icon: 'nb-keypad',
             };
+            this.menuItems.push(users);
         }
         const contactUs = {
-            title: 'Contact us',
+            title: 'الاتصال بنا',
             link: '/home/contact-us',
-            icon: 'nb-email'
+            icon: 'nb-email',
         };
-        const howToPray = {
-            title: 'How to pray',
-            link: '/home/how-to-pray',
-            icon: 'fa fa-hand-o-right'
-        };
-        const prayerTime = {
-            title: 'Prayer times',
-            link: '/home/prayer-times',
-            icon: 'fa fa-compass'
-        };
-        const Qibla = {
-            title: 'Qibla',
-            link: '/home/find-qibla',
-            icon: 'fa fa-compass'
-        };
-
-        this.menuItems.push(howToPray);
-        this.menuItems.push(prayerTime);
-        this.menuItems.push(Qibla);
         this.menuItems.push(contactUs);
     }
 

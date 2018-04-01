@@ -22,81 +22,21 @@ html {
     /* make sure we use up the whole viewport */
     width: 100%;
     min-height: 100vh;
-    font-family: 'Exo';
 }
 
 body {
     width: 100%;
     background-color: $s-bg-gray;
-    font-family: 'Exo';
     //min-height: 100vh; /* this helps with the sticky footer */
 }
 
-
-header.legend-title {
-    background-color: transparent;
-    color: #333;
-    height: inherit;
+.menu-item {
+    flex-direction: row;
 }
-
-.s-dashboard-pg .chart-legend .legend-wrap {
-    width: 105px;
+.menu-title{
+    text-align: right;
+    float: left;
 }
-
-// Custom Classes
-.s-badge {
-    font-size: 11px;
-    font-weight: normal;
-    border-radius: 2px;
-    padding: 2px 5px;
-
-    &.s-badge-error,
-    &.s-badge-onhold {
-        background-color: $s-c-error;
-        color: $s-c-white;
-    }
-    &.s-badge-warning {
-        background-color: #ff8e28;
-        color: $s-c-text;
-    }
-    &.s-badge-good {
-        background-color: $s-c-good;
-        color: $s-c-text;
-    }
-    &.s-badge-new {
-        background-color: $s-c-info;
-        color: $s-c-white;
-    }
-}
-
-.tile {
-    display: flex;
-    padding: 16px;
-    margin: 16px;
-    border-radius: 2px;
-    &.column {
-        flex-direction: column;
-    }
-    &.center {
-        align-items: center;
-    }
-    &.white {
-        background-color: $s-bg-white;
-        border: 1px solid #ccc;
-    }
-}
-.header{
-    width: 100%;
-    display: inline-block;
-    .branding{
-        float: left;
-        display: inline-block;
-        width: 200px;
-        .title{
-            float: right;
-        }
-    }
-    .header-actions{
-        float: right;
-    }
+.menu-icon {
+    float: right;
 }

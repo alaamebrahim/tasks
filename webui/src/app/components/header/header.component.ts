@@ -32,16 +32,16 @@ export class HeaderComponent implements OnInit {
         const profileLink = (this.userid > 0) ? '/home/profile/' + this.userid : 'home/dashboard';
         this.userList = (this.userid > 0) ? [
             {
-                title: 'Edit Profile',
+                title: 'تحديث بياناتى',
                 link: profileLink
             },
             {
-                title: 'Log out',
+                title: 'تسجيل الخروج',
                 link: '../logout'
             }
         ] : [];
         this.userImage = (this.userid > 0) ? user.image : '';
-        this.fullName = (this.userid > 0) ? user.displayName : '';
+        this.fullName = (this.userid > 0) ? user.userName : '';
         this.initializeLanguagesMenu();
     }
     toggleSidebar(): boolean {

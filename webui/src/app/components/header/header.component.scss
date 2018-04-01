@@ -43,7 +43,7 @@
   .header-container {
     display: flex;
     align-items: center;
-    /*width: 100%;*/
+    width: 100%;
 
     .navigation {
       padding-right: nb-theme(padding);
@@ -61,7 +61,7 @@
       padding: 0 nb-theme(padding);
       font-size: 1.75rem;
       font-weight: nb-theme(font-weight-bolder);
-      border-left: 1px solid nb-theme(separator);
+      border-right: 1px solid nb-theme(separator);
       white-space: nowrap;
       font-family: 'Exo';
 
