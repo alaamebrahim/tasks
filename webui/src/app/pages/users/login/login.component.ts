@@ -62,8 +62,12 @@ export class LoginComponent implements OnInit {
                     this.loginService.getUserDataByToken(resp.data.token)
                         .then(userResp => {
                             // console.log(userResp);
-                            this.loginService.saveUserDataInSession(userResp, resp.data.token);
-                            this.router.navigate(['home/dashboard']);
+                            this.loginService.getUserRoleName(userResp.data.role_id, resp.data.token)
+                                .subscribe(roleResp => {
+                                    // console.log(roleResp.json().name);
+                                    this.loginService.saveUserDataInSession(userResp, resp.data.token, roleResp.json().name);
+                                    this.router.navigate(['home/dashboard']);
+                                });
                         }, error => console.log(error));
                     // this.router.navigate(['home/dashboard']);
                 } else {

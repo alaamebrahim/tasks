@@ -24,6 +24,9 @@ $api->version('v1', function ($api) {
         'uses' => 'App\Http\Controllers\Auth\AuthController@test',
     ]);
 
+    /*************************************************************
+     * Authunticaion routes
+     ************************************************************/
     $api->group([
         'middleware' => 'api.auth',
     ], function ($api) {
@@ -42,6 +45,20 @@ $api->version('v1', function ($api) {
         $api->delete('/auth/invalidate', [
             'uses' => 'App\Http\Controllers\Auth\AuthController@deleteInvalidate',
             'as' => 'api.auth.invalidate'
+        ]);
+    });
+
+    /*************************************************************
+     * Users controller routes
+     ************************************************************/
+    $api->group([
+        'middleware' => 'api.auth',
+        'prefix'     => '/users/',
+        'namespace'  => 'App\Http\Controllers\Users',
+    ], function ($api) {
+        $api->get('/get-role-by-id/{id}', [
+            'uses' => 'UsersController@getUserRole',
+            'as' => 'api.auth.user.role'
         ]);
     });
 });

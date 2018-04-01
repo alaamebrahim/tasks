@@ -53,4 +53,8 @@ class User extends Model implements
     {
         return [];
     }
+
+    public function role () {
+        return $this->hasOne('App\DB\Models\Role');
+    }
 }

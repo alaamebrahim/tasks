@@ -13,8 +13,10 @@ export class RolesGuardService implements CanActivate {
         private loginService: LoginService) {
     }
 
-    canActivate(route: ActivatedRouteSnapshot,
-                state: RouterStateSnapshot): boolean {
+    canActivate(
+        route: ActivatedRouteSnapshot,
+        state: RouterStateSnapshot
+    ): boolean {
         const userInfo: any = this.userInfoService.getUserInfo();
         const userRoles: any = userInfo !== null ? userInfo.role as string : null;
         const routeRoles: string[] = route.data['roles'] !== undefined ? route.data['roles'] : route.data[0]['roles'];
@@ -23,7 +25,7 @@ export class RolesGuardService implements CanActivate {
         // console.log(userRoles);
         if (userRoles !== null) {
             for (const i in userRoles) {
-                if (roles.includes(userRoles[i]['name'])) {
+                if (roles.includes(userRoles[i])) {
                     return true;
                 }
             }

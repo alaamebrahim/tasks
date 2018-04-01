@@ -11,6 +11,7 @@ import { SnotifyService } from 'ng-snotify';
 import { Http, RequestOptions, Headers } from '@angular/http';
 import { HttpHeaders } from '@angular/common/http';
 import { AppConfig } from '../../app-config';
+import { UsersService } from './users.service';
 
 export interface LoginRequestParam {
     email: string;
@@ -27,6 +28,7 @@ export class LoginService {
 
     public landingPage = '/home/dashboard';
     public socialUserData: any;
+    roleName: string;
 
     constructor(
         private router: Router,
@@ -102,7 +104,13 @@ export class LoginService {
             .then(resp => resp.json(), error => console.log(error));
     }
 
-    saveUserDataInSession(userData: any, token: string) {
+    /**
+     * Saves user info in session
+     * @param userData
+     * @param token
+     */
+    saveUserDataInSession(userData: any, token: string, roleName) {
+        const me = this;
         // Will use this BehaviorSubject to emit data that we want after ajax login attempt
         const loginDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
         let loginInfoReturn: LoginInfoInStorage; // Object that we want to send back to Login Page
@@ -118,14 +126,30 @@ export class LoginService {
                     'email': userData.data.email,
                     'displayName': userData.data.display_name,
                     'token': token,
-                    'role': userData.data.role_id,
+                    'role': roleName,
                     'image': null,
                     'locale': null,
                 }
             };
+            console.log(loginInfoReturn);
             this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
             return loginInfoReturn;
         }
+    }
+
+    /**
+     * Returns role name
+     * @param id
+     */
+    getUserRoleName(id: number, token: string) {
+        const headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+        if (token !== null) {
+            headers.append('Authorization', 'Bearer ' + token);
+        }
+        const opts = new RequestOptions();
+        opts.headers = headers;
+        return this.http.get(this.appConfig.baseApiPath + 'users/get-role-by-id/' + id, opts);
     }
 
 

@@ -79,12 +79,12 @@ export class UsersService {
                 loginDataSubject.next(registerInfoReturn);
             }, error => {
                 console.log(error);
-            })
+            });
         return loginDataSubject;
     }
 
     updateProfile(user: any) {
-        let me = this;
+        const me = this;
         let registerInfoReturn: SocialRegisterInfoReturn; // Object that we want to send back to Login Page
 
         // delete unnecessary data
@@ -144,6 +144,19 @@ export class UsersService {
         params.append('id', id);
 
         return this.apiRequest.get('api/users/data/' + id);
+    }
+
+    /**
+     * Returns role name
+     * @param id
+     */
+    getUserRoleName(id: number) {
+        let roleName = '';
+        this.apiRequest.get('users/get-role-by-user-id/' + id)
+            .subscribe(resp => {
+                roleName = resp.name;
+            });
+        return roleName;
     }
 
 }

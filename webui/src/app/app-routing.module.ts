@@ -31,13 +31,13 @@ export const routes: Routes = [
         path: 'home',
         component: HomeComponent,
         canActivate: [AuthGuard, RolesGuardService],
-        data: {roles: ['admin', 'facebook']},
+        data: {roles: ['root', 'admin', 'facebook']},
         children: [  // Children paths are appended to the parent path
             {
                 path: '',
                 redirectTo: '/home/dashboard',
                 pathMatch: 'full',
-                data: [{selectedHeaderItemIndex: 1, selectedSubNavItemIndex: -1}]
+                data: {roles: ['root', 'admin', 'facebook']},
             },
             // Default path (if no deep path is specified for home component like webui/home
             // then it will by default show ProductsComponent )
