@@ -44,7 +44,7 @@ export class AppConfig {
         if (locale !== 'undefined' && locale !== null) {
             this.changeLocale(locale);
         } else {
-            this.changeLocale('en');
+            this.changeLocale('ar');
         }
     }
 
