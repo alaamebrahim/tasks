@@ -45,3 +45,8 @@ body {
 .menu-icon {
     float: right;
 }
+
+.mat-button:focus, .mat-flat-button:focus, .mat-icon-button:focus, .mat-stroked-button:focus {
+    border: none;
+        outline: 0;
+}

@@ -56,10 +56,15 @@
     direction: rtl;
 
     .navigation {
-      padding-right: nb-theme(padding);
+      padding-left: nb-theme(padding);
       font-size: 2.5rem;
       text-decoration: none;
       color: #f4f5f7;
+
+      &:focus {
+        border: none;
+        outline: 0;
+      }
 
       i {
         display: block;

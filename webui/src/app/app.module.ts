@@ -17,7 +17,8 @@ import { LoadingBarHttpModule } from '@ngx-loading-bar/http';
 import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { LoadingBarModule } from '@ngx-loading-bar/core';
 import { CarouselModule } from 'ngx-bootstrap/carousel';
-import {MatButtonModule, MatCheckboxModule, MatSidenavModule, MatMenuModule, MatIconModule, MatToolbarModule} from '@angular/material';
+import {MatButtonModule, MatCheckboxModule, MatSidenavModule, MatMenuModule, MatIconModule,
+    MatToolbarModule, MatInputModule} from '@angular/material';
 
 import {
     NbActionsModule, NbContextMenuModule, NbMenuService, NbSearchModule, NbThemeModule,
@@ -96,6 +97,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     imports: [
         // Material design modules..
         MatButtonModule, MatCheckboxModule, MatSidenavModule, MatMenuModule, MatIconModule, MatToolbarModule,
+        MatInputModule,
         ServiceWorkerModule.register('/ngsw-worker.js', {enabled: environment.production}),
         BrowserModule, BrowserAnimationsModule, FormsModule,
         ReactiveFormsModule, HttpClientModule, RouterModule,
