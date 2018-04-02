@@ -1,4 +1,7 @@
 {
+    "login": {
+        "title": "تسجيل الدخول للتطبيق"
+    },
     "general": {
         "sitetitle": "برنامج إدارة المهام",
         "description": "برنامج بسيط لإدارة المهام",
@@ -66,7 +69,7 @@
     "contact": {
         "pageTitle": "نموذج الاتصال بنا",
         "name": "اسم المرسل",
-        "email": "email@example.net",
+        "email": "البريد الالكترونى",
         "subject": "محتوى الرسالة",
         "errors": {
             "required": "حقل الاسم مطلوب",

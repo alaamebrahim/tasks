@@ -14,6 +14,9 @@
     font-family: uthmani;
     src: url('/assets/fonts/uthmani.otf');
 }
+
+@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+
 // install the framework
 @include nb-install() {
     @include nb-theme-global();
@@ -29,9 +32,11 @@ body {
     background-color: $s-bg-gray;
     //min-height: 100vh; /* this helps with the sticky footer */
 }
-
+.nb-theme-default nb-card-header {
+    text-align: right;
+}
 .menu-item {
-    flex-direction: row;
+    direction: rtl;
 }
 .menu-title{
     text-align: right;

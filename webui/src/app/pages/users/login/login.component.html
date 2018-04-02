@@ -2,28 +2,28 @@
     <nb-layout-column>
         <div class="container">
             <div class="row">
-                <div class="col col-12 text-center"><h1>Tasks Platform</h1></div>
+                <div class="col col-12 text-center"><h1>{{'general.sitetitle' | translate}}</h1></div>
             </div>
             <div class="row justify-content-center">
                 <div class="col col-md-6 self-align-center">
                     <nb-card>
                         <nb-card-header>
-                            Login to site
+                            <div class="float: right">{{'login.title' | translate}}</div>
                         </nb-card-header>
                         <nb-card-body scrollable>
                             <form name="form" (ngSubmit)="login()" #f="ngForm" novalidate>
                                 <div class="form-group">
-                                    <label class="legend-label-color" for="username" [translate]="'user.table.fields.username'"></label>
-                                    <input class="form-control" type="email" placeholder="email" id="username" name="email" [(ngModel)]="model.email"
+                                    <label class="legend-label-color float-right" for="username" [translate]="'user.table.fields.email'"></label>
+                                    <input class="form-control" type="email" placeholder="{{'user.table.fields.email' | translate}}" id="username" name="email" [(ngModel)]="model.email"
                                         #username="ngModel" required/>
                                 </div>
                                 <div class="form-group">
-                                    <label class="legend-label-color" for="password" [translate]="'user.table.fields.password'"></label>
-                                    <input class="form-control" id="password" type="password" placeholder="Password" name="password" [(ngModel)]="model.password"
+                                    <label class="legend-label-color float-right" for="password" [translate]="'user.table.fields.password'"></label>
+                                    <input class="form-control" id="password" type="password" placeholder="{{'user.table.fields.password' | translate}}" name="password" [(ngModel)]="model.password"
                                         #password="ngModel" required/>
                                 </div>
                                 <div class="form-group">
-                                    <button type="submit" class="btn btn-info btn-sm self-align-center" [translate]="'user.buttons.login'">LOG IN</button>
+                                    <button type="submit" class="btn btn-info btn-sm" [translate]="'user.buttons.login'">LOG IN</button>
                                 </div>
                             </form>
                             <!--div class="container">

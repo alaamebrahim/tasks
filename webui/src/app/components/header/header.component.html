@@ -1,23 +1,24 @@
-<div class="header-container">
-  <div class="logo-containter">
-    <a *ngIf="userid > 0" (click)="toggleSidebar()" href="#" class="navigation" right>
-      <i class="nb-menu"></i>
-    </a>
-    <div class="logo" (click)="goToHome()">
-      <b class="text-white">إدارة</b>
-      <span class="text-white">المهام</span>
+<div class="container-fluid header-main-container">
+  <div class="row">
+    <div class="col col-9">
+      <div class="header-container">
+        <div class="logo-containter" right>
+          <a *ngIf="userid > 0" (click)="toggleSidebar()" href="#" class="navigation">
+            <i class="nb-menu"></i>
+          </a>
+          <div class="logo" (click)="goToHome()">
+            <b class="text-white">إدارة</b>
+            <span class="text-white">المهام</span>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-</div>
-<div class="row p-2">
-  <!--div class="col col-6">
-    <nb-action *ngIf="userid > 0">
-      <nb-user class="user" [nbContextMenu]="langList" [name]="'Language'" [picture]="langImage"></nb-user>
-    </nb-action>
-  </div-->
-  <div class="col col-12">
-    <nb-action *ngIf="userid > 0">
-      <nb-user class="user" [nbContextMenu]="userList" [name]="fullName" [picture]="userImage"></nb-user>
-    </nb-action>
+    <div class="col col-3 text-left">
+        <div class="col col-12 text-left">
+            <nb-action *ngIf="userid > 0" class="float-left">
+              <nb-user class="user" [nbContextMenu]="userList" [name]="fullName" [picture]="userImage"></nb-user>
+            </nb-action>
+          </div>
+    </div>
   </div>
 </div>

@@ -12,6 +12,9 @@
   justify-content: space-between;
   width: 100%;
 
+  .header-main-container {
+    direction: rtl;
+  }
   .user {
     font-family: Exo;
     font-weight: bold;
@@ -44,6 +47,7 @@
     display: flex;
     align-items: center;
     width: 100%;
+    direction: rtl;
 
     .navigation {
       padding-right: nb-theme(padding);

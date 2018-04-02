@@ -10,17 +10,17 @@
 // let's make it blue-ish instead of the default white color
 $nb-themes: nb-register-theme((
     font-main: unquote('"Arial","Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif'),
-        header-bg: #3d45bd,
-        color-fg-heading: #3d45bd,
-        color-fg-highlight: #3d45bd,
+        header-bg: #1e88e5,
+        color-fg-heading: #1e88e5,
+        color-fg-highlight: #1e88e5,
         separator: rgb(235, 235, 235),
         color-fg-text: #000,
-        color-bg: #fcfcfd,
-        header-bg-custom: #3d45bd url(assets/images/headerbg.png) repeat-x center center,
+        color-bg: #f5f5f5,
+        header-bg-custom: #1e88e5 url(assets/images/headerbg.png) repeat-x center center,
         btn-font-size-md: 1.2rem,
-        link-color: #3d45bd,
-        link-color-hover: #3d45bd,
-        color-success: #3d45bd,
+        link-color: #1e88e5,
+        link-color-hover: #1e88e5,
+        color-success: #1e88e5,
         footer-height: 3rem,
 ), default, default); // let's leave it as default
 
