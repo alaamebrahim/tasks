@@ -1,4 +1,4 @@
-<div class="container-fluid header-main-container">
+<!--div class="container-fluid header-main-container">
   <div class="row">
     <div class="col col-9">
       <div class="header-container">
@@ -21,4 +21,23 @@
           </div>
     </div>
   </div>
-</div>
+</div-->
+<mat-toolbar color="primary">
+    <mat-toolbar-row>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon>more_vert</mat-icon>
+          </button>
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item *ngFor="let item of userList" [routerLink]="item.link">
+              <mat-icon>{{item.matIcon}}</mat-icon>
+              <span>{{item.title}}</span>
+            </button>
+            
+          </mat-menu>
+        <span class="example-spacer"></span>
+        <span>إدارة المهام</span>
+        <button *ngIf="userid > 0" (click)="toggleSidebar()" href="#" class="navigation" mat-icon-button>
+            <i class="nb-menu fa-3x"></i>
+        </button>
+    </mat-toolbar-row>
+  </mat-toolbar>

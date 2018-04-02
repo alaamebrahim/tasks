@@ -33,11 +33,18 @@ export class HeaderComponent implements OnInit {
         this.userList = (this.userid > 0) ? [
             {
                 title: 'تحديث بياناتى',
-                link: profileLink
+                link: profileLink,
+                matIcon: 'assignment_ind'
+            },
+            {
+                title: 'تحديث بياناتى',
+                link: profileLink,
+                matIcon: 'assignment_ind'
             },
             {
                 title: 'تسجيل الخروج',
-                link: '../logout'
+                link: '../logout',
+                matIcon: 'exit_to_app'
             }
         ] : [];
         this.userImage = (this.userid > 0) ? user.image : '';

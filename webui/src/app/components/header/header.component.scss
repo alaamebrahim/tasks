@@ -6,7 +6,13 @@
 // @nebular out of the box themes
 @import '~@nebular/theme/styles/themes';
 
+.example-icon {
+  padding: 0 14px;
+}
 
+.example-spacer {
+  flex: 1 1 auto;
+}
 @include nb-install-component() {
   display: flex;
   justify-content: space-between;
