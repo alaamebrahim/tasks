@@ -4,11 +4,11 @@ namespace App\DB\Models;
 
 use Illuminate\Auth\Authenticatable;
 use Laravel\Lumen\Auth\Authorizable;
-use Illuminate\Database\Eloquent\Model;
+use App\Models\BaseModel;
 use Illuminate\Contracts\Auth\Authenticatable as AuthenticatableContract;
 use Illuminate\Contracts\Auth\Access\Authorizable as AuthorizableContract;
 
-class User extends Model implements
+class User extends BaseModel implements
     AuthenticatableContract,
     AuthorizableContract
 {
@@ -32,6 +32,14 @@ class User extends Model implements
     protected $hidden = [
         'password',
         'remember_token',
+    ];
+
+    protected $rules = [
+        'email' => 'required|unique:users|email',
+        'role_id' => 'required',
+        'first_name' => 'required',
+        'last_name' => 'required',
+        'last_name' => 'required',
     ];
 
     /**
