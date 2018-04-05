@@ -56,9 +56,16 @@ $api->version('v1', function ($api) {
         'prefix'     => '/users/',
         'namespace'  => 'App\Http\Controllers\Users',
     ], function ($api) {
+        // Get role object
         $api->get('/get-role-by-id/{id}', [
             'uses' => 'UsersController@getUserRole',
             'as' => 'api.auth.user.role'
+        ]);
+
+        // add new user
+        $api->post('/add-user', [
+            'uses' => 'UsersController@addNewUser',
+            'as' => 'api.auth.user.addNew'
         ]);
     });
 });
