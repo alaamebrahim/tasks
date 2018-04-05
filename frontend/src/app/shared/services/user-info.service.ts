@@ -72,6 +72,9 @@ export class UserInfoService {
         if (userObj !== null) {
             return userObj.token;
         }
+        if (sessionStorage.getItem('userToken') !== null) {
+            return sessionStorage.getItem('userToken');
+        }
         return null;
     }
 }

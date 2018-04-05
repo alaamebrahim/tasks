@@ -8,7 +8,7 @@ import 'rxjs/add/operator/catch';
 import { UserInfoService, LoginInfoInStorage } from './user-info.service';
 import { ApiRequestService } from './api-request.service';
 import { Http, RequestOptions, Headers } from '@angular/http';
-import { HttpHeaders } from '@angular/common/http';
+import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app-config';
 import { UsersService } from './users.service';
 
@@ -33,7 +33,7 @@ export class LoginService {
         private router: Router,
         private userInfoService: UserInfoService,
         private apiRequest: ApiRequestService,
-        private http: Http,
+        private http: HttpClient,
         private appConfig: AppConfig,
         ) {
     }
@@ -91,16 +91,9 @@ export class LoginService {
      * @param token
      */
     getUserDataByToken(token: string) {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        if (token !== null) {
-            headers.append('Authorization', 'Bearer ' + token);
-        }
-        const opts = new RequestOptions();
-        opts.headers = headers;
-        return this.http.get(this.appConfig.baseApiPath + 'auth/user', opts)
+        return this.apiRequest.get('auth/user')
             .toPromise()
-            .then(resp => resp.json(), error => console.log(error));
+            .then(resp => resp, error => console.log(error));
     }
 
     /**
@@ -130,7 +123,7 @@ export class LoginService {
                     'locale': null,
                 }
             };
-            console.log(loginInfoReturn);
+            // console.log(loginInfoReturn);
             this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
             return loginInfoReturn;
         }
@@ -141,14 +134,7 @@ export class LoginService {
      * @param id
      */
     getUserRoleName(id: number, token: string) {
-        const headers = new Headers();
-        headers.append('Content-Type', 'application/json');
-        if (token !== null) {
-            headers.append('Authorization', 'Bearer ' + token);
-        }
-        const opts = new RequestOptions();
-        opts.headers = headers;
-        return this.http.get(this.appConfig.baseApiPath + 'users/get-role-by-id/' + id, opts);
+        return this.apiRequest.get('users/get-role-by-id/' + id);
     }
 
 

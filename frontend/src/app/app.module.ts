@@ -41,6 +41,7 @@ import { UserInfoService } from './shared/services/user-info.service';
 import { ApiRequestService } from './shared/services/api-request.service';
 import { LoginService } from './shared/services/login.service';
 import { TranslateService } from '@ngx-translate/core';
+import { Http } from '@angular/http';
 
 @NgModule({
   imports: [
