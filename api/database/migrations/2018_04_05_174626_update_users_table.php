@@ -17,7 +17,7 @@ class UpdateUsersTable extends Migration
             $table->string('username');
             $table->string('first_name');
             $table->string('last_name');
-            $table->date('birthdate');
+            $table->date('birthday');
             $table->string('gender');
             $table->binary('picture');
             $table->string('position');
