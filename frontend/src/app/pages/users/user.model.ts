@@ -8,6 +8,7 @@ export class User {
   birthday: Object;
   gender: string;
   picture: string;
+  country: string;
   // User work
   company: string;
   position: string;

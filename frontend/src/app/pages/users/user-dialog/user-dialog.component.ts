@@ -45,6 +45,7 @@ export class UserDialogComponent implements OnInit {
       role_id: null,
       created_at: null,
       updated_at: null,
+      country: null,
     });
   }
 

@@ -22,7 +22,6 @@ class UpdateUsersTable extends Migration
             $table->binary('picture');
             $table->string('position');
             $table->string('company');
-            $table->string('phone');
             $table->string('address');
             $table->string('facebook');
             $table->string('twitter');
