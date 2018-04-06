@@ -57,15 +57,11 @@ $api->version('v1', function ($api) {
         'namespace'  => 'App\Http\Controllers\Users',
     ], function ($api) {
         // Get role object
-        $api->get('/get-role-by-id/{id}', [
-            'uses' => 'UsersController@getUserRole',
-            'as' => 'api.auth.user.role'
-        ]);
-
+        $api->get('/get-role-by-id/{id}', ['uses' => 'RolesController@getUserRole','as' => 'api.user.role']);
+        $api->get('/get-roles', ['uses' => 'RolesController@getAllRoles','as' => 'api.roles.all']);
         // add new user
-        $api->post('/add-user', [
-            'uses' => 'UsersController@addNewUser',
-            'as' => 'api.auth.user.addNew'
-        ]);
+        $api->post('/add-user', ['uses' => 'UsersController@addNewUser','as' => 'api.user.addNew']);
+        // Get All users
+        $api->get('/get-users', ['uses' => 'UsersController@getAllUsers','as' => 'api.user.all']);
     });
 });
