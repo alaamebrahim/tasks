@@ -40,14 +40,14 @@ export class UsersComponent implements OnInit {
         this.users = null; // for show spinner each time
         this.usersService.getUsers().subscribe(users => this.users = users);
     }
-    public addUser(user: User) {
-        this.usersService.addUser(user).subscribe(user => this.getUsers());
+    public addUser(userdata: User) {
+        this.usersService.addUser(userdata).subscribe(user => this.getUsers());
     }
-    public updateUser(user: User) {
-        this.usersService.updateUser(user).subscribe(user => this.getUsers());
+    public updateUser(userdata: User) {
+        this.usersService.updateUser(userdata).subscribe(user => this.getUsers());
     }
-    public deleteUser(user: User) {
-        this.usersService.deleteUser(user.id).subscribe(user => this.getUsers());
+    public deleteUser(userdata: User) {
+        this.usersService.deleteUser(userdata.id).subscribe(user => this.getUsers());
     }
 
 
@@ -61,9 +61,9 @@ export class UsersComponent implements OnInit {
         }
     }
 
-    public openUserDialog(user) {
+    public openUserDialog(userdata) {
         const dialogRef = this.dialog.open(UserDialogComponent, {
-            data: user
+            data: userdata
         });
 
         dialogRef.afterClosed().subscribe(user => {
@@ -72,5 +72,4 @@ export class UsersComponent implements OnInit {
             }
         });
     }
-
 }
