@@ -11,7 +11,7 @@
     </div>
     <form class="user-search" [class.show]="controls.value == 'search'">
         <mat-form-field class="user-search-input">
-            <input matInput placeholder="Search user by name..." [(ngModel)]="searchText" name="search">
+            <input matInput placeholder="{{'users.forms.search' | translate}}" [(ngModel)]="searchText" name="search">
         </mat-form-field>
     </form>
     <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -30,8 +30,8 @@
     <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
-                <h3 *ngIf="!user.settings.isDeleted" class="user-name">{{user.profile.name}} {{user.profile.surname}}</h3> 
-                <h3 *ngIf="user.settings.isDeleted" class="user-name">User blocked</h3>
+                <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3> 
+                <h3 *ngIf="user.is_blocked" class="user-name">{{'users.is_blocked' | translate}}</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
                 </button>
@@ -40,46 +40,46 @@
                 <span (mouseleave)="menuTrigger.closeMenu()">
                     <button mat-menu-item (click)="openUserDialog(user)">
                         <mat-icon>mode_edit</mat-icon>
-                        <span>Edit</span>
+                        <span>{{'buttons.edit' | translate}}</span>
                     </button>
                     <button mat-menu-item (click)="deleteUser(user);">
                         <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
+                        <span>{{'buttons.delete' | translate}}</span>
                     </button>
                 </span>
             </mat-menu>
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
-                        <img *ngIf="user.profile.image" [src]="user.profile.image" class="transition-2" [class.blocked]="user.settings.isDeleted">
-                        <img *ngIf="!user.profile.image" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.settings.isDeleted">  
-                        <mat-icon *ngIf="user.settings.isDeleted" class="warn-color">block</mat-icon>
+                        <img *ngIf="user.picture" [src]="user.picture" class="transition-2" [class.blocked]="user.is_blocked">
+                        <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">  
+                        <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" [checked]="user.settings.isDeleted" (change)="user.settings.isDeleted = !user.settings.isDeleted"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" [checked]="user.is_blocked" (change)="user.is_blocked = !user.is_blocked"></mat-slide-toggle>
                     </div>
                 </div>
-                <div fxFlex="70" fxLayout="column" class="user-details transition-2" [class.blocked]="user.settings.isDeleted">
+                <div fxFlex="70" fxLayout="column" class="user-details transition-2" [class.blocked]="user.is_blocked">
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="muted-text">card_membership</mat-icon>
-                        <span>{{user.work.position}}</span>
+                        <span>{{user.position}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="muted-text">mail_outline</mat-icon>
-                        <span>{{user.contacts.email}}</span>
+                        <span>{{user.email}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="muted-text">call</mat-icon>
-                        <span>{{user.contacts.phone}}</span>
+                        <span>{{user.phone}}</span>
                     </p>
                     <p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="muted-text">location_on</mat-icon>
-                        <span>{{user.contacts.address}}</span>
+                        <span>{{user.address}}</span>
                     </p>
-                    <p fxLayout="row" fxLayoutAlign="start center">
+                    <!--p fxLayout="row" fxLayoutAlign="start center">
                         <mat-icon class="muted-text">date_range</mat-icon>
                         <span>Joined {{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
-                    </p>
+                    </p-->
                 </div>
             </div>
         </mat-card>
@@ -90,77 +90,73 @@
     <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" class="flex-p"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
-                <h3 *ngIf="!user.settings.isDeleted" class="user-name">{{user.profile.name}} {{user.profile.surname}}</h3> 
-                <h3 *ngIf="user.settings.isDeleted" class="user-name">User blocked</h3>
+                <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3> 
+                <h3 *ngIf="user.is_blocked" class="user-name">{{'users.is_blocked' | translate}}</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
                 </button>
             </div>
             <mat-menu #menu="matMenu" xPosition="before">
                 <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item (click)="openUserDialog(user);">
+                    <button mat-menu-item (click)="openUserDialog(user)">
                         <mat-icon>mode_edit</mat-icon>
-                        <span>Edit</span>
+                        <span>{{'buttons.edit' | translate}}</span>
                     </button>
                     <button mat-menu-item (click)="deleteUser(user);">
                         <mat-icon>delete</mat-icon>
-                        <span>Delete</span>
+                        <span>{{'buttons.delete' | translate}}</span>
                     </button>
                 </span>
             </mat-menu>
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
-                        <img *ngIf="user.profile.image" [src]="user.profile.image" class="transition-2" [class.blocked]="user.settings.isDeleted"> 
-                        <img *ngIf="!user.profile.image" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.settings.isDeleted">  
-                        <mat-icon *ngIf="user.settings.isDeleted" class="warn-color">block</mat-icon>   
+                        <img *ngIf="user.picture" [src]="user.picture" class="transition-2" [class.blocked]="user.is_blocked"> 
+                        <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">  
+                        <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>   
                     </div>                                            
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" [checked]="user.settings.isDeleted" (change)="user.settings.isDeleted = !user.settings.isDeleted"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" [checked]="user.is_blocked" (change)="user.is_blocked = !user.is_blocked"></mat-slide-toggle>
                     </div>
                 </div>
-                <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2" [class.blocked]="user.settings.isDeleted">
+                <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2" [class.blocked]="user.is_blocked">
                     <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">business</mat-icon>
-                            <span>{{user.work.company}}</span>
+                            <span>{{user.company}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">card_membership</mat-icon>
-                            <span>{{user.work.position}}</span>
+                            <span>{{user.position}}</span>
                         </p>
-                        <p fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon class="muted-text">attach_money</mat-icon>
-                            <span>{{user.work.salary}}</span>
-                        </p>                                               
                     </div>
                     <div fxFlex="30" fxFlex.xs="100" fxLayout="column">
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">mail_outline</mat-icon>
-                            <span>{{user.contacts.email}}</span>
+                            <span>{{user.email}}</span>
                         </p> 
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">call</mat-icon>
-                            <span>{{user.contacts.phone}}</span>
+                            <span>{{user.phone}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">location_on</mat-icon>
-                            <span>{{user.contacts.address}}</span>
+                            <span>{{user.address}}</span>
                         </p>                        
                     </div>
                     <div fxFlex="40" fxFlex.xs="100" fxLayout="column">
-                        <p fxLayout="row" fxLayoutAlign="start center">
+                        <!--p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">event_available</mat-icon>
                             <span>Registration {{user.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
                         </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">date_range</mat-icon>
                             <span>Joined {{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
-                        </p> 
+                        </p--> 
                         <p fxLayout="row" fxLayoutAlign="start center">
-                            <mat-icon *ngIf="user.settings.isDeleted" class="muted-text">person_outline</mat-icon>
-                            <mat-icon *ngIf="!user.settings.isDeleted" class="muted-text">person</mat-icon>
-                            <span>{{ (user.settings.isDeleted) ? 'Blocked' : 'Active' }}</span>
+                            <mat-icon *ngIf="user.is_blocked" class="muted-text">person_outline</mat-icon>
+                            <mat-icon *ngIf="!user.is_blocked" class="muted-text">person</mat-icon>
+                            <span>{{ (user.is_blocked) ? 'محظور' : 'مفعل' }}</span>
                         </p>                       
                     </div>
                 </div>

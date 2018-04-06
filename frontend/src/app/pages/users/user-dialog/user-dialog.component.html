@@ -1,99 +1,100 @@
-<h1 mat-dialog-title><span *ngIf="!user.id">Add</span><span *ngIf="user.id">Edit</span> user</h1>
+<h1 mat-dialog-title><span *ngIf="!user.id">{{'users.form.button.add' | translate}}</span><span *ngIf="user.id">{{'users.form.button.edit' | translate}}</span></h1>
 <div mat-dialog-content>
     <form [formGroup]="form" class="user-form">      
         <mat-tab-group class="vertical-tabs">
-            <mat-tab label="Basic">
+            <mat-tab label="{{'users.labels.basic' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <mat-placeholder><mat-icon>person</mat-icon> Username</mat-placeholder>
+                        <mat-placeholder><mat-icon>person</mat-icon> {{'users.form.username' | translate}}</mat-placeholder>
                         <input matInput formControlName="username" required>
-                        <mat-error *ngIf="form.controls.username.errors?.required">Username is required</mat-error>
-                        <mat-error *ngIf="form.controls.username.hasError('minlength')">Username isn't long enough, minimum of 5 characters</mat-error>
+                        <mat-error *ngIf="form.controls.username.errors?.required">{{'users.form.errors.username.required' | translate}}</mat-error>
+                        <mat-error *ngIf="form.controls.username.hasError('minlength')">{{'users.form.errors.username.min' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <mat-placeholder><mat-icon>vpn_key</mat-icon> Password</mat-placeholder>
+                        <mat-placeholder><mat-icon>vpn_key</mat-icon> {{'users.form.password' | translate}}</mat-placeholder>
                         <input matInput formControlName="password" required [type]="passwordHide ? 'password' : 'text'">
                         <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
-                        <mat-error *ngIf="form.controls.password.errors?.required">Password is required</mat-error>
-                        <mat-error *ngIf="form.controls.password.hasError('minlength')">Password isn't long enough, minimum of 6 characters</mat-error>
+                        <mat-error *ngIf="form.controls.password.errors?.required">{{'users.form.errors.password.required' | translate}}</mat-error>
+                        <mat-error *ngIf="form.controls.password.hasError('minlength')">{{'users.form.errors.password.length' | translate}}</mat-error>
+                    </mat-form-field>
+                    <mat-form-field class="w-100">
+                        <mat-placeholder><mat-icon></mat-icon>{{'users.form.role' | translate}}</mat-placeholder>
+                        <mat-select>
+                            <mat-option *ngFor="let role of roles" [value]="role.id">{{role.description}}</mat-option>
+                        </mat-select>
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Personal" formGroupName="profile">
+            <mat-tab label="{{'users.labels.personal' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Name" formControlName="name">
+                        <input matInput placeholder="{{'users.form.first_name' | translate}}" formControlName="first_name">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Surname" formControlName="surname">
+                        <input matInput placeholder="{{'users.form.last_name' | translate}}" formControlName="last_name">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput [matDatepicker]="birthday" placeholder="Birthday" formControlName="birthday">
+                        <input matInput [matDatepicker]="birthday" placeholder="{{'users.form.birthdate' | translate}}" formControlName="birthday">
                         <mat-datepicker-toggle matSuffix [for]="birthday"></mat-datepicker-toggle>
                         <mat-datepicker #birthday></mat-datepicker>
                     </mat-form-field>
                     <mat-radio-group formControlName="gender">
-                        <mat-radio-button value="male" labelPosition="before">Male</mat-radio-button>
-                        <mat-radio-button value="female" labelPosition="before">Female</mat-radio-button>
+                        <mat-radio-button value="{{'users.form.gender.male' | translate}}" labelPosition="before">{{'users.form.gender.male' | translate}}</mat-radio-button>
+                        <mat-radio-button value="{{'users.form.gender.female' | translate}}" labelPosition="before">{{'users.form.gender.female' | translate}}</mat-radio-button>
                     </mat-radio-group>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Image url" formControlName="image">
+                        <input matInput placeholder="{{'users.form.picture' | translate}}" formControlName="picture">
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Work" formGroupName="work">
+            <mat-tab label="{{'users.labels.work' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Company" formControlName="company">
+                        <input matInput placeholder="{{'users.form.company' | translate}}" formControlName="company">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Position" formControlName="position">
-                    </mat-form-field>
-                    <mat-form-field class="w-100">
-                        <input matInput placeholder="Salary" formControlName="salary">
-                        <span matPrefix>$&nbsp;</span>
-                        <span matSuffix>.00</span>
+                        <input matInput placeholder="{{'users.form.position' | translate}}" formControlName="position">
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Contacts" formGroupName="contacts">
+            <mat-tab label="{{'users.labels.contacts' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Email" formControlName="email">
+                        <input matInput placeholder="{{'users.form.email' | translate}}" formControlName="email">
+                        <mat-error *ngIf="form.controls.email.errors?.required">{{'users.form.errors.email.required' | translate}}</mat-error>
+                        <mat-error *ngIf="form.controls.email.errors?.email">{{'users.form.errors.email.valid' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Phone" formControlName="phone">
+                        <input matInput placeholder="{{'users.form.phone' | translate}}" formControlName="phone">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Address" formControlName="address">
+                        <input matInput placeholder="{{'users.form.address' | translate}}" formControlName="address">
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Social life" formGroupName="social">
+            <mat-tab label="{{'users.labels.social' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Facebook" formControlName="facebook">
+                        <input matInput placeholder="{{'users.form.facebook' | translate}}" formControlName="facebook">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Twitter" formControlName="twitter">
+                        <input matInput placeholder="{{'users.form.twitter' | translate}}" formControlName="twitter">
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="Google" formControlName="google">
+                        <input matInput placeholder="{{'users.form.google' | translate}}" formControlName="google">
                     </mat-form-field>
                 </div>
             </mat-tab>
-            <mat-tab label="Settings" formGroupName="settings">
+            <mat-tab label="{{'users.form.labels.settings' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
-                    <mat-checkbox formControlName="isActive">Active</mat-checkbox>
-                    <mat-checkbox formControlName="isDeleted">Blocked</mat-checkbox>
-                    <p *ngIf="user.id"><span>Registration date:</span> <i>{{user.settings.registrationDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i></p> 
-                    <p *ngIf="user.id"><span>Last joined date:</span> <i>{{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm" }}</i> </p>     
+                    <mat-checkbox formControlName="is_active">{{'users.form.isActive' | translate}}</mat-checkbox>
+                    <mat-checkbox formControlName="is_blocked">{{'users.form.isBlocked' | translate}}</mat-checkbox>
                 </div>
             </mat-tab>
         </mat-tab-group>
     </form>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-raised-button color="primary" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.id">Save</span><span *ngIf="user.id">Update</span></button>
-    <button mat-raised-button color="warn" (click)="close()">Cancel</button>
+    <button mat-raised-button color="primary" (click)="saveUser(form.value)" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.id">{{'buttons.save' | translate}}</span><span *ngIf="user.id">{{'buttons.update' | translate}}</span></button>
+    <button mat-raised-button color="warn" (click)="close()">{{'buttons.cancel' | translate}}</button>
 </div>

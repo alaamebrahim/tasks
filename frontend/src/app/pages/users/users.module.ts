@@ -10,6 +10,8 @@ import { PipesModule } from '../../theme/pipes/pipes.module';
 import { UsersComponent } from './users.component';
 import { UsersData } from './users.data';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
+import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
+import { UsersService } from './users.service';
 
 export const routes = [
   { path: '', component: UsersComponent, pathMatch: 'full' }
@@ -25,12 +27,14 @@ export const routes = [
     InMemoryWebApiModule.forRoot(UsersData, { delay: 500 }),
     NgxPaginationModule,
     SharedModule,
-    PipesModule
+    PipesModule,
   ],
+  exports: [TranslatePipe],
   declarations: [
     UsersComponent,
     UserDialogComponent
   ],
+  providers: [UsersService],
   entryComponents: [
     UserDialogComponent
   ]
