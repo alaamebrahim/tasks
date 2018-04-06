@@ -35,14 +35,16 @@ export class UserDialogComponent implements OnInit {
       company: null,
       position: null,
       email: [null, Validators.compose([Validators.required, Validators.email])],
-      phone: null,
+      phone_no: null,
       address: null,
       facebook: null,
       twitter: null,
       google: null,
       is_active: true,
       is_blocked: false,
-      role_id: null
+      role_id: null,
+      created_at: null,
+      updated_at: null,
     });
   }
 
@@ -50,6 +52,7 @@ export class UserDialogComponent implements OnInit {
     this.getAllRoles();
     if (this.user) {
       console.log(this.user);
+      this.user.password = null;
       this.form.setValue(this.user);
     } else {
       this.user = new User();

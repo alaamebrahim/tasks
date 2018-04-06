@@ -13,7 +13,7 @@ export class User {
   position: string;
   // User Contacts
   email: string;
-  phone: string;
+  phone_no: string;
   address: string;
   // user social
   facebook: string;
