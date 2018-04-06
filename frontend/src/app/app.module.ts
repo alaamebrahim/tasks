@@ -40,8 +40,14 @@ import { AppConfig } from './app-config';
 import { UserInfoService } from './shared/services/user-info.service';
 import { ApiRequestService } from './shared/services/api-request.service';
 import { LoginService } from './shared/services/login.service';
-import { TranslateService } from '@ngx-translate/core';
+import { TranslateService, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { Http } from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+
+export function HttpLoaderFactory(http: HttpClient) {
+  return new TranslateHttpLoader(http);
+}
 
 @NgModule({
   imports: [
@@ -56,7 +62,14 @@ import { Http } from '@angular/http';
     CalendarModule.forRoot(),
     SharedModule,
     PipesModule,
-    routing
+    routing,
+    TranslateModule.forRoot({ // Translation module
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
+    }),
   ],
   declarations: [
     AppComponent,
