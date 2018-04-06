@@ -2,9 +2,9 @@
 
 namespace App\DB\Models;
 
-use App\Models\BaseModel;
+use Illuminate\Database\Eloquent\Model;
 
-class Role extends BaseModel
+class Role extends Model
 {
     public function users () {
         return $this->hasMany('App\DB\Models\User');
