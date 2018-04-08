@@ -40,7 +40,7 @@ export class AppConfig {
     }
 
     setLocale() {
-        console.log(sessionStorage.getItem('locale'));
+        // console.log(sessionStorage.getItem('locale'));
         this.translator.setDefaultLang(sessionStorage.getItem('locale'));
         this.translator.use(sessionStorage.getItem('locale'));
     }

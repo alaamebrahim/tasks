@@ -47,7 +47,7 @@ export class LoginComponent {
                 this.loginService.getUserRoleName(userResp.data.role_id, resp.data.token)
                   .subscribe(roleResp => {
                     // console.log(roleResp);
-                    const role: Role = userResp;
+                    const role: Role = roleResp;
                     this.loginService.saveUserDataInSession(userResp, resp.data.token, role.name);
                     this.router.navigate(['/']);
                   });

@@ -40,6 +40,8 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LocaleService } from './services/locale.service';
+import { AuthGuard } from './services/auth_guard.service';
+import { RolesGuardService } from './services/roles-guard.service';
 
 
 
@@ -78,7 +80,7 @@ import { LocaleService } from './services/locale.service';
     MatToolbarModule,
     MatTooltipModule,
     MatStepperModule,
-    HttpClientModule
+    HttpClientModule,
   ],
   exports: [
     FlexLayoutModule,

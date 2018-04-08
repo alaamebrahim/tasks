@@ -21,6 +21,8 @@ export class RolesGuardService implements CanActivate {
         const userRoles: any = userInfo !== null ? userInfo.role as string : null;
         const routeRoles: string[] = route.data['roles'] !== undefined ? route.data['roles'] : route.data[0]['roles'];
         // console.log(route);
+        // console.log(userInfo);
+        // console.log(sessionStorage.getItem('currentUser'));
         const roles: string = routeRoles.join();
         // console.log(userRoles);
         if (userRoles !== null) {

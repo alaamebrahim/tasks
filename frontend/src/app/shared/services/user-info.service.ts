@@ -30,8 +30,8 @@ export class UserInfoService {
     }
 
     // Store userinfo from session storage
-    storeUserInfo(userInfoString: string) {
-        this.storage.setItem(this.currentUserKey, userInfoString);
+    storeUserInfo(userInfoString: any) {
+        this.storage.setItem(this.currentUserKey, JSON.stringify(userInfoString));
     }
 
     // Remove userinfo from session storage

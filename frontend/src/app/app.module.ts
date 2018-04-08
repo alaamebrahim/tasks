@@ -44,6 +44,8 @@ import { TranslateService, TranslateLoader, TranslateModule } from '@ngx-transla
 import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
+import { AuthGuard } from './shared/services/auth_guard.service';
+import { RolesGuardService } from './shared/services/roles-guard.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -90,7 +92,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   providers: [
     AppSettings,
-    /*AuthGuard, RolesGuardService,*/
+    AuthGuard, RolesGuardService,
     TranslateService,
     LocaleService,
     AppConfig,

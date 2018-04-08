@@ -35,8 +35,7 @@ export class LoginService {
         private apiRequest: ApiRequestService,
         private http: HttpClient,
         private appConfig: AppConfig,
-        ) {
-    }
+        ) { }
 
     performLogin(userData: any) {
         const me = this;
@@ -124,7 +123,9 @@ export class LoginService {
                 }
             };
             // console.log(loginInfoReturn);
-            this.userInfoService.storeUserInfo(JSON.stringify(loginInfoReturn.user));
+            // console.log(JSON.stringify(loginInfoReturn));
+            // console.log(loginInfoReturn);
+            this.userInfoService.storeUserInfo(loginInfoReturn.user);
             return loginInfoReturn;
         }
     }
