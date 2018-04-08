@@ -46,6 +46,7 @@ import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthGuard } from './shared/services/auth_guard.service';
 import { RolesGuardService } from './shared/services/roles-guard.service';
+import { NotifyUserService } from './shared/services/notify-user.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -102,6 +103,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LoginService,
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
+    NotifyUserService
 
   ],
   bootstrap: [AppComponent]

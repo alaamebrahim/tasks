@@ -1,11 +1,15 @@
 import {Injectable, Inject} from '@angular/core';
 import {AppConfig} from '../../app-config';
 import { TranslateService } from '@ngx-translate/core';
+import { MatSnackBar } from '@angular/material/snack-bar';
+import { timeout } from 'q';
 
 
 @Injectable()
 export class LocaleService {
-    constructor(private translator: TranslateService) {
+    constructor(
+        private translator: TranslateService
+    ) {
         // Code to get Locale Info from Session Storage
         this.translator.setDefaultLang(sessionStorage.getItem('locale'));
         this.translator.use(sessionStorage.getItem('locale'));

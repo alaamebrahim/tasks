@@ -1,10 +1,10 @@
-import {Injectable, Inject} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse, HttpRequest, HttpParams} from '@angular/common/http';
-import {Router} from '@angular/router';
-import {Observable} from 'rxjs/Observable';
+import { Injectable, Inject } from '@angular/core';
+import { HttpClient, HttpHeaders, HttpResponse, HttpRequest, HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
+import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
-import {UserInfoService, LoginInfoInStorage} from './user-info.service';
-import {AppConfig} from '../../app-config';
+import { UserInfoService, LoginInfoInStorage } from './user-info.service';
+import { AppConfig } from '../../app-config';
 
 
 @Injectable()
@@ -15,7 +15,7 @@ export class ApiRequestService {
         private http: HttpClient,
         private router: Router,
         private userInfoService: UserInfoService
-        ) {
+    ) {
     }
 
     /**
@@ -26,61 +26,61 @@ export class ApiRequestService {
         const token = this.userInfoService.getStoredToken();
         headers = headers.append('Content-Type', 'application/json');
         if (token !== null) {
-            headers = headers.append('Authorization', 'Bearer ' +  token);
+            headers = headers.append('Authorization', 'Bearer ' + token);
         }
         return headers;
     }
 
     get(url: string, urlParams?: HttpParams): Observable<any> {
         const me = this;
-        return this.http.get(this.appConfig.baseApiPath + url, {headers: this.getHeaders(), params: urlParams})
+        return this.http.get(this.appConfig.baseApiPath + url, { headers: this.getHeaders(), params: urlParams })
             .catch(function (error: any) {
                 console.log('Some error in catch');
                 if (error.status === 401 || error.status === 403) {
-                    me.router.navigate(['/logout']);
+                    me.router.navigate(['/login']);
                 }
-                return Observable.throw(error || 'Server error');
+                return [];
             });
     }
 
     post(url: string, body: Object): Observable<any> {
         const me = this;
         // console.log(JSON.stringify(body));
-        return this.http.post(this.appConfig.baseApiPath + url, JSON.stringify(body), {headers: this.getHeaders()})
+        return this.http.post(this.appConfig.baseApiPath + url, JSON.stringify(body), { headers: this.getHeaders() })
             .catch(function (error: any) {
                 if (error.status === 401) {
-                    me.router.navigate(['/logout']);
+                    me.router.navigate(['/login']);
                 }
-                return Observable.throw(error || 'Server error');
+                return [];
             });
     }
 
     put(url: string, body: Object): Observable<any> {
         const me = this;
-        return this.http.put(this.appConfig.baseApiPath + url, JSON.stringify(body), {headers: this.getHeaders()})
+        return this.http.put(this.appConfig.baseApiPath + url, JSON.stringify(body), { headers: this.getHeaders() })
             .catch(function (error: any) {
                 if (error.status === 401) {
-                    me.router.navigate(['/logout']);
+                    me.router.navigate(['/login']);
                 }
-                return Observable.throw(error || 'Server error');
+                return [];
             });
     }
 
     delete(url: string): Observable<any> {
         const me = this;
-        return this.http.delete(this.appConfig.baseApiPath + url, {headers: this.getHeaders()})
+        return this.http.delete(this.appConfig.baseApiPath + url, { headers: this.getHeaders() })
             .catch(function (error: any) {
                 if (error.status === 401) {
-                    me.router.navigate(['/logout']);
+                    me.router.navigate(['/login']);
                 }
-                return Observable.throw(error || 'Server error');
+                return [];
             });
     }
 
     postFormData(url: string, formData: FormData): any {
         const oReq = new XMLHttpRequest();
         // Completed succesfully.
-        oReq.addEventListener('load', function(evt) {
+        oReq.addEventListener('load', function (evt) {
             console.log(oReq.response);
         });
         // An error happened

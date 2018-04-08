@@ -52,7 +52,7 @@ export class UserDialogComponent implements OnInit {
   ngOnInit() {
     this.getAllRoles();
     if (this.user) {
-      console.log(this.user);
+      // console.log(this.user);
       this.user.password = null;
       this.form.setValue(this.user);
     } else {
@@ -65,7 +65,7 @@ export class UserDialogComponent implements OnInit {
   }
 
   saveUser(data: User) {
-    console.log(data);
+    // console.log(data);
   }
 
   close(): void {

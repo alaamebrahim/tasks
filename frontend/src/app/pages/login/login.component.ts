@@ -8,6 +8,8 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocaleService } from '../../shared/services/locale.service';
 import { LoginService } from '../../shared/services/login.service';
 import { Role } from './role.model';
+import { UserInfoService } from '../../shared/services/user-info.service';
+import { NotifyUserService } from '../../shared/services/notify-user.service';
 
 @Component({
   selector: 'app-login',
@@ -21,8 +23,9 @@ export class LoginComponent {
     public fb: FormBuilder,
     public router: Router,
     private translator: TranslateService,
-    private localeService: LocaleService,
+    private notifyService: NotifyUserService,
     private loginService: LoginService,
+    private userInfoService: UserInfoService
   ) {
     this.settings = this.appSettings.settings;
     this.translator.setDefaultLang(sessionStorage.getItem('locale'));
@@ -31,6 +34,8 @@ export class LoginComponent {
       'email': [null, Validators.compose([Validators.required, emailValidator])],
       'password': [null, Validators.compose([Validators.required, Validators.minLength(6)])]
     });
+    // as long as you choosed this page, then u MUST login again.
+    this.userInfoService.removeUserInfo();
   }
 
   public onSubmit(): void {
@@ -38,6 +43,10 @@ export class LoginComponent {
       this.loginService.getToken(this.form.get('email').value, this.form.get('password').value)
         .then(resp => {
           // console.log(resp);
+          if (resp === undefined) {
+            this.notifyService.notifyUser('login.messages.badcredits');
+            return;
+          }
           if (resp.login === 'token_generated') {
             sessionStorage.setItem('userToken', resp.data.token);
             // console.log('Yes, token is generated');
@@ -51,12 +60,17 @@ export class LoginComponent {
                     this.loginService.saveUserDataInSession(userResp, resp.data.token, role.name);
                     this.router.navigate(['/']);
                   });
-              }, error => console.log(error));
-            // this.router.navigate(['home/dashboard']);
+              }, error => {
+                this.notifyService.notifyUser('login.messages.error');
+                console.log(error);
+              });
           } else {
-
+            this.notifyService.notifyUser('login.messages.badcredits');
           }
-        }, errResponse => errResponse);
+        }, errResponse => {
+          this.notifyService.notifyUser('login.messages.error');
+          console.log(errResponse);
+        });
     }
   }
 

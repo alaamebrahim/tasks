@@ -23,11 +23,11 @@ export class UsersService {
     }
 
     updateUser(user: User) {
-        return this.http.put(this.url, user);
+        return this.apiRequestService.post('users/update-user', user);
     }
 
-    deleteUser(id: number) {
-        return this.http.delete(this.url + "/" + id);
+    deleteUser(user: User) {
+        return this.apiRequestService.post('users/delete-user', user);
     }
 
     getRoles(): Observable<Role[]> {

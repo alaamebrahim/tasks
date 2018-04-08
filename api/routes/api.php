@@ -61,6 +61,10 @@ $api->version('v1', function ($api) {
         $api->get('/get-roles', ['uses' => 'RolesController@getAllRoles','as' => 'api.roles.all']);
         // add new user
         $api->post('/add-user', ['uses' => 'UsersController@addNewUser','as' => 'api.user.addNew']);
+        // update existing user
+        $api->post('/update-user', ['uses' => 'UsersController@updateExistingUser','as' => 'api.user.updateExisting']);
+        // delete a user
+        $api->post('/delete-user', ['uses' => 'UsersController@deleteExistingUser','as' => 'api.user.deleteExistingUser']);
         // Get All users
         $api->get('/get-users', ['uses' => 'UsersController@getAllUsers','as' => 'api.user.all']);
     });

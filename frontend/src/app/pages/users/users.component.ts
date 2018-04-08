@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import { MatDialog } from '@angular/material';
+import { MatDialog, MatSnackBar } from '@angular/material';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import { User } from './user.model';
@@ -7,6 +7,7 @@ import { UsersService } from './users.service';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LocaleService } from '../../shared/services/locale.service';
+import { NotifyUserService } from '../../shared/services/notify-user.service';
 
 @Component({
     selector: 'app-users',
@@ -25,7 +26,7 @@ export class UsersComponent implements OnInit {
         public dialog: MatDialog,
         public usersService: UsersService,
         private translator: TranslateService,
-        // private localeService: LocaleService
+        private notifyService: NotifyUserService
     ) {
         this.settings = this.appSettings.settings;
         this.translator.setDefaultLang(sessionStorage.getItem('locale'));
@@ -36,21 +37,65 @@ export class UsersComponent implements OnInit {
         this.getUsers();
     }
 
+    /**
+     * Get all users
+     */
     public getUsers(): void {
         this.users = null; // for show spinner each time
         this.usersService.getUsers().subscribe(users => this.users = users);
     }
+
+    /**
+     * add new user to db
+     * @param userdata
+     */
     public addUser(userdata: User) {
-        this.usersService.addUser(userdata).subscribe(user => this.getUsers());
+        this.usersService.addUser(userdata).subscribe(response => {
+            if (response.success === true) {
+                this.notifyService.notifyUser('general.messages.saved');
+            } else {
+                this.notifyService.notifyUser('general.messages.error');
+            }
+            this.getUsers();
+        });
     }
+
+    /**
+     * update user data
+     * @param userdata
+     */
     public updateUser(userdata: User) {
-        this.usersService.updateUser(userdata).subscribe(user => this.getUsers());
+        this.usersService.updateUser(userdata).subscribe(response => {
+            if (response.success === true) {
+                // console.log(response.message);
+                this.notifyService.notifyUser('general.messages.saved');
+            } else {
+                this.notifyService.notifyUser('general.messages.error');
+            }
+            this.getUsers();
+        });
     }
+
+    /**
+     * Delete user data
+     * @param userdata
+     */
     public deleteUser(userdata: User) {
-        this.usersService.deleteUser(userdata.id).subscribe(user => this.getUsers());
+        this.usersService.deleteUser(userdata).subscribe(response => {
+            if (response.success === true) {
+                // console.log(response.message);
+                this.notifyService.notifyUser('general.messages.saved');
+            } else {
+                this.notifyService.notifyUser('general.messages.error');
+            }
+            this.getUsers();
+        });
     }
 
-
+    /**
+     * Even listener for changes in page
+     * @param event
+     */
     public onPageChanged(event) {
         this.page = event;
         this.getUsers();
@@ -61,6 +106,10 @@ export class UsersComponent implements OnInit {
         }
     }
 
+    /**
+     * Opens user dialog
+     * @param userdata
+     */
     public openUserDialog(userdata) {
         const dialogRef = this.dialog.open(UserDialogComponent, {
             data: userdata

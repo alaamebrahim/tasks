@@ -12,7 +12,7 @@
                     </mat-form-field>
                     <mat-form-field class="w-100">
                         <mat-placeholder><mat-icon>vpn_key</mat-icon> {{'users.form.password' | translate}}</mat-placeholder>
-                        <input matInput formControlName="password" required [type]="passwordHide ? 'password' : 'text'">
+                        <input matInput formControlName="password" [required]="!user.id" [type]="passwordHide ? 'password' : 'text'">
                         <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
                         <mat-error *ngIf="form.controls.password.errors?.required">{{'users.form.errors.password.required' | translate}}</mat-error>
                         <mat-error *ngIf="form.controls.password.hasError('minlength')">{{'users.form.errors.password.length' | translate}}</mat-error>
@@ -28,10 +28,12 @@
             <mat-tab label="{{'users.labels.personal' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="{{'users.form.first_name' | translate}}" formControlName="first_name">
+                        <input matInput placeholder="{{'users.form.first_name' | translate}}" required formControlName="first_name">
+                        <mat-error *ngIf="form.controls.first_name.errors?.required">{{'users.form.errors.first_name.required' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <input matInput placeholder="{{'users.form.last_name' | translate}}" formControlName="last_name">
+                        <input matInput placeholder="{{'users.form.last_name' | translate}}" required formControlName="last_name">
+                        <mat-error *ngIf="form.controls.last_name.errors?.required">{{'users.form.errors.last_name.required' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100">
                         <input matInput [matDatepicker]="birthday" placeholder="{{'users.form.birthdate' | translate}}" formControlName="birthday">
