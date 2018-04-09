@@ -12,6 +12,8 @@
     font-style:normal;
 }
 
+
+
 // indigo-pink, deeppurple-amber, purple-green and pink-bluegrey.
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
 
@@ -19,3 +21,10 @@
 @import "app/theme/styles/theme";
 @import "app/theme/styles/libs-override";
 @import "app/theme/styles/rtl";
+
+// This part responsible for glolaizing font family for material
+@import '~@angular/material/theming';
+$custom-typography: mat-typography-config(
+    $font-family: '"GE SS Text Light", Roboto, "Helvetica Neue", sans-serif'
+);
+@include mat-core($custom-typography);
