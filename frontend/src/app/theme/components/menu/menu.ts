@@ -3,8 +3,9 @@ import { Menu } from './menu.model';
 export const verticalMenuItems = [
     new Menu(1, 'الرئيسية', '/', null, 'dashboard', null, false, 0),
     new Menu(2, 'المستخدمين', '/users', null, 'supervisor_account', null, false, 0),
+    new Menu(3, 'المهام', '/tasks', null, 'access_alarm', null, false, 0),
     new Menu(16, 'البريد', '/mailbox', null, 'email', null, false, 0),
-    new Menu(3, 'UI Features', null, null, 'computer', null, true, 0),
+    new Menu(81, 'UI Features', null, null, 'computer', null, true, 0),
     new Menu(4, 'Buttons', '/ui/buttons', null, 'keyboard', null, false, 3),
     new Menu(5, 'Cards', '/ui/cards', null, 'card_membership', null, false, 3),
     new Menu(6, 'Lists', '/ui/lists', null, 'list', null, false, 3),
@@ -50,21 +51,20 @@ export const verticalMenuItems = [
     new Menu(72, 'Pie Charts', '/charts/pie', null, 'pie_chart', null, false, 70),
     new Menu(73, 'Line Charts', '/charts/line', null, 'show_chart', null, false, 70),
     new Menu(74, 'Bubble Charts', '/charts/bubble', null, 'bubble_chart', null, false, 70),
-    new Menu(81, 'Drag & Drop', '/drag-drop', null, 'mouse', null, false, 0),
     new Menu(85, 'Material Icons', '/icons', null, 'insert_emoticon', null, false, 0),
     new Menu(140, 'Level 1', null, null, 'more_horiz', null, true, 0),
     new Menu(141, 'Level 2', null, null, 'folder_open', null, true, 140),
     new Menu(142, 'Level 3', null, null, 'folder_open', null, true, 141),
     new Menu(143, 'Level 4', null, null, 'folder_open', null, true, 142),
     new Menu(144, 'Level 5', null, 'http://themeseason.com', 'link', null, false, 143),
-    new Menu(200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 0)
-]
+];
 
 export const horizontalMenuItems = [
     new Menu(1, 'الرئيسية', '/', null, 'dashboard', null, false, 0),
     new Menu(2, 'المستخدمين', '/users', null, 'supervisor_account', null, false, 0),
+    new Menu(3, 'المهام', '/tasks', null, 'access_alarm', null, false, 0),
     new Menu(16, 'البريد', '/mailbox', null, 'email', null, false, 40),
-    new Menu(3, 'UI Features', null, null, 'computer', null, true, 0),
+    new Menu(81, 'UI Features', null, null, 'computer', null, true, 0),
     new Menu(4, 'Buttons', '/ui/buttons', null, 'keyboard', null, false, 3),
     new Menu(5, 'Cards', '/ui/cards', null, 'card_membership', null, false, 3),
     new Menu(6, 'Lists', '/ui/lists', null, 'list', null, false, 3),
@@ -101,7 +101,6 @@ export const horizontalMenuItems = [
     new Menu(66, 'Maps', null, null, 'map', null, true, 70),
     new Menu(67, 'Google Maps', '/maps/googlemaps', null, 'location_on', null, false, 66),
     new Menu(68, 'Leaflet Maps', '/maps/leafletmaps', null, 'my_location', null, false, 66),
-    new Menu(81, 'Drag & Drop', '/drag-drop', null, 'mouse', null, false, 3),
     new Menu(85, 'Material Icons', '/icons', null, 'insert_emoticon', null, false, 3),
     new Menu(40, 'Pages', null, null, 'library_books', null, true, 0),
     new Menu(43, 'Login', '/login', null, 'exit_to_app', null, false, 40),
@@ -110,6 +109,5 @@ export const horizontalMenuItems = [
     new Menu(46, 'Page Not Found', '/pagenotfound', null, 'error_outline', null, false, 40),
     new Menu(47, 'Error', '/error', null, 'warning', null, false, 40),
     new Menu(48, 'Landing', '/landing', null, 'filter', null, false, 40),
-    new Menu(50, 'Schedule', '/schedule', null, 'event', null, false, 40),
-    new Menu(200, 'External Link', null, 'http://themeseason.com', 'open_in_new', '_blank', false, 40)
-]
+    new Menu(50, 'Schedule', '/schedule', null, 'event', null, false, 40)
+];
