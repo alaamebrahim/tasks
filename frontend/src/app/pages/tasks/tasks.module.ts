@@ -5,9 +5,15 @@ import { DragulaModule } from 'ng2-dragula';
 import { SharedModule } from '../../shared/shared.module';
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
-
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
+import { TasksService } from './tasks.service';
 export const routes = [
-  { path: '', component: TasksComponent, pathMatch: 'full' }
+  { path: '', component: TasksComponent, pathMatch: 'full' },
+  {
+    path: 'add-task',
+    component: AddTaskComponent,
+    data: { breadcrumb: 'تكليف بمهمة جديدة'}
+  }
 ];
 
 @NgModule({
@@ -15,11 +21,16 @@ export const routes = [
     CommonModule,
     RouterModule.forChild(routes),
     DragulaModule,
-    SharedModule
+    SharedModule,
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     TasksComponent,
     AddTaskComponent
+  ],
+  providers: [
+    TasksService
   ]
 })
 export class TasksModule { }

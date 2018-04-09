@@ -1,6 +1,6 @@
 <div fxLayout="row wrap" fxLayout.xs="column" [dragula]="'bag-container'">
-    <div fxFlex="33.3" class="flex-p">
-        <mat-card>
+    <div fxFlex="33.3" class="flex-p" (click)="onAddNewTaskClick()">
+        <mat-card class="bg-primary">
             <mat-card-header fxLayoutAlign="center">
                 <mat-card-subtitle fxLayoutAlign="center">
                     <mat-icon class="icon-lg">alarm_add</mat-icon>

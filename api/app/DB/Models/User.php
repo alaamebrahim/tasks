@@ -57,4 +57,8 @@ class User extends Model implements
     public function role () {
         return $this->hasOne('App\DB\Models\Role');
     }
+
+    public function tasks () {
+        return $this->hasMany('App\DB\Models\Task');
+    }
 }

@@ -1,1 +1,52 @@
-
+<div fxLayout="column">
+    <div class="flex-p">
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center">
+                <mat-card-subtitle>
+                    <h2>{{'tasks.addtask.head' | translate}}</h2>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxLayoutAlign="center">
+                <form [formGroup]="form">
+                    <div fxLayout="column" class="form-field-outer w-100">
+                        <mat-input-container>
+                            <mat-placeholder>
+                                <mat-icon>person</mat-icon> {{'tasks.form.title' | translate}}</mat-placeholder>
+                            <input matInput formControlName="title" required>
+                        </mat-input-container>
+                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                            <mat-select formControlName="user_id" multiple required placeholder="{{'tasks.form.user' | translate}}">
+                                <mat-option *ngFor="let user of users" [value]="user.id">{{user.first_name === '' ? user.email : user.first_name}} {{user.last_name === '' ? '' :
+                                    user.last_name}}</mat-option>
+                            </mat-select>
+                        </mat-input-container>
+                        <mat-input-container floatPlaceholder="auto">
+                            <input matInput [matDatepicker]="startdate" required placeholder="{{'tasks.form.start_date' | translate}}" formControlName="start_date">
+                            <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+                            <mat-datepicker #startdate></mat-datepicker>
+                        </mat-input-container>
+                        <mat-input-container floatPlaceholder="auto">
+                            <input matInput [matDatepicker]="enddate" required placeholder="{{'tasks.form.end_date' | translate}}" formControlName="end_date">
+                            <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                            <mat-datepicker #enddate></mat-datepicker>
+                        </mat-input-container>
+                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                            <textarea matInput formControlName="description" required placeholder="{{'tasks.form.description' | translate}}" rows="5"></textarea>
+                        </mat-input-container>
+                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                            <mat-select formControlName="priority" placeholder="{{'tasks.form.priority.title' | translate}}">
+                                <mat-option [value]="1">{{'tasks.form.priority.levels.1' | translate}}</mat-option>
+                                <mat-option [value]="2">{{'tasks.form.priority.levels.2' | translate}}</mat-option>
+                                <mat-option [value]="3">{{'tasks.form.priority.levels.3' | translate}}</mat-option>
+                                <mat-option [value]="4">{{'tasks.form.priority.levels.4' | translate}}</mat-option>
+                            </mat-select>
+                        </mat-input-container>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-footer fxLayout="column">
+                    <button mat-raised-button color="primary" (click)="onSaveTask()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>

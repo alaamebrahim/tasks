@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-
+import { User } from '../../users/user.model';
+import { UsersService } from '../../users/users.service';
+import { TasksService } from '../tasks.service';
+import { Task } from '../task.model';
+import { NotifyUserService } from '../../../shared/services/notify-user.service';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-add-task',
   templateUrl: './add-task.component.html',
@@ -8,11 +13,17 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 })
 export class AddTaskComponent implements OnInit {
 
-  private formGroup: FormGroup;
+  private form: FormGroup;
+  private users: User[];
+
   constructor(
-    private fb: FormBuilder
+    private fb: FormBuilder,
+    private usersService: UsersService,
+    private tasksService: TasksService,
+    private notifyService: NotifyUserService,
+    private router: Router,
   ) {
-    this.formGroup = this.fb.group({
+    this.form = this.fb.group({
       id: null,
       title: [null, Validators.compose([Validators.required])],
       start_date: [null, Validators.compose([Validators.required])],
@@ -24,6 +35,30 @@ export class AddTaskComponent implements OnInit {
   }
 
   ngOnInit() {
+    this.getAllUsers();
+  }
+
+  onSaveTask() {
+    this.tasksService.addTask(this.form.value)
+      .subscribe((response) => {
+        if (response.success === true) {
+          console.log(response.message);
+          this.notifyService.notifyUser('general.messages.saved');
+          this.router.navigate(['tasks']);
+        } else {
+          this.notifyService.notifyUser('general.messages.error');
+        }
+      });
+  }
+
+  /**
+   * Get users for dropdown menu
+   */
+  getAllUsers(): void {
+    this.usersService.getUsers().subscribe((response) => {
+      // console.log(response);
+      this.users = response['users'];
+    });
   }
 
 }
