@@ -4,7 +4,10 @@ namespace App\DB\Repositories;
 
 use Bosnadev\Repositories\Contracts\RepositoryInterface;
 use Bosnadev\Repositories\Eloquent\Repository;
-use Tymon\JWTAuth\Facades\JWTAuth;
+use App\DB\Models\Tasks as Task;
+use App\DB\Models\User;
+use Illuminate\Support\Facades\DB;
+
 class TasksRepository extends Repository {
     public function model () {
         return 'App\DB\Models\Tasks';
@@ -14,6 +17,22 @@ class TasksRepository extends Repository {
      * Returns all tasks for an user
      */
     public function getAllTasksByUser ($id) {
-        return $this->model()->where('user_id',$id)->orderBy('updated_at')->get();
+        return DB::table('tasks')
+                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+                    ->orderBy('tasks.updated_at')
+                    ->where('tasks.user_id', '=', $id)
+                    ->select('tasks.*', 'users.first_name', 'users.last_name')
+                    ->get();
+    }
+
+    /**
+     * Returns all tasks for an user
+     */
+    public function getAllTasks () {
+        return DB::table('tasks')
+                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+                    ->orderBy('tasks.updated_at')
+                    ->select('tasks.*', 'users.first_name', 'users.last_name')
+                    ->get();
     }
 }

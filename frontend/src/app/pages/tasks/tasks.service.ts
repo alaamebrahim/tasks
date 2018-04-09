@@ -13,4 +13,8 @@ export class TasksService {
     return this.apiRequestService.post('tasks/add-task', data);
   }
 
+  public getTasks() {
+    return this.apiRequestService.get('tasks/get-tasks');
+  }
+
 }

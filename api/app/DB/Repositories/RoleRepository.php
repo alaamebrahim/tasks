@@ -14,6 +14,7 @@ class RoleRepository extends Repository {
      * Get role name by user id.
      */
     public function getRoleName($id) {
-        return $this->model()->find($id)->role;
+        // var_dump($this->find($id)->name);
+        return $this->find($id)->name;
     }
 }

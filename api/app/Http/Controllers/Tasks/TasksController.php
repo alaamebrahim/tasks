@@ -11,18 +11,22 @@ use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exception\HttpResponseException;
 use App\DB\Repositories\UserRepository as UserRepo;
+use App\DB\Repositories\RoleRepository as RoleRepo;
 use App\DB\Repositories\TasksRepository as TaskRepo;
 use App\DB\Models\User;
 use App\DB\Models\Tasks;
 use Carbon\Carbon;
+
 class TasksController extends Controller
 {
     private $userRepo;
     private $taskRepo;
+    private $roleRepo;
 
-    public function __construct(UserRepo $userRepo, TaskRepo $taskRepo) {
+    public function __construct(UserRepo $userRepo, TaskRepo $taskRepo, RoleRepo $roleRepo) {
         $this->userRepo = $userRepo;
         $this->taskRepo = $taskRepo;
+        $this->roleRepo = $roleRepo;
     }
 
     /**
@@ -105,9 +109,19 @@ class TasksController extends Controller
     }
 
     /**
-     * Get all tasks in db depending on current use
+     * Get all tasks in db depending on current user
      */
     public function getAllTasks() {
-        return $this->taskRepo->getAllTasks();
+        $current_user = JWTAuth::parseToken()->authenticate();
+        if(!$current_user) {
+            return null;
+        }
+        $role_name = $this->roleRepo->getRoleName($current_user['attributes']['role_id']);
+        if($role_name == 'root' || $role_name == 'admin') {
+            return $this->taskRepo->getAllTasks();
+        } else {
+            return $this->userRepo->find($current_user['attributes']['id'])->tasks;
+        }
+        
     }
 }

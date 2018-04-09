@@ -93,7 +93,7 @@ export class UsersComponent implements OnInit {
     }
 
     /**
-     * Even listener for changes in page
+     * Even listener for changes in pagination
      * @param event
      */
     public onPageChanged(event) {

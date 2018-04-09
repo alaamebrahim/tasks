@@ -59,6 +59,6 @@ class User extends Model implements
     }
 
     public function tasks () {
-        return $this->hasMany('App\DB\Models\Task');
+        return $this->hasMany('App\DB\Models\Tasks');
     }
 }

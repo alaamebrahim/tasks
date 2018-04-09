@@ -87,7 +87,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" class="flex-p"> 
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 1, currentPage: page }" fxFlex="100" class="flex-p"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3> 

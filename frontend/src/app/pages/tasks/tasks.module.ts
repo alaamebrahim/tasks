@@ -7,6 +7,8 @@ import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TasksService } from './tasks.service';
+import { NgxPaginationModule } from 'ngx-pagination';
+import { PipesModule } from '../../theme/pipes/pipes.module';
 export const routes = [
   { path: '', component: TasksComponent, pathMatch: 'full' },
   {
@@ -23,7 +25,9 @@ export const routes = [
     DragulaModule,
     SharedModule,
     FormsModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgxPaginationModule,
+    PipesModule
   ],
   declarations: [
     TasksComponent,

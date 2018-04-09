@@ -9,4 +9,8 @@ class UserRepository extends Repository {
     public function model () {
         return 'App\DB\Models\User';
     }
+
+    public function getUserCompletedTasks($id) {
+
+    }
 }

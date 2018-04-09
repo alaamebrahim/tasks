@@ -11,48 +11,36 @@
             </mat-card-content>
         </mat-card>
     </div>
-    <div *ngFor="let icon of icons" fxFlex="33.3" class="flex-p">
+    <div *ngFor="let task of tasks | paginate: { itemsPerPage: 11, currentPage: page }" fxFlex="33.3" class="flex-p">
         <mat-card class="draggable">
             <mat-card-header fxLayoutAlign="center">
                 <mat-card-subtitle fxLayoutAlign="center">
-                    <mat-icon class="icon-lg">{{icon}}</mat-icon>
+                    {{task.title}}
                 </mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content class="text-center">
-                There's also the possibility of moving elements around in the same container, changing their position.
+            <mat-card-content class="text-right">
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon>person_outline</mat-icon>
+                    <span>{{task.first_name}} {{task.last_name}}</span>
+                        </p>
+                <p fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="muted-text">location_on</mat-icon>
+                    <span>{{task.description}}</span>
+                </p>
+                <p fxLayout="row" fxLayoutAlign="start center">
+                    <mat-icon class="muted-text">date_range</mat-icon>
+                    <span>{{task.start_date}}</span>
+                    <mat-icon class="muted-text">date_range</mat-icon>
+                    <span>{{task.end_date}}</span>
+                </p>
             </mat-card-content>
         </mat-card>
     </div>
 </div>
-<div fxLayout="row">
-    <div fxFlex="50" class="flex-p">
-        <mat-card>
-            <mat-card-header fxLayoutAlign="center">
-                <mat-card-subtitle fxLayoutAlign="center">
-                    <h2>First Container</h2>
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content [dragula]="'bag-1'" class="bag">
-                <mat-card *ngFor="let color of colors" [class.bg-primary]="color=='primary'" [class.bg-accent]="color=='accent'" [class.bg-warn]="color=='warn'"
-                    class="draggable">
-                    You can move these elements between these two containers
-                </mat-card>
-            </mat-card-content>
-        </mat-card>
-    </div>
-    <div fxFlex="50" class="flex-p">
-        <mat-card>
-            <mat-card-header fxLayoutAlign="center">
-                <mat-card-subtitle fxLayoutAlign="center">
-                    <h2>Second Container</h2>
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content [dragula]="'bag-1'" class="bag">
-                <mat-card *ngFor="let color of colors" [class.bg-primary]="color=='primary'" [class.bg-accent]="color=='accent'" [class.bg-warn]="color=='warn'"
-                    class="draggable">
-                    You can move these elements between these two containers
-                </mat-card>
-            </mat-card-content>
+<div *ngIf="tasks" fxLayout="row wrap">
+    <div fxFlex="100" class="flex-p">
+        <mat-card class="p-0 text-center">
+            <pagination-controls class="gradus-pagination" autoHide="true" maxSize="7" (pageChange)="onPageChanged($event)"></pagination-controls>
         </mat-card>
     </div>
 </div>
