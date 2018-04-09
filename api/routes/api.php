@@ -68,4 +68,22 @@ $api->version('v1', function ($api) {
         // Get All users
         $api->get('/get-users', ['uses' => 'UsersController@getAllUsers','as' => 'api.user.all']);
     });
+
+    /*************************************************************
+     * Tasks controller routes
+     ************************************************************/
+    $api->group([
+        'middleware' => 'api.auth',
+        'prefix'     => '/tasks/',
+        'namespace'  => 'App\Http\Controllers\Tasks',
+    ], function ($api) {
+        // add new task
+        $api->post('/add-task', ['uses' => 'TasksController@addNewTask','as' => 'api.task.addNew']);
+        // update existing user
+        $api->post('/update-task', ['uses' => 'TasksController@updateExistingTask','as' => 'api.task.updateExisting']);
+        // delete a user
+        $api->post('/delete-task', ['uses' => 'TasksController@deleteExistingTask','as' => 'api.task.deleteExisting']);
+        // Get All tasks
+        $api->get('/get-tasks', ['uses' => 'TasksController@getAllTasks','as' => 'api.task.all']);
+    });
 });
