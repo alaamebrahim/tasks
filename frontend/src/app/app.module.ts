@@ -47,6 +47,7 @@ import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthGuard } from './shared/services/auth_guard.service';
 import { RolesGuardService } from './shared/services/roles-guard.service';
 import { NotifyUserService } from './shared/services/notify-user.service';
+import { MAT_DATE_LOCALE } from '@angular/material/core';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -98,6 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     LocaleService,
     AppConfig,
     { provide: APP_INITIALIZER, useFactory: (config: AppConfig) => () => config.load(), deps: [AppConfig], multi: true },
+    {provide: MAT_DATE_LOCALE, useValue: 'ar-SA'},
     ApiRequestService,
     UserInfoService,
     LoginService,
