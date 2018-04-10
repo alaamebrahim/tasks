@@ -17,4 +17,8 @@ export class TasksService {
     return this.apiRequestService.get('tasks/get-tasks');
   }
 
+  public updateTask(task: Task) {
+    return this.apiRequestService.post('tasks/update-task', task);
+  }
+
 }

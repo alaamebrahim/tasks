@@ -73,7 +73,6 @@ class TasksController extends Controller
      */
     public function updateExistingTask(Request $request) {
         // Validation rules
-        // Validation rules
         $this->validate($request, [
             'title' => 'required',
             'start_date' => 'required',
@@ -82,9 +81,14 @@ class TasksController extends Controller
             'description' => 'required'
         ]);
         $data = $request->all();
-        
-        // save user object
-        $this->taskRepo->update($data,$data['id']);
+
+        $data['updated_at'] = Carbon::now();
+        unset($data['first_name']);
+        unset($data['last_name']);
+        $data['completed'] = $data['progress'] == 100 ? 1 : 0;
+        $this->taskRepo->update($data, $data['id']);
+        //$this->taskRepo->saveModel($saveData);
+
         // return success obj as json
         return new JsonResponse([
             'success' => true,

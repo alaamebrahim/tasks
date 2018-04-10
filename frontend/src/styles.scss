@@ -28,3 +28,7 @@ $custom-typography: mat-typography-config(
     $font-family: '"GE SS Text Light", Roboto, "Helvetica Neue", sans-serif'
 );
 @include mat-core($custom-typography);
+
+i {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}

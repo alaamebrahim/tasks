@@ -12,7 +12,7 @@ export class AppSettings {
         true,       // sidenavUserBlock
         'vertical', // horizontal , vertical
         'default',  // default, compact, mini
-        'indigo-light',   // indigo-light, teal-light, red-light, blue-dark, green-dark, pink-dark
+        'teal-light',   // indigo-light, teal-light, red-light, blue-dark, green-dark, pink-dark
         true       // true = rtl, false = ltr
     )
 }

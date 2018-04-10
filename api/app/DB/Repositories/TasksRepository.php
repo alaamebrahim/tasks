@@ -19,7 +19,7 @@ class TasksRepository extends Repository {
     public function getAllTasksByUser ($id) {
         return DB::table('tasks')
                     ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
-                    ->orderBy('tasks.updated_at')
+                    ->orderBy('tasks.updated_at', 'desc')
                     ->where('tasks.user_id', '=', $id)
                     ->select('tasks.*', 'users.first_name', 'users.last_name')
                     ->get();
@@ -31,7 +31,8 @@ class TasksRepository extends Repository {
     public function getAllTasks () {
         return DB::table('tasks')
                     ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
-                    ->orderBy('tasks.updated_at')
+                    ->orderBy('tasks.updated_at','desc')
+                    ->orderBy('tasks.completed','desc')
                     ->select('tasks.*', 'users.first_name', 'users.last_name')
                     ->get();
     }

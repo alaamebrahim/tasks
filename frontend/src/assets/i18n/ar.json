@@ -105,7 +105,14 @@
 			"user": "المستخدم"
 		},
 		"buttons": {
-			"add-new": "يمكنك إضافة مهامة جديدة بالضغط هنا"
+			"add-new": "إضافة مهمة جديدة",
+			"filter-completed": "عرض الغير منتهى",
+			"filter-uncompleted": "عرض المنتهى"
+		},
+		"text": {
+			"completed": "مكتملة",
+			"uncompleted": "غير مكتملة",
+			"responsibleuser": "المستخدم المكلف"
 		}
 	},
 	"buttons": {

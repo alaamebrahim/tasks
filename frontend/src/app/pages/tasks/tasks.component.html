@@ -1,41 +1,66 @@
-<div fxLayout="row wrap" fxLayout.xs="column" [dragula]="'bag-container'">
-    <div fxFlex="33.3" class="flex-p" (click)="onAddNewTaskClick()">
-        <mat-card class="bg-primary">
-            <mat-card-header fxLayoutAlign="center">
-                <mat-card-subtitle fxLayoutAlign="center">
-                    <mat-icon class="icon-lg">alarm_add</mat-icon>
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content class="text-center">
-                {{'tasks.buttons.add-new' |translate}}
-            </mat-card-content>
-        </mat-card>
+<div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
+    <div fxLayout="row">
+        <button (click)="onAddNewTaskClick()" mat-raised-button color="primary" class="m-1">
+            <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.add-new' |translate}}
+        </button>
+        <button (click)="onFilterTasks('uncompleted')" mat-raised-button color="accent" class="m-1">
+            <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.filter-uncompleted' |translate}}
+        </button>
+        <button (click)="onFilterTasks('completed')" mat-raised-button color="basic" class="m-1">
+            <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.filter-completed' |translate}}
+        </button>
     </div>
-    <div *ngFor="let task of tasks | paginate: { itemsPerPage: 11, currentPage: page }" fxFlex="33.3" class="flex-p">
-        <mat-card class="draggable">
-            <mat-card-header fxLayoutAlign="center">
-                <mat-card-subtitle fxLayoutAlign="center">
-                    {{task.title}}
-                </mat-card-subtitle>
-            </mat-card-header>
-            <mat-card-content class="text-right">
-                    <p fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon>person_outline</mat-icon>
-                    <span>{{task.first_name}} {{task.last_name}}</span>
-                        </p>
-                <p fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon class="muted-text">location_on</mat-icon>
-                    <span>{{task.description}}</span>
-                </p>
-                <p fxLayout="row" fxLayoutAlign="start center">
-                    <mat-icon class="muted-text">date_range</mat-icon>
-                    <span>{{task.start_date}}</span>
-                    <mat-icon class="muted-text">date_range</mat-icon>
-                    <span>{{task.end_date}}</span>
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </div>
+</div>
+<div fxFlex="100">
+    <mat-accordion displayMode="default" [multi]="false" [hideToggle]="true">
+        <mat-expansion-panel *ngFor="let task of tasks | paginate: { itemsPerPage: 11, currentPage: page }">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon *ngIf="task.progress === 100" class="mat-18" color="primary">verified_user</mat-icon>
+                    <mat-icon *ngIf="task.progress < 100" class="mat-18">assignment_late</mat-icon>
+                    <h5>{{task.title}}</h5>
+                </mat-panel-title>
+                <mat-panel-description class="float-left">
+                    <i>
+                        <small>{{task.start_date}} : {{task.end_date}}</small>
+                    </i>
+                </mat-panel-description>
+            </mat-expansion-panel-header>
+            <p fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="mat-18">description</mat-icon>
+                <span>
+                    <i>{{task.description}}</i>
+                </span>
+            </p>
+            <p fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="mat-18">face</mat-icon>
+                <span>
+                    <i>{{task.first_name + ' ' + task.last_name}}</i>
+                </span>
+            </p>
+            <p fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="mat-18">low_priority</mat-icon>
+                <span>
+                    <i>{{'tasks.form.priority.levels.' + task.priority | translate}}</i>
+                </span>
+            </p>
+            <p fxLayout="row" fxLayoutAlign="start center">
+                <mat-icon class="mat-18">hourglass_empty</mat-icon>
+                <span>
+                    <mat-slider (change)="onProgressChange(task)" class="custom-slider w-50" [max]="100" [min]="0" [step]="1" [thumb-label]="true"
+                        [tick-interval]="tickInterval" [(ngModel)]="task.progress" [vertical]="false">
+                    </mat-slider>
+                    <i>
+                        <small>{{task.progress}}%</small>
+                    </i>
+                </span>
+            </p>
+            <button *ngIf="task.progress !== 100" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="accent" class="m-1">
+                <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
+            </button>
+
+        </mat-expansion-panel>
+    </mat-accordion>
 </div>
 <div *ngIf="tasks" fxLayout="row wrap">
     <div fxFlex="100" class="flex-p">
