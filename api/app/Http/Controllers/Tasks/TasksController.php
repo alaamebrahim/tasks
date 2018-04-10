@@ -85,6 +85,7 @@ class TasksController extends Controller
         $data['updated_at'] = Carbon::now();
         unset($data['first_name']);
         unset($data['last_name']);
+        
         $data['completed'] = $data['progress'] == 100 ? 1 : 0;
         $this->taskRepo->update($data, $data['id']);
         //$this->taskRepo->saveModel($saveData);
@@ -126,6 +127,19 @@ class TasksController extends Controller
         } else {
             return $this->userRepo->find($current_user['attributes']['id'])->tasks;
         }
-        
+    }
+
+    /**
+     * Get list of completed tasks
+     */
+    public function getCompletedTasks() {
+        return $this->taskRepo->getTasksByStatus(1);
+    }
+
+    /**
+     * Get list of uncompleted tasks
+     */
+    public function getUncompletedTasks() {
+        return $this->taskRepo->getTasksByStatus(0);
     }
 }

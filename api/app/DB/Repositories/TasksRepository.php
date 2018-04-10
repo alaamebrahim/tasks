@@ -36,4 +36,11 @@ class TasksRepository extends Repository {
                     ->select('tasks.*', 'users.first_name', 'users.last_name')
                     ->get();
     }
+
+    /**
+     * Get completed/uncompleted tasks
+     */
+    public function getTasksByStatus($status) {
+        return parent::findAllBy('completed', $status);
+    }
 }

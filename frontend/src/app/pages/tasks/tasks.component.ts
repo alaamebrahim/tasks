@@ -6,6 +6,9 @@ import { Router } from '@angular/router';
 import { Task } from './task.model';
 import { TasksService } from './tasks.service';
 import { NotifyUserService } from '../../shared/services/notify-user.service';
+import { MatDialog } from '@angular/material';
+import { EditTaskComponent } from './edit-task/edit-task.component';
+import { User } from '../users/user.model';
 
 @Component({
   selector: 'app-tasks',
@@ -25,19 +28,26 @@ export class TasksComponent {
     private dragula: DragulaService,
     private router: Router,
     private tasksService: TasksService,
-    private notifyService: NotifyUserService
+    private notifyService: NotifyUserService,
+    public dialog: MatDialog,
   ) {
     this.settings = this.appSettings.settings;
     this.getAllTasks();
-    this.dragula.drop.subscribe((value) => {
-      console.log(value);
-    });
   }
 
   getAllTasks() {
+    this.tasks = null;
     this.tasksService.getTasks().subscribe((response) => {
       // console.log(response);
       this.tasks = response;
+    });
+  }
+
+  onFilterTasks(status: number) {
+    this.tasks = null;
+    this.tasksService.getTasksByStatus(status).subscribe((response) => {
+      // console.log(response);
+      this.tasks = response.tasks;
     });
   }
 
@@ -65,5 +75,19 @@ export class TasksComponent {
      */
   public onPageChanged(event) {
     this.page = event;
+  }
+
+  /**
+     * Opens user dialog
+     * @param userdata
+     */
+  public onEditTaskClick(taskData: Task) {
+    const dialogRef = this.dialog.open(EditTaskComponent, {
+      data: taskData
+    });
+
+    dialogRef.afterClosed().subscribe(user => {
+      this.getAllTasks();
+    });
   }
 }

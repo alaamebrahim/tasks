@@ -85,5 +85,10 @@ $api->version('v1', function ($api) {
         $api->post('/delete-task', ['uses' => 'TasksController@deleteExistingTask','as' => 'api.task.deleteExisting']);
         // Get All tasks
         $api->get('/get-tasks', ['uses' => 'TasksController@getAllTasks','as' => 'api.task.all']);
+        // Get all completed tasks
+        $api->get('/get-completed-tasks', ['uses' => 'TasksController@getCompletedTasks','as' => 'api.task.all.completed']);
+        // Get all uncompleted tasks
+        $api->get('/get-uncompleted-tasks', ['uses' => 'TasksController@getUncompletedTasks','as' => 'api.task.all.uncompleted']);
+
     });
 });

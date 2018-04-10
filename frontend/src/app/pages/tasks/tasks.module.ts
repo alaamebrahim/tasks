@@ -5,6 +5,7 @@ import { DragulaModule } from 'ng2-dragula';
 import { SharedModule } from '../../shared/shared.module';
 import { TasksComponent } from './tasks.component';
 import { AddTaskComponent } from './add-task/add-task.component';
+import { EditTaskComponent } from './edit-task/edit-task.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TasksService } from './tasks.service';
 import { NgxPaginationModule } from 'ngx-pagination';
@@ -31,10 +32,14 @@ export const routes = [
   ],
   declarations: [
     TasksComponent,
-    AddTaskComponent
+    AddTaskComponent,
+    EditTaskComponent
   ],
   providers: [
     TasksService
+  ],
+  entryComponents: [
+    EditTaskComponent
   ]
 })
 export class TasksModule { }

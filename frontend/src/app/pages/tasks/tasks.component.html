@@ -3,12 +3,23 @@
         <button (click)="onAddNewTaskClick()" mat-raised-button color="primary" class="m-1">
             <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.add-new' |translate}}
         </button>
-        <button (click)="onFilterTasks('uncompleted')" mat-raised-button color="accent" class="m-1">
-            <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.filter-uncompleted' |translate}}
-        </button>
-        <button (click)="onFilterTasks('completed')" mat-raised-button color="basic" class="m-1">
-            <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.filter-completed' |translate}}
-        </button>
+    </div>
+</div>
+
+<div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
+    <div fxLayout="row">
+
+        <mat-button-toggle-group #viewType="matButtonToggleGroup">
+            <mat-button-toggle (click)="getAllTasks()" matTooltip="{{'tasks.buttons.all' | translate}}">
+                <mat-icon>view_list</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="onFilterTasks(0)" matTooltip="{{'tasks.buttons.filter-completed' | translate}}">
+                <mat-icon>assignment_late</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="onFilterTasks(1)" matTooltip="{{'tasks.buttons.filter-uncompleted' | translate}}">
+                <mat-icon color="primary">verified_user</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
     </div>
 </div>
 <div fxFlex="100">
@@ -58,6 +69,9 @@
             <button *ngIf="task.progress !== 100" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="accent" class="m-1">
                 <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
             </button>
+            <button *ngIf="task.progress !== 100" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
+                <mat-icon class="mat-18">update</mat-icon> {{'buttons.edit' |translate}}
+            </button>
 
         </mat-expansion-panel>
     </mat-accordion>
@@ -68,4 +82,8 @@
             <pagination-controls class="gradus-pagination" autoHide="true" maxSize="7" (pageChange)="onPageChanged($event)"></pagination-controls>
         </mat-card>
     </div>
+</div>
+
+<div *ngIf="!tasks" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
 </div>
