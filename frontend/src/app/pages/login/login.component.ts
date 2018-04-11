@@ -10,6 +10,7 @@ import { LoginService } from '../../shared/services/login.service';
 import { Role } from './role.model';
 import { UserInfoService } from '../../shared/services/user-info.service';
 import { NotifyUserService } from '../../shared/services/notify-user.service';
+import { PermissionsService } from '../../shared/services/permissions.service';
 
 @Component({
   selector: 'app-login',
@@ -25,7 +26,8 @@ export class LoginComponent {
     private translator: TranslateService,
     private notifyService: NotifyUserService,
     private loginService: LoginService,
-    private userInfoService: UserInfoService
+    private userInfoService: UserInfoService,
+    private permissionsService: PermissionsService
   ) {
     this.settings = this.appSettings.settings;
     this.translator.setDefaultLang(sessionStorage.getItem('locale'));
@@ -58,6 +60,7 @@ export class LoginComponent {
                     // console.log(roleResp);
                     const role: Role = roleResp;
                     this.loginService.saveUserDataInSession(userResp, resp.data.token, role.name);
+                    this.permissionsService.setUserPermissions();
                     this.router.navigate(['/']);
                   });
               }, error => {

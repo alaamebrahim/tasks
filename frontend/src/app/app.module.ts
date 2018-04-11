@@ -50,6 +50,7 @@ import { RolesGuardService } from './shared/services/roles-guard.service';
 import { NotifyUserService } from './shared/services/notify-user.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { UsersService } from './pages/users/users.service';
+import { PermissionsService } from './shared/services/permissions.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -109,7 +110,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: PERFECT_SCROLLBAR_CONFIG, useValue: DEFAULT_PERFECT_SCROLLBAR_CONFIG },
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     NotifyUserService,
-    UsersService
+    UsersService,
+    PermissionsService
 
   ],
   bootstrap: [AppComponent]

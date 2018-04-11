@@ -19,7 +19,7 @@ export const routes: Routes = [
                 loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule',
                 canActivate: [NgxPermissionsGuard],
                 data: {
-                    breadcrumb: 'الرئيسية', permissions: { only: ['root', 'admin', 'user'] }
+                    breadcrumb: 'الرئيسية', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/login' }
                 }
             },
             {
@@ -27,7 +27,7 @@ export const routes: Routes = [
                 loadChildren: 'app/pages/users/users.module#UsersModule',
                 canActivate: [NgxPermissionsGuard],
                 data: {
-                    breadcrumb: 'المستخدمين', permissions: { only: ['root', 'admin'] }
+                    breadcrumb: 'المستخدمين', permissions: { only: ['root', 'admin'], redirectTo: '/login'  }
                 }
             },
             {
@@ -65,5 +65,5 @@ export const routes: Routes = [
 
 export const routing: ModuleWithProviders = RouterModule.forRoot(routes, {
     preloadingStrategy: PreloadAllModules,  // <- comment this line for activate lazy load
-    // useHash: true
+    useHash: true
 });
