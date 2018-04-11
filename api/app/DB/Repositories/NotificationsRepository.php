@@ -7,7 +7,7 @@ use Bosnadev\Repositories\Eloquent\Repository;
 use App\DB\Models\Notifications as Notification;
 use Illuminate\Support\Facades\DB;
 
-class TasksRepository extends Repository {
+class NotificationsRepository extends Repository {
     public function model () {
         return 'App\DB\Models\Notifications';
     }

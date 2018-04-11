@@ -19,8 +19,8 @@ class CreateNotificationsTable extends Migration
             $table->string('text');
             $table->boolean('unreaded');
             $table->boolean('starred');
-            $table->unsignedInteger('task_id')->unsigned()->index();
-            $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
+            //$table->unsignedInteger('task_id')->unsigned()->index();
+           // $table->foreign('task_id')->references('id')->on('tasks')->onDelete('cascade');
             $table->unsignedInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

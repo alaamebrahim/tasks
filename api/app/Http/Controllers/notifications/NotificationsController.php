@@ -31,7 +31,6 @@ class UsersController extends Controller
             'task_id' => 'required'
         ]);
         $data = $request->all();
-
         // save user object
         $this->notifyRepo->saveModel($data);
         // return success obj as json

@@ -26,5 +26,4 @@ export class TasksService {
     // console.log(task);
     return this.apiRequestService.post('tasks/update-task', task);
   }
-
 }

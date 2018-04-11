@@ -13,6 +13,7 @@ use Illuminate\Http\Exception\HttpResponseException;
 use App\DB\Repositories\UserRepository as UserRepo;
 use App\DB\Repositories\RoleRepository as RoleRepo;
 use App\DB\Repositories\TasksRepository as TaskRepo;
+use App\DB\Services\NotificationsService as NotificationsService;
 use App\DB\Models\User;
 use App\DB\Models\Tasks;
 use Carbon\Carbon;
@@ -22,11 +23,18 @@ class TasksController extends Controller
     private $userRepo;
     private $taskRepo;
     private $roleRepo;
+    private $notificationsService;
 
-    public function __construct(UserRepo $userRepo, TaskRepo $taskRepo, RoleRepo $roleRepo) {
+    public function __construct(
+        UserRepo $userRepo,
+        TaskRepo $taskRepo,
+        RoleRepo $roleRepo,
+        NotificationsService $notificationsService
+    ) {
         $this->userRepo = $userRepo;
         $this->taskRepo = $taskRepo;
         $this->roleRepo = $roleRepo;
+        $this->notificationsService = $notificationsService;
     }
 
     /**
@@ -52,12 +60,24 @@ class TasksController extends Controller
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
 
-        $saveData = [];
+        $message = "تم إضافة مهمة جديدة بعنوان: \n";
+        $message .= $data['title'];
+
+        //Loop data
+        $saveData = []; 
+        $users_emails = [];
         for($i=0; $i<count($userIds[0]); $i++) {
             $data['user_id'] = $userIds[0][$i];
-            $saveData[] = $data;
+            $user_email  = $this->userRepo->find($data['user_id'])->email;
+            $users_emails[]  = $this->userRepo->find($data['user_id'])->email;
+            $saveData[]      = $data;
+            $this->notificationsService->addNewNotification($data['user_id'], $message);
         }
         Tasks::insert($saveData);
+
+        
+        $message .= "\n"."برجاء الدخول للتطبيق لمعرفة التفاصيل";
+        $this->notificationsService->sendNotificationByMail($users_emails, $message);
         //$this->taskRepo->saveModel($saveData);
 
         // return success obj as json
