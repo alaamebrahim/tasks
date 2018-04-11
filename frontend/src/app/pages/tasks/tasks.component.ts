@@ -83,7 +83,8 @@ export class TasksComponent {
      */
   public onEditTaskClick(taskData: Task) {
     const dialogRef = this.dialog.open(EditTaskComponent, {
-      data: taskData
+      data: taskData,
+      minWidth: '50%'
     });
 
     dialogRef.afterClosed().subscribe(user => {
