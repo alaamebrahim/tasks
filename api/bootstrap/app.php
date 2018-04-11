@@ -86,6 +86,10 @@ $app->middleware([
 //     'auth' => App\Http\Middleware\Authenticate::class,
 //]);
 
+$app->routeMiddleware([
+     'api.isadmin' => App\Http\Middleware\IsAdminMiddleware::class,
+]);
+
 /*
 |--------------------------------------------------------------------------
 | Register Service Providers

@@ -89,6 +89,21 @@ $api->version('v1', function ($api) {
         $api->get('/get-completed-tasks', ['uses' => 'TasksController@getCompletedTasks','as' => 'api.task.all.completed']);
         // Get all uncompleted tasks
         $api->get('/get-uncompleted-tasks', ['uses' => 'TasksController@getUncompletedTasks','as' => 'api.task.all.uncompleted']);
+    });
 
+    /*************************************************************
+     * Notifications controller routes
+     ************************************************************/
+    $api->group([
+        'middleware' => 'api.auth',
+        'prefix'     => '/notifications/',
+        'namespace'  => 'App\Http\Controllers\Notifications',
+    ], function ($api) {
+        // add new task
+        $api->post('/add-Notification', ['uses' => 'NotificationsController@addNewNotification','as' => 'api.Notification.addNew']);
+        // update existing user
+        $api->post('/update-Notification', ['uses' => 'NotificationsController@updateExistingNotification','as' => 'api.Notification.updateExisting']);
+        // Get All Notifications
+        $api->get('/get-Notifications', ['uses' => 'NotificationsController@getUserNotifications','as' => 'api.Notification.all']);
     });
 });
