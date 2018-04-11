@@ -66,13 +66,14 @@
                     </i>
                 </span>
             </p>
-            <button *ngIf="task.progress !== 100" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="accent" class="m-1">
-                <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
-            </button>
-            <button *ngIf="task.progress !== 100" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
-                <mat-icon class="mat-18">update</mat-icon> {{'buttons.edit' |translate}}
-            </button>
-
+            <div *ngxPermissionsOnly="['root','admin']">
+                <button *ngIf="task.progress !== 100" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="accent" class="m-1">
+                    <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
+                </button>
+                <button *ngIf="task.progress !== 100" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
+                    <mat-icon class="mat-18">update</mat-icon> {{'buttons.edit' |translate}}
+                </button>
+            </div>
         </mat-expansion-panel>
     </mat-accordion>
 </div>

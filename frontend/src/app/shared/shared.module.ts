@@ -42,6 +42,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { LocaleService } from './services/locale.service';
 import { AuthGuard } from './services/auth_guard.service';
 import { RolesGuardService } from './services/roles-guard.service';
+import { NgxPermissionsModule } from 'ngx-permissions';
 
 
 
@@ -117,6 +118,7 @@ import { RolesGuardService } from './services/roles-guard.service';
     MatStepperModule,
     CommonModule, // translate
     TranslateModule, // translate
+    NgxPermissionsModule,
     HttpClientModule,
   ],
   declarations: []

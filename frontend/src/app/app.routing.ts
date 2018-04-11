@@ -8,6 +8,7 @@ import { NotFoundComponent } from './pages/errors/not-found/not-found.component'
 import { ErrorComponent } from './pages/errors/error/error.component';
 import { RolesGuardService } from './shared/services/roles-guard.service';
 import { AuthGuard } from './shared/services/auth_guard.service';
+import { NgxPermissionsGuard } from 'ngx-permissions';
 
 export const routes: Routes = [
     {
@@ -16,25 +17,30 @@ export const routes: Routes = [
             {
                 path: '',
                 loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule',
-                canActivate: [AuthGuard, RolesGuardService],
-                data: { breadcrumb: 'الرئيسية' , roles: ['root', 'admin']}
+                canActivate: [NgxPermissionsGuard],
+                data: {
+                    breadcrumb: 'الرئيسية', permissions: { only: ['root', 'admin', 'user'] }
+                }
             },
             {
                 path: 'users',
                 loadChildren: 'app/pages/users/users.module#UsersModule',
-                canActivate: [AuthGuard, RolesGuardService],
-                data: { breadcrumb: 'المستخدمين', roles: ['root', 'admin']}
+                canActivate: [NgxPermissionsGuard],
+                data: {
+                    breadcrumb: 'المستخدمين', permissions: { only: ['root', 'admin'] }
+                }
             },
             {
                 path: 'mailbox',
                 loadChildren: 'app/pages/mailbox/mailbox.module#MailboxModule',
-                canActivate: [AuthGuard, RolesGuardService],
-                data: { breadcrumb: 'البريد الالكترونى', roles: ['root', 'admin']}
+                canActivate: [NgxPermissionsGuard],
+                data: { breadcrumb: 'البريد الالكترونى', permissions: { only: ['root', 'admin', 'user'] } }
             },
-
             { path: 'ui', loadChildren: 'app/pages/ui/ui.module#UiModule', data: { breadcrumb: 'UI' } },
-            { path: 'form-controls',
-            loadChildren: 'app/pages/form-controls/form-controls.module#FormControlsModule', data: { breadcrumb: 'Form Controls' } },
+            {
+                path: 'form-controls',
+                loadChildren: 'app/pages/form-controls/form-controls.module#FormControlsModule', data: { breadcrumb: 'Form Controls' }
+            },
             { path: 'tables', loadChildren: 'app/pages/tables/tables.module#TablesModule', data: { breadcrumb: 'Tables' } },
             { path: 'icons', loadChildren: 'app/pages/icons/icons.module#IconsModule', data: { breadcrumb: 'Material Icons' } },
             { path: 'tasks', loadChildren: 'app/pages/tasks/tasks.module#TasksModule', data: { breadcrumb: 'المهام' } },
@@ -42,8 +48,10 @@ export const routes: Routes = [
             { path: 'chat', loadChildren: 'app/pages/chat/chat.module#ChatModule', data: { breadcrumb: 'Chat' } },
             { path: 'maps', loadChildren: 'app/pages/maps/maps.module#MapsModule', data: { breadcrumb: 'Maps' } },
             { path: 'charts', loadChildren: 'app/pages/charts/charts.module#ChartsModule', data: { breadcrumb: 'Charts' } },
-            { path: 'dynamic-menu',
-            loadChildren: 'app/pages/dynamic-menu/dynamic-menu.module#DynamicMenuModule', data: { breadcrumb: 'Dynamic Menu' } },
+            {
+                path: 'dynamic-menu',
+                loadChildren: 'app/pages/dynamic-menu/dynamic-menu.module#DynamicMenuModule', data: { breadcrumb: 'Dynamic Menu' }
+            },
             { path: 'blank', component: BlankComponent, data: { breadcrumb: 'Blank page' } },
             { path: 'search', component: SearchComponent, data: { breadcrumb: 'Search' } }
         ]
