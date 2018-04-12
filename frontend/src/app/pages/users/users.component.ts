@@ -8,6 +8,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LocaleService } from '../../shared/services/locale.service';
 import { NotifyUserService } from '../../shared/services/notify-user.service';
+import {environment} from '../../../environments/environment';
 
 @Component({
     selector: 'app-users',
@@ -21,6 +22,7 @@ export class UsersComponent implements OnInit {
     public searchText: string;
     public page: any;
     public settings: Settings;
+    private userPicPath = environment.userPicPath;
     constructor(
         public appSettings: AppSettings,
         public dialog: MatDialog,
@@ -57,6 +59,9 @@ export class UsersComponent implements OnInit {
                 this.notifyService.notifyUser('general.messages.error');
             }
             this.getUsers();
+        }, error => {
+            console.log(error);
+            this.notifyService.notifyUser('general.messages.error');
         });
     }
 
@@ -70,9 +75,12 @@ export class UsersComponent implements OnInit {
                 // console.log(response.message);
                 this.notifyService.notifyUser('general.messages.saved');
             } else {
-                this.notifyService.notifyUser('general.messages.error');
+                this.notifyService.notifyUser(response.message);
             }
             this.getUsers();
+        }, error => {
+            console.log(error);
+            this.notifyService.notifyUser('general.messages.error');
         });
     }
 

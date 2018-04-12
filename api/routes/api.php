@@ -63,6 +63,8 @@ $api->version('v1', function ($api) {
         $api->post('/add-user', ['uses' => 'UsersController@addNewUser','as' => 'api.user.addNew']);
         // update existing user
         $api->post('/update-user', ['uses' => 'UsersController@updateExistingUser','as' => 'api.user.updateExisting']);
+        // Upload image
+        $api->post('/upload-image', ['uses' => 'UsersController@uploadUserPicture','as' => 'api.user.uploadUserPicture']);
         // delete a user
         $api->post('/delete-user', ['uses' => 'UsersController@deleteExistingUser','as' => 'api.user.deleteExistingUser']);
         // Get All users

@@ -2,6 +2,9 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 import { MenuService } from '../menu/menu.service';
+import {environment} from '../../../../environments/environment';
+import { User } from '../../../pages/users/user.model';
+import { UserInfoService, UserInStorage } from '../../../shared/services/user-info.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -11,15 +14,23 @@ import { MenuService } from '../menu/menu.service';
   providers: [MenuService]
 })
 export class SidenavComponent implements OnInit {
-  public userImage = '../assets/img/users/user.jpg';
+  public userImage: string;
+  private userInfo: UserInStorage;
   public menuItems: Array<any>;
   public settings: Settings;
-  constructor(public appSettings: AppSettings, public menuService: MenuService) {
+  private userPicPath = environment.userPicPath;
+  constructor(
+    public appSettings: AppSettings,
+    public menuService: MenuService,
+    private userInfoService: UserInfoService
+  ) {
     this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
     this.menuItems = this.menuService.getVerticalMenuItems();
+    this.userInfo = this.userInfoService.getUserInfo();
+    this.userImage = this.userInfo.image;
   }
 
   public closeSubMenus() {

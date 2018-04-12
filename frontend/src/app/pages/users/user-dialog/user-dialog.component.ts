@@ -1,4 +1,4 @@
-import { Component, OnInit, Inject } from '@angular/core';
+import { Component, OnInit, Inject, ViewChild } from '@angular/core';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { User } from '../user.model';
@@ -15,6 +15,7 @@ export class UserDialogComponent implements OnInit {
   public form: FormGroup;
   public passwordHide = true;
   private roles: Role[];
+  @ViewChild('fileInput') fileInput;
 
   constructor(
     public dialogRef: MatDialogRef<UserDialogComponent>,
@@ -71,5 +72,19 @@ export class UserDialogComponent implements OnInit {
   close(): void {
     this.dialogRef.close();
   }
+
+  addFile(): void {
+    const fi = this.fileInput.nativeElement;
+    if (fi.files && fi.files[0]) {
+      const fileToUpload = fi.files[0];
+        // this.form.controls['picture'].setValue(fileToUpload);
+        // console.log(this.form.value);
+        this.userService.uploadUserPicture(fileToUpload).subscribe(response => {
+          if (response.success === true) {
+            this.form.controls['picture'].setValue(response.message);
+          }
+        });
+    }
+}
 
 }

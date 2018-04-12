@@ -7,7 +7,6 @@ import { Role } from '../login/role.model';
 
 @Injectable()
 export class UsersService {
-    public url = "api/users";
     constructor(
         public http: HttpClient,
         private apiRequestService: ApiRequestService
@@ -24,6 +23,13 @@ export class UsersService {
 
     updateUser(user: User) {
         return this.apiRequestService.post('users/update-user', user);
+    }
+
+    uploadUserPicture(picture: File) {
+        const fd = new FormData();
+        fd.append('picture', picture);
+        // console.log(fd);
+        return this.apiRequestService.postFormData('users/upload-image', fd);
     }
 
     deleteUser(user: User) {

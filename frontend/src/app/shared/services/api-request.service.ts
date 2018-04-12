@@ -77,22 +77,20 @@ export class ApiRequestService {
             });
     }
 
-    postFormData(url: string, formData: FormData): any {
-        const oReq = new XMLHttpRequest();
-        // Completed succesfully.
-        oReq.addEventListener('load', function (evt) {
-            console.log(oReq.response);
-        });
-        // An error happened
-        oReq.addEventListener('error', function (evt) {
-            console.log(oReq.response);
-        });
-        // Excecute
-        oReq.open('POST', this.appConfig.baseApiPath + url, true);
+    postFormData(url: string, formData: FormData): Observable<any> {
+        const me = this;
+        let headers = new HttpHeaders();
         const token = this.userInfoService.getStoredToken();
-        oReq.setRequestHeader('Content-Type', 'application/json');
-        oReq.setRequestHeader('Authorization', token);
-        oReq.send(formData);
+        if (token !== null) {
+            headers = headers.append('Authorization', 'Bearer ' + token);
+        }
+        return this.http.post(this.appConfig.baseApiPath + url, formData, { headers: headers })
+            .catch(function (error: any) {
+                if (error.status === 401) {
+                    me.router.navigate(['/login']);
+                }
+                return [];
+            });
     }
 
 }

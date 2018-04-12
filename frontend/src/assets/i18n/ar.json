@@ -82,7 +82,8 @@
 			"search": "بحث بالاسم",
 			"role_choose": "اختر صلاحية المستخدم"
 		},
-		"is_blocked": "محظور"
+		"is_blocked": "محظور",
+		"created_at": "مشترك منذ"
 	},
 	"tasks": {
 		"addtask": {
@@ -104,6 +105,7 @@
 				}
 			}
 		},
+		"edit-title": "تعديل بيانات",
 		"buttons": {
 			"add-new": "إضافة مهمة جديدة",
 			"all": "عرض الكل",

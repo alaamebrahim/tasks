@@ -1,24 +1,30 @@
-<h1 mat-dialog-title><span *ngIf="!user.id">{{'users.form.button.add' | translate}}</span><span *ngIf="user.id">{{'users.form.button.edit' | translate}}</span></h1>
+<h1 mat-dialog-title>
+    <span *ngIf="!user.id">{{'users.form.button.add' | translate}}</span>
+    <span *ngIf="user.id">{{'users.form.button.edit' | translate}}</span>
+</h1>
 <div mat-dialog-content>
-    <form [formGroup]="form" class="user-form">      
+    <form [formGroup]="form" class="user-form" enctype="multipart/form-data">
         <mat-tab-group class="vertical-tabs">
             <mat-tab label="{{'users.labels.basic' | translate}}">
                 <div fxLayout="column" class="form-field-outer">
                     <mat-form-field class="w-100">
-                        <mat-placeholder><mat-icon>person</mat-icon> {{'users.form.username' | translate}}</mat-placeholder>
+                        <mat-placeholder>
+                            <mat-icon>person</mat-icon> {{'users.form.username' | translate}}</mat-placeholder>
                         <input matInput formControlName="username" required>
                         <mat-error *ngIf="form.controls.username.errors?.required">{{'users.form.errors.username.required' | translate}}</mat-error>
                         <mat-error *ngIf="form.controls.username.hasError('minlength')">{{'users.form.errors.username.min' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <mat-placeholder><mat-icon>vpn_key</mat-icon> {{'users.form.password' | translate}}</mat-placeholder>
+                        <mat-placeholder>
+                            <mat-icon>vpn_key</mat-icon> {{'users.form.password' | translate}}</mat-placeholder>
                         <input matInput formControlName="password" [required]="!user.id" [type]="passwordHide ? 'password' : 'text'">
                         <mat-icon matSuffix (click)="passwordHide = !passwordHide">{{passwordHide ? 'visibility' : 'visibility_off'}}</mat-icon>
                         <mat-error *ngIf="form.controls.password.errors?.required">{{'users.form.errors.password.required' | translate}}</mat-error>
                         <mat-error *ngIf="form.controls.password.hasError('minlength')">{{'users.form.errors.password.length' | translate}}</mat-error>
                     </mat-form-field>
                     <mat-form-field class="w-100">
-                        <mat-placeholder><mat-icon></mat-icon>{{'users.form.role' | translate}}</mat-placeholder>
+                        <mat-placeholder>
+                            <mat-icon></mat-icon>{{'users.form.role' | translate}}</mat-placeholder>
                         <mat-select formControlName="role_id">
                             <mat-option *ngFor="let role of roles" [value]="role.id">{{role.description}}</mat-option>
                         </mat-select>
@@ -44,9 +50,10 @@
                         <mat-radio-button value="{{'users.form.gender.male' | translate}}" labelPosition="before">{{'users.form.gender.male' | translate}}</mat-radio-button>
                         <mat-radio-button value="{{'users.form.gender.female' | translate}}" labelPosition="before">{{'users.form.gender.female' | translate}}</mat-radio-button>
                     </mat-radio-group>
-                    <mat-form-field class="w-100">
-                        <input matInput placeholder="{{'users.form.picture' | translate}}" formControlName="picture">
-                    </mat-form-field>
+                    <div class="w-100 text-right">
+                        <input #fileInput type="file" (change)="addFile()" style="display: none;" />
+                        <button class="bg-accent" mat-button (click)="fileInput.click()">{{'users.form.picture' | translate}}</button>
+                    </div>
                 </div>
             </mat-tab>
             <mat-tab label="{{'users.labels.work' | translate}}">
@@ -97,6 +104,9 @@
     </form>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
-    <button mat-raised-button color="primary" (click)="saveUser(form.value)" [mat-dialog-close]="form.value" [disabled]="!form.valid"><span *ngIf="!user.id">{{'buttons.save' | translate}}</span><span *ngIf="user.id">{{'buttons.update' | translate}}</span></button>
+    <button mat-raised-button color="primary" (click)="saveUser(form.value)" [mat-dialog-close]="form.value" [disabled]="!form.valid">
+        <span *ngIf="!user.id">{{'buttons.save' | translate}}</span>
+        <span *ngIf="user.id">{{'buttons.update' | translate}}</span>
+    </button>
     <button mat-raised-button color="warn" (click)="close()">{{'buttons.cancel' | translate}}</button>
 </div>

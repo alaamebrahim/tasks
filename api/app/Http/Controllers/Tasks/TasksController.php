@@ -24,6 +24,7 @@ class TasksController extends Controller
     private $taskRepo;
     private $roleRepo;
     private $notificationsService;
+    private $usersService;
 
     public function __construct(
         UserRepo $userRepo,
@@ -50,6 +51,7 @@ class TasksController extends Controller
             'user_id' => 'required',
             'description' => 'required'
         ]);
+
         $data = $request->all();
 
         // Put user id in separate var

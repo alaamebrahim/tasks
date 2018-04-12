@@ -1,4 +1,6 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
+import {environment} from '../../../../environments/environment';
+import { UserInStorage, UserInfoService } from '../../../shared/services/user-info.service';
 
 @Component({
   selector: 'app-user-menu',
@@ -7,10 +9,15 @@ import { Component, OnInit, ViewEncapsulation } from '@angular/core';
   encapsulation: ViewEncapsulation.None,
 })
 export class UserMenuComponent implements OnInit {
-  public userImage = '../assets/img/users/user.jpg';
-  constructor() { }
+  public userImage: string;
+  private userInfo: UserInStorage;
+  private userPicPath = environment.userPicPath;
+
+  constructor(private userInfoService: UserInfoService) { }
 
   ngOnInit() {
+    this.userInfo = this.userInfoService.getUserInfo();
+    this.userImage = this.userInfo.image;
   }
 
 }

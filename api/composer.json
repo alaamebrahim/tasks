@@ -11,7 +11,8 @@
         "krisanalfa/lumen-dingo-adapter": "^0.0.3",
         "bosnadev/repositories": " 0.*",
         "illuminate/mail": "^5.4.19",
-        "guzzlehttp/guzzle": "^6.3"
+        "guzzlehttp/guzzle": "^6.3",
+        "irazasyed/larasupport": "^1.6"
     },
     "require-dev": {
         "fzaninotto/faker": "~1.4",

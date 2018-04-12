@@ -10,6 +10,8 @@ export interface UserInStorage {
     token: string;
     image: string;
     locale: string;
+    position: string;
+    created_at: Date;
 }
 
 export interface LoginInfoInStorage {

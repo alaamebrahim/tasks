@@ -115,10 +115,12 @@ export class LoginService {
                     'id': userData.data.id,
                     'userName': userData.data.name,
                     'email': userData.data.email,
-                    'displayName': userData.data.display_name,
+                    'displayName': userData.data.first_name + ' ' + userData.data.last_name,
+                    'position': userData.data.position,
+                    'created_at': userData.data.created_at,
                     'token': token,
                     'role': roleName,
-                    'image': null,
+                    'image': userData.data.picture,
                     'locale': null,
                 }
             };

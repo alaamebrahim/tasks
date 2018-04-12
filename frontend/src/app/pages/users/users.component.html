@@ -27,7 +27,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 6, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p"> 
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3> 
@@ -51,7 +51,7 @@
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
-                        <img *ngIf="user.picture" [src]="user.picture" class="transition-2" [class.blocked]="user.is_blocked">
+                        <img *ngIf="user.picture" [src]="userPicPath + user.picture" class="transition-2" [class.blocked]="user.is_blocked">
                         <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">  
                         <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>
                     </div>                                            
@@ -87,7 +87,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 1, currentPage: page }" fxFlex="100" class="flex-p"> 
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" class="flex-p"> 
         <mat-card class="p-0">  
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
                 <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3> 
@@ -111,7 +111,7 @@
             <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
                 <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
-                        <img *ngIf="user.picture" [src]="user.picture" class="transition-2" [class.blocked]="user.is_blocked"> 
+                        <img *ngIf="user.picture" [src]="userPicPath + user.picture" class="transition-2" [class.blocked]="user.is_blocked">
                         <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">  
                         <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>   
                     </div>                                            
