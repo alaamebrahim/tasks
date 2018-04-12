@@ -1,4 +1,4 @@
-<div fxLayout="column">
+<div fxLayout="column" *ngIf="!working">
     <div class="flex-p">
         <mat-card>
             <mat-card-header fxLayoutAlign="center">
@@ -49,4 +49,7 @@
             </mat-card-footer>
         </mat-card>
     </div>
+</div>
+<div *ngIf="working" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
 </div>

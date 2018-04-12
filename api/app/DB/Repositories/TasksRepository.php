@@ -43,4 +43,11 @@ class TasksRepository extends Repository {
     public function getTasksByStatus($status) {
         return parent::findAllBy('completed', $status);
     }
+
+    public function getLastAddedTasksIdByDateCreated($created_at) {
+        return DB::table('tasks')
+                    ->where('created_at', '=', $created_at)
+                    ->select('tasks.id')
+                    ->get();
+    }
 }

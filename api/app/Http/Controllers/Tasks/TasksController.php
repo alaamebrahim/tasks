@@ -57,28 +57,37 @@ class TasksController extends Controller
         // Remove user id from object so we can deal with it individually
         unset($data['user_id']);
 
+        //Set dates
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
 
-        $message = "تم إضافة مهمة جديدة بعنوان: \n";
-        $message .= $data['title'];
+        //Notifications and mails
+        $message = trans('messages.notifications.mail.message',['title' => $data['title']]) . "\n";
 
         //Loop data
-        $saveData = []; 
+        $dataForSave = []; 
         $users_emails = [];
         for($i=0; $i<count($userIds[0]); $i++) {
+            // Extract users ids
             $data['user_id'] = $userIds[0][$i];
-            $user_email  = $this->userRepo->find($data['user_id'])->email;
-            $users_emails[]  = $this->userRepo->find($data['user_id'])->email;
-            $saveData[]      = $data;
-            $this->notificationsService->addNewNotification($data['user_id'], $message);
+            $dataForSave[]   = $data;
+            // Extract users emails
+            $user_email      = $this->userRepo->find($data['user_id'])->email;
+            $users_emails[]  = $user_email;
         }
-        Tasks::insert($saveData);
+        Tasks::insert($dataForSave);
+
+        $added_ids = $this->taskRepo->getLastAddedTasksIdByDateCreated($data['created_at']);
+
+        // Save notifications
+        foreach($added_ids as $key => $value) {
+            $this->notificationsService->addNewNotification($data['user_id'], $value->id, $message);
+        }
 
         
-        $message .= "\n"."برجاء الدخول للتطبيق لمعرفة التفاصيل";
+        $message .= trans('messages.notifications.mail.message2');
         $this->notificationsService->sendNotificationByMail($users_emails, $message);
-        //$this->taskRepo->saveModel($saveData);
+        //$this->taskRepo->saveModel($dataForSave);
 
         // return success obj as json
         return new JsonResponse([

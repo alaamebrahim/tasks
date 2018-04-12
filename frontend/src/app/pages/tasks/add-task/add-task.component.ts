@@ -15,6 +15,7 @@ export class AddTaskComponent implements OnInit {
 
   private form: FormGroup;
   private users: User[];
+  private working =  false;
 
   constructor(
     private fb: FormBuilder,
@@ -39,6 +40,8 @@ export class AddTaskComponent implements OnInit {
   }
 
   onSaveTask() {
+    const me = this;
+    me.working = true;
     this.tasksService.addTask(this.form.value)
       .subscribe((response) => {
         if (response.success === true) {
@@ -48,6 +51,7 @@ export class AddTaskComponent implements OnInit {
         } else {
           this.notifyService.notifyUser('general.messages.error');
         }
+        me.working = false;
       });
   }
 
