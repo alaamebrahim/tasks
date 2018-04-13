@@ -27,15 +27,22 @@
         <mat-expansion-panel *ngFor="let task of tasks | paginate: { itemsPerPage: 11, currentPage: page }">
             <mat-expansion-panel-header>
                 <mat-panel-title>
-                    <mat-icon *ngIf="task.progress === 100" class="mat-18" color="primary">verified_user</mat-icon>
-                    <mat-icon *ngIf="task.progress < 100" class="mat-18">assignment_late</mat-icon>
-                    <h5>{{task.title}}</h5>
+                    <mat-icon *ngIf="task.progress === 100" class="mat-18 p-1" color="primary">verified_user</mat-icon>
+                    <mat-icon *ngIf="task.progress < 100" class="mat-18 p-1" color="accent">assignment_late</mat-icon>
+                    <h4 class="p-1">{{task.title}}</h4>
                 </mat-panel-title>
-                <mat-panel-description class="float-left">
-                    <i>
-                        <small>{{task.start_date}} : {{task.end_date}}</small>
-                    </i>
+                <mat-panel-description>
                 </mat-panel-description>
+                <i class="p-1">
+                    <small>{{task.start_date}} : {{task.end_date}}</small>
+                </i>
+                <mat-chip-list class="p-1">
+                    <mat-chip color="primary">
+                        <i>
+                            <small>{{task.notifications}}</small>
+                        </i>
+                    </mat-chip>
+                </mat-chip-list>
             </mat-expansion-panel-header>
             <p fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="mat-18">description</mat-icon>
@@ -72,6 +79,9 @@
                 </button>
                 <button *ngIf="task.progress !== 100" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
                     <mat-icon class="mat-18">update</mat-icon> {{'buttons.edit' |translate}}
+                </button>
+                <button *ngIf="task.progress !== 100" (click)="onSendNotificationClick(task)" mat-raised-button color="primary" class="m-1">
+                    <mat-icon class="mat-18">exposure_plus_1</mat-icon> {{'tasks.buttons.add-notification' |translate}}
                 </button>
             </div>
         </mat-expansion-panel>
