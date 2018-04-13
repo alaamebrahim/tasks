@@ -1,4 +1,7 @@
 {
+	"site": {
+		"title": "إدارة المهام"
+	},
 	"login": {
 		"title": "تسجيل الدخول للتطبيق",
 		"button": "تسجيل الدخول",
@@ -105,12 +108,13 @@
 				}
 			}
 		},
-		"edit-title": "تعديل بيانات",
+		"edit-title": "تعديل بيانات المهمة",
 		"buttons": {
 			"add-new": "إضافة مهمة جديدة",
 			"all": "عرض الكل",
 			"filter-completed": "عرض الغير منتهى",
-			"filter-uncompleted": "عرض المنتهى"
+			"filter-uncompleted": "عرض المنتهى",
+			"add-notification": "إرسال تنبيه"
 		},
 		"text": {
 			"completed": "مكتملة",
