@@ -13,7 +13,23 @@ class CreateMailboxTable extends Migration
      */
     public function up()
     {
-        //
+        
+        Schema::create('mailbox', function (Blueprint $table) {
+            $table->increments('id');
+            $table->unsignedInteger('sender_id')->unsigned()->index();
+            $table->foreign('sender_id')->references('id')->on('users')->onDelete('cascade');
+            $table->unsignedInteger('receiver_id')->unsigned()->index();
+            $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
+            $table->string('subject');
+            $table->string('message');
+            $table->string('attachment');
+            $table->boolean('starred');
+            $table->boolean('readed');
+            $table->boolean('draft');
+            $table->boolean('trash');
+            $table->timestamps();
+        });
+        
     }
 
     /**
