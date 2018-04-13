@@ -104,7 +104,9 @@ $api->version('v1', function ($api) {
         // add new task
         $api->post('/add-Notification', ['uses' => 'NotificationsController@addNewNotification','as' => 'api.Notification.addNew']);
         // update existing user
-        $api->post('/update-Notification', ['uses' => 'NotificationsController@updateExistingNotification','as' => 'api.Notification.updateExisting']);
+        $api->post('/update-notification', ['uses' => 'NotificationsController@updateExistingNotification','as' => 'api.Notification.updateExisting']);
+        //send notification to use
+        $api->post('/send-notification', ['uses' => 'NotificationsController@sendSingleNotification','as' => 'api.Notification.sendSingleNotification']);
         // Get All Notifications
         $api->get('/get-Notifications', ['uses' => 'NotificationsController@getUserNotifications','as' => 'api.Notification.all']);
     });

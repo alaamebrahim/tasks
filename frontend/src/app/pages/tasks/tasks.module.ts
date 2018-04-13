@@ -10,6 +10,8 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import { TasksService } from './tasks.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../../theme/pipes/pipes.module';
+import { AddNotificationComponent } from './add-notification/add-notification.component';
+import { NotificationsService } from '../../share/services/notifications.service';
 export const routes = [
   { path: '', component: TasksComponent, pathMatch: 'full' },
   {
@@ -33,13 +35,16 @@ export const routes = [
   declarations: [
     TasksComponent,
     AddTaskComponent,
-    EditTaskComponent
+    EditTaskComponent,
+    AddNotificationComponent
   ],
   providers: [
-    TasksService
+    TasksService,
+    NotificationsService
   ],
   entryComponents: [
-    EditTaskComponent
+    EditTaskComponent,
+    AddNotificationComponent
   ]
 })
 export class TasksModule { }

@@ -1,0 +1,11 @@
+<h3 class="text-center">{{'tasks.add-notification-title' | translate}}</h3>
+<div mat-dialog-content class="w-100">
+    <form [formGroup]="form">
+        <div fxLayout="column" class="form-field-outer w-100">
+            <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                <textarea matInput formControlName="text" required placeholder="{{'notifications.form.text' | translate}}" rows="5"></textarea>
+            </mat-input-container>
+            <button mat-raised-button color="primary" (click)="onSaveNotificatiion()" [mat-dialog-close]="saved" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
+        </div>
+    </form>
+</div>

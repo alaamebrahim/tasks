@@ -9,6 +9,8 @@ import { NotifyUserService } from '../../shared/services/notify-user.service';
 import { MatDialog } from '@angular/material';
 import { EditTaskComponent } from './edit-task/edit-task.component';
 import { User } from '../users/user.model';
+import { AddNotificationComponent } from './add-notification/add-notification.component';
+import { Notification } from './add-notification/notification.model';
 
 @Component({
   selector: 'app-tasks',
@@ -47,7 +49,7 @@ export class TasksComponent {
     this.tasks = null;
     this.tasksService.getTasksByStatus(status).subscribe((response) => {
       // console.log(response);
-      this.tasks = response.tasks;
+      this.tasks = response;
     });
   }
 
@@ -62,6 +64,25 @@ export class TasksComponent {
       } else {
         this.notifyService.notifyUser('general.messages.error');
       }
+    });
+  }
+
+  onSendNotificationClick(task: Task) {
+    console.log(task);
+    const notification = new Notification();
+    notification.task_id = task.id;
+    notification.user_id = task.user_id;
+    notification.id = null;
+    notification.text = null;
+    // console.log(notification);
+
+    const dialogRef = this.dialog.open(AddNotificationComponent, {
+      data: notification,
+      minWidth: '50%'
+    });
+
+    dialogRef.afterClosed().subscribe(response => {
+        this.getAllTasks();
     });
   }
 

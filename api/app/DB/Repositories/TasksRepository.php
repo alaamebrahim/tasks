@@ -24,7 +24,7 @@ class TasksRepository extends Repository {
                     ->where('tasks.user_id', '=', $id)
                     ->orderBy('tasks.updated_at','desc')
                     ->orderBy('tasks.completed','desc')
-                    ->select(['tasks.*', 'users.id', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
                     ->groupBy('tasks.id')
                     ->get();
     }
@@ -38,7 +38,7 @@ class TasksRepository extends Repository {
                     ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
                     ->orderBy('tasks.updated_at','desc')
                     ->orderBy('tasks.completed','desc')
-                    ->select(['tasks.*', 'users.id', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
                     ->groupBy('tasks.id')
                     ->get();
     }
@@ -47,7 +47,31 @@ class TasksRepository extends Repository {
      * Get completed/uncompleted tasks
      */
     public function getTasksByStatus($status) {
-        return parent::findAllBy('completed', $status);
+        return DB::table('tasks')
+                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
+                    ->where('completed', '=', $status)
+                    ->orderBy('tasks.updated_at','desc')
+                    ->orderBy('tasks.completed','desc')
+                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+                    ->groupBy('tasks.id')
+                    ->get();
+    }
+
+    /**
+     * Get completed/uncompleted tasks depending on current user
+     */
+    public function getTasksByStatusAndUser($status, $user_id) {
+        return DB::table('tasks')
+                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
+                    ->where('tasks.user_id', '=', $user_id)
+                    ->where('completed', '=', $status)
+                    ->orderBy('tasks.updated_at','desc')
+                    ->orderBy('tasks.completed','desc')
+                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+                    ->groupBy('tasks.id')
+                    ->get();
     }
 
     public function getLastAddedTasksIdByDateCreated($created_at) {

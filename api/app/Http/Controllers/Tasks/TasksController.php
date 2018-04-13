@@ -14,6 +14,7 @@ use App\DB\Repositories\UserRepository as UserRepo;
 use App\DB\Repositories\RoleRepository as RoleRepo;
 use App\DB\Repositories\TasksRepository as TaskRepo;
 use App\DB\Services\NotificationsService as NotificationsService;
+use App\DB\Services\TasksService as TasksService;
 use App\DB\Models\User;
 use App\DB\Models\Tasks;
 use Carbon\Carbon;
@@ -24,34 +25,43 @@ class TasksController extends Controller
     private $taskRepo;
     private $roleRepo;
     private $notificationsService;
-    private $usersService;
+    private $tasksService;
 
     public function __construct(
         UserRepo $userRepo,
         TaskRepo $taskRepo,
         RoleRepo $roleRepo,
-        NotificationsService $notificationsService
+        NotificationsService $notificationsService,
+        TasksService $tasksService
     ) {
         $this->userRepo = $userRepo;
         $this->taskRepo = $taskRepo;
         $this->roleRepo = $roleRepo;
         $this->notificationsService = $notificationsService;
+        $this->tasksService = $tasksService;
     }
 
     /**
      * Post add new user
      * @Returns JsonResponse
      */
-    public function addNewTask(Request $request) {
+    public function addNewTask(Request $request) {      
         // Validation rules
-        $this->validate($request, [
-            'title' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'user_id' => 'required',
-            'description' => 'required'
-        ]);
-
+        try {
+            $this->validate($request, [
+                'title' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+                'user_id' => 'required',
+                'description' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            //var_dump($e);
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        }
         $data = $request->all();
 
         // Put user id in separate var
@@ -104,18 +114,27 @@ class TasksController extends Controller
      */
     public function updateExistingTask(Request $request) {
         // Validation rules
-        $this->validate($request, [
-            'title' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'user_id' => 'required',
-            'description' => 'required'
-        ]);
+        try {
+            $this->validate($request, [
+                'title' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+                'user_id' => 'required',
+                'description' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            //var_dump($e);
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        }
         $data = $request->all();
 
         $data['updated_at'] = Carbon::now();
         unset($data['first_name']);
         unset($data['last_name']);
+        unset($data['notifications']);
         
         $data['completed'] = $data['progress'] == 100 ? 1 : 0;
         $this->taskRepo->update($data, $data['id']);
@@ -148,29 +167,20 @@ class TasksController extends Controller
      * Get all tasks in db depending on current user
      */
     public function getAllTasks() {
-        $current_user = JWTAuth::parseToken()->authenticate();
-        if(!$current_user) {
-            return null;
-        }
-        $role_name = $this->roleRepo->getRoleName($current_user['attributes']['role_id']);
-        if($role_name == 'root' || $role_name == 'admin') {
-            return $this->taskRepo->getAllTasks();
-        } else {
-            return $this->userRepo->find($current_user['attributes']['id'])->tasks;
-        }
+        return $this->tasksService->getAllTasks();
     }
 
     /**
      * Get list of completed tasks
      */
     public function getCompletedTasks() {
-        return $this->taskRepo->getTasksByStatus(1);
+        return $this->tasksService->getAllTasksByStatus(1);
     }
 
     /**
      * Get list of uncompleted tasks
      */
     public function getUncompletedTasks() {
-        return $this->taskRepo->getTasksByStatus(0);
+        return $this->tasksService->getAllTasksByStatus(0);
     }
 }

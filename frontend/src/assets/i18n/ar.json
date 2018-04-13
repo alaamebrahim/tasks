@@ -1,7 +1,4 @@
 {
-	"site": {
-		"title": "إدارة المهام"
-	},
 	"login": {
 		"title": "تسجيل الدخول للتطبيق",
 		"button": "تسجيل الدخول",
@@ -88,7 +85,11 @@
 		"is_blocked": "محظور",
 		"created_at": "مشترك منذ"
 	},
+	"site": {
+		"title": "إدارة المهام"
+	},
 	"tasks": {
+		"add-notification-title": "",
 		"addtask": {
 			"head": "إضافة مهمة  جديدة"
 		},
@@ -120,6 +121,11 @@
 			"completed": "مكتملة",
 			"uncompleted": "غير مكتملة",
 			"responsibleuser": "المستخدم المكلف"
+		}
+	},
+	"notifications": {
+		"form": {
+			"text": ""
 		}
 	},
 	"buttons": {
