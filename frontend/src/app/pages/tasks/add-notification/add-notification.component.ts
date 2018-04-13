@@ -4,7 +4,7 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
 import { Task } from '../task.model';
 import { NotifyUserService } from '../../../shared/services/notify-user.service';
 import { Router } from '@angular/router';
-import { NotificationsService } from '../../../share/services/notifications.service';
+import { NotificationsService } from '../../../shared/services/notifications.service';
 import { Notification } from './notification.model';
 
 @Component({

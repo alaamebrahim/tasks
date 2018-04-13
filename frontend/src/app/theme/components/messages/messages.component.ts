@@ -1,7 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material';
 import { MessagesService } from './messages.service';
-import { NotificationsService } from '../../../share/services/notifications.service';
+import { NotificationsService } from '../../../shared/services/notifications.service';
 
 @Component({
   selector: 'app-messages',
@@ -12,7 +12,7 @@ import { NotificationsService } from '../../../share/services/notifications.serv
 })
 export class MessagesComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
-  public selectedTab: number = 1;
+  public selectedTab = 1;
   public messages: Array<Object>;
   public files: Array<Object>;
   public meetings: Array<Object>;

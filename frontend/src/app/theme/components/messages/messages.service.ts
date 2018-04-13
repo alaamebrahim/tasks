@@ -1,4 +1,4 @@
-import {Injectable} from '@angular/core'
+import { Injectable } from '@angular/core'
 
 @Injectable()
 export class MessagesService {
@@ -39,11 +39,11 @@ export class MessagesService {
             text: 'Wrap the dropdown\'s trigger and the dropdown menu within .dropdown, or...',
             time: '1 week ago'
         }
-    ];   
+    ];
 
-    private files = [        
+    private files = [
         {
-            text:'gradus.zip',
+            text: 'gradus.zip',
             size: '~6.2 MB',
             value: '47',
             color: 'primary'
@@ -87,7 +87,7 @@ export class MessagesService {
             title: 'Meeting with Bruno',
             text: 'Fusce ut condimentum velit, quis egestas eros. Quisque sed condimentum neque.',
             color: 'danger'
-        },       
+        },
         {
             day: '15',
             month: 'May',
@@ -114,20 +114,20 @@ export class MessagesService {
             month: 'July',
             title: 'Birthday of Julia',
             text: 'Nam porttitor justo nec elit efficitur vestibulum.',
-            color:'success'
+            color: 'success'
         }
     ];
 
-    public getMessages():Array<Object> {
+    public getMessages(): Array<Object> {
         return this.messages;
     }
 
-    public getFiles():Array<Object> {
+    public getFiles(): Array<Object> {
         return this.files;
     }
 
-    public getMeetings():Array<Object> {
+    public getMeetings(): Array<Object> {
         return this.meetings;
-    }   
+    }
 
 }

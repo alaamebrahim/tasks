@@ -11,7 +11,7 @@ import { TasksService } from './tasks.service';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { AddNotificationComponent } from './add-notification/add-notification.component';
-import { NotificationsService } from '../../share/services/notifications.service';
+import { NotificationsService } from '../../shared/services/notifications.service';
 export const routes = [
   { path: '', component: TasksComponent, pathMatch: 'full' },
   {
