@@ -85,6 +85,53 @@
 		"is_blocked": "محظور",
 		"created_at": "مشترك منذ"
 	},
+	"mail": {
+		"labels": {
+			"search-mail": "بحث بالبريد",
+			"all": "الكل",
+			"starred": "المميز",
+			"sent": "المرسل",
+			"draft": "مسودة",
+			"trash": "محذوف",
+			"reply": "رد",
+			"back": "رجوع",
+			"mark-important": "تحديد كهام",
+			"restore": "استعادة",
+			"report-spam": "SPAM",
+			"to-trash": "سلة المهملات",
+			"compose": "بريد جديد",
+			"mark-read": "تحديد كمقروء",
+			"mark-unread": "تحديد كغير مقروء",
+			"to-me": "مرسل لى",
+			"attachments": "مرفق/مرفقات",
+			"download-attachs": "تحميل المرفقات",
+			"view-images": "عرض الصور",
+			"choose-mail": "اختر بريد للعرض",
+			"to": "إلى",
+			"cc-bc": "نسخة إلى",
+			"subject": "الموضوع"
+		}
+	},
+	"general": {
+		"buttons": {
+			"delete": "",
+			"cancel": ""
+		},
+		"button": {
+			"send": ""
+		},
+		"sitetitle": "برنامج إدارة المهام",
+		"description": "برنامج بسيط لإدارة المهام",
+		"fblogin": "LOGIN USING FACEBOOK",
+		"save": "حفظ",
+		"send": "إرسال",
+		"reset": "إعادة",
+		"notfound": "صفحة غير موجودة",
+		"messages": {
+			"saved": "تم الحفظ بنجاح",
+			"error": "حدث خطأ أثناء العملية"
+		}
+	},
 	"site": {
 		"title": "إدارة المهام"
 	},
@@ -134,19 +181,6 @@
 		"edit": "تعديل",
 		"update": "تحديث",
 		"cancel": "إلغاء"
-	},
-	"general": {
-		"sitetitle": "برنامج إدارة المهام",
-		"description": "برنامج بسيط لإدارة المهام",
-		"fblogin": "LOGIN USING FACEBOOK",
-		"save": "حفظ",
-		"send": "إرسال",
-		"reset": "إعادة",
-		"notfound": "صفحة غير موجودة",
-		"messages": {
-			"saved": "تم الحفظ بنجاح",
-			"error": "حدث خطأ أثناء العملية"
-		}
 	},
 	"user": {
 		"table": {
