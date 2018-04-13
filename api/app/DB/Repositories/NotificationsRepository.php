@@ -16,11 +16,10 @@ class NotificationsRepository extends Repository {
      * Returns all notifications for an user
      */
     public function getAllNotificationsByUser ($id) {
-        return DB::table('tasks')
-                    ->leftJoin('users', 'notifications.user_id', '=', 'users.id')
+        return DB::table('notifications')
                     ->orderBy('notifications.created_at', 'desc')
                     ->where('notifications.user_id', '=', $id)
-                    ->select('notifications.*', 'users.first_name', 'users.last_name')
+                    ->select('notifications.*')
                     ->get();
     }
 }

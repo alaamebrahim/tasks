@@ -107,7 +107,7 @@ $api->version('v1', function ($api) {
         $api->post('/update-notification', ['uses' => 'NotificationsController@updateExistingNotification','as' => 'api.Notification.updateExisting']);
         //send notification to use
         $api->post('/send-notification', ['uses' => 'NotificationsController@sendSingleNotification','as' => 'api.Notification.sendSingleNotification']);
-        // Get All Notifications
-        $api->get('/get-Notifications', ['uses' => 'NotificationsController@getUserNotifications','as' => 'api.Notification.all']);
+        // Get All Notifications for a user
+        $api->get('/get-user-notifications/{user_id}', ['uses' => 'NotificationsController@getUserNotifications','as' => 'api.Notification.all']);
     });
 });
