@@ -19,9 +19,13 @@ class TasksRepository extends Repository {
     public function getAllTasksByUser ($id) {
         return DB::table('tasks')
                     ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
                     ->orderBy('tasks.updated_at', 'desc')
                     ->where('tasks.user_id', '=', $id)
-                    ->select('tasks.*', 'users.first_name', 'users.last_name')
+                    ->orderBy('tasks.updated_at','desc')
+                    ->orderBy('tasks.completed','desc')
+                    ->select(['tasks.*', 'users.id', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+                    ->groupBy('tasks.id')
                     ->get();
     }
 
@@ -31,9 +35,11 @@ class TasksRepository extends Repository {
     public function getAllTasks () {
         return DB::table('tasks')
                     ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
                     ->orderBy('tasks.updated_at','desc')
                     ->orderBy('tasks.completed','desc')
-                    ->select('tasks.*', 'users.first_name', 'users.last_name')
+                    ->select(['tasks.*', 'users.id', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+                    ->groupBy('tasks.id')
                     ->get();
     }
 
