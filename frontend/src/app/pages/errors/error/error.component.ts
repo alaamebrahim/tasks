@@ -9,16 +9,16 @@ import { Settings } from '../../../app.settings.model';
 })
 export class ErrorComponent {
   public settings: Settings;
-  constructor(public appSettings:AppSettings, public router:Router) {
-    this.settings = this.appSettings.settings; 
+  constructor(public appSettings: AppSettings, public router: Router) {
+    this.settings = this.appSettings.settings;
   }
 
   goHome(): void {
     this.router.navigate(['/']);
   }
 
-  ngAfterViewInit(){
-    this.settings.loadingSpinner = false;  
-  } 
+  ngAfterViewInit() {
+    this.settings.loadingSpinner = false;
+  }
 
 }
