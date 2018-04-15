@@ -1,0 +1,16 @@
+<form [formGroup]="form" class="mail-body" *ngIf="!sending">
+    <mat-input-container floatPlaceholder="auto" dividerColor="primary" class="w-100">
+        <mat-select formControlName="receiver_id" multiple required placeholder="{{'mail.labels.to' | translate}}">
+            <mat-option *ngFor="let user of users" [value]="user.id">{{user.first_name === '' ? user.email : user.first_name}} {{user.last_name === '' ? '' :
+                user.last_name}}</mat-option>
+        </mat-select>
+    </mat-input-container>
+    <mat-form-field class="w-100">
+        <input matInput placeholder="{{'mail.labels.subject' | translate}}" formControlName="subject">
+    </mat-form-field>
+    <quill-editor formControlName="message"></quill-editor>
+    <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!form.valid">{{'general.button.send' | translate}}</button>
+</form>
+<div *ngIf="sending" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
+</div>

@@ -7,6 +7,7 @@ import { QuillModule } from 'ngx-quill'
 import { SharedModule } from '../../shared/shared.module';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { MailboxComponent } from './mailbox.component';
+import { ComposeComponent } from './compose/compose.component';
 
 export const routes = [
   { path: '', component: MailboxComponent, pathMatch: 'full' }
@@ -24,7 +25,8 @@ export const routes = [
     PipesModule
   ],
   declarations: [
-    MailboxComponent
+    MailboxComponent,
+    ComposeComponent
   ]
 })
 export class MailboxModule { }

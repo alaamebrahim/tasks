@@ -87,38 +87,39 @@
 	},
 	"mail": {
 		"labels": {
+			"to": "إلى",
+			"subject": "الموضوع",
 			"search-mail": "بحث بالبريد",
 			"all": "الكل",
 			"starred": "المميز",
 			"sent": "المرسل",
 			"draft": "مسودة",
 			"trash": "محذوف",
-			"reply": "رد",
 			"back": "رجوع",
 			"mark-important": "تحديد كهام",
 			"restore": "استعادة",
-			"report-spam": "SPAM",
 			"to-trash": "سلة المهملات",
 			"compose": "بريد جديد",
 			"mark-read": "تحديد كمقروء",
 			"mark-unread": "تحديد كغير مقروء",
 			"to-me": "مرسل لى",
+			"from-me": "",
 			"attachments": "مرفق/مرفقات",
 			"download-attachs": "تحميل المرفقات",
 			"view-images": "عرض الصور",
 			"choose-mail": "اختر بريد للعرض",
-			"to": "إلى",
 			"cc-bc": "نسخة إلى",
-			"subject": "الموضوع"
+			"reply": "رد",
+			"report-spam": "SPAM"
 		}
 	},
 	"general": {
-		"buttons": {
-			"delete": "",
-			"cancel": ""
-		},
 		"button": {
-			"send": ""
+			"send": "ارسال"
+		},
+		"buttons": {
+			"delete": "حذف",
+			"cancel": "الغاء"
 		},
 		"sitetitle": "برنامج إدارة المهام",
 		"description": "برنامج بسيط لإدارة المهام",
@@ -129,6 +130,7 @@
 		"notfound": "صفحة غير موجودة",
 		"messages": {
 			"saved": "تم الحفظ بنجاح",
+			"sent": "تم الارسال بنجاح",
 			"error": "حدث خطأ أثناء العملية"
 		}
 	},
@@ -136,7 +138,7 @@
 		"title": "إدارة المهام"
 	},
 	"tasks": {
-		"add-notification-title": "",
+		"add-notification-title": "أرسال تنبيه جديد",
 		"addtask": {
 			"head": "إضافة مهمة  جديدة"
 		},
@@ -172,7 +174,7 @@
 	},
 	"notifications": {
 		"form": {
-			"text": ""
+			"text": "نص التنبيه"
 		}
 	},
 	"buttons": {

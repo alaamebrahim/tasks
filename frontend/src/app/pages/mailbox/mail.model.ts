@@ -1,17 +1,20 @@
+import { User } from '../users/user.model';
+
 export class Mail {
-    constructor(public id: number,
-        public sender: string,
-        public senderPhoto: string,
-        public senderMail: string,
-        public subject: string,
-        public date: string,
-        public body: string,
-        public attachment: boolean,
-        public attachments: string[],
-        public unread: boolean,
-        public sent: boolean,
-        public starred: boolean,
+    constructor(// public id: number,
+        public attachment: string,
+        public created_at: Date,
         public draft: boolean,
+        public id: number,
+        public message: string,
+        public readed: boolean,
+        public receiver: User,
+        public receiver_id: number,
+        public sender: User,
+        public sender_id: number,
+        public starred: boolean,
+        public subject: string,
         public trash: boolean,
-        public selected: boolean) { }
+        public updated_at: boolean
+    ) { }
 }

@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable } from 'rxjs/Observable';
 import { User } from './user.model';
 import { ApiRequestService } from '../../shared/services/api-request.service';
 import { Role } from '../login/role.model';

@@ -14,4 +14,17 @@ export class NotifyUserService {
     this.notify.open(this.localeService.translate(code), 'X', { duration: 4000 });
   }
 
+  prepareResponse(response: any, message: string): boolean {
+    if (response !== 'undefined' && response !== null) {
+      if (response.success === true ) {
+        if (message !== null) {
+          this.notifyUser(message);
+        }
+        return true;
+      }
+      this.notifyUser(response.message);
+    }
+    return false;
+  }
+
 }

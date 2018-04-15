@@ -22,7 +22,7 @@ class CreateMailboxTable extends Migration
             $table->foreign('receiver_id')->references('id')->on('users')->onDelete('cascade');
             $table->string('subject');
             $table->string('message');
-            $table->string('attachment');
+            $table->string('attachment')->nullable;
             $table->boolean('starred');
             $table->boolean('readed');
             $table->boolean('draft');

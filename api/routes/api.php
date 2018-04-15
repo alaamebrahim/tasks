@@ -110,4 +110,24 @@ $api->version('v1', function ($api) {
         // Get All Notifications for a user
         $api->get('/get-user-notifications/{user_id}', ['uses' => 'NotificationsController@getUserNotifications','as' => 'api.Notification.all']);
     });
+
+    /*************************************************************
+     * Mailbox controller routes
+     ************************************************************/
+    $api->group([
+        'middleware' => 'api.auth',
+        'prefix'     => '/mailbox/',
+        'namespace'  => 'App\Http\Controllers\Mailbox',
+    ], function ($api) {
+        // add new task
+        $api->post('/send-mail', ['uses' => 'MailboxController@sendNewEmail','as' => 'api.mailbox.send-mail']);
+        $api->get('/get-user-mails/{user_id}', ['uses' => 'MailboxController@getUserMails','as' => 'api.mailbox.get-user-mails']);
+        $api->get('/get-user-inbox/{user_id}', ['uses' => 'MailboxController@getUserInbox','as' => 'api.mailbox.get-user-inbox']);
+        $api->get('/get-user-outbox/{user_id}', ['uses' => 'MailboxController@getUserOutbox','as' => 'api.mailbox.get-user-outbox']);
+        $api->get('/get-user-inbox-starred/{user_id}', ['uses' => 'MailboxController@getUserInboxStarred','as' => 'api.mailbox.get-user-inbox-starred']);
+        $api->get('/get-user-inbox-trash/{user_id}', ['uses' => 'MailboxController@getUserInboxTrash','as' => 'api.mailbox.get-user-inbox-trash']);
+        $api->put('/set-mail-read-status', ['uses' => 'MailboxController@setMailStatus','as' => 'api.mailbox.set-mail-status']);
+        $api->put('/set-mail-star-status', ['uses' => 'MailboxController@setMailStarStatus','as' => 'api.mailbox.set-mail-star-status']);
+        $api->put('/set-mail-trash-status', ['uses' => 'MailboxController@setMailTrashStatus','as' => 'api.mailbox.set-mail-trash-status']);
+    });
 });

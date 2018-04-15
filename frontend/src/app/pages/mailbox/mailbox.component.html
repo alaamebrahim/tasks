@@ -14,18 +14,33 @@
                             <button mat-menu-item (click)="type = 'all';getMails();">{{'mail.labels.all' | translate}}</button>
                             <button mat-menu-item (click)="type = 'starred';getMails();">{{'mail.labels.starred' | translate}}</button>
                             <button mat-menu-item (click)="type = 'sent';getMails();">{{'mail.labels.sent' | translate}}</button>
-                            <button mat-menu-item (click)="type = 'drafts';getMails();">{{'mail.labels.draft' | translate}}</button>
                             <button mat-menu-item (click)="type = 'trash';getMails();">{{'mail.labels.trash' | translate}}</button>
                         </span>
                     </mat-menu>
                     <mat-nav-list class="p-0 mailbox-sidenav-list" perfectScrollbar>
                         <div *ngFor="let mail of mails | MailSearch : searchText" (click)="viewDetail(mail)">
-                            <mat-list-item [ngClass]="{'unread': mail.unread, 'selected': mail.selected}">
-                                <img *ngIf="mail.senderPhoto" matListAvatar [src]="mail.senderPhoto">
-                                <img *ngIf="!mail.senderPhoto" matListAvatar src="assets/img/users/default-user.jpg">
+                            <mat-list-item [ngClass]="{'unread': !mail.readed}" *ngIf="mail.sender">
+                                <img *ngIf="mail.sender.picture" matListAvatar [src]="userPic + mail.sender.picture">
+                                <img *ngIf="!mail.sender.picture" matListAvatar src="assets/img/users/default-user.jpg">
                                 <div matLine fxLayout="row" fxLayoutAlign="space-between space-between">
-                                    <h4 class="text-truncate sender">{{mail.sender}}</h4>
-                                    <small>{{mail.date}}</small>
+                                    <h4 class="text-truncate sender">
+                                        <small>
+                                            <mat-icon *ngIf="mail.starred" color="accent">star</mat-icon>
+                                        </small>
+                                        {{mail.sender.first_name + ' ' + mail.sender.last_name}}
+                                    </h4>
+                                    <small>{{mail.created_at}}</small>
+                                </div>
+                                <p matLine class="text-truncate subject">{{mail.subject}}</p>
+                            </mat-list-item>
+                            <mat-list-item [ngClass]="{'unread': !mail.readed}" *ngIf="mail.receiver">
+                                <img *ngIf="mail.receiver[0].picture" matListAvatar [src]="userPic + mail.receiver[0].picture">
+                                <img *ngIf="!mail.receiver[0].picture" matListAvatar src="assets/img/users/default-user.jpg">
+                                <div matLine fxLayout="row" fxLayoutAlign="space-between space-between">
+                                    <h4 class="text-truncate sender">
+                                        {{mail.receiver[0].first_name + ' ' + mail.receiver[0].last_name}}
+                                    </h4>
+                                    <small>{{mail.created_at}}</small>
                                 </div>
                                 <p matLine class="text-truncate subject">{{mail.subject}}</p>
                             </mat-list-item>
@@ -39,9 +54,6 @@
                             <button mat-icon-button (click)="sidenav.toggle()">
                                 <mat-icon>list</mat-icon>
                             </button>
-                            <button *ngIf="mail && type !='trash'" mat-icon-button matTooltip="{{'mail.labels.reply' | translate}}" matTooltipPosition="above">
-                                <mat-icon>reply</mat-icon>
-                            </button>
                             <button *ngIf="newMail" mat-icon-button (click)="newMail = false;" matTooltip="{{'mail.labels.back' | translate}}" matTooltipPosition="above">
                                 <mat-icon>arrow_back</mat-icon>
                             </button>
@@ -54,11 +66,7 @@
                                 matTooltipPosition="above">
                                 <mat-icon>undo</mat-icon>
                             </button>
-                            <button *ngIf="mail" mat-icon-button matTooltip="{{'mail.labels.report-spam' | translate}}" matTooltipPosition="above" fxShow="false"
-                                fxShow.gt-xs>
-                                <mat-icon>error</mat-icon>
-                            </button>
-                            <button *ngIf="mail && type !='trash'" mat-icon-button (click)="delete()" matTooltip="{{'mail.labels.to-trash' | translate}}"
+                            <button *ngIf="mail && type !='trash'" mat-icon-button (click)="moveToTrash()" matTooltip="{{'mail.labels.to-trash' | translate}}"
                                 matTooltipPosition="above">
                                 <mat-icon>delete</mat-icon>
                             </button>
@@ -72,7 +80,7 @@
                         <span (mouseleave)="moreMenuTrigger.closeMenu()">
                             <button mat-menu-item (click)="setAsRead()">{{'mail.labels.mark-read' | translate}}</button>
                             <button mat-menu-item (click)="setAsUnRead()">{{'mail.labels.mark-unread' | translate}}</button>
-                            <button mat-menu-item (click)="delete()">{{'general.buttons.delete' | translate}}</button>
+                            <button mat-menu-item (click)="moveToTrash()">{{'general.buttons.delete' | translate}}</button>
                         </span>
                     </mat-menu>
                     <div class="mailbox-content" perfectScrollbar>
@@ -85,67 +93,42 @@
                                     </div>
                                 </mat-list-item>
                                 <mat-divider></mat-divider>
-                                <mat-list-item class="h-100 py-1">
-                                    <img *ngIf="mail.senderPhoto" matListAvatar [src]="mail.senderPhoto">
-                                    <img *ngIf="!mail.senderPhoto" matListAvatar src="assets/img/users/default-user.jpg">
+                                <mat-list-item class="h-100 py-1" *ngIf="mail.sender">
+                                    <img *ngIf="mail.sender.picture" matListAvatar [src]="userPic + mail.sender.picture">
+                                    <img *ngIf="!mail.sender.picture" matListAvatar src="assets/img/users/default-user.jpg">
                                     <h6 matLine fxLayout="row" fxLayoutAlign="space-between center">
                                         <span>
-                                            <strong class="text-truncate">{{mail.sender}}</strong>
-                                            <span *ngIf="mail.senderMail" class="email">&lt;{{mail.senderMail}}&gt;</span>
+                                            <strong class="text-truncate">{{mail.sender.first_name + ' ' + mail.sender.last_name}}</strong>
+                                            <span *ngIf="mail.sender.email" class="email">&lt;{{mail.sender.email}}&gt;</span>
                                         </span>
-                                        <span>{{mail.date}}</span>
+                                        <span>{{mail.created_at}}</span>
                                     </h6>
                                     <span matLine>{{'mail.labels.to-me' | translate}}</span>
                                 </mat-list-item>
+                                <mat-list-item class="h-100 py-1" *ngIf="mail.receiver">
+                                    <img *ngIf="mail.receiver[0].picture" matListAvatar [src]="userPic + mail.receiver[0].picture">
+                                    <img *ngIf="!mail.receiver[0].picture" matListAvatar src="assets/img/users/default-user.jpg">
+                                    <h6 matLine fxLayout="row" fxLayoutAlign="space-between center">
+                                        <span>
+                                            <strong class="text-truncate">{{mail.receiver[0].first_name + ' ' + mail.receiver[0].last_name}}</strong>
+                                            <span *ngIf="mail.receiver[0].email" class="email">&lt;{{mail.receiver[0].email}}&gt;</span>
+                                        </span>
+                                        <span>{{mail.created_at}}</span>
+                                    </h6>
+                                    <span matLine>{{'mail.labels.from-me' | translate}}</span>
+                                </mat-list-item>
                                 <mat-divider></mat-divider>
                             </mat-list>
-                            <div class="mail-body" [innerHTML]="mail.body"></div>
-                            <div *ngIf="mail.attachments.length > 0" class="mail-body">
-                                <mat-divider></mat-divider>
-                                <p>
-                                    <strong>{{mail.attachments.length}} {{'mail.labels.attachments' | translate}}</strong>
-                                    <button mat-icon-button matTooltip="{{'mail.labels.download-attachs' | translate}}" matTooltipPosition="above">
-                                        <mat-icon>file_download</mat-icon>
-                                    </button>
-                                    <button mat-icon-button matTooltip="{{'mail.labels.view-images' | translate}}" matTooltipPosition="above">
-                                        <mat-icon>pageview</mat-icon>
-                                    </button>
-                                </p>
-                                <div *ngFor="let attachment of mail.attachments; let i = index">
-                                    <img [src]="attachment" alt="attachment">
-                                    <h3>image-{{i + 1}}.jpg</h3>
-                                    <p>
-                                        <span>457K</span>
-                                        <button mat-icon-button>
-                                            <mat-icon>file_download</mat-icon>
-                                        </button>
-                                        <button mat-icon-button>
-                                            <mat-icon>pageview</mat-icon>
-                                        </button>
-                                    </p>
-                                </div>
-                            </div>
+                            <div class="mail-body" [innerHTML]="mail.message"></div>
                         </div>
                         <div *ngIf="!mail && !newMail" fxLayout="column" fxLayoutAlign="center center" class="h-100 empty">
                             <mat-icon>mail_outline</mat-icon>
                             <p>{{'mail.labels.choose-mail' | translate}}</p>
                         </div>
-                        <form *ngIf="newMail" [formGroup]="form" (ngSubmit)="onSubmit(form.value)" class="mail-body">
-                            <mat-form-field class="w-100">
-                                <input matInput placeholder="{{'mail.labels.to' | translate}}" formControlName="to">
-                            </mat-form-field>
-                            <mat-form-field class="w-100">
-                                <input matInput placeholder="{{'mail.labels.cc-bc' | translate}}" formControlName="cc">
-                            </mat-form-field>
-                            <mat-form-field class="w-100">
-                                <input matInput placeholder="{{'mail.labels.subject' | translate}}" formControlName="subject">
-                            </mat-form-field>
-                            <quill-editor formControlName="message"></quill-editor>
-                            <div fxLayout="row" fxLayoutAlign="space-between center">
-                                <button mat-raised-button (click)="newMail = false;" type="button">{{'general.buttons.cancel' | translate}}</button>
-                                <button mat-raised-button color="primary" type="submit">{{'general.button.send' | translate}}</button>
-                            </div>
-                        </form>
+                        <div *ngIf="newMail" fxLayout="column" fxLayoutAlign="center center" class="h-100 p-1">
+                            <app-compose *ngIf="newMail"></app-compose>
+                        </div>
+
                     </div>
                 </div>
             </mat-sidenav-container>

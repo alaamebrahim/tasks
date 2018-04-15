@@ -1,128 +1,156 @@
 import { Component, OnInit, ViewChild, HostListener } from '@angular/core';
-import { FormGroup, FormBuilder, Validators} from '@angular/forms';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { MatSnackBar } from '@angular/material';
 import { AppSettings } from '../../app.settings';
 import { Settings } from '../../app.settings.model';
 import { Mail } from './mail.model';
 import { MailboxService } from './mailbox.service';
+import { environment } from '../../../environments/environment';
+import { NotifyUserService } from '../../shared/services/notify-user.service';
 
 @Component({
   selector: 'app-mailbox',
   templateUrl: './mailbox.component.html',
   styleUrls: ['./mailbox.component.scss'],
-  providers: [ MailboxService ]
+  providers: [MailboxService]
 })
 export class MailboxComponent implements OnInit {
   @ViewChild('sidenav') sidenav: any;
   public settings: Settings;
-  public sidenavOpen:boolean = true;
+  public sidenavOpen = true;
   public mails: Array<Mail>;
   public mail: Mail;
   public newMail: boolean;
-  public type:string = 'all';
+  public type = 'all';
   public searchText: string;
-  public form:FormGroup;
+  private userPic = environment.userPicPath;
 
-  constructor(public appSettings:AppSettings, 
-              public formBuilder: FormBuilder, 
-              public snackBar: MatSnackBar,
-              private mailboxService:MailboxService) { 
-    this.settings = this.appSettings.settings; 
+  constructor(public appSettings: AppSettings,
+    private notifyService: NotifyUserService,
+    private mailboxService: MailboxService) {
+    this.settings = this.appSettings.settings;
   }
 
   ngOnInit() {
-    this.getMails();      
-    if(window.innerWidth <= 992){
+    this.getMails();
+    if (window.innerWidth <= 992) {
       this.sidenavOpen = false;
     }
-    this.form = this.formBuilder.group({
-      'to': ['', Validators.required],
-      'cc': null,
-      'subject': null,    
-      'message': null
-    });  
   }
 
   @HostListener('window:resize')
-  public onWindowResize():void {
+  public onWindowResize(): void {
     (window.innerWidth <= 992) ? this.sidenavOpen = false : this.sidenavOpen = true;
   }
 
-  public getMails(){
+  public getMails() {
     switch (this.type) {
-      case 'all': 
-        this.mails = this.mailboxService.getAllMails();
+      case 'all':
+        this.mailboxService.getUserInbox().subscribe(response => {
+          // console.log(response.mailboxes);
+          this.mails = response.mailboxes;
+        });
         break;
       case 'starred':
-        this.mails =  this.mailboxService.getStarredMails();
+        this.mailboxService.getStarredMails().subscribe(response => {
+          // console.log(response);
+          this.mails = response.mailboxes;
+        });
         break;
       case 'sent':
-        this.mails =  this.mailboxService.getSentMails();
-        break;
-      case 'drafts':
-        this.mails =  this.mailboxService.getDraftMails();
+        this.mailboxService.getSentMails().subscribe(response => {
+          // console.log(response);
+          this.mails = response.mailboxes;
+          // console.log(this.mails);
+        });
         break;
       case 'trash':
-        this.mails =  this.mailboxService.getTrashMails();
+        this.mailboxService.getTrashMails().subscribe(response => {
+          // console.log(response.mailboxes);
+          this.mails = response.mailboxes;
+        });
         break;
       default:
-        this.mails =  this.mailboxService.getDraftMails();
-    }  
-  }
-
-  public viewDetail(mail){
-    this.mail = this.mailboxService.getMail(mail.id);    
-    this.mails.forEach(m => m.selected = false);
-    this.mail.selected = true;
-    this.mail.unread = false;
-    this.newMail = false;
-    if(window.innerWidth <= 992){
-      this.sidenav.close(); 
+      // this.mails = this.mailboxService.getDraftMails();
     }
   }
 
-  public compose(){
+  /**
+   * Show selected mail
+   * @param mail
+   */
+  public viewDetail(mail: Mail) {
+    this.mail = mail;
+    this.setAsRead();
+    if (window.innerWidth <= 992) {
+      this.sidenav.close();
+    }
+  }
+
+  /**
+   * View new mail form
+   */
+  public compose() {
     this.mail = null;
     this.newMail = true;
   }
 
-  public setAsRead(){
-    this.mail.unread = false;
+  /**
+   * Set mail as readed
+   */
+  public setAsRead() {
+    this.mail.readed = true;
+    this.mailboxService.updateReadStatus(this.mail).subscribe(response => {
+      this.notifyService.prepareResponse(response, null);
+    });
   }
 
-  public setAsUnRead(){
-    this.mail.unread = true;
+  /**
+   * Set mail as unreaded
+   */
+  public setAsUnRead() {
+    this.mail.readed = false;
+    this.mailboxService.updateReadStatus(this.mail).subscribe(response => {
+      this.notifyService.prepareResponse(response, null);
+    });
   }
 
   public delete() {
     this.mail.trash = true;
-    this.mail.sent = false;
-    this.mail.draft = false; 
-    this.mail.starred = false; 
+    // this.mail.sent = false;
+    this.mail.draft = false;
+    this.mail.starred = false;
     this.getMails();
     this.mail = null;
   }
 
-  public changeStarStatus() {       
+  /**
+   * Change starred status
+   */
+  public changeStarStatus() {
     this.mail.starred = !this.mail.starred;
-    this.getMails(); 
+    this.mailboxService.updateStarStatus(this.mail).subscribe(response => {
+      this.notifyService.prepareResponse(response, null);
+    });
   }
 
-  public restore(){
+  public moveToTrash() {
+    this.mail.trash = true;
+    this.mailboxService.moveToTrash(this.mail).subscribe(response => {
+      this.notifyService.prepareResponse(response, null);
+      this.type = 'all';
+      this.getMails();
+    });
+  }
+
+
+  public restore() {
     this.mail.trash = false;
-    this.type = 'all';
-    this.getMails();
-    this.mail = null; 
-  }
-
-  public onSubmit(mail){
-    console.log(mail)
-    if (this.form.valid) {
-      this.snackBar.open('Mail sent to ' + mail.to + ' successfully!', null, {
-        duration: 2000,
-      });
-      this.form.reset();     
-    }
+    this.mailboxService.moveToTrash(this.mail).subscribe(response => {
+      this.notifyService.prepareResponse(response, null);
+      this.type = 'trash';
+      this.getMails();
+    });
   }
 
 }

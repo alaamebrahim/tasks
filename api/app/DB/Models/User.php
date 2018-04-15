@@ -61,4 +61,12 @@ class User extends Model implements
     public function tasks () {
         return $this->hasMany('App\DB\Models\Tasks');
     }
+
+    public function mailboxSender () {
+        return $this->hasMany('App\DB\Models\MailBox', 'sender_id');
+    }
+
+    public function mailboxReceiver () {
+        return $this->hasMany('App\DB\Models\MailBox', 'receiver_id');
+    }
 }
