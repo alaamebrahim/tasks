@@ -20,7 +20,6 @@ import { routing } from './app.routing';
 
 import { AppComponent } from './app.component';
 import { PagesComponent } from './pages/pages.component';
-import { BlankComponent } from './pages/blank/blank.component';
 import { SearchComponent } from './pages/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
@@ -82,7 +81,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   declarations: [
     AppComponent,
     PagesComponent,
-    BlankComponent,
+    // BlankComponent,
     SearchComponent,
     NotFoundComponent,
     ErrorComponent,
