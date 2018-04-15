@@ -30,14 +30,14 @@
             </ng-template>
             <mat-card class="content" perfectScrollbar>
                 <div fxLayout="column" fxLayoutAlign="none">
-                    <button mat-button *ngFor="let meeting of meetings">
+                    <button mat-button *ngFor="let mail of mailbox">
                         <div fxLayout="column" fxLayoutAlign="center center" class="row-1">
-                            <span class="name">{{meeting.day}}</span>
-                            <span class="name">{{meeting.month}}</span>
+                            <span class="name">{{mail.created_at | date:"dd"}}</span>
+                            <span class="name">{{mail.created_at |date:"yyyy/MM"}}</span>
                         </div>
                         <div fxLayout="column" fxLayoutAlign="none">
-                            <span class="name">{{meeting.title}}</span>
-                            <span class="text muted-text">{{meeting.text}}</span>
+                            <span class="name">{{mail.subject | slice:0:50}}</span>
+                            <span class="text muted-text">{{mail.sender.first_name + ' ' + mail.sender.last_name | slice:0:50}}</span>
                         </div>
                     </button>
                 </div>

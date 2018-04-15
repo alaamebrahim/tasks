@@ -2,6 +2,8 @@ import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { MatMenuTrigger } from '@angular/material';
 import { MessagesService } from './messages.service';
 import { NotificationsService } from '../../../shared/services/notifications.service';
+import { MailboxService } from '../../../pages/mailbox/mailbox.service';
+import { Mail } from '../../../pages/mailbox/mail.model';
 
 @Component({
   selector: 'app-messages',
@@ -14,15 +16,14 @@ export class MessagesComponent implements OnInit {
   @ViewChild(MatMenuTrigger) trigger: MatMenuTrigger;
   public selectedTab = 1;
   public messages: Array<Object>;
-  public files: Array<Object>;
-  public meetings: Array<Object>;
+  public mailbox: Mail[];
   constructor(
     private messagesService: MessagesService,
-    private notificationsService: NotificationsService
+    private notificationsService: NotificationsService,
+    private mailboxService: MailboxService
   ) {
-    this.files = messagesService.getFiles();
-    this.meetings = messagesService.getMeetings();
     this.getNotifications();
+    this.getEmails();
   }
 
   ngOnInit() {
@@ -36,7 +37,10 @@ export class MessagesComponent implements OnInit {
   }
 
   getEmails() {
-
+    this.mailboxService.getUserInbox().subscribe(response => {
+      console.log(response.mailboxes);
+      this.mailbox = response.mailboxes;
+    });
   }
 
   openMessagesMenu() {

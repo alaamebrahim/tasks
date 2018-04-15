@@ -50,6 +50,7 @@ import { NotifyUserService } from './shared/services/notify-user.service';
 import { MAT_DATE_LOCALE } from '@angular/material/core';
 import { UsersService } from './pages/users/users.service';
 import { PermissionsService } from './shared/services/permissions.service';
+import { MailboxService } from './pages/mailbox/mailbox.service';
 
 export function HttpLoaderFactory(http: HttpClient) {
   return new TranslateHttpLoader(http);
@@ -110,8 +111,8 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: OverlayContainer, useClass: CustomOverlayContainer },
     NotifyUserService,
     UsersService,
-    PermissionsService
-
+    PermissionsService,
+    MailboxService
   ],
   bootstrap: [AppComponent]
 })

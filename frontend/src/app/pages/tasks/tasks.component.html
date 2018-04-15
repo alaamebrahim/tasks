@@ -11,10 +11,10 @@
 
         <mat-button-toggle-group #viewType="matButtonToggleGroup">
             <mat-button-toggle (click)="getAllTasks()" matTooltip="{{'tasks.buttons.all' | translate}}">
-                <mat-icon>view_list</mat-icon>
+                <mat-icon color="basic">view_list</mat-icon>
             </mat-button-toggle>
             <mat-button-toggle (click)="onFilterTasks(0)" matTooltip="{{'tasks.buttons.filter-completed' | translate}}">
-                <mat-icon color="accent">assignment_late</mat-icon>
+                <mat-icon color="warn">assignment_late</mat-icon>
             </mat-button-toggle>
             <mat-button-toggle (click)="onFilterTasks(1)" matTooltip="{{'tasks.buttons.filter-uncompleted' | translate}}">
                 <mat-icon color="primary">verified_user</mat-icon>
@@ -28,7 +28,7 @@
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     <mat-icon *ngIf="task.progress === 100" class="mat-18 p-1" color="primary">verified_user</mat-icon>
-                    <mat-icon *ngIf="task.progress < 100" class="mat-18 p-1" color="accent">assignment_late</mat-icon>
+                    <mat-icon *ngIf="task.progress < 100" class="mat-18 p-1" color="warn">assignment_late</mat-icon>
                     <mat-icon class="p-1" *ngIf="task.attachment" matTooltip="{{'tasks.buttons.has-attachment' | translate}}">attachment</mat-icon>
                     <h4 class="p-1">{{task.title}}</h4>
                 </mat-panel-title>
@@ -76,7 +76,7 @@
                 </span>
             </p>
             <div *ngxPermissionsOnly="['root','admin']">
-                <button *ngIf="task.progress !== 100" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="accent" class="m-1">
+                <button *ngIf="task.progress !== 100" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="warn" class="m-1">
                     <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
                 </button>
                 <button *ngIf="task.progress !== 100" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
