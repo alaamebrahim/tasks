@@ -32,6 +32,13 @@ export class UsersService {
         return this.apiRequestService.postFormData('users/upload-image', fd);
     }
 
+    uploadTaskAttachment(picture: File) {
+        const fd = new FormData();
+        fd.append('attachment', picture);
+        // console.log(fd);
+        return this.apiRequestService.postFormData('tasks/upload-attachment', fd);
+    }
+
     deleteUser(user: User) {
         return this.apiRequestService.post('users/delete-user', user);
     }
