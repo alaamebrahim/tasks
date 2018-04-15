@@ -4,17 +4,15 @@ namespace App\DB\Services;
 
 use App\DB\Repositories\NotificationsRepository as NotifyRepo;
 use App\DB\Repositories\UserRepository as UserRepo;
+use App\DB\Services\MailboxService as MailboxService;
 
 use App\DB\Models\Notifications;
-use Illuminate\Support\Facades\Mail;
 
 class NotificationsService {
 
     private $notifyRepo;
-    private $to = [];
-    private $subject;
-    private $from = "admin@jalyat.com";
     private $userRepo;
+    private $mailboxService;
 
     
     /**
@@ -22,10 +20,12 @@ class NotificationsService {
      */
     public function __construct (
         NotifyRepo $notifyRepo,
-        UserRepo $userRepo
+        UserRepo $userRepo,
+        MailboxService $mailboxService
     ) {
         $this->notifyRepo = $notifyRepo;
         $this->userRepo = $userRepo;
+        $this->mailboxService = $mailboxService;
     }
 
     /**
@@ -40,7 +40,7 @@ class NotificationsService {
     }
 
     public function sendNotificationByMail($to = [], $message) {
-        $this->sendMail($to, trans('messages.notifications.mail.subject'), $message);
+        $this->mailboxService->sendMail($to, trans('messages.notifications.mail.subject'), $message);
     }
 
     public function sendSingleNotification($request) {
@@ -52,16 +52,6 @@ class NotificationsService {
         $message = trans('messages.notifications.mail.remember.body') . "\n";
         $message .= trans('messages.notifications.mail.remember.text') . "\n";
         $message .= $request->text;
-        $this->sendMail($user_email, trans('messages.notifications.mail.remember.title'), $message);
-    }
-
-    public function sendMail($to = [], $subject, $message) {
-        $this->to = $to;
-        $this->subject = $subject;
-        Mail::raw($message, function($msg) { 
-            $msg->to($this->to); 
-            $msg->subject($this->subject);
-            $msg->from([$this->from]); 
-        });
+        $this->mailboxService->sendMail($user_email, trans('messages.notifications.mail.remember.title'), $message);
     }
 }
