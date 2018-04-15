@@ -28,7 +28,7 @@ class UsersController extends Controller
 
     /**
      * Post add new user
-     * @Returns JsonResponse
+     * @return JsonResponse
      */
     public function addNewUser(Request $request) {
         // Validation rules
@@ -61,7 +61,7 @@ class UsersController extends Controller
 
     /**
      * Post add new user
-     * @Returns JsonResponse
+     * @return JsonResponse
      */
     public function updateExistingUser(Request $request) {
         // Validation rules
@@ -98,7 +98,7 @@ class UsersController extends Controller
 
     /**
      * Delete a user
-     * @Returns JsonResponse
+     * @return JsonResponse
      */
     public function deleteExistingUser(Request $request) {        
         $data = $request->all();
@@ -114,12 +114,29 @@ class UsersController extends Controller
 
     /**
      * Get all users in db
+     * @return Collection
      */
     public function getAllUsers() {
         return $this->userRepo->all();
     }
 
+    /**
+     * Uploads an attachment and return reponse
+     * @return JsonResponse
+     */
     public function uploadUserPicture(Request $request) {
+        // Validation rules
+        try {
+            $this->validate($request, [
+                'email' => 'required|image',
+            ]);
+        } catch (ValidationException $e) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        }
+        //
         if ($request->hasFile('picture')) {
             $picture = $this->usersService->uploadUserPicture($request->file('picture'));
             return new JsonResponse([

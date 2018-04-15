@@ -29,6 +29,10 @@ class TasksService {
         $this->roleRepo = $roleRepo;
     }
 
+    /**
+     * Get All tasks
+     * @return Collection
+     */
     public function getAllTasks() {
         $current_user = JWTAuth::parseToken()->authenticate();
         
@@ -43,6 +47,10 @@ class TasksService {
         }
     }
 
+    /**
+     * Get all tasks by its status
+     * @return Collection
+     */
     public function getAllTasksByStatus($status) {
         $current_user = JWTAuth::parseToken()->authenticate();
         
@@ -55,5 +63,18 @@ class TasksService {
         } else {
             return $this->taskRepo->getTasksByStatusAndUser($status, $current_user['attributes']['id']);
         }
+    }
+
+    /**
+     * upload task attachment
+     * @return String
+     */
+    public function uploadTaskAttachment($image) {
+        $name = time().'.'.$image->getClientOriginalExtension();
+        $destinationPath = storage_path('/app/images');
+        $path = 'uploads' . DIRECTORY_SEPARATOR . 'tasks_files' . DIRECTORY_SEPARATOR;
+        $destinationPath = public_path($path); // upload path
+        $image->move($destinationPath, $name);
+        return $name;
     }
 }

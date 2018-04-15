@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { User } from '../../users/user.model';
 import { UsersService } from '../../users/users.service';
@@ -15,7 +15,9 @@ export class AddTaskComponent implements OnInit {
 
   private form: FormGroup;
   private users: User[];
-  private working =  false;
+  private working = false;
+  private attachment: string;
+  @ViewChild('fileInput') fileInput;
 
   constructor(
     private fb: FormBuilder,
@@ -31,7 +33,8 @@ export class AddTaskComponent implements OnInit {
       end_date: [null, Validators.compose([Validators.required])],
       description: [null, Validators.compose([Validators.required])],
       priority: [1],
-      user_id: [null, Validators.compose([Validators.required])]
+      user_id: [null, Validators.compose([Validators.required])],
+      attachment: null
     });
   }
 
@@ -45,7 +48,7 @@ export class AddTaskComponent implements OnInit {
     this.tasksService.addTask(this.form.value)
       .subscribe((response) => {
         if (response.success === true) {
-          console.log(response.message);
+          // console.log(response.message);
           this.notifyService.notifyUser('general.messages.saved');
           this.router.navigate(['tasks']);
         } else {
@@ -65,4 +68,20 @@ export class AddTaskComponent implements OnInit {
     });
   }
 
+  addFile(): void {
+    const fi = this.fileInput.nativeElement;
+    if (fi.files && fi.files[0]) {
+      const fileToUpload = fi.files[0];
+      // this.form.controls['picture'].setValue(fileToUpload);
+      // console.log(fileToUpload);
+      this.usersService.uploadTaskAttachment(fileToUpload).subscribe(response => {
+        if (response.success === true) {
+          this.form.controls['attachment'].setValue(response.message);
+          console.log(this.form.value);
+          this.attachment = response.message;
+        }
+      });
+    }
+
+  }
 }

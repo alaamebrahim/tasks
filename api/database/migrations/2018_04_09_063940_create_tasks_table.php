@@ -19,6 +19,7 @@ class CreateTasksTable extends Migration
             $table->date('start_date');
             $table->date('end_date');
             $table->string('description');
+            $table->string('attachment')->nullable;
             $table->integer('progress')->default(0);
             $table->boolean('completed')->default(false);
             $table->boolean('cancelled')->default(false);

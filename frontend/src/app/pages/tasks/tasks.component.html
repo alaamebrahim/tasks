@@ -14,7 +14,7 @@
                 <mat-icon>view_list</mat-icon>
             </mat-button-toggle>
             <mat-button-toggle (click)="onFilterTasks(0)" matTooltip="{{'tasks.buttons.filter-completed' | translate}}">
-                <mat-icon>assignment_late</mat-icon>
+                <mat-icon color="accent">assignment_late</mat-icon>
             </mat-button-toggle>
             <mat-button-toggle (click)="onFilterTasks(1)" matTooltip="{{'tasks.buttons.filter-uncompleted' | translate}}">
                 <mat-icon color="primary">verified_user</mat-icon>
@@ -29,6 +29,7 @@
                 <mat-panel-title>
                     <mat-icon *ngIf="task.progress === 100" class="mat-18 p-1" color="primary">verified_user</mat-icon>
                     <mat-icon *ngIf="task.progress < 100" class="mat-18 p-1" color="accent">assignment_late</mat-icon>
+                    <mat-icon class="p-1" *ngIf="task.attachment" matTooltip="{{'tasks.buttons.has-attachment' | translate}}">attachment</mat-icon>
                     <h4 class="p-1">{{task.title}}</h4>
                 </mat-panel-title>
                 <mat-panel-description>
@@ -43,6 +44,7 @@
                         </i>
                     </mat-chip>
                 </mat-chip-list>
+                
             </mat-expansion-panel-header>
             <p fxLayout="row" fxLayoutAlign="start center">
                 <mat-icon class="mat-18">description</mat-icon>

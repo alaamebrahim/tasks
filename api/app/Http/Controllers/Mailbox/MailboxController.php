@@ -136,5 +136,4 @@ class MailboxController extends Controller
     public function setMailTrashStatus(Request $request) {
         $this->mailboxService->setMailTrashStatus($request->id, $request->trash);
     }
-
 }

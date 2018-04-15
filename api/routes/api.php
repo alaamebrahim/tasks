@@ -91,6 +91,9 @@ $api->version('v1', function ($api) {
         $api->get('/get-completed-tasks', ['uses' => 'TasksController@getCompletedTasks','as' => 'api.task.all.completed']);
         // Get all uncompleted tasks
         $api->get('/get-uncompleted-tasks', ['uses' => 'TasksController@getUncompletedTasks','as' => 'api.task.all.uncompleted']);
+        // Upload image
+        $api->post('/upload-attachment', ['uses' => 'TasksController@UploadAttachment','as' => 'api.task.upload-attachment']);
+
     });
 
     /*************************************************************

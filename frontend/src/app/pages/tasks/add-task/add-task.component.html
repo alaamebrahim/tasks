@@ -17,7 +17,8 @@
                         <mat-input-container floatPlaceholder="auto" dividerColor="primary">
                             <mat-select formControlName="user_id" multiple required placeholder="{{'tasks.form.user' | translate}}">
                                 <mat-option *ngFor="let user of users" [value]="user.id">{{user.first_name === '' ? user.email : user.first_name}} {{user.last_name === '' ? '' :
-                                    user.last_name}}</mat-option>
+                                    user.last_name}}
+                                </mat-option>
                             </mat-select>
                         </mat-input-container>
                         <mat-input-container floatPlaceholder="auto">
@@ -41,11 +42,16 @@
                                 <mat-option [value]="4">{{'tasks.form.priority.levels.4' | translate}}</mat-option>
                             </mat-select>
                         </mat-input-container>
+                        <div class="w-100 text-right">
+                            <input #fileInput type="file" (change)="addFile()" style="display: none;" />
+                            <button class="bg-accent" mat-button (click)="fileInput.click()">{{'tasks.form.attachment' | translate}}</button>
+                            <label>{{attachment}}</label>
+                        </div>
                     </div>
                 </form>
             </mat-card-content>
             <mat-card-footer fxLayout="column">
-                    <button mat-raised-button color="primary" (click)="onSaveTask()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
+                <button mat-raised-button color="primary" (click)="onSaveTask()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
             </mat-card-footer>
         </mat-card>
     </div>

@@ -93,7 +93,6 @@
 			"all": "الكل",
 			"starred": "المميز",
 			"sent": "المرسل",
-			"draft": "مسودة",
 			"trash": "محذوف",
 			"back": "رجوع",
 			"mark-important": "تحديد كهام",
@@ -103,11 +102,12 @@
 			"mark-read": "تحديد كمقروء",
 			"mark-unread": "تحديد كغير مقروء",
 			"to-me": "مرسل لى",
-			"from-me": "",
+			"from-me": "...",
+			"choose-mail": "اختر بريد للعرض",
+			"draft": "مسودة",
 			"attachments": "مرفق/مرفقات",
 			"download-attachs": "تحميل المرفقات",
 			"view-images": "عرض الصور",
-			"choose-mail": "اختر بريد للعرض",
 			"cc-bc": "نسخة إلى",
 			"reply": "رد",
 			"report-spam": "SPAM"
@@ -156,7 +156,8 @@
 					"3": "هام وعاجل",
 					"4": "شديد الأهمية"
 				}
-			}
+			},
+			"attachment": "مرفق"
 		},
 		"edit-title": "تعديل بيانات المهمة",
 		"buttons": {
@@ -164,6 +165,7 @@
 			"all": "عرض الكل",
 			"filter-completed": "عرض الغير منتهى",
 			"filter-uncompleted": "عرض المنتهى",
+			"has-attachment": "يوجد مرفق",
 			"add-notification": "إرسال تنبيه"
 		},
 		"text": {

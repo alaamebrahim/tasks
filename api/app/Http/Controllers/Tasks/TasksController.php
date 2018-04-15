@@ -183,4 +183,34 @@ class TasksController extends Controller
     public function getUncompletedTasks() {
         return $this->tasksService->getAllTasksByStatus(0);
     }
+
+    /**
+     * Uploads attachment an return its name
+     */
+    public function UploadAttachment(Request $request) {
+        // Validation rules
+        // var_dump($request);
+        try {
+            $this->validate($request, [
+                'attachment' => 'required|image',
+            ]);
+        } catch (ValidationException $e) {
+            //var_dump($e);
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        }
+        if ($request->hasFile('attachment')) {
+            $picture = $this->tasksService->uploadTaskAttachment($request->file('attachment'));
+            return new JsonResponse([
+                'success' => true,
+                'message' => $picture
+            ]);
+        }
+        return new JsonResponse([
+            'success' => false,
+            'message' => ''
+        ]);
+    }
 }
