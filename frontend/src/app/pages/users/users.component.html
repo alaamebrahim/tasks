@@ -1,13 +1,16 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
     <div fxLayout="row">
-        <mat-button-toggle-group #controls="matButtonToggleGroup">            
-            <mat-button-toggle value="add" (click)="openUserDialog(null)">
+        <mat-button-toggle-group #controls="matButtonToggleGroup">
+            <mat-button-toggle value="add" (click)="openUserDialog(null)"  matTooltip="{{'users.add-user' | translate}}">
                 <mat-icon>person_add</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle value="add" (click)="goToRolesPage()" matTooltip="{{'users.roles.title' | translate}}">
+                <mat-icon>account_box</mat-icon>
             </mat-button-toggle>
             <mat-button-toggle value="search">
                 <mat-icon>search</mat-icon>
-            </mat-button-toggle>           
-        </mat-button-toggle-group>            
+            </mat-button-toggle>
+        </mat-button-toggle-group>
     </div>
     <form class="user-search" [class.show]="controls.value == 'search'">
         <mat-form-field class="user-search-input">
@@ -15,22 +18,23 @@
         </mat-form-field>
     </form>
     <div fxLayout="row" fxLayoutAlign="space-between center">
-        <mat-button-toggle-group #viewType="matButtonToggleGroup">            
+        <mat-button-toggle-group #viewType="matButtonToggleGroup">
             <mat-button-toggle value="grid" checked="true">
                 <mat-icon>view_module</mat-icon>
             </mat-button-toggle>
             <mat-button-toggle value="list">
                 <mat-icon>view_list</mat-icon>
-            </mat-button-toggle>           
+            </mat-button-toggle>
         </mat-button-toggle-group>
     </div>
 </div>
 
-<div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">    
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p"> 
-        <mat-card class="p-0">  
+<div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100"
+        fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p">
+        <mat-card class="p-0">
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
-                <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3> 
+                <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3>
                 <h3 *ngIf="user.is_blocked" class="user-name">{{'users.is_blocked' | translate}}</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
@@ -52,9 +56,9 @@
                 <div fxFlex="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
                         <img *ngIf="user.picture" [src]="userPicPath + user.picture" class="transition-2" [class.blocked]="user.is_blocked">
-                        <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">  
+                        <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">
                         <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>
-                    </div>                                            
+                    </div>
                     <div class="user-social">
                         <mat-slide-toggle color="primary" [checked]="user.is_blocked" (change)="user.is_blocked = !user.is_blocked"></mat-slide-toggle>
                     </div>
@@ -87,10 +91,11 @@
 </div>
 
 <div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" class="flex-p"> 
-        <mat-card class="p-0">  
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100"
+        class="flex-p">
+        <mat-card class="p-0">
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
-                <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3> 
+                <h3 *ngIf="!user.is_blocked" class="user-name">{{user.first_name}} {{user.last_name}}</h3>
                 <h3 *ngIf="user.is_blocked" class="user-name">{{'users.is_blocked' | translate}}</h3>
                 <button mat-icon-button [matMenuTriggerFor]="menu" #menuTrigger="matMenuTrigger">
                     <mat-icon>more_vert</mat-icon>
@@ -112,9 +117,9 @@
                 <div fxFlex="20" fxFlex.xs="30" fxLayout="column" fxLayoutAlign="center center">
                     <div class="user-img">
                         <img *ngIf="user.picture" [src]="userPicPath + user.picture" class="transition-2" [class.blocked]="user.is_blocked">
-                        <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">  
-                        <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>   
-                    </div>                                            
+                        <img *ngIf="!user.picture" src="assets/img/users/default-user.jpg" class="transition-2" [class.blocked]="user.is_blocked">
+                        <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>
+                    </div>
                     <div class="user-social">
                         <mat-slide-toggle color="primary" [checked]="user.is_blocked" (change)="user.is_blocked = !user.is_blocked"></mat-slide-toggle>
                     </div>
@@ -134,7 +139,7 @@
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">mail_outline</mat-icon>
                             <span>{{user.email}}</span>
-                        </p> 
+                        </p>
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">call</mat-icon>
                             <span>{{user.phone_no}}</span>
@@ -142,7 +147,7 @@
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">location_on</mat-icon>
                             <span>{{user.address}}</span>
-                        </p>                        
+                        </p>
                     </div>
                     <div fxFlex="40" fxFlex.xs="100" fxLayout="column">
                         <!--p fxLayout="row" fxLayoutAlign="start center">
@@ -152,12 +157,12 @@
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon class="muted-text">date_range</mat-icon>
                             <span>Joined {{user.settings.joinedDate | date:"dd MMMM, yyyy 'at' HH:mm"}}</span>
-                        </p--> 
+                        </p-->
                         <p fxLayout="row" fxLayoutAlign="start center">
                             <mat-icon *ngIf="user.is_blocked" class="muted-text">person_outline</mat-icon>
                             <mat-icon *ngIf="!user.is_blocked" class="muted-text">person</mat-icon>
                             <span>{{ (user.is_blocked) ? 'محظور' : 'مفعل' }}</span>
-                        </p>                       
+                        </p>
                     </div>
                 </div>
             </div>
@@ -166,14 +171,13 @@
 </div>
 
 <div *ngIf="users" fxLayout="row wrap">
-    <div fxFlex="100" class="flex-p"> 
-        <mat-card class="p-0 text-center">           
+    <div fxFlex="100" class="flex-p">
+        <mat-card class="p-0 text-center">
             <pagination-controls class="gradus-pagination" autoHide="true" maxSize="3" (pageChange)="onPageChanged($event)"></pagination-controls>
         </mat-card>
     </div>
 </div>
 
-<div *ngIf="!users" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">   
-    <mat-spinner color="primary"></mat-spinner>    
+<div *ngIf="!users" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
 </div>
-

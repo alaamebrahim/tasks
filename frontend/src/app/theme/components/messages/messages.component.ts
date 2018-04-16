@@ -38,7 +38,7 @@ export class MessagesComponent implements OnInit {
 
   getEmails() {
     this.mailboxService.getUserInbox().subscribe(response => {
-      console.log(response.mailboxes);
+      // console.log(response.mailboxes);
       this.mailbox = response.mailboxes;
     });
   }

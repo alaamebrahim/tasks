@@ -9,6 +9,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { LocaleService } from '../../shared/services/locale.service';
 import { NotifyUserService } from '../../shared/services/notify-user.service';
 import {environment} from '../../../environments/environment';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-users',
@@ -28,7 +29,8 @@ export class UsersComponent implements OnInit {
         public dialog: MatDialog,
         public usersService: UsersService,
         private translator: TranslateService,
-        private notifyService: NotifyUserService
+        private notifyService: NotifyUserService,
+        private router: Router
     ) {
         this.settings = this.appSettings.settings;
         this.translator.setDefaultLang(sessionStorage.getItem('locale'));
@@ -128,5 +130,9 @@ export class UsersComponent implements OnInit {
                 (user.id) ? this.updateUser(user) : this.addUser(user);
             }
         });
+    }
+
+    public goToRolesPage() {
+        this.router.navigate(['users/roles']);
     }
 }

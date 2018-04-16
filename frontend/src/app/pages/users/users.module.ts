@@ -12,9 +12,17 @@ import { UsersData } from './users.data';
 import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { TranslateModule, TranslatePipe } from '@ngx-translate/core';
 import { UsersService } from './users.service';
+import { RolesComponent } from './roles/roles.component';
 
 export const routes = [
-  { path: '', component: UsersComponent, pathMatch: 'full' }
+  { path: '', component: UsersComponent, pathMatch: 'full' },
+  {
+    path: 'roles',
+    component: RolesComponent,
+    data: {
+      breadcrumb: 'الصلاحيات', permissions: { only: ['root', 'admin'], redirectTo: '/' }
+    }
+  }
 ];
 
 @NgModule({
@@ -32,7 +40,8 @@ export const routes = [
   exports: [TranslatePipe],
   declarations: [
     UsersComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    RolesComponent
   ],
   providers: [UsersService],
   entryComponents: [
