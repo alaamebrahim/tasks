@@ -8,7 +8,7 @@
     <mat-form-field class="w-100">
         <input matInput placeholder="{{'mail.labels.subject' | translate}}" formControlName="subject">
     </mat-form-field>
-    <quill-editor formControlName="message"></quill-editor>
+    <quill-editor [modules]="quillConfig" formControlName="message"></quill-editor>
     <button mat-raised-button color="primary" type="submit" (click)="onSubmit()" [disabled]="!form.valid">{{'general.button.send' | translate}}</button>
 </form>
 <div *ngIf="sending" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">

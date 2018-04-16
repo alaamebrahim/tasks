@@ -71,9 +71,11 @@ class MailboxController extends Controller
             $data['receiver_id'] = $receiverIds[0][$i];
             $dataForSave[] = $data;
             // Extract users emails
-            $user = $this->userRepo->find($data['receiver_id']);
+            $receeiver = $this->userRepo->find($data['receiver_id']);
+            $sender = $this->userRepo->find($data['receiver_id']);
+            $data['sender'] = $sender;
             // send an email.
-            if(!$this->mailboxService->sendNewEmail($data, $user->email)) {
+            if(!$this->mailboxService->sendNewEmail($data, $receeiver->email)) {
                 $usersNotReceived[] = $user->first_name . ' ' . $user->last_name;
             }
         }

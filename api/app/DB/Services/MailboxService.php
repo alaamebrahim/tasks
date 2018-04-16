@@ -7,7 +7,7 @@ use App\DB\Models\Notifications;
 use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\DB\Repositories\MailboxRepository as MailboxRepo;
-
+use App\Mail\NewMail;
 class MailboxService {
 
     private $userRepo;
@@ -40,15 +40,27 @@ class MailboxService {
         });
     }
 
+    public function sendMailWithTemplate ($to, $data){
+        $this->to = $to;
+        // $this->subject = $subject;
+        Mail::to($this->to)
+            ->send(new NewMail($data));
+        /*$message, function($msg) { 
+            $msg->to($this->to); 
+            $msg->subject($this->subject);
+            $msg->from([$this->from]); 
+        });*/
+    }
+
     /**
      * Prepares and sends one email to an email
      */
     public function sendNewEmail($data, $email) {
         try {
-            $message = trans('messages.notifications.mail.new-mail') . "\n";
-            $message .= $data['subject'] . "\n";
-            $message .= $data['message'] . "\n";
-            $this->sendMail($email, $data['subject'], $message);
+            // $message = trans('messages.notifications.mail.new-mail') . "\n";
+            // $message .= $data['subject'] . "\n";
+            // $message .= $data['message'] . "\n";
+            $this->sendMailWithTemplate($email, $data);
             return true;
         } catch (Exception $e) {
             return false;

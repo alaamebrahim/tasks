@@ -1,6 +1,7 @@
 <?php
 
 return [
+    "site-name" => "تطبيق إدارة المهام",
     "notifications" => [
         "mail" => [
             "subject" => "تم إضافة مهمة جديدة - تطبيق إدارة المهام",

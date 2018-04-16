@@ -44,6 +44,7 @@ export class MailboxComponent implements OnInit {
   }
 
   public getMails() {
+    this.newMail = false;
     switch (this.type) {
       case 'all':
         this.mailboxService.getUserInbox().subscribe(response => {
@@ -80,6 +81,7 @@ export class MailboxComponent implements OnInit {
    * @param mail
    */
   public viewDetail(mail: Mail) {
+    this.newMail = false;
     this.mail = mail;
     this.setAsRead();
     if (window.innerWidth <= 992) {
