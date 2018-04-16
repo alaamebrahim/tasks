@@ -26,7 +26,7 @@ export const routes: Routes = [
                 loadChildren: 'app/pages/users/users.module#UsersModule',
                 canActivate: [NgxPermissionsGuard],
                 data: {
-                    breadcrumb: 'المستخدمين', permissions: { only: ['root', 'admin'], redirectTo: '/login'  }
+                    breadcrumb: 'المستخدمين', permissions: { only: ['root', 'admin'], redirectTo: '/' }
                 }
             },
             {
@@ -35,7 +35,14 @@ export const routes: Routes = [
                 canActivate: [NgxPermissionsGuard],
                 data: { breadcrumb: 'البريد الالكترونى', permissions: { only: ['root', 'admin', 'user'] } }
             },
-            { path: 'tasks', loadChildren: 'app/pages/tasks/tasks.module#TasksModule', data: { breadcrumb: 'المهام' } },
+            {
+                path: 'tasks',
+                loadChildren: 'app/pages/tasks/tasks.module#TasksModule',
+                canActivate: [NgxPermissionsGuard],
+                data: {
+                    breadcrumb: 'المهام', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/' }
+                }
+            }
         ]
     },
     { path: 'landing', loadChildren: 'app/pages/landing/landing.module#LandingModule' },
