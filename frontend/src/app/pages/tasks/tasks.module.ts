@@ -13,11 +13,20 @@ import { PipesModule } from '../../theme/pipes/pipes.module';
 import { AddNotificationComponent } from './add-notification/add-notification.component';
 import { NotificationsService } from '../../shared/services/notifications.service';
 export const routes = [
-  { path: '', component: TasksComponent, pathMatch: 'full' },
+  {
+    path: '',
+    component: TasksComponent,
+    pathMatch: 'full',
+    data: {
+        breadcrumb: 'المهام', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/' }
+    }
+  },
   {
     path: 'add-task',
     component: AddTaskComponent,
-    data: { breadcrumb: 'تكليف بمهمة جديدة'}
+    data: {
+      breadcrumb: 'تكليف بمهمة جديدة', permissions: { only: ['root', 'admin'], redirectTo: '/' }
+  }
   }
 ];
 
