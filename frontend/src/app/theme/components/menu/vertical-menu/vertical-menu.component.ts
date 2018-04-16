@@ -3,46 +3,56 @@ import { Router, NavigationEnd } from '@angular/router';
 import { AppSettings } from '../../../../app.settings';
 import { Settings } from '../../../../app.settings.model';
 import { MenuService } from '../menu.service';
+import { UserInfoService } from '../../../../shared/services/user-info.service';
 
 @Component({
   selector: 'app-vertical-menu',
   templateUrl: './vertical-menu.component.html',
   styleUrls: ['./vertical-menu.component.scss'],
   encapsulation: ViewEncapsulation.None,
-  providers: [ MenuService ]
+  providers: [MenuService]
 })
 export class VerticalMenuComponent implements OnInit {
   @Input('menuItems') menuItems;
   @Input('menuParentId') menuParentId;
-  parentMenu:Array<any>;
+  parentMenu: Array<any>;
   public settings: Settings;
-  constructor(public appSettings:AppSettings, public menuService:MenuService, public router:Router) { 
+  private userRole: string;
+  constructor(
+    public appSettings: AppSettings,
+    public menuService: MenuService,
+    public router: Router,
+    private userInfoService: UserInfoService
+  ) {
     this.settings = this.appSettings.settings;
+    this.userRole = this.userInfoService.getUserInfo().role;
   }
 
-  ngOnInit() {     
-    this.parentMenu = this.menuItems.filter(item => item.parentId == this.menuParentId);  
-  }
-
-  ngAfterViewInit(){
-    this.router.events.subscribe(event => {
-      if (event instanceof NavigationEnd) {
-        if(this.settings.fixedHeader){
-          let mainContent = document.getElementById('main-content');
-          if(mainContent){
-            mainContent.scrollTop = 0;
-          }
-        }
-        else{
-          document.getElementsByClassName('mat-drawer-content')[0].scrollTop = 0;
-        }
-      }                
+  ngOnInit() {
+    this.parentMenu = this.menuItems.filter(item => {
+      return (item.parentId === this.menuParentId) && (item.canView.indexOf(this.userRole, 1) !== -1);
     });
   }
 
-  onClick(menuId){
+  // tslint:disable-next-line:use-life-cycle-interface
+  ngAfterViewInit() {
+    this.router.events.subscribe(event => {
+      if (event instanceof NavigationEnd) {
+        if (this.settings.fixedHeader) {
+          const mainContent = document.getElementById('main-content');
+          if (mainContent) {
+            mainContent.scrollTop = 0;
+          }
+        } else {
+          document.getElementsByClassName('mat-drawer-content')[0].scrollTop = 0;
+        }
+      }
+    });
+  }
+
+  onClick(menuId) {
     this.menuService.toggleMenuItem(menuId);
-    this.menuService.closeOtherSubMenus(this.menuItems, menuId);    
+    this.menuService.closeOtherSubMenus(this.menuItems, menuId);
   }
 
 }
