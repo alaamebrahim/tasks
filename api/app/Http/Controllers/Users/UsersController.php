@@ -13,6 +13,8 @@ use Illuminate\Http\Exception\HttpResponseException;
 use App\DB\Repositories\UserRepository as UserRepo;
 use App\DB\Models\User;
 use App\DB\Services\UsersService as UsersService;
+use App\DB\Services\RolesService as RolesService;
+use Carbon\Carbon;
 
 class UsersController extends Controller
 {
@@ -20,10 +22,12 @@ class UsersController extends Controller
 
     public function __construct(
         UserRepo $userRepo,
-        UsersService $usersService
+        UsersService $usersService,
+        RolesService $roleService
     ) {
         $this->userRepo = $userRepo;
         $this->usersService = $usersService;
+        $this->roleService = $roleService;
     }
 
     /**
@@ -35,7 +39,7 @@ class UsersController extends Controller
         try {
             $this->validate($request, [
                 'email' => 'required|unique:users|email',
-                'role_id' => 'required',
+                'role_name' => 'required',
                 'first_name' => 'required',
                 'last_name' => 'required',
                 'password' => 'required|min:6'
@@ -48,10 +52,19 @@ class UsersController extends Controller
         }
         
         $data = $request->all();
+        $data['created_at'] = Carbon::now();
         $data['password'] = app('hash')->make($data['password']);
-
+        $role = $data['role_name'];
+        //var_dump($data);
         // save user object
+        //$user = User::create($data);
         $this->userRepo->saveModel($data);
+
+        $user_id = $this->userRepo->findBy('created_at', $data['created_at'])->id;
+
+        //set user role
+        $this->roleService->setUserRole($user_id, [$role]);
+
         // return success obj as json
         return new JsonResponse([
             'success' => true,
@@ -68,7 +81,7 @@ class UsersController extends Controller
         try {
             $this->validate($request, [
                 'email' => 'required|email',
-                'role_id' => 'required',
+                'role_name' => 'required',
                 'first_name' => 'required',
                 'last_name' => 'required',
             ]);
@@ -87,8 +100,13 @@ class UsersController extends Controller
         } else {
             unset($data['password']);
         }
+        $role = $data['role_name'];
         // save user object
         $this->userRepo->update($data,$data['id']);
+
+        //set user role
+        $this->roleService->setUserRole($data['id'], [$role]);
+
         // return success obj as json
         return new JsonResponse([
             'success' => true,

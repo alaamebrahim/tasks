@@ -274,33 +274,33 @@ let Mails = [
 
 @Injectable()
 export class MailboxService {
-
+    private curretnUserId;
     constructor(
         private apiRequestService: ApiRequestService,
         private userInfoService: UserInfoService
     ) {
-
+        this.curretnUserId = this.userInfoService.getUserInfo() !== null ? this.userInfoService.getUserInfo().id : 0;
     }
     public getAllMails() {
 
-        return this.apiRequestService.get('mailbox/get-user-mails/' + this.userInfoService.getUserInfo().id);
+        return this.apiRequestService.get('mailbox/get-user-mails/' + this.curretnUserId);
         // return Mails.filter(mail => mail.sent === false && mail.draft === false && mail.trash === false);
     }
 
     public getUserInbox() {
-        return this.apiRequestService.get('mailbox/get-user-inbox/' + this.userInfoService.getUserInfo().id);
+        return this.apiRequestService.get('mailbox/get-user-inbox/' + this.curretnUserId);
     }
 
     public getStarredMails() {
-        return this.apiRequestService.get('mailbox/get-user-inbox-starred/' + this.userInfoService.getUserInfo().id);
+        return this.apiRequestService.get('mailbox/get-user-inbox-starred/' + this.curretnUserId);
     }
 
     public getSentMails() {
-        return this.apiRequestService.get('mailbox/get-user-outbox/' + this.userInfoService.getUserInfo().id);
+        return this.apiRequestService.get('mailbox/get-user-outbox/' + this.curretnUserId);
     }
 
     public getTrashMails() {
-        return this.apiRequestService.get('mailbox/get-user-inbox-trash/' + this.userInfoService.getUserInfo().id);
+        return this.apiRequestService.get('mailbox/get-user-inbox-trash/' + this.curretnUserId);
     }
 
     public getMail(id: number | string) {

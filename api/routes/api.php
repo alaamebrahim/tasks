@@ -72,6 +72,23 @@ $api->version('v1', function ($api) {
     });
 
     /*************************************************************
+     * Roles controller routes
+     ************************************************************/
+    $api->group([
+        'middleware' => 'api.auth',
+        'prefix'     => '/roles/',
+        'namespace'  => 'App\Http\Controllers\Users',
+    ], function ($api) {
+        // get all roles
+        $api->get('/get-roles', ['uses' => 'RolesController@getAllRoles','as' => 'api.role.get-roles']);
+        $api->get('/get-permissions', ['uses' => 'RolesController@getAllPermissions','as' => 'api.role.get-permissions']);
+        // add new role
+        $api->post('/add-role', ['uses' => 'RolesController@createNewRole','as' => 'api.role.add-role']);
+        // add new permission
+        $api->post('/add-permission', ['uses' => 'RolesController@createNewPermission','as' => 'api.role.add-permission']);
+    });
+
+    /*************************************************************
      * Tasks controller routes
      ************************************************************/
     $api->group([

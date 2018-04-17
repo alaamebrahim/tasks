@@ -23,6 +23,10 @@ class UsersService {
         $this->userRepo = $userRepo;
     }
 
+    public function getAllUsers() {
+        return $this->userRepo->getAllUsers();
+    }
+
     public function uploadUserPicture($image) {
         $name = time().'.'.$image->getClientOriginalExtension();
         $destinationPath = storage_path('/app/images');
@@ -31,4 +35,5 @@ class UsersService {
         $image->move($destinationPath, $name);
         return $name;
     }
+    
 }

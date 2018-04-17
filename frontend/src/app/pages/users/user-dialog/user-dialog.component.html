@@ -25,8 +25,8 @@
                     <mat-form-field class="w-100">
                         <mat-placeholder>
                             <mat-icon></mat-icon>{{'users.form.role' | translate}}</mat-placeholder>
-                        <mat-select formControlName="role_id">
-                            <mat-option *ngFor="let role of roles" [value]="role.id">{{role.description}}</mat-option>
+                        <mat-select formControlName="role_name">
+                            <mat-option *ngFor="let role of roles" [value]="role.name">{{role.translation}}</mat-option>
                         </mat-select>
                     </mat-form-field>
                 </div>

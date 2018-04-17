@@ -46,7 +46,10 @@ export class UsersComponent implements OnInit {
      */
     public getUsers(): void {
         this.users = null; // for show spinner each time
-        this.usersService.getUsers().subscribe(users => this.users = users);
+        this.usersService.getUsers().subscribe(users => {
+            this.users = users;
+            console.log(this.users);
+        });
     }
 
     /**

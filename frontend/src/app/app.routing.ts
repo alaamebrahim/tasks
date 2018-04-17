@@ -16,7 +16,7 @@ export const routes: Routes = [
             {
                 path: '',
                 loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule',
-                canActivate: [NgxPermissionsGuard],
+                //canActivate: [NgxPermissionsGuard],
                 data: {
                     breadcrumb: 'الرئيسية', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/login' }
                 }
@@ -24,7 +24,7 @@ export const routes: Routes = [
             {
                 path: 'users',
                 loadChildren: 'app/pages/users/users.module#UsersModule',
-                canActivate: [NgxPermissionsGuard],
+                //canActivate: [NgxPermissionsGuard],
                 data: {
                     breadcrumb: 'المستخدمين', permissions: { only: ['root', 'admin'], redirectTo: '/' }
                 }
@@ -32,13 +32,13 @@ export const routes: Routes = [
             {
                 path: 'mailbox',
                 loadChildren: 'app/pages/mailbox/mailbox.module#MailboxModule',
-                canActivate: [NgxPermissionsGuard],
+                //canActivate: [NgxPermissionsGuard],
                 data: { breadcrumb: 'البريد الالكترونى', permissions: { only: ['root', 'admin', 'user'] } }
             },
             {
                 path: 'tasks',
                 loadChildren: 'app/pages/tasks/tasks.module#TasksModule',
-                canActivate: [NgxPermissionsGuard],
+                //canActivate: [NgxPermissionsGuard],
                 data: {
                     breadcrumb: 'المهام', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/' }
                 }

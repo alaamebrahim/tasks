@@ -1,25 +1,21 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
   <div fxLayout="row">
     <mat-button-toggle-group #controls="matButtonToggleGroup">
-        <mat-button-toggle (click)="onAddRole()" matTooltip="{{'users.roles.add' | translate}}">
-            <mat-icon>person_add</mat-icon>
-          </mat-button-toggle>
-      <mat-button-toggle (click)="onShowPermissions()" matTooltip="{{'users.roles.permissions.show-permission' | translate}}">
-        <mat-icon>show_chart</mat-icon>
+      <mat-button-toggle value="add" (click)="onAddPermission()" matTooltip="{{'users.roles.permissions.add-permission' | translate}}">
+        <mat-icon>person_add</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
   </div>
 </div>
 
-<div *ngFor="let role of roles | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100"
-  class="flex-p">
+<div *ngFor="let permission of permissions | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100" class="flex-p">
   <mat-card class="p-0">
     <div class="user-content" fxLayout="row" fxLayoutAlign="space-around center">
       <div fxFlex="100" fxFlex.xs="100" fxLayout="row" fxLayout.xs="column" class="transition-2">
         <div fxFlex="100" fxFlex.xs="100" fxLayout="column">
           <p fxLayout="row" fxLayoutAlign="start center" class="p-1">
             <mat-icon class="muted-text">business</mat-icon>
-            <span>{{role.translation}}</span>
+            <span>{{permission.translation}}</span>
           </p>
         </div>
       </div>
@@ -27,7 +23,7 @@
   </mat-card>
 </div>
 
-<div *ngIf="roles" fxLayout="row wrap">
+<div *ngIf="permissions" fxLayout="row wrap">
   <div fxFlex="100" class="flex-p">
     <mat-card class="p-0 text-center">
       <pagination-controls class="gradus-pagination" autoHide="true" maxSize="3" (pageChange)="onPageChanged($event)"></pagination-controls>
@@ -35,6 +31,6 @@
   </div>
 </div>
 
-<div *ngIf="!roles" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+<div *ngIf="!permissions" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
   <mat-spinner color="primary"></mat-spinner>
 </div>

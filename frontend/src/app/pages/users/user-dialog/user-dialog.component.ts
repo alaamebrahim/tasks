@@ -43,7 +43,7 @@ export class UserDialogComponent implements OnInit {
       google: null,
       is_active: true,
       is_blocked: false,
-      role_id: null,
+      role_name: null,
       created_at: null,
       updated_at: null,
       country: null,

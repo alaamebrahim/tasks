@@ -1,0 +1,33 @@
+<div fxLayout="column" *ngIf="!working">
+    <div class="flex-p">
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center">
+                <mat-card-subtitle>
+                    <h2>{{'users.roles.permissions.add-permission' | translate}}</h2>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxLayoutAlign="center">
+                <form [formGroup]="form">
+                    <div fxLayout="column" class="form-field-outer w-100">
+                        <mat-input-container>
+                            <mat-placeholder>
+                                <mat-icon>person</mat-icon> {{'users.roles.permissions.form.name' | translate}}</mat-placeholder>
+                            <input matInput formControlName="name" required>
+                        </mat-input-container>
+                        <mat-input-container>
+                            <mat-placeholder>
+                                <mat-icon>person</mat-icon> {{'users.roles.permissions.form.translation' | translate}}</mat-placeholder>
+                            <input matInput formControlName="translation" required>
+                        </mat-input-container>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-footer fxLayout="column">
+                <button mat-raised-button color="primary" (click)="onSavePermission()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>
+<div *ngIf="working" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
+</div>

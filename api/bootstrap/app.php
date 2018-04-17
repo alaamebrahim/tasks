@@ -82,9 +82,14 @@ $app->middleware([
     App\Http\Middleware\CORSMiddleware::class
 ]);
 
-//$app->routeMiddleware([
-//     'auth' => App\Http\Middleware\Authenticate::class,
-//]);
+$app->routeMiddleware([
+    'auth'       => App\Http\Middleware\Authenticate::class,
+    'permission' => Spatie\Permission\Middlewares\PermissionMiddleware::class,
+    'role'       => Spatie\Permission\Middlewares\RoleMiddleware::class,
+]);
+$app->configure('permission');
+$app->register(Spatie\Permission\PermissionServiceProvider::class);
+
 
 $app->routeMiddleware([
      'api.isadmin' => App\Http\Middleware\IsAdminMiddleware::class,

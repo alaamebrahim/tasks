@@ -7,7 +7,8 @@ use Bosnadev\Repositories\Eloquent\Repository;
 
 class RoleRepository extends Repository {
     public function model () {
-        return 'App\DB\Models\Role';
+        //return 'App\DB\Models\Role';
+        return 'Spatie\Permission\Models\Role';
     }
 
     /**

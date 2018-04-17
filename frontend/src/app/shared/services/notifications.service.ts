@@ -19,7 +19,8 @@ export class NotificationsService {
   }
 
   getUserNotifications() {
-    return this.apiRequestService.get('notifications/get-user-notifications/' + this.currentUser.id);
+    const id = this.currentUser !== null ? this.currentUser.id : 0;
+    return this.apiRequestService.get('notifications/get-user-notifications/' + id);
   }
 
 }

@@ -23,35 +23,6 @@ export class User {
   // user settings
   is_active: boolean;
   is_blocked: boolean;
+  //
+  role_name: string;
 }
-/*
-export class UserProfile {
-  first_name: string;
-  last_name: string;
-  birthday: Object;
-  gender: string;
-  picture: string;
-}
-
-export class UserWork {
-  company: string;
-  position: string;
-}
-
-export class UserContacts {
-  email: string;
-  phone: string;
-  address: string;
-}
-
-export class UserSocial {
-  facebook: string;
-  twitter: string;
-  google: string;
-}
-
-export class UserSettings {
-  is_active: boolean;
-  is_blocked: boolean;
-}
-*/
