@@ -18,14 +18,14 @@ export const routes = [
     component: TasksComponent,
     pathMatch: 'full',
     data: {
-        breadcrumb: 'المهام', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/' }
+        breadcrumb: 'المهام', permissions: { only: ['task_view'], redirectTo: '/' }
     }
   },
   {
     path: 'add-task',
     component: AddTaskComponent,
     data: {
-      breadcrumb: 'تكليف بمهمة جديدة', permissions: { only: ['root', 'admin'], redirectTo: '/' }
+      breadcrumb: 'تكليف بمهمة جديدة', permissions: { only: ['task_add'], redirectTo: '/' }
   }
   }
 ];

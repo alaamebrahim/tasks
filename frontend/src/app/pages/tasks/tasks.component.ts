@@ -68,7 +68,7 @@ export class TasksComponent {
   }
 
   onSendNotificationClick(task: Task) {
-    console.log(task);
+    // console.log(task);
     const notification = new Notification();
     notification.task_id = task.id;
     notification.user_id = task.user_id;

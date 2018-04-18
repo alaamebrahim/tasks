@@ -18,7 +18,7 @@ export const routes: Routes = [
                 loadChildren: 'app/pages/dashboard/dashboard.module#DashboardModule',
                 canActivate: [NgxPermissionsGuard],
                 data: {
-                    breadcrumb: 'الرئيسية', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/login' }
+                    breadcrumb: 'الرئيسية', permissions: { only: ['dashboard_view'], redirectTo: '/login' }
                 }
             },
             {
@@ -26,21 +26,21 @@ export const routes: Routes = [
                 loadChildren: 'app/pages/users/users.module#UsersModule',
                 canActivate: [NgxPermissionsGuard],
                 data: {
-                    breadcrumb: 'المستخدمين', permissions: { only: ['root', 'admin'], redirectTo: '/' }
+                    breadcrumb: 'المستخدمين', permissions: { only: ['user_view'], redirectTo: '/' }
                 }
             },
             {
                 path: 'mailbox',
                 loadChildren: 'app/pages/mailbox/mailbox.module#MailboxModule',
                 canActivate: [NgxPermissionsGuard],
-                data: { breadcrumb: 'البريد الالكترونى', permissions: { only: ['root', 'admin', 'user'] } }
+                data: { breadcrumb: 'البريد الالكترونى', permissions: { only: ['mail_view'] } }
             },
             {
                 path: 'tasks',
                 loadChildren: 'app/pages/tasks/tasks.module#TasksModule',
                 canActivate: [NgxPermissionsGuard],
                 data: {
-                    breadcrumb: 'المهام', permissions: { only: ['root', 'admin', 'user'], redirectTo: '/' }
+                    breadcrumb: 'المهام', permissions: { only: ['task_view'], redirectTo: '/' }
                 }
             }
         ]

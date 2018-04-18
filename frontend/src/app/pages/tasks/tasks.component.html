@@ -1,6 +1,6 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p" *ngxPermissionsOnly="['root','admin']">
     <div fxLayout="row">
-        <button (click)="onAddNewTaskClick()" mat-raised-button color="primary" class="m-1">
+        <button (click)="onAddNewTaskClick()" mat-raised-button color="primary" class="m-1" *ngxPermissionsOnly="['task_add']">
             <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.add-new' |translate}}
         </button>
     </div>
@@ -8,7 +8,6 @@
 
 <div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
     <div fxLayout="row">
-
         <mat-button-toggle-group #viewType="matButtonToggleGroup">
             <mat-button-toggle (click)="getAllTasks()" matTooltip="{{'tasks.buttons.all' | translate}}">
                 <mat-icon color="basic">view_list</mat-icon>
@@ -75,14 +74,14 @@
                     </i>
                 </span>
             </p>
-            <div *ngxPermissionsOnly="['root','admin']">
-                <button *ngIf="task.progress !== 100" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="warn" class="m-1">
+            <div *ngIf="task.progress !== 100">
+                <button *ngxPermissionsOnly="['task_delete']" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="warn" class="m-1">
                     <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
                 </button>
-                <button *ngIf="task.progress !== 100" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
-                    <mat-icon class="mat-18">update</mat-icon> {{'buttons.edit' |translate}}
+                <button *ngxPermissionsOnly="['task_update']" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
+                    <mat-icon class="mat-18">update</mat-icon> {{'buttons.update' |translate}}
                 </button>
-                <button *ngIf="task.progress !== 100" (click)="onSendNotificationClick(task)" mat-raised-button color="primary" class="m-1">
+                <button *ngxPermissionsOnly="['root','admin']" (click)="onSendNotificationClick(task)" mat-raised-button color="primary" class="m-1">
                     <mat-icon class="mat-18">exposure_plus_1</mat-icon> {{'tasks.buttons.add-notification' |translate}}
                 </button>
             </div>

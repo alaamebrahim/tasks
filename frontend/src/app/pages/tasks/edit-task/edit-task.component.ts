@@ -43,7 +43,8 @@ export class EditTaskComponent implements OnInit {
       last_name: null, // this will be removed on save
       progress: null, // thi will be removed on save
       completed: null, // thi will be removed on save
-      notifications: null // thi will be removed on save
+      notifications: null, // thi will be removed on save
+      attachment: null
     });
   }
 

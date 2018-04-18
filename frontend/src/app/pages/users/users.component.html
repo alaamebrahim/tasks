@@ -1,10 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
     <div fxLayout="row">
         <mat-button-toggle-group #controls="matButtonToggleGroup">
-            <mat-button-toggle value="add" (click)="openUserDialog(null)"  matTooltip="{{'users.add-user' | translate}}">
+            <mat-button-toggle *ngxPermissionsOnly="['user_add']" (click)="openUserDialog(null)"  matTooltip="{{'users.add-user' | translate}}">
                 <mat-icon>person_add</mat-icon>
             </mat-button-toggle>
-            <mat-button-toggle value="add" (click)="goToRolesPage()" matTooltip="{{'users.roles.title' | translate}}">
+            <mat-button-toggle *ngxPermissionsOnly="['user_role_view']" (click)="goToRolesPage()" matTooltip="{{'users.roles.title' | translate}}">
                 <mat-icon>account_box</mat-icon>
             </mat-button-toggle>
             <mat-button-toggle value="search">
@@ -42,11 +42,11 @@
             </div>
             <mat-menu #menu="matMenu" xPosition="before">
                 <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item (click)="openUserDialog(user)">
+                    <button mat-menu-item (click)="openUserDialog(user)" *ngxPermissionsOnly="['user_update']">
                         <mat-icon>mode_edit</mat-icon>
                         <span>{{'buttons.edit' | translate}}</span>
                     </button>
-                    <button mat-menu-item (click)="deleteUser(user);">
+                    <button mat-menu-item (click)="deleteUser(user);" *ngxPermissionsOnly="['user_delete']">
                         <mat-icon>delete</mat-icon>
                         <span>{{'buttons.delete' | translate}}</span>
                     </button>
@@ -103,11 +103,11 @@
             </div>
             <mat-menu #menu="matMenu" xPosition="before">
                 <span (mouseleave)="menuTrigger.closeMenu()">
-                    <button mat-menu-item (click)="openUserDialog(user)">
+                    <button mat-menu-item (click)="openUserDialog(user)" *ngxPermissionsOnly="['user_update']">
                         <mat-icon>mode_edit</mat-icon>
                         <span>{{'buttons.edit' | translate}}</span>
                     </button>
-                    <button mat-menu-item (click)="deleteUser(user);">
+                    <button mat-menu-item (click)="deleteUser(user);" *ngxPermissionsOnly="['user_delete']">
                         <mat-icon>delete</mat-icon>
                         <span>{{'buttons.delete' | translate}}</span>
                     </button>
@@ -121,7 +121,7 @@
                         <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>
                     </div>
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" [checked]="user.is_blocked" (change)="user.is_blocked = !user.is_blocked"></mat-slide-toggle>
+                        <mat-slide-toggle *ngxPermissionsOnly="['user_block']" color="primary" [checked]="user.is_blocked" (change)="user.is_blocked = !user.is_blocked"></mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="80" fxFlex.xs="70" fxLayout="row" fxLayout.xs="column" class="user-details transition-2" [class.blocked]="user.is_blocked">

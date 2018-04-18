@@ -1,7 +1,7 @@
 <h1 mat-dialog-title>
     {{'users.roles.edit' | translate}}
 </h1>
-<div mat-dialog-content>
+<div mat-dialog-content *ngxPermissionsOnly="['user_role_edit']">
     <form [formGroup]="form">
         <div fxLayout="column" class="form-field-outer w-100">
             <mat-input-container>
@@ -24,7 +24,7 @@
         </div>
     </form>
 </div>
-<div mat-dialog-footer>
+<div mat-dialog-footer *ngxPermissionsOnly="['user_role_edit']">
     <button mat-raised-button color="primary" (click)="onSaveRole()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
 </div>
 

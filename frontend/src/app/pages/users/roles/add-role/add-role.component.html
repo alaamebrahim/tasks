@@ -6,7 +6,7 @@
                     <h2>{{'users.roles.add' | translate}}</h2>
                 </mat-card-subtitle>
             </mat-card-header>
-            <mat-card-content fxLayout="column" fxLayoutAlign="center">
+            <mat-card-content fxLayout="column" fxLayoutAlign="center" *ngxPermissionsOnly="['user_role_add']">
                 <form [formGroup]="form">
                     <div fxLayout="column" class="form-field-outer w-100">
                         <mat-input-container>
@@ -29,7 +29,7 @@
                     </div>
                 </form>
             </mat-card-content>
-            <mat-card-footer fxLayout="column">
+            <mat-card-footer fxLayout="column" *ngxPermissionsOnly="['user_role_add']">
                 <button mat-raised-button color="primary" (click)="onSaveRole()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
             </mat-card-footer>
         </mat-card>

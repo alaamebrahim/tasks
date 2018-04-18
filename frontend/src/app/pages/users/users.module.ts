@@ -25,28 +25,28 @@ export const routes = [
     path: 'roles',
     component: RolesComponent,
     data: {
-      breadcrumb: 'الصلاحيات', permissions: { only: ['root', 'admin'], redirectTo: '/' }
+      breadcrumb: 'الصلاحيات', permissions: { only: ['user_role_view'], redirectTo: '/' }
     },
   },
   {
     path: 'permissions',
     component: PermissionsComponent,
     data: {
-      breadcrumb: 'التصاريح'/*, permissions: { only: ['root'], redirectTo: 'users/roles' }*/
+      breadcrumb: 'التصاريح', permissions: { only: ['user_permission_view'], redirectTo: 'users/roles' }
     }
   },
   {
     path: 'add-permission',
     component: AddPermissionComponent,
     data: {
-      breadcrumb: 'اضافة تصريح'/*, permissions: { only: ['root'], redirectTo: 'users/roles' }*/
+      breadcrumb: 'اضافة تصريح', permissions: { only: ['user_permission_add'], redirectTo: 'users/roles' }
     }
   },
   {
     path: 'add-role',
     component: AddRoleComponent,
     data: {
-      breadcrumb: 'اضافة صلاحية'/*, permissions: { only: ['root'], redirectTo: 'users/roles' }*/
+      breadcrumb: 'اضافة صلاحية', permissions: { only: ['user_role_add'], redirectTo: 'users/roles' }
     }
   }
 ];

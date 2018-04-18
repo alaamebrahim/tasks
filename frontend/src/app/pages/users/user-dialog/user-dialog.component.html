@@ -2,7 +2,7 @@
     <span *ngIf="!user.id">{{'users.form.button.add' | translate}}</span>
     <span *ngIf="user.id">{{'users.form.button.edit' | translate}}</span>
 </h1>
-<div mat-dialog-content>
+<div mat-dialog-content *ngxPermissionsOnly="['user_update']">
     <form [formGroup]="form" class="user-form" enctype="multipart/form-data">
         <mat-tab-group class="vertical-tabs">
             <mat-tab label="{{'users.labels.basic' | translate}}">
@@ -103,7 +103,7 @@
         </mat-tab-group>
     </form>
 </div>
-<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center">
+<div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center" *ngxPermissionsOnly="['user_update']">
     <button mat-raised-button color="primary" (click)="saveUser(form.value)" [mat-dialog-close]="form.value" [disabled]="!form.valid">
         <span *ngIf="!user.id">{{'buttons.save' | translate}}</span>
         <span *ngIf="user.id">{{'buttons.update' | translate}}</span>

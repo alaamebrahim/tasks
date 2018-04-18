@@ -1,10 +1,10 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
   <div fxLayout="row">
     <mat-button-toggle-group #controls="matButtonToggleGroup">
-        <mat-button-toggle (click)="onAddRole()" matTooltip="{{'users.roles.add' | translate}}">
+        <mat-button-toggle *ngxPermissionsOnly="['user_role_add']" (click)="onAddRole()" matTooltip="{{'users.roles.add' | translate}}">
             <mat-icon>person_add</mat-icon>
           </mat-button-toggle>
-      <mat-button-toggle (click)="onShowPermissions()" matTooltip="{{'users.roles.permissions.show-permission' | translate}}">
+      <mat-button-toggle *ngxPermissionsOnly="['user_permission_view']" (click)="onShowPermissions()" matTooltip="{{'users.roles.permissions.show-permission' | translate}}">
         <mat-icon>show_chart</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
@@ -21,7 +21,7 @@
             <mat-icon class="muted-text">business</mat-icon>
             <span>{{role.translation}}</span>
           </p>
-          <button mat-button (click)="openRoleDialog(role)">
+          <button mat-button *ngxPermissionsOnly="['user_role_edit']" (click)="openRoleDialog(role)">
             <mat-icon>mode_edit</mat-icon>
             <span>{{'buttons.edit' | translate}}</span>
         </button>

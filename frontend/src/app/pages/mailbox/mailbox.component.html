@@ -74,7 +74,7 @@
                                 <mat-icon>more_vert</mat-icon>
                             </button>
                         </div>
-                        <button mat-raised-button color="warn" (click)="compose()">{{'mail.labels.compose' | translate}}</button>
+                        <button *ngxPermissionsOnly="['mail_compose']" mat-raised-button color="warn" (click)="compose()">{{'mail.labels.compose' | translate}}</button>
                     </mat-toolbar>
                     <mat-menu #moreMenu="matMenu" xPosition="before">
                         <span (mouseleave)="moreMenuTrigger.closeMenu()">

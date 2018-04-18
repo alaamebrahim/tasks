@@ -1,7 +1,7 @@
 <div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
   <div fxLayout="row">
     <mat-button-toggle-group #controls="matButtonToggleGroup">
-      <mat-button-toggle value="add" (click)="onAddPermission()" matTooltip="{{'users.roles.permissions.add-permission' | translate}}">
+      <mat-button-toggle *ngxPermissionsOnly="['user_permission_add']" (click)="onAddPermission()" matTooltip="{{'users.roles.permissions.add-permission' | translate}}">
         <mat-icon>person_add</mat-icon>
       </mat-button-toggle>
     </mat-button-toggle-group>
