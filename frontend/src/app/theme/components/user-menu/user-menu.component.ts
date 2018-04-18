@@ -1,5 +1,5 @@
 import { Component, OnInit, ViewEncapsulation } from '@angular/core';
-import {environment} from '../../../../environments/environment';
+import { environment } from '../../../../environments/environment';
 import { UserInStorage, UserInfoService } from '../../../shared/services/user-info.service';
 
 @Component({
@@ -17,7 +17,9 @@ export class UserMenuComponent implements OnInit {
 
   ngOnInit() {
     this.userInfo = this.userInfoService.getUserInfo();
-    this.userImage = this.userInfo.image;
+    if (this.userInfo !== null) {
+      this.userImage = this.userInfo.image;
+    }
   }
 
 }

@@ -39,7 +39,7 @@ class TasksService {
         if(!$current_user) {
             return null;
         }
-        $role_name = $this->roleRepo->getRoleName($current_user['attributes']['role_id']);
+        $role_name = $current_user['attributes']['role_name'];
         if($role_name == 'root' || $role_name == 'admin') {
             return $this->taskRepo->getAllTasks();
         } else {
@@ -57,7 +57,7 @@ class TasksService {
         if(!$current_user) {
             return null;
         }
-        $role_name = $this->roleRepo->getRoleName($current_user['attributes']['role_id']);
+        $role_name = $current_user['attributes']['role_name'];
         if($role_name == 'root' || $role_name == 'admin') {
             return $this->taskRepo->getTasksByStatus($status);
         } else {

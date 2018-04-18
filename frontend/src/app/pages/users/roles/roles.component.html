@@ -21,6 +21,10 @@
             <mat-icon class="muted-text">business</mat-icon>
             <span>{{role.translation}}</span>
           </p>
+          <button mat-button (click)="openRoleDialog(role)">
+            <mat-icon>mode_edit</mat-icon>
+            <span>{{'buttons.edit' | translate}}</span>
+        </button>
         </div>
       </div>
     </div>

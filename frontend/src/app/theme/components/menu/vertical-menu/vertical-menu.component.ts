@@ -18,6 +18,7 @@ export class VerticalMenuComponent implements OnInit {
   parentMenu: Array<any>;
   public settings: Settings;
   private userRole: string;
+  private hasARole = false;
   constructor(
     public appSettings: AppSettings,
     public menuService: MenuService,
@@ -25,12 +26,21 @@ export class VerticalMenuComponent implements OnInit {
     private userInfoService: UserInfoService
   ) {
     this.settings = this.appSettings.settings;
-    this.userRole = this.userInfoService.getUserInfo().role;
   }
 
   ngOnInit() {
+    const me = this;
+    // console.log(this.menuItems);
+    /*me.menuItems.forEach(element => {
+      //
+      if (element.canView.indexOf(me.userInfoService.getUserInfo().role) === -1) {
+        me.parentMenu.push(element);
+      }
+    });*/
+    // console.log(this.parentMenu);
     this.parentMenu = this.menuItems.filter(item => {
-      return (item.parentId === this.menuParentId) && (item.canView.indexOf(this.userRole, 1) !== -1);
+      // return true;
+      return (item.parentId === this.menuParentId) && item.canView.indexOf(this.userInfoService.getUserInfo().role) !== -1;
     });
   }
 

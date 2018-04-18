@@ -19,6 +19,7 @@ import { PermissionsService } from '../../shared/services/permissions.service';
 export class LoginComponent {
   public form: FormGroup;
   public settings: Settings;
+
   constructor(
     public appSettings: AppSettings,
     public fb: FormBuilder,
@@ -27,7 +28,6 @@ export class LoginComponent {
     private notifyService: NotifyUserService,
     private loginService: LoginService,
     private userInfoService: UserInfoService,
-    private permissionsService: PermissionsService
   ) {
     this.settings = this.appSettings.settings;
     this.translator.setDefaultLang(sessionStorage.getItem('locale'));
@@ -55,14 +55,7 @@ export class LoginComponent {
             this.loginService.getUserDataByToken(resp.data.token)
               .then(userResp => {
                 // console.log(userResp);
-                this.loginService.getUserRoleName(userResp.data.role_id, resp.data.token)
-                  .subscribe(roleResp => {
-                    // console.log(roleResp);
-                    const role: Role = roleResp;
-                    this.loginService.saveUserDataInSession(userResp, resp.data.token, role.name);
-                    this.permissionsService.setUserPermissions();
-                    this.router.navigate(['/']);
-                  });
+                this.loginService.saveUserDataInSession(userResp, resp.data.token);
               }, error => {
                 this.notifyService.notifyUser('login.messages.error');
                 console.log(error);

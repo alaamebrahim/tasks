@@ -1,21 +1,26 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Inject } from '@angular/core';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { NotifyUserService } from '../../../../shared/services/notify-user.service';
 import { RolesService } from '../roles.service';
 import { Router } from '@angular/router';
 import { Permission } from '../../permissions/permission.model';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { Role } from '../../../login/role.model';
 
 @Component({
-  selector: 'app-add-role',
-  templateUrl: './add-role.component.html',
-  styleUrls: ['./add-role.component.scss']
+  selector: 'app-edit-role',
+  templateUrl: './edit-role.component.html',
+  styleUrls: ['./edit-role.component.scss']
 })
-export class AddRoleComponent implements OnInit {
+export class EditRoleComponent implements OnInit {
+
   private form: FormGroup;
   private working = false;
   public permissions: Permission[];
 
   constructor(
+    public dialogRef: MatDialogRef<EditRoleComponent>,
+    @Inject(MAT_DIALOG_DATA) public role: Role,
     private fb: FormBuilder,
     private notifyService: NotifyUserService,
     private roleService: RolesService,
@@ -31,6 +36,10 @@ export class AddRoleComponent implements OnInit {
 
   ngOnInit() {
     this.getPermissions();
+    if (this.role) {
+      this.form.setValue(this.role);
+      console.log(this.form.value);
+    }
   }
 
   getPermissions() {
@@ -41,8 +50,7 @@ export class AddRoleComponent implements OnInit {
   onSaveRole() {
     const me = this;
     me.working = true;
-    console.log(this.form.value);
-    /*this.roleService.AddRole(this.form.value)
+    this.roleService.UpdateRole(this.form.value)
       .subscribe((response) => {
         if (response.success === true) {
           // console.log(response.message);
@@ -52,7 +60,7 @@ export class AddRoleComponent implements OnInit {
           this.notifyService.notifyUser('general.messages.error');
         }
         me.working = false;
-      });*/
+      });
   }
 
 }

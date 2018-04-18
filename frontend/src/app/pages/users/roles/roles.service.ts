@@ -25,4 +25,8 @@ export class RolesService {
   public AddRole(role: Role) {
     return this.apiRequestService.post('roles/add-role', role);
   }
+
+  public UpdateRole(role: Role) {
+    return this.apiRequestService.post('roles/edit-role', role);
+  }
 }

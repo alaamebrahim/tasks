@@ -1,0 +1,33 @@
+<h1 mat-dialog-title>
+    {{'users.roles.edit' | translate}}
+</h1>
+<div mat-dialog-content>
+    <form [formGroup]="form">
+        <div fxLayout="column" class="form-field-outer w-100">
+            <mat-input-container>
+                <mat-placeholder>
+                    <mat-icon>person</mat-icon> {{'users.roles.form.name' | translate}}</mat-placeholder>
+                <input matInput formControlName="name" required>
+            </mat-input-container>
+            <mat-input-container>
+                <mat-placeholder>
+                    <mat-icon>person</mat-icon> {{'users.roles.form.translation' | translate}}</mat-placeholder>
+                <input matInput formControlName="translation" required>
+            </mat-input-container>
+            <mat-input-container>
+                <mat-placeholder>
+                    <mat-icon></mat-icon>{{'users.roles.permissions.title' | translate}}</mat-placeholder>
+                <mat-select formControlName="permissions" multiple>
+                    <mat-option *ngFor="let permission of permissions" [value]="permission.id">{{permission.translation}}</mat-option>
+                </mat-select>
+            </mat-input-container>
+        </div>
+    </form>
+</div>
+<div mat-dialog-footer>
+    <button mat-raised-button color="primary" (click)="onSaveRole()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
+</div>
+
+<div *ngIf="working" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
+</div>

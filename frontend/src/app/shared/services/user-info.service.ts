@@ -1,5 +1,6 @@
 import {Injectable} from '@angular/core';
 import {Observable} from 'rxjs/Observable';
+import { Permission } from '../../pages/users/permissions/permission.model';
 
 export interface UserInStorage {
     id: number;
@@ -7,6 +8,7 @@ export interface UserInStorage {
     email: string;
     displayName: string;
     role: string;
+    permissions: Permission[];
     token: string;
     image: string;
     locale: string;

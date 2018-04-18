@@ -17,6 +17,7 @@ import { AddPermissionComponent } from './permissions/add-permission/add-permiss
 import { RolesService } from './roles/roles.service';
 import { PermissionsComponent } from './permissions/permissions.component';
 import { AddRoleComponent } from './roles/add-role/add-role.component';
+import { EditRoleComponent } from './roles/edit-role/edit-role.component';
 
 export const routes = [
   { path: '', component: UsersComponent, pathMatch: 'full' },
@@ -69,11 +70,13 @@ export const routes = [
     RolesComponent,
     PermissionsComponent,
     AddRoleComponent,
+    EditRoleComponent,
     AddPermissionComponent,
   ],
   providers: [UsersService, RolesService],
   entryComponents: [
-    UserDialogComponent
+    UserDialogComponent,
+    EditRoleComponent
   ]
 })
 export class UsersModule { }

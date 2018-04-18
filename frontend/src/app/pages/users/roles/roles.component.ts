@@ -4,6 +4,8 @@ import { AppSettings } from '../../../app.settings';
 import { Settings } from '../../../app.settings.model';
 import { RolesService } from './roles.service';
 import { Router } from '@angular/router';
+import { MatDialog } from '@angular/material';
+import { EditRoleComponent } from './edit-role/edit-role.component';
 
 @Component({
   selector: 'app-roles',
@@ -18,7 +20,8 @@ export class RolesComponent implements OnInit {
   constructor(
     public appSettings: AppSettings,
     private roleService: RolesService,
-    private router: Router
+    private router: Router,
+    public dialog: MatDialog,
   ) {
     this.settings = this.appSettings.settings;
   }
@@ -29,7 +32,11 @@ export class RolesComponent implements OnInit {
 
   getRoles() {
     this.roles = null; // for show spinner each time
-    this.roleService.getRoles().subscribe(roles => this.roles = roles);
+    this.roleService.getRoles().subscribe(roles => {
+      this.roles = roles;
+      console.log(roles);
+    });
+
   }
 
   onAddRole() {
@@ -38,6 +45,17 @@ export class RolesComponent implements OnInit {
 
   onShowPermissions() {
     this.router.navigate(['users/permissions']);
+  }
+
+  /**
+     * Opens role dialog
+     * @param userdata
+     */
+    public openRoleDialog(roleData) {
+      const dialogRef = this.dialog.open(EditRoleComponent, {
+          data: roleData,
+          minWidth: '50%'
+      });
   }
 
   /**

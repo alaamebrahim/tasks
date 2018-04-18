@@ -11,6 +11,9 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { HttpHeaders, HttpClient } from '@angular/common/http';
 import { AppConfig } from '../../app-config';
 import { UsersService } from './users.service';
+import { Permission } from '../../pages/users/permissions/permission.model';
+import { Role } from '../../pages/login/role.model';
+import { PermissionsService } from './permissions.service';
 
 export interface LoginRequestParam {
     email: string;
@@ -27,7 +30,8 @@ export class LoginService {
 
     public landingPage = '/home/dashboard';
     public socialUserData: any;
-    roleName: string;
+    role: Role;
+    permission: Permission[];
 
     constructor(
         private router: Router,
@@ -35,7 +39,8 @@ export class LoginService {
         private apiRequest: ApiRequestService,
         private http: HttpClient,
         private appConfig: AppConfig,
-        ) { }
+        private permissionsService: PermissionsService
+    ) { }
 
     performLogin(userData: any) {
         const me = this;
@@ -100,44 +105,61 @@ export class LoginService {
      * @param userData
      * @param token
      */
-    saveUserDataInSession(userData: any, token: string, roleName) {
+    saveUserDataInSession(userData: any, token: string) {
         const me = this;
-        // Will use this BehaviorSubject to emit data that we want after ajax login attempt
-        const loginDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
-        let loginInfoReturn: LoginInfoInStorage; // Object that we want to send back to Login Page
-        if (userData.message === 'authenticated_user') {
-            loginInfoReturn = {
-                'success': true,
-                'message': userData.message,
-                'landingPage': this.landingPage,
-                'exists': true,
-                'user': {
-                    'id': userData.data.id,
-                    'userName': userData.data.name,
-                    'email': userData.data.email,
-                    'displayName': userData.data.first_name + ' ' + userData.data.last_name,
-                    'position': userData.data.position,
-                    'created_at': userData.data.created_at,
-                    'token': token,
-                    'role': roleName,
-                    'image': userData.data.picture,
-                    'locale': null,
-                }
-            };
-            // console.log(loginInfoReturn);
-            // console.log(JSON.stringify(loginInfoReturn));
-            // console.log(loginInfoReturn);
-            this.userInfoService.storeUserInfo(loginInfoReturn.user);
-            return loginInfoReturn;
-        }
+
+        // Get user permissions
+        me.getUserPermissions(userData.data.id).subscribe(resp => {
+            // console.log(resp);
+            me.permission = resp;
+            // Will use this BehaviorSubject to emit data that we want after ajax login attempt
+            const loginDataSubject: BehaviorSubject<any> = new BehaviorSubject<any>([]);
+            let loginInfoReturn: LoginInfoInStorage; // Object that we want to send back to Login Page
+            if (userData.message === 'authenticated_user') {
+                loginInfoReturn = {
+                    'success': true,
+                    'message': userData.message,
+                    'landingPage': me.landingPage,
+                    'exists': true,
+                    'user': {
+                        'id': userData.data.id,
+                        'userName': userData.data.name,
+                        'email': userData.data.email,
+                        'displayName': userData.data.first_name + ' ' + userData.data.last_name,
+                        'position': userData.data.position,
+                        'created_at': userData.data.created_at,
+                        'token': token,
+                        'role': userData.data.role_name,
+                        'permissions': me.permission,
+                        'image': userData.data.picture,
+                        'locale': null,
+                    }
+                };
+                // console.log(loginInfoReturn);
+                // console.log(JSON.stringify(loginInfoReturn));
+                // console.log(loginInfoReturn);
+                this.userInfoService.storeUserInfo(loginInfoReturn.user);
+                this.permissionsService.setUserPermissions();
+                this.router.navigate(['/']);
+                return loginInfoReturn;
+            }
+        });
     }
 
     /**
-     * Returns role name
+     * Get current user role
      * @param id
      */
-    getUserRoleName(id: number, token: string) {
+    getUserRole(id: number) {
         return this.apiRequest.get('users/get-role-by-id/' + id);
+    }
+
+    /**
+     * Get logged user permissions
+     * @param id
+     */
+    getUserPermissions(id: number) {
+        return this.apiRequest.get('users/get-user-permissions/' + id);
     }
 
 

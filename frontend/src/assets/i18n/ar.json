@@ -22,20 +22,21 @@
 		},
 		"password": "كلمة المرور",
 		"roles": {
+			"permissions": {
+				"add-permission": "اضافة تصريح جديد",
+				"form": {
+					"name": "اسم التصريح (EN)",
+					"translation": "كود الترجمة"
+				},
+				"title": "التصاريح",
+				"show-permission": "عرض التصاريح"
+			},
 			"add": "اضافة صلاحية",
 			"form": {
 				"name": "اسم الصلاحية (en)",
 				"translation": "كود الترجمة"
 			},
-			"permissions": {
-				"title": "التصاريح",
-				"show-permission": "عرض التصاريح",
-				"add-permission": "اضافة تصريح جديد",
-				"form": {
-					"name": "اسم التصريح (EN)",
-					"translation": "كود الترجمة"
-				}
-			},
+			"edit": "تعديل صلاحية",
 			"title": "التحكم بالصلاحيات"
 		},
 		"form": {

@@ -57,7 +57,13 @@ $api->version('v1', function ($api) {
         'namespace'  => 'App\Http\Controllers\Users',
     ], function ($api) {
         // Get role object
-        $api->get('/get-role-by-id/{id}', ['uses' => 'RolesController@getUserRole','as' => 'api.user.role']);
+        $api->get('/get-role-by-id/{id}',
+            [
+                'uses' => 'RolesController@getUserRole',
+                'as' => 'api.user.role',
+                'middleware' => ['permission:user_view']
+            ]);
+        $api->get('/get-user-permissions/{id}', ['uses' => 'RolesController@getUserPermissions','as' => 'api.user.permissions']);
         $api->get('/get-roles', ['uses' => 'RolesController@getAllRoles','as' => 'api.roles.all']);
         // add new user
         $api->post('/add-user', ['uses' => 'UsersController@addNewUser','as' => 'api.user.addNew']);
@@ -84,6 +90,7 @@ $api->version('v1', function ($api) {
         $api->get('/get-permissions', ['uses' => 'RolesController@getAllPermissions','as' => 'api.role.get-permissions']);
         // add new role
         $api->post('/add-role', ['uses' => 'RolesController@createNewRole','as' => 'api.role.add-role']);
+        $api->post('/edit-role', ['uses' => 'RolesController@UpdateExistingRole','as' => 'api.role.edit-role']);
         // add new permission
         $api->post('/add-permission', ['uses' => 'RolesController@createNewPermission','as' => 'api.role.add-permission']);
     });

@@ -44,6 +44,13 @@ class RolesController extends Controller
     }
 
     /**
+     * Get current user permissions
+     */
+    public function getUserPermissions($id) {
+        return $this->roleService->getUserPermissions($id);
+    }
+
+    /**
      * Creates one or more permissions.
      */
     public function createNewPermission(Request $request) {
@@ -84,7 +91,33 @@ class RolesController extends Controller
         }
         $role = $this->roleService->createRole($request['name'], $request['translation']);
         if($role) {
-            $role->syncPermissions($request['permissions']);
+            $this->roleService->associatePermissionToRole($role->id, $request['permissions']);
+        }
+        return new JsonResponse([
+            'success' => true,
+            'message' => ''
+        ]);
+    }
+
+    /**
+     * Creates one or more roles.
+     */
+    public function UpdateExistingRole(Request $request) {
+        // Validation rules
+        try {
+            $this->validate($request, [
+                'name' => 'required',
+                'translation' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.permissions.errors.permission-null')
+            ]);
+        }
+        $role = $this->roleService->updateRole($request['id'], $request['name'], $request['translation']);
+        if($role) {
+            $this->roleService->associatePermissionToRole($request['id'], $request['permissions']);
         }
         return new JsonResponse([
             'success' => true,
