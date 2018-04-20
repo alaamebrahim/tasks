@@ -8,7 +8,7 @@ import { UserDialogComponent } from './user-dialog/user-dialog.component';
 import { TranslateService } from '@ngx-translate/core';
 import { LocaleService } from '../../shared/services/locale.service';
 import { NotifyUserService } from '../../shared/services/notify-user.service';
-import {environment} from '../../../environments/environment';
+import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
 
 @Component({
@@ -127,11 +127,8 @@ export class UsersComponent implements OnInit {
         const dialogRef = this.dialog.open(UserDialogComponent, {
             data: userdata
         });
-
         dialogRef.afterClosed().subscribe(user => {
-            if (user) {
-                (user.id) ? this.updateUser(user) : this.addUser(user);
-            }
+            this.getUsers();
         });
     }
 

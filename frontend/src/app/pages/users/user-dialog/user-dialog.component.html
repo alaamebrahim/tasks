@@ -104,7 +104,7 @@
     </form>
 </div>
 <div mat-dialog-actions fxLayout="row" fxLayoutAlign="space-between center" *ngxPermissionsOnly="['user_update']">
-    <button mat-raised-button color="primary" (click)="saveUser(form.value)" [mat-dialog-close]="form.value" [disabled]="!form.valid">
+    <button mat-raised-button color="primary" (click)="saveUser()" [disabled]="!form.valid">
         <span *ngIf="!user.id">{{'buttons.save' | translate}}</span>
         <span *ngIf="user.id">{{'buttons.update' | translate}}</span>
     </button>

@@ -146,7 +146,7 @@ class UsersController extends Controller
         // Validation rules
         try {
             $this->validate($request, [
-                'email' => 'required|image',
+                'picture' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
             ]);
         } catch (ValidationException $e) {
             return new JsonResponse([

@@ -5,6 +5,7 @@ import { User } from '../user.model';
 import { Role } from '../../login/role.model';
 import { ApiRequestService } from '../../../shared/services/api-request.service';
 import { UsersService } from '../users.service';
+import { NotifyUserService } from '../../../shared/services/notify-user.service';
 
 @Component({
   selector: 'app-user-dialog',
@@ -15,6 +16,7 @@ export class UserDialogComponent implements OnInit {
   public form: FormGroup;
   public passwordHide = true;
   private roles: Role[];
+  private uploadedFile: File;
   @ViewChild('fileInput') fileInput;
 
   constructor(
@@ -22,7 +24,8 @@ export class UserDialogComponent implements OnInit {
     @Inject(MAT_DIALOG_DATA) public user: User,
     public fb: FormBuilder,
     private apiRepuestService: ApiRequestService,
-    private userService: UsersService
+    private userService: UsersService,
+    private notifyService: NotifyUserService
   ) {
     this.form = this.fb.group({
       id: null,
@@ -65,8 +68,55 @@ export class UserDialogComponent implements OnInit {
     this.userService.getRoles().subscribe(roles => this.roles = roles);
   }
 
-  saveUser(data: User) {
-    // console.log(data);
+  /**
+ * add new user to db
+ * @param userdata
+ */
+  public addUser(userdata: User) {
+    this.userService.addUser(userdata).subscribe(response => {
+      if (response.success === true) {
+        this.notifyService.notifyUser('general.messages.saved');
+      } else {
+        this.notifyService.notifyUser('general.messages.error');
+      }
+    }, error => {
+      console.log(error);
+      this.notifyService.notifyUser('general.messages.error');
+    });
+  }
+
+  /**
+   * update user data
+   * @param userdata
+   */
+  public updateUser(userdata: User) {
+    this.userService.updateUser(userdata).subscribe(response => {
+      if (response.success === true) {
+        // console.log(response.message);
+        this.notifyService.notifyUser('general.messages.saved');
+      } else {
+        this.notifyService.notifyUser(response.message);
+      }
+    }, error => {
+      console.log(error);
+      this.notifyService.notifyUser('general.messages.error');
+    });
+  }
+
+  saveUser() {
+    if (this.form.value) {
+      if (this.uploadedFile !== null) {
+        this.uploadFile().subscribe(response => {
+          // console.log(response);
+          if (response.success === true) {
+            this.form.controls['picture'].setValue(response.message);
+            (this.form.controls['id']) ? this.updateUser(this.form.value) : this.addUser(this.form.value);
+          }
+        });
+      } else {
+        (this.form.controls['id']) ? this.updateUser(this.form.value) : this.addUser(this.form.value);
+      }
+    }
   }
 
   close(): void {
@@ -76,15 +126,23 @@ export class UserDialogComponent implements OnInit {
   addFile(): void {
     const fi = this.fileInput.nativeElement;
     if (fi.files && fi.files[0]) {
-      const fileToUpload = fi.files[0];
-        // this.form.controls['picture'].setValue(fileToUpload);
-        // console.log(this.form.value);
-        this.userService.uploadUserPicture(fileToUpload).subscribe(response => {
-          if (response.success === true) {
-            this.form.controls['picture'].setValue(response.message);
-          }
-        });
+      const fileToUpload: File = fi.files[0];
+      const allowed = ['image/jpeg', 'image/png', 'image/gif', 'image/svg'];
+      if (allowed.indexOf(fileToUpload.type) === -1) {
+        this.notifyService.notifyUser('users.errors.picture.type');
+      } else {
+        this.uploadedFile = fileToUpload;
+      }
     }
-}
+  }
+
+  uploadFile() {
+    // this.form.controls['picture'].setValue(fileToUpload);
+    // console.log(this.form.value);
+    // console.log(fileToUpload);
+    if (this.uploadedFile !== null) {
+      return this.userService.uploadUserPicture(this.uploadedFile);
+    }
+  }
 
 }
