@@ -19,7 +19,7 @@ import { PermissionsService } from '../../shared/services/permissions.service';
 export class LoginComponent {
   public form: FormGroup;
   public settings: Settings;
-
+  private loading = false;
   constructor(
     public appSettings: AppSettings,
     public fb: FormBuilder,
@@ -41,6 +41,7 @@ export class LoginComponent {
   }
 
   public onSubmit(): void {
+    this.loading = true;
     if (this.form.valid) {
       this.loginService.getToken(this.form.get('email').value, this.form.get('password').value)
         .then(resp => {
@@ -57,6 +58,7 @@ export class LoginComponent {
                 // console.log(userResp);
                 this.loginService.saveUserDataInSession(userResp, resp.data.token);
               }, error => {
+                this.loading = false;
                 this.notifyService.notifyUser('login.messages.error');
                 console.log(error);
               });

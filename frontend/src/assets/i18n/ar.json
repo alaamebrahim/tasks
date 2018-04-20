@@ -207,6 +207,9 @@
 			"completed": "مكتملة",
 			"uncompleted": "غير مكتملة",
 			"responsibleuser": "المستخدم المكلف"
+		},
+		"labels": {
+			"filter-by-user": "عرض حسب المستخدم"
 		}
 	},
 	"notifications": {

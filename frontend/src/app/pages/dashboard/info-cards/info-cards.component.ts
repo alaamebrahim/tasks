@@ -41,7 +41,7 @@ export class InfoCardsComponent implements OnInit {
       if (currentUser.role === 'root' || currentUser.role === 'admin') {
         this.dashboardService.getLastTasks().subscribe(tasks => {
           this.tasks = tasks;
-          console.log(tasks);
+          // console.log(tasks);
         });
       } else {
         this.dashboardService.getUserLastTasks(currentUser.id).subscribe(tasks => {

@@ -11,6 +11,7 @@ import { EditTaskComponent } from './edit-task/edit-task.component';
 import { User } from '../users/user.model';
 import { AddNotificationComponent } from './add-notification/add-notification.component';
 import { Notification } from './add-notification/notification.model';
+import { UsersService } from '../users/users.service';
 
 @Component({
   selector: 'app-tasks',
@@ -22,8 +23,10 @@ export class TasksComponent {
   public colors = ['accent', 'primary', 'warn'];
   public settings: Settings;
   private tasks: Task[];
+  private users: any[];
   private page: any;
   public step = 0;
+  private searchText: number;
 
   constructor(
     public appSettings: AppSettings,
@@ -31,18 +34,32 @@ export class TasksComponent {
     private router: Router,
     private tasksService: TasksService,
     private notifyService: NotifyUserService,
+    private usersService: UsersService,
     public dialog: MatDialog,
   ) {
     this.settings = this.appSettings.settings;
     this.getAllTasks();
+    this.getUsers();
   }
 
   getAllTasks() {
+    this.searchText = 0;
     this.tasks = null;
     this.tasksService.getTasks().subscribe((response) => {
       // console.log(response);
       this.tasks = response;
     });
+  }
+
+  /**
+     * Get all users
+     */
+    public getUsers(): void {
+      this.users = null; // for show spinner each time
+      this.usersService.getUsers().subscribe((user) => {
+          this.users = user.users;
+          // console.log(this.users);
+      });
   }
 
   onFilterTasks(status: number) {

@@ -6,7 +6,7 @@
     </div>
 </div>
 
-<div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p">
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="flex-p">
     <div fxLayout="row">
         <mat-button-toggle-group #viewType="matButtonToggleGroup">
             <mat-button-toggle (click)="getAllTasks()" matTooltip="{{'tasks.buttons.all' | translate}}">
@@ -20,10 +20,16 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
     </div>
+    <div fxLayout="row" fxFlex="40%" fxLayoutAlign="space-between left" class="flex-p">
+        <span>{{'tasks.labels.filter-by-user' | translate}}</span>
+        <mat-select placeholder="{{'users.form.username' | translate}}" [(ngModel)]="searchText">
+            <mat-option *ngFor="let user of users | UsersExceptRootPipe" [value]="user.id">{{user.first_name +' '+user.last_name}}</mat-option>
+        </mat-select>
+    </div>
 </div>
 <div fxFlex="100">
     <mat-accordion displayMode="default" [multi]="false" [hideToggle]="true">
-        <mat-expansion-panel *ngFor="let task of tasks | paginate: { itemsPerPage: 11, currentPage: page }">
+        <mat-expansion-panel *ngFor="let task of tasks | TasksFilterPipe: searchText | paginate: { itemsPerPage: 30, currentPage: page }">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     <mat-icon *ngIf="task.progress === 100" class="mat-18 p-1" color="primary">verified_user</mat-icon>

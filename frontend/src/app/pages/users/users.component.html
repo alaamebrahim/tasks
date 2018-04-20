@@ -91,7 +91,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'list'" fxLayout="row wrap">
-    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100"
+    <div *ngFor="let user of users | UserSearchPipe : searchText | paginate: { itemsPerPage: 30, currentPage: page }" fxFlex="100"
         class="flex-p">
         <mat-card class="p-0">
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">

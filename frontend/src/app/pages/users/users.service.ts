@@ -12,7 +12,7 @@ export class UsersService {
         private apiRequestService: ApiRequestService
     ) { }
 
-    getUsers(): Observable<User[]> {
+    getUsers() {
         return this.apiRequestService.get('users/get-users');
     }
 
