@@ -77,4 +77,31 @@ class TasksService {
         $image->move($destinationPath, $name);
         return $name;
     }
+
+    /**
+     * Get count of tasks
+     */
+    public function getTasksCount($completed, $user = "all"){
+        if($user == "all") {
+            if($completed == true) {
+                return $this->taskRepo->getCompletedTasksCount();
+            }
+            return $this->taskRepo->getUncompletedTasksCount();
+        } else {
+            if($completed == true) {
+                return $this->taskRepo->getUserCompletedTasksCount($user);
+            }
+            return $this->taskRepo->getUserUncompletedTasksCount($user);
+        }
+    }
+        
+    public function getLastTasks(){
+        $tasks = $this->taskRepo->getLastTasks();
+        return $tasks;
+    }
+
+    public function getUserLastTasks($id){
+        $tasks =  $this->taskRepo->getUserLastTasks($id);
+        return $tasks;
+    }
 }

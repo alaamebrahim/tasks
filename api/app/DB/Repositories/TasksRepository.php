@@ -80,4 +80,43 @@ class TasksRepository extends Repository {
                     ->select('tasks.id')
                     ->get();
     }
+
+    public function getCompletedTasksCount(){
+        return Task::where('completed', '=', true)
+                    ->count();
+    }
+
+    public function getUncompletedTasksCount(){
+        return Task::where('completed', '=', false)
+                    ->count();
+    }
+
+    public function getUserCompletedTasksCount($id){
+        return Task::where('completed', '=', true)
+                    ->where('user_id', '=', $id)
+                    ->count();
+    }
+
+    public function getUserUncompletedTasksCount($id){
+        return Task::where('completed', '=', false)
+                    ->where('user_id', '=', $id)
+                    ->count();
+    }
+
+    public function getLastTasks(){
+        return DB::table('tasks')
+                ->orderBy('id', 'desc')
+                ->limit(18)
+                ->select('tasks.*')
+                ->get();
+    }
+
+    public function getUserLastTasks($id){
+        return DB::table('tasks')
+                ->orderBy('id', 'desc')
+                ->where('user_id', '=', $id)
+                ->limit(18)
+                ->select('tasks.*')
+                ->get();
+    }
 }

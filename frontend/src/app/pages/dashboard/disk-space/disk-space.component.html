@@ -1,11 +1,11 @@
 <mat-card>
     <mat-card-header fxLayoutAlign="center">                
-        <mat-card-subtitle><h2>Disk Space</h2></mat-card-subtitle>
+        <mat-card-subtitle><h2>{{'dashboard.labels.tasks' | translate}}</h2></mat-card-subtitle>
     </mat-card-header>
     <mat-card-content>
         <div fxLayout="row" fxLayoutAlign="space-around">
-            <mat-checkbox color="primary" class="example-margin" [checked]="explodeSlices" (change)="explodeSlices = !explodeSlices">Explode Slices</mat-checkbox>
-            <mat-checkbox color="primary" class="example-margin" [checked]="showLabels" (change)="showLabels = !showLabels">Show Labels</mat-checkbox>
+            <mat-checkbox color="primary" class="example-margin" [checked]="explodeSlices" (change)="explodeSlices = !explodeSlices">{{'dashboard.labels.explode-slices' | translate}}</mat-checkbox>
+            <mat-checkbox color="primary" class="example-margin" [checked]="showLabels" (change)="showLabels = !showLabels">{{'dashboard.labels.show-labels' | translate}}</mat-checkbox>
         </div>
         <div class="w-100 h-300p" #resizedDiv>
             <ngx-charts-pie-chart

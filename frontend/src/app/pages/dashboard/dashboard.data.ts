@@ -12,75 +12,8 @@ export const orders = [
 
 export const products = [
   {
-    "name": "Product-1",
-    "value": 69400
-  },
-  {
-    "name": "Product-2",
-    "value": 59400
-  },
-  {
-    "name": "Product-3",
-    "value": 82400
-  },
-  {
-    "name": "Product-4",
-    "value": 73400
-  },
-  {
-    "name": "Product-5",
-    "value": 25400
-  },
-  {
-    "name": "Product-6",
-    "value": 23400
-  },
-  {
-    "name": "Product-7",
-    "value": 49300
-  },
-  {
-    "name": "Product-8",
-    "value": 55400
-  },
-  {
-    "name": "Product-9",
-    "value": 37400
-  },
-  {
-    "name": "Product-10",
-    "value": 65220
-  },
-  {
-    "name": "Product-11",
-    "value": 79400
-  },
-  {
-    "name": "Product-12",
-    "value": 58400
-  },
-  {
-    "name": "Product-13",
-    "value": 41400
-  },
-  {
-    "name": "Product-14",
-    "value": 37400
-  },
-  {
-    "name": "Product-15",
-    "value": 33700
-  },
-  {
-    "name": "Product-16",
-    "value": 42700
-  },
-  {
-    "name": "Product-17",
-    "value": 52700
-  },
-  {
     "name": "Product-18",
+    "Test": "Product-18",
     "value": 62700
   }
 ]

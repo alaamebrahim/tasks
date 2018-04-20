@@ -1,4 +1,16 @@
 {
+	"dashboard": {
+		"labels": {
+			"tasks": "إحصائية عددية للمهام",
+			"explode-slices": "عرض شرائح",
+			"show-labels": "عرض العناوين",
+			"notifications": "أخر التنبيهات",
+			"latest-tasks": "أخر المهام",
+			"progress": "نسبة الانجاز",
+			"uncompleted-tasks": "عدد المهام غير المكتملة",
+			"completed-tasks": "عدد المهام المكتملة"
+		}
+	},
 	"login": {
 		"title": "تسجيل الدخول للتطبيق",
 		"button": "تسجيل الدخول",
@@ -201,8 +213,8 @@
 	"buttons": {
 		"save": "حفظ",
 		"delete": "حذف",
-		"edit": "تعديل",
 		"update": "تحديث",
+		"edit": "تعديل",
 		"cancel": "إلغاء"
 	},
 	"user": {

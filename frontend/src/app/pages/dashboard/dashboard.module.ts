@@ -10,6 +10,10 @@ import { InfoCardsComponent } from './info-cards/info-cards.component';
 import { DiskSpaceComponent } from './disk-space/disk-space.component';
 import { TodoComponent } from './todo/todo.component';
 import { AnalyticsComponent } from './analytics/analytics.component';
+import { DashboardService } from './dashboard.service';
+import { NotificationsComponent } from './notifications/notifications.component';
+import { NotificationsService } from '../../shared/services/notifications.service';
+import { TasksComponent } from './tasks/tasks.component';
 
 export const routes = [
   { path: '', component: DashboardComponent, pathMatch: 'full' }
@@ -29,7 +33,10 @@ export const routes = [
     InfoCardsComponent,
     DiskSpaceComponent,
     TodoComponent,
-    AnalyticsComponent
-  ]
+    AnalyticsComponent,
+    NotificationsComponent,
+    TasksComponent
+  ],
+  providers: [DashboardService, NotificationsService]
 })
 export class DashboardModule { }
