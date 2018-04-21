@@ -12,6 +12,7 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { PipesModule } from '../../theme/pipes/pipes.module';
 import { AddNotificationComponent } from './add-notification/add-notification.component';
 import { NotificationsService } from '../../shared/services/notifications.service';
+import { ShowAttachmentComponent } from './show-attachment/show-attachment.component';
 export const routes = [
   {
     path: '',
@@ -45,7 +46,9 @@ export const routes = [
     TasksComponent,
     AddTaskComponent,
     EditTaskComponent,
-    AddNotificationComponent
+    AddNotificationComponent,
+    ShowAttachmentComponent,
+    ShowAttachmentComponent
   ],
   providers: [
     TasksService,
@@ -53,7 +56,8 @@ export const routes = [
   ],
   entryComponents: [
     EditTaskComponent,
-    AddNotificationComponent
+    AddNotificationComponent,
+    ShowAttachmentComponent
   ]
 })
 export class TasksModule { }

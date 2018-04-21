@@ -69,6 +69,7 @@ export class AddTaskComponent implements OnInit {
   }
 
   addFile(): void {
+    this.working = true;
     const fi = this.fileInput.nativeElement;
     if (fi.files && fi.files[0]) {
       const fileToUpload = fi.files[0];
@@ -80,7 +81,10 @@ export class AddTaskComponent implements OnInit {
           // console.log(this.form.value);
           this.attachment = response.message;
         }
+        this.working = false;
       });
+    } else {
+      this.working = false;
     }
 
   }

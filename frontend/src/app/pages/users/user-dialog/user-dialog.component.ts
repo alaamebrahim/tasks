@@ -17,6 +17,7 @@ export class UserDialogComponent implements OnInit {
   public passwordHide = true;
   public roles: Role[];
   public uploadedFile: File = null;
+  public loading = false;
   @ViewChild('fileInput') fileInput;
 
   constructor(
@@ -73,13 +74,17 @@ export class UserDialogComponent implements OnInit {
  * @param userdata
  */
   public addUser(userdata: User) {
+    this.loading = true;
     this.userService.addUser(userdata).subscribe(response => {
       if (response.success === true) {
         this.notifyService.notifyUser('general.messages.saved');
+        this.loading = false;
       } else {
+        this.loading = false;
         this.notifyService.notifyUser('general.messages.error');
       }
     }, error => {
+      this.loading = false;
       console.log(error);
       this.notifyService.notifyUser('general.messages.error');
     });
@@ -90,14 +95,18 @@ export class UserDialogComponent implements OnInit {
    * @param userdata
    */
   public updateUser(userdata: User) {
+    this.loading = true;
     this.userService.updateUser(userdata).subscribe(response => {
       if (response.success === true) {
         // console.log(response.message);
         this.notifyService.notifyUser('general.messages.saved');
+        this.loading = false;
       } else {
+        this.loading = false;
         this.notifyService.notifyUser(response.message);
       }
     }, error => {
+      this.loading = false;
       console.log(error);
       this.notifyService.notifyUser('general.messages.error');
     });
@@ -105,16 +114,27 @@ export class UserDialogComponent implements OnInit {
 
   saveUser() {
     if (this.form.value) {
+      // console.clear();
+      // console.log(this.form.value);
+      // console.log(this.form.controls['id']);
       if (this.uploadedFile !== null) {
         this.uploadFile().subscribe(response => {
           // console.log(response);
           if (response.success === true) {
             this.form.controls['picture'].setValue(response.message);
-            (this.form.controls['id']) ? this.updateUser(this.form.value) : this.addUser(this.form.value);
+            if (this.form.controls['id'].value === null) {
+              this.addUser(this.form.value);
+            } else {
+              this.updateUser(this.form.value);
+            }
           }
         });
       } else {
-        (this.form.controls['id']) ? this.updateUser(this.form.value) : this.addUser(this.form.value);
+        if (this.form.controls['id'].value === null) {
+          this.addUser(this.form.value);
+        } else {
+          this.updateUser(this.form.value);
+        }
       }
     } else {
       console.log('not valid form');

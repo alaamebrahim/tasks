@@ -13,6 +13,8 @@ import { AddNotificationComponent } from './add-notification/add-notification.co
 import { Notification } from './add-notification/notification.model';
 import { UsersService } from '../users/users.service';
 import { UserInfoService } from '../../shared/services/user-info.service';
+import { NgxPermissionsService } from 'ngx-permissions';
+import { ShowAttachmentComponent } from './show-attachment/show-attachment.component';
 
 @Component({
   selector: 'app-tasks',
@@ -29,6 +31,7 @@ export class TasksComponent {
   public step = 0;
   public searchText: number;
   public currentUserRole: string;
+  public currentUserId: number;
 
   constructor(
     public appSettings: AppSettings,
@@ -38,12 +41,16 @@ export class TasksComponent {
     private notifyService: NotifyUserService,
     private usersService: UsersService,
     private userInfoService: UserInfoService,
+    private permissionsService: NgxPermissionsService,
     public dialog: MatDialog,
   ) {
     this.settings = this.appSettings.settings;
+    this.currentUserId = this.userInfoService.getUserInfo().id;
     this.currentUserRole = this.userInfoService.getUserInfo().role;
     this.getAllTasks();
-    this.getUsers();
+    if (this.permissionsService.getPermissions().user_view !== undefined) {
+      this.getUsers();
+    }
   }
 
   getAllTasks() {
@@ -58,12 +65,12 @@ export class TasksComponent {
   /**
      * Get all users
      */
-    public getUsers(): void {
-      this.users = null; // for show spinner each time
-      this.usersService.getUsers().subscribe((user) => {
-          this.users = user.users;
-          // console.log(this.users);
-      });
+  public getUsers(): void {
+    this.users = null; // for show spinner each time
+    this.usersService.getUsers().subscribe((user) => {
+      this.users = user.users;
+      // console.log(this.users);
+    });
   }
 
   onFilterTasks(status: number) {
@@ -79,7 +86,7 @@ export class TasksComponent {
   }
 
   onProgressChange(task: Task) {
-    this.tasksService.updateTask(task).subscribe((response) => {
+    this.tasksService.updateTaskProgress(task).subscribe((response) => {
       if (response.success === true) {
         this.notifyService.notifyUser('general.messages.saved');
       } else {
@@ -103,12 +110,21 @@ export class TasksComponent {
     });
 
     dialogRef.afterClosed().subscribe(response => {
-        this.getAllTasks();
+      this.getAllTasks();
     });
   }
 
-  onDeleteTaskClick(taskId: number) {
-
+  onDeleteTaskClick(task: Task) {
+    this.tasksService.deleteTask(task).subscribe(response => {
+      if (response.success === true) {
+        // console.log(response.message);
+        this.notifyService.notifyUser('general.messages.saved');
+        this.getAllTasks();
+      } else {
+        this.notifyService.notifyUser('general.messages.error');
+      }
+      this.getUsers();
+    });
   }
 
   /**
@@ -131,6 +147,17 @@ export class TasksComponent {
 
     dialogRef.afterClosed().subscribe(user => {
       this.getAllTasks();
+    });
+  }
+
+  /**
+     * Opens user dialog
+     * @param userdata
+     */
+  public onShowAttachment(taskData: Task) {
+    const dialogRef = this.dialog.open(ShowAttachmentComponent, {
+      data: taskData,
+      minWidth: '80%'
     });
   }
 }

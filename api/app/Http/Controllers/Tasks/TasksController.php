@@ -151,7 +151,19 @@ class TasksController extends Controller
      * Delete a user
      * @Returns JsonResponse
      */
-    public function deleteExistingTask(Request $request) {        
+    public function deleteExistingTask(Request $request) {       
+        // Validation rules
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+            ]);
+        } catch (ValidationException $e) {
+            //var_dump($e);
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        } 
         $data = $request->all();
         
         // save user object

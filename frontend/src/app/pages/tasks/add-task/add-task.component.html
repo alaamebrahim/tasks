@@ -51,7 +51,7 @@
                 </form>
             </mat-card-content>
             <mat-card-footer fxLayout="column">
-                <button mat-raised-button color="primary" (click)="onSaveTask()" [disabled]="!form.valid">{{'buttons.save' | translate}}</button>
+                <button mat-raised-button color="primary" (click)="onSaveTask()" [disabled]="!form.valid || working">{{'buttons.save' | translate}}</button>
             </mat-card-footer>
         </mat-card>
     </div>

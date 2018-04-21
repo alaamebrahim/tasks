@@ -26,4 +26,13 @@ export class TasksService {
     // console.log(task);
     return this.apiRequestService.post('tasks/update-task', task);
   }
+
+  public updateTaskProgress(task: Task) {
+    // console.log(task);
+    return this.apiRequestService.post('tasks/update-task-progress', task);
+  }
+
+  public deleteTask(task: Task) {
+    return this.apiRequestService.post('tasks/delete-task', task);
+  }
 }

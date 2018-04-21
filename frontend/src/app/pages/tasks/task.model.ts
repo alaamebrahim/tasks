@@ -9,6 +9,7 @@ export class Task {
     progress: number = 0;
     completed: boolean = false;
     cancelled: boolean = false;
+    attachment: string;
     created_at: Date;
     updated_at: Date;
   }

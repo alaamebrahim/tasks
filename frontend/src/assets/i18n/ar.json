@@ -202,7 +202,8 @@
 			"filter-completed": "عرض الغير منتهى",
 			"filter-uncompleted": "عرض المنتهى",
 			"has-attachment": "يوجد مرفق",
-			"add-notification": "إرسال تنبيه"
+			"add-notification": "إرسال تنبيه",
+			"show-attachment": "عرض المرفق"
 		},
 		"text": {
 			"completed": "مكتملة",

@@ -20,9 +20,9 @@
             </mat-button-toggle>
         </mat-button-toggle-group>
     </div>
-    <div fxLayout="row" fxFlex="40%" fxLayoutAlign="space-between left" class="flex-p">
+    <div fxLayout="row" fxFlex="40%" fxLayoutAlign="space-between left" class="flex-p" *ngxPermissionsOnly="['root', 'admin']">
         <span>{{'tasks.labels.filter-by-user' | translate}}</span>
-        <mat-select placeholder="{{'users.form.username' | translate}}" [(ngModel)]="searchText" *ngxPermissionsOnly="['root', 'admin']">
+        <mat-select placeholder="{{'users.form.username' | translate}}" [(ngModel)]="searchText">
             <mat-option *ngFor="let user of users | UsersExceptRootPipe: currentUserRole" [value]="user.id">{{user.first_name +' '+user.last_name}}</mat-option>
         </mat-select>
     </div>
@@ -37,9 +37,9 @@
                     <mat-icon class="p-1" *ngIf="task.attachment" matTooltip="{{'tasks.buttons.has-attachment' | translate}}">attachment</mat-icon>
                     <h5 class="p-1">{{task.title}}</h5>
                 </mat-panel-title>
-                <mat-panel-description  fxHide.xs="true">
+                <mat-panel-description fxHide.xs="true">
                 </mat-panel-description>
-                <i class="p-1"  fxHide.xs="true">
+                <i class="p-1" fxHide.xs="true">
                     <small>{{task.start_date}} : {{task.end_date}}</small>
                 </i>
                 <mat-chip-list class="p-1">
@@ -75,7 +75,7 @@
                         <mat-icon class="mat-18">hourglass_empty</mat-icon>
                         <span>
                             <mat-slider (change)="onProgressChange(task)" class="custom-slider w-50" [max]="100" [min]="0" [step]="1" [thumb-label]="true"
-                                [tick-interval]="tickInterval" [(ngModel)]="task.progress" [vertical]="false" [disabled]="task.progress === 100">
+                                [tick-interval]="tickInterval" [(ngModel)]="task.progress" [vertical]="false" [disabled]="task.progress === 100 || task.user_id !== currentUserId">
                             </mat-slider>
                             <i>
                                 <small>{{task.progress}}%</small>
@@ -87,9 +87,10 @@
                     <mat-icon *ngIf="task.progress === 100" class="mat-icon-custom-size p-1" color="primary">verified_user</mat-icon>
                 </div>
             </div>
-            <div *ngIf="task.progress !== 100">
-                <button *ngxPermissionsOnly="['task_delete']" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="warn" class="m-1">
-                    <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
+            <div fxLayout.xs="column" fxLayoutGap="5px" *ngIf="task.progress !== 100">
+                <button *ngxPermissionsOnly="['root','admin', 'user']" [disabled]="!task.attachment" (click)="onShowAttachment(task)" mat-raised-button
+                    color="primary" class="m-1">
+                    <mat-icon class="mat-18">visibility</mat-icon> {{'tasks.buttons.show-attachment' |translate}}
                 </button>
                 <button *ngxPermissionsOnly="['task_update']" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
                     <mat-icon class="mat-18">update</mat-icon> {{'buttons.update' |translate}}
@@ -97,6 +98,9 @@
                 <button *ngxPermissionsOnly="['root','admin']" (click)="onSendNotificationClick(task)" mat-raised-button color="primary"
                     class="m-1">
                     <mat-icon class="mat-18">exposure_plus_1</mat-icon> {{'tasks.buttons.add-notification' |translate}}
+                </button>
+                <button *ngxPermissionsOnly="['task_delete']" (click)="onDeleteTaskClick(task)" mat-raised-button color="warn" class="m-1">
+                    <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
                 </button>
             </div>
         </mat-expansion-panel>

@@ -6,5 +6,6 @@
 export const environment = {
   production: false,
   apiUrl: 'http://localhost/tasks/api/public/',
-  userPicPath: 'http://localhost/tasks/api/public/uploads/user_files/'
+  userPicPath: 'http://localhost/tasks/api/public/uploads/user_files/',
+  attachmentsPath: 'http://localhost/tasks/api/public/uploads/tasks_files/'
 };

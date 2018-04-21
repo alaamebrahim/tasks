@@ -125,8 +125,7 @@ $api->version('v1', function ($api) {
         $api->get('/get-user-permissions/{id}',
             [
                 'uses' => 'RolesController@getUserPermissions',
-                'as' => 'api.user.permissions',
-                'middleware' => ['permission:user_permission_view']
+                'as' => 'api.user.permissions'
             ]
         );
         $api->get('/get-roles',
@@ -250,12 +249,19 @@ $api->version('v1', function ($api) {
                 'middleware' => ['permission:task_add']
             ]
         );
-        // update existing user
+        // update existing task
         $api->post('/update-task',
             [
                 'uses' => 'TasksController@updateExistingTask',
-                'as' => 'api.task.updateExisting',
-                'middleware' => ['permission:task_update']
+                'as' => 'api.task.updateExisting'
+            ]
+        );
+
+        // update existing task progress
+        $api->post('/update-task-progress',
+            [
+                'uses' => 'TasksController@updateExistingTask',
+                'as' => 'api.task.updateExisting'
             ]
         );
         // delete a user

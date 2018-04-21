@@ -13,7 +13,7 @@ return [
     |            "sparkpost", "log", "array"
     |
     */
-    'driver' => env('MAIL_DRIVER', 'mailgun'),
+    'driver' => 'smtp',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Address
@@ -24,7 +24,7 @@ return [
     | the Mailgun mail service which will provide reliable deliveries.
     |
     */
-    'host' => env('MAIL_HOST', 'smtp.mailgun.org'),
+    'host' => 'mail.time-chat.org',
     /*
     |--------------------------------------------------------------------------
     | SMTP Host Port
@@ -35,7 +35,7 @@ return [
     | stay compatible with the Mailgun e-mail application by default.
     |
     */
-    'port' => env('MAIL_PORT', 587),
+    'port' => '587',
     /*
     |--------------------------------------------------------------------------
     | Global "From" Address
@@ -47,8 +47,8 @@ return [
     |
     */
     'from' => [
-        'address' => env('MAIL_FROM_ADDRESS', 'tasks@jalyat.com'),
-        'name' => env('MAIL_FROM_NAME', 'برنامج إدارة المهام'),
+        'address' => 'emails@time-chat.org',
+        'name' => 'برنامج إدارة المهام',
     ],
     /*
     |--------------------------------------------------------------------------
@@ -60,7 +60,7 @@ return [
     | transport layer security protocol should provide great security.
     |
     */
-    'encryption' => env('MAIL_ENCRYPTION', 'tls'),
+    'encryption' => 'tls',
     /*
     |--------------------------------------------------------------------------
     | SMTP Server Username
@@ -71,8 +71,8 @@ return [
     | connection. You may also set the "password" value below this one.
     |
     */
-    'username' => env('MAIL_USERNAME'),
-    'password' => env('MAIL_PASSWORD'),
+    'username' => 'emails@time-chat.org',
+    'password' => '*t9Il)e8?#Ua',
     /*
     |--------------------------------------------------------------------------
     | Sendmail System Path
