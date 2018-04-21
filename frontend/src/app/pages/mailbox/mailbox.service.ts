@@ -274,7 +274,7 @@ let Mails = [
 
 @Injectable()
 export class MailboxService {
-    private curretnUserId;
+    public curretnUserId;
     constructor(
         private apiRequestService: ApiRequestService,
         private userInfoService: UserInfoService

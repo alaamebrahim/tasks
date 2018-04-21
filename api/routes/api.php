@@ -168,6 +168,14 @@ $api->version('v1', function ($api) {
                 'middleware' => ['permission:user_delete']
             ]
         );
+        // updateBlockStatus a user
+        $api->post('/update-user-block-status',
+            [
+                'uses' => 'UsersController@updateBlockStatus',
+                'as' => 'api.user.block-user',
+                'middleware' => ['permission:user_block']
+            ]
+        );
         // Get All users
         $api->get('/get-users',
             [

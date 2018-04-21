@@ -31,3 +31,7 @@ i {
     font-weight:normal;
     font-style:normal;
 }
+
+.mat-icon-custom-size {
+    @include md-icon-size(64px);
+  }

@@ -17,8 +17,8 @@ export class VerticalMenuComponent implements OnInit {
   @Input('menuParentId') menuParentId;
   parentMenu: Array<any>;
   public settings: Settings;
-  private userRole: string;
-  private hasARole = false;
+  public userRole: string;
+  public hasARole = false;
   constructor(
     public appSettings: AppSettings,
     public menuService: MenuService,

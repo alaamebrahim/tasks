@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core'  ;
 
 @Injectable()
 export class MessagesService {
-    private meetings = [
+    public meetings = [
         {
             day: '09',
             month: 'May',

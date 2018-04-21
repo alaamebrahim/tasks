@@ -12,6 +12,7 @@ import { User } from '../users/user.model';
 import { AddNotificationComponent } from './add-notification/add-notification.component';
 import { Notification } from './add-notification/notification.model';
 import { UsersService } from '../users/users.service';
+import { UserInfoService } from '../../shared/services/user-info.service';
 
 @Component({
   selector: 'app-tasks',
@@ -22,11 +23,12 @@ export class TasksComponent {
   public icons = ['home', 'person', 'alarm', 'work', 'mail', 'favorite'];
   public colors = ['accent', 'primary', 'warn'];
   public settings: Settings;
-  private tasks: Task[];
-  private users: any[];
-  private page: any;
+  public tasks: Task[];
+  public users: any[];
+  public page: any;
   public step = 0;
-  private searchText: number;
+  public searchText: number;
+  public currentUserRole: string;
 
   constructor(
     public appSettings: AppSettings,
@@ -35,9 +37,11 @@ export class TasksComponent {
     private tasksService: TasksService,
     private notifyService: NotifyUserService,
     private usersService: UsersService,
+    private userInfoService: UserInfoService,
     public dialog: MatDialog,
   ) {
     this.settings = this.appSettings.settings;
+    this.currentUserRole = this.userInfoService.getUserInfo().role;
     this.getAllTasks();
     this.getUsers();
   }

@@ -60,7 +60,7 @@
                         <mat-icon *ngIf="user.is_blocked" class="warn-color">block</mat-icon>
                     </div>
                     <div class="user-social">
-                        <mat-slide-toggle color="primary" [checked]="user.is_blocked" (change)="user.is_blocked = !user.is_blocked"></mat-slide-toggle>
+                        <mat-slide-toggle color="primary" [checked]="!user.is_blocked" (change)="onBlockUser(user);"></mat-slide-toggle>
                     </div>
                 </div>
                 <div fxFlex="70" fxLayout="column" class="user-details transition-2" [class.blocked]="user.is_blocked">

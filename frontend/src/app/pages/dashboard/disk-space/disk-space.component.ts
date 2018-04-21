@@ -7,8 +7,8 @@ import { UserInfoService } from '../../../shared/services/user-info.service';
   templateUrl: './disk-space.component.html'
 })
 export class DiskSpaceComponent implements OnInit {
-  private completedCount = 0;
-  private uncompletedCount = 0;
+  public completedCount = 0;
+  public uncompletedCount = 0;
   public data: any[];
   public showLegend = false;
   public gradient = true;

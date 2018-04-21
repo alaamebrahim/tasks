@@ -43,6 +43,10 @@ export class UsersService {
         return this.apiRequestService.post('users/delete-user', user);
     }
 
+    blockUser(user: User) {
+        return this.apiRequestService.post('users/update-user-block-status', user);
+    }
+
     getRoles(): Observable<Role[]> {
         return this.apiRequestService.get('users/get-roles');
     }

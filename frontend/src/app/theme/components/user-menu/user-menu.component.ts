@@ -10,8 +10,8 @@ import { UserInStorage, UserInfoService } from '../../../shared/services/user-in
 })
 export class UserMenuComponent implements OnInit {
   public userImage: string;
-  private userInfo: UserInStorage;
-  private userPicPath = environment.userPicPath;
+  public userInfo: UserInStorage;
+  public userPicPath = environment.userPicPath;
 
   constructor(private userInfoService: UserInfoService) { }
 

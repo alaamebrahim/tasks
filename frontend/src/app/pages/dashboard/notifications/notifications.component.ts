@@ -7,7 +7,7 @@ import { NotificationsService } from '../../../shared/services/notifications.ser
   styleUrls: ['./notifications.component.scss']
 })
 export class NotificationsComponent implements OnInit {
-  private notifications: Notification;
+  public notifications: Notification;
   constructor(
     private notificationsService: NotificationsService,
   ) { }

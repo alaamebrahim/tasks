@@ -22,8 +22,8 @@
     </div>
     <div fxLayout="row" fxFlex="40%" fxLayoutAlign="space-between left" class="flex-p">
         <span>{{'tasks.labels.filter-by-user' | translate}}</span>
-        <mat-select placeholder="{{'users.form.username' | translate}}" [(ngModel)]="searchText">
-            <mat-option *ngFor="let user of users | UsersExceptRootPipe" [value]="user.id">{{user.first_name +' '+user.last_name}}</mat-option>
+        <mat-select placeholder="{{'users.form.username' | translate}}" [(ngModel)]="searchText" *ngxPermissionsOnly="['root', 'admin']">
+            <mat-option *ngFor="let user of users | UsersExceptRootPipe: currentUserRole" [value]="user.id">{{user.first_name +' '+user.last_name}}</mat-option>
         </mat-select>
     </div>
 </div>
@@ -35,11 +35,11 @@
                     <mat-icon *ngIf="task.progress === 100" class="mat-18 p-1" color="primary">verified_user</mat-icon>
                     <mat-icon *ngIf="task.progress < 100" class="mat-18 p-1" color="warn">assignment_late</mat-icon>
                     <mat-icon class="p-1" *ngIf="task.attachment" matTooltip="{{'tasks.buttons.has-attachment' | translate}}">attachment</mat-icon>
-                    <h4 class="p-1">{{task.title}}</h4>
+                    <h5 class="p-1">{{task.title}}</h5>
                 </mat-panel-title>
-                <mat-panel-description>
+                <mat-panel-description  fxHide.xs="true">
                 </mat-panel-description>
-                <i class="p-1">
+                <i class="p-1"  fxHide.xs="true">
                     <small>{{task.start_date}} : {{task.end_date}}</small>
                 </i>
                 <mat-chip-list class="p-1">
@@ -49,37 +49,44 @@
                         </i>
                     </mat-chip>
                 </mat-chip-list>
-                
+
             </mat-expansion-panel-header>
-            <p fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="mat-18">description</mat-icon>
-                <span>
-                    <i>{{task.description}}</i>
-                </span>
-            </p>
-            <p fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="mat-18">face</mat-icon>
-                <span>
-                    <i>{{task.first_name + ' ' + task.last_name}}</i>
-                </span>
-            </p>
-            <p fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="mat-18">low_priority</mat-icon>
-                <span>
-                    <i>{{'tasks.form.priority.levels.' + task.priority | translate}}</i>
-                </span>
-            </p>
-            <p fxLayout="row" fxLayoutAlign="start center">
-                <mat-icon class="mat-18">hourglass_empty</mat-icon>
-                <span>
-                    <mat-slider (change)="onProgressChange(task)" class="custom-slider w-50" [max]="100" [min]="0" [step]="1" [thumb-label]="true"
-                        [tick-interval]="tickInterval" [(ngModel)]="task.progress" [vertical]="false">
-                    </mat-slider>
-                    <i>
-                        <small>{{task.progress}}%</small>
-                    </i>
-                </span>
-            </p>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="flex-p">
+                <div fxLayout="column">
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">description</mat-icon>
+                        <span>
+                            <i>{{task.description}}</i>
+                        </span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">face</mat-icon>
+                        <span>
+                            <i>{{task.first_name + ' ' + task.last_name}}</i>
+                        </span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">low_priority</mat-icon>
+                        <span>
+                            <i>{{'tasks.form.priority.levels.' + task.priority | translate}}</i>
+                        </span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">hourglass_empty</mat-icon>
+                        <span>
+                            <mat-slider (change)="onProgressChange(task)" class="custom-slider w-50" [max]="100" [min]="0" [step]="1" [thumb-label]="true"
+                                [tick-interval]="tickInterval" [(ngModel)]="task.progress" [vertical]="false" [disabled]="task.progress === 100">
+                            </mat-slider>
+                            <i>
+                                <small>{{task.progress}}%</small>
+                            </i>
+                        </span>
+                    </p>
+                </div>
+                <div fxLayout="row">
+                    <mat-icon *ngIf="task.progress === 100" class="mat-icon-custom-size p-1" color="primary">verified_user</mat-icon>
+                </div>
+            </div>
             <div *ngIf="task.progress !== 100">
                 <button *ngxPermissionsOnly="['task_delete']" (click)="onDeleteTaskClick(task.id)" mat-raised-button color="warn" class="m-1">
                     <mat-icon class="mat-18">close</mat-icon> {{'buttons.delete' |translate}}
@@ -87,7 +94,8 @@
                 <button *ngxPermissionsOnly="['task_update']" (click)="onEditTaskClick(task)" mat-raised-button color="primary" class="m-1">
                     <mat-icon class="mat-18">update</mat-icon> {{'buttons.update' |translate}}
                 </button>
-                <button *ngxPermissionsOnly="['root','admin']" (click)="onSendNotificationClick(task)" mat-raised-button color="primary" class="m-1">
+                <button *ngxPermissionsOnly="['root','admin']" (click)="onSendNotificationClick(task)" mat-raised-button color="primary"
+                    class="m-1">
                     <mat-icon class="mat-18">exposure_plus_1</mat-icon> {{'tasks.buttons.add-notification' |translate}}
                 </button>
             </div>

@@ -119,10 +119,52 @@ class UsersController extends Controller
      * @return JsonResponse
      */
     public function deleteExistingUser(Request $request) {        
+        // Validation rules
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+            ]);
+        } catch (ValidationException $e) {
+            //var_dump($e);
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        }
         $data = $request->all();
         
         // save user object
         $this->userRepo->delete($data['id']);
+        // return success obj as json
+        return new JsonResponse([
+            'success' => true,
+            'message' => ''
+        ]);
+    }
+
+    /**
+     * block/unbloc a user
+     * @return JsonResponse
+     */
+    public function updateBlockStatus(Request $request) {        
+        // Validation rules
+        try {
+            $this->validate($request, [
+                'id' => 'required',
+                'is_blocked' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            //var_dump($e);
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        }
+        $data = $request->all();
+        $newData['is_blocked'] = !$data['is_blocked'];
+        // save user object
+        $this->userRepo->update($newData,$data['id']);
+
         // return success obj as json
         return new JsonResponse([
             'success' => true,

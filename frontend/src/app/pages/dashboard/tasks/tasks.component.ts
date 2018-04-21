@@ -10,7 +10,7 @@ import { Task } from '../../tasks/task.model';
 })
 export class TasksComponent implements OnInit {
 
-  private tasks: any[];
+  public tasks: any[];
   constructor(
     private userInfoService: UserInfoService,
     private dashboardService: DashboardService

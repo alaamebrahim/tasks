@@ -16,9 +16,9 @@ import { NotifyUserService } from '../../../shared/services/notify-user.service'
 export class ComposeComponent implements OnInit {
   public settings: Settings;
   public form: FormGroup;
-  private users: User[];
-  private sending = false;
-  private quillConfig = {
+  public users: User[];
+  public sending = false;
+  public quillConfig = {
     toolbar: [
       ['bold', 'italic', 'underline', 'strike'],        // toggled buttons
       ['blockquote', 'code-block'],

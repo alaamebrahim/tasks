@@ -15,8 +15,8 @@ import { NotifyUserService } from '../../../shared/services/notify-user.service'
 export class UserDialogComponent implements OnInit {
   public form: FormGroup;
   public passwordHide = true;
-  private roles: Role[];
-  private uploadedFile: File;
+  public roles: Role[];
+  public uploadedFile: File = null;
   @ViewChild('fileInput') fileInput;
 
   constructor(
@@ -116,6 +116,8 @@ export class UserDialogComponent implements OnInit {
       } else {
         (this.form.controls['id']) ? this.updateUser(this.form.value) : this.addUser(this.form.value);
       }
+    } else {
+      console.log('not valid form');
     }
   }
 

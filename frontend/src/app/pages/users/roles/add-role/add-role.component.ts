@@ -11,8 +11,8 @@ import { Permission } from '../../permissions/permission.model';
   styleUrls: ['./add-role.component.scss']
 })
 export class AddRoleComponent implements OnInit {
-  private form: FormGroup;
-  private working = false;
+  public form: FormGroup;
+  public working = false;
   public permissions: Permission[];
 
   constructor(
@@ -41,8 +41,8 @@ export class AddRoleComponent implements OnInit {
   onSaveRole() {
     const me = this;
     me.working = true;
-    console.log(this.form.value);
-    /*this.roleService.AddRole(this.form.value)
+    // console.log(this.form.value);
+    this.roleService.AddRole(this.form.value)
       .subscribe((response) => {
         if (response.success === true) {
           // console.log(response.message);
@@ -52,7 +52,7 @@ export class AddRoleComponent implements OnInit {
           this.notifyService.notifyUser('general.messages.error');
         }
         me.working = false;
-      });*/
+      });
   }
 
 }

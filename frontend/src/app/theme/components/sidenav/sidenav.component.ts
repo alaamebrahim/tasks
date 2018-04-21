@@ -15,10 +15,10 @@ import { UserInfoService, UserInStorage } from '../../../shared/services/user-in
 })
 export class SidenavComponent implements OnInit {
   public userImage: string;
-  private userInfo: UserInStorage;
+  public userInfo: UserInStorage;
   public menuItems: Array<any>;
   public settings: Settings;
-  private userPicPath = environment.userPicPath;
+  public userPicPath = environment.userPicPath;
   constructor(
     public appSettings: AppSettings,
     public menuService: MenuService,

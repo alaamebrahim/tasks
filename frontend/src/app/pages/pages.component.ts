@@ -22,7 +22,7 @@ export class PagesComponent implements OnInit {
   public lastScrollTop: number = 0;
   public showBackToTop: boolean = false;
   public toggleSearchBar: boolean = false;
-  private defaultMenu: string; //declared for return default menu when window resized 
+  public defaultMenu: string; //declared for return default menu when window resized 
   public scrolledContent: any;
 
   constructor(public appSettings: AppSettings, public router: Router, private menuService: MenuService) {

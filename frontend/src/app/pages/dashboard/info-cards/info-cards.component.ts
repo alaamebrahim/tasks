@@ -12,8 +12,8 @@ import { UserInfoService } from '../../../shared/services/user-info.service';
 })
 export class InfoCardsComponent implements OnInit {
   public tasks: any[];
-  private completedCount = 0;
-  private uncompletedCount = 0;
+  public completedCount = 0;
+  public uncompletedCount = 0;
   public colorScheme = {
     domain: ['#999']
   };

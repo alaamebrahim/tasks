@@ -106,6 +106,22 @@ export class UsersComponent implements OnInit {
     }
 
     /**
+     * Block user
+     * @param user
+     */
+    public onBlockUser(userdata) {
+        this.usersService.blockUser(userdata).subscribe(response => {
+            if (response.success === true) {
+                // console.log(response.message);
+                this.notifyService.notifyUser('general.messages.saved');
+            } else {
+                this.notifyService.notifyUser('general.messages.error');
+            }
+            this.getUsers();
+        });
+    }
+
+    /**
      * Even listener for changes in pagination
      * @param event
      */

@@ -14,8 +14,8 @@ import { Role } from '../../../login/role.model';
 })
 export class EditRoleComponent implements OnInit {
 
-  private form: FormGroup;
-  private working = false;
+  public form: FormGroup;
+  public working = false;
   public permissions: Permission[];
 
   constructor(
@@ -38,7 +38,7 @@ export class EditRoleComponent implements OnInit {
     this.getPermissions();
     if (this.role) {
       this.form.setValue(this.role);
-      console.log(this.form.value);
+      // console.log(this.form.value);
     }
   }
 

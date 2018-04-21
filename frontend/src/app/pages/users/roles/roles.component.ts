@@ -34,7 +34,7 @@ export class RolesComponent implements OnInit {
     this.roles = null; // for show spinner each time
     this.roleService.getRoles().subscribe(roles => {
       this.roles = roles;
-      console.log(roles);
+      // console.log(roles);
     });
 
   }

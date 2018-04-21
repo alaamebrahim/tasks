@@ -10,8 +10,8 @@ import { Router } from '@angular/router';
   styleUrls: ['./add-permission.component.scss']
 })
 export class AddPermissionComponent implements OnInit {
-  private form: FormGroup;
-  private working = false;
+  public form: FormGroup;
+  public working = false;
 
   constructor(
     private fb: FormBuilder,

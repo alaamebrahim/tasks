@@ -23,7 +23,7 @@ export class MailboxComponent implements OnInit {
   public newMail: boolean;
   public type = 'all';
   public searchText: string;
-  private userPic = environment.userPicPath;
+  public userPic = environment.userPicPath;
 
   constructor(public appSettings: AppSettings,
     private notifyService: NotifyUserService,

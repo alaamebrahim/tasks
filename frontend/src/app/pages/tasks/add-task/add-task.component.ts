@@ -13,18 +13,18 @@ import { Router } from '@angular/router';
 })
 export class AddTaskComponent implements OnInit {
 
-  private form: FormGroup;
-  private users: User[];
-  private working = false;
-  private attachment: string;
+  public form: FormGroup;
+  public users: User[];
+  public working = false;
+  public attachment: string;
   @ViewChild('fileInput') fileInput;
 
   constructor(
-    private fb: FormBuilder,
-    private usersService: UsersService,
-    private tasksService: TasksService,
-    private notifyService: NotifyUserService,
-    private router: Router,
+    public fb: FormBuilder,
+    public usersService: UsersService,
+    public tasksService: TasksService,
+    public notifyService: NotifyUserService,
+    public router: Router,
   ) {
     this.form = this.fb.group({
       id: null,
@@ -77,7 +77,7 @@ export class AddTaskComponent implements OnInit {
       this.usersService.uploadTaskAttachment(fileToUpload).subscribe(response => {
         if (response.success === true) {
           this.form.controls['attachment'].setValue(response.message);
-          console.log(this.form.value);
+          // console.log(this.form.value);
           this.attachment = response.message;
         }
       });

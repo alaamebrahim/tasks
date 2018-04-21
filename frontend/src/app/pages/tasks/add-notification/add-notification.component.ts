@@ -13,8 +13,8 @@ import { Notification } from './notification.model';
   styleUrls: ['./add-notification.component.scss']
 })
 export class AddNotificationComponent implements OnInit {
-  private form: FormGroup;
-  private saved = false;
+  public form: FormGroup;
+  public saved = false;
 
   constructor(
     private dialogRef: MatDialogRef<AddNotificationComponent>,

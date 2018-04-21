@@ -19,7 +19,7 @@ import { PermissionsService } from '../../shared/services/permissions.service';
 export class LoginComponent {
   public form: FormGroup;
   public settings: Settings;
-  private loading = false;
+  public loading = false;
   constructor(
     public appSettings: AppSettings,
     public fb: FormBuilder,
@@ -41,32 +41,44 @@ export class LoginComponent {
   }
 
   public onSubmit(): void {
-    this.loading = true;
-    if (this.form.valid) {
-      this.loginService.getToken(this.form.get('email').value, this.form.get('password').value)
+    const me = this;
+    me.loading = true;
+    if (me.form.valid) {
+      me.loginService.getToken(me.form.get('email').value, me.form.get('password').value)
         .then(resp => {
           // console.log(resp);
           if (resp === undefined) {
-            this.notifyService.notifyUser('login.messages.badcredits');
+            me.notifyService.notifyUser('login.messages.badcredits');
+            me.loading = false;
             return;
           }
           if (resp.login === 'token_generated') {
             sessionStorage.setItem('userToken', resp.data.token);
             // console.log('Yes, token is generated');
-            this.loginService.getUserDataByToken(resp.data.token)
+            me.loginService.getUserDataByToken(resp.data.token)
               .then(userResp => {
-                // console.log(userResp);
-                this.loginService.saveUserDataInSession(userResp, resp.data.token);
+                // console.log(userResp.data.is_blocked);
+                // Check if this user is activated and not blocked
+                if (userResp.data.is_blocked === 1 || userResp.data.is_active !== 1) {
+                  sessionStorage.clear();
+                  me.notifyService.notifyUser('login.messages.blocked');
+                  me.loading = false;
+                  return;
+                }
+                // Finally save user data
+                me.loginService.saveUserDataInSession(userResp, resp.data.token);
               }, error => {
-                this.loading = false;
-                this.notifyService.notifyUser('login.messages.error');
+                me.loading = false;
+                me.notifyService.notifyUser('login.messages.error');
                 console.log(error);
               });
           } else {
-            this.notifyService.notifyUser('login.messages.badcredits');
+            me.loading = false;
+            me.notifyService.notifyUser('login.messages.badcredits');
           }
         }, errResponse => {
-          this.notifyService.notifyUser('login.messages.error');
+          me.loading = false;
+          me.notifyService.notifyUser('login.messages.error');
           console.log(errResponse);
         });
     }

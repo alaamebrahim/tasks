@@ -15,9 +15,9 @@ import { Router } from '@angular/router';
 })
 export class EditTaskComponent implements OnInit {
 
-  private form: FormGroup;
-  private users: User[];
-  private saved = false;
+  public form: FormGroup;
+  public users: User[];
+  public saved = false;
 
   constructor(
     private dialogRef: MatDialogRef<EditTaskComponent>,
