@@ -138,12 +138,12 @@ class TasksController extends Controller
         
         $data['completed'] = $data['progress'] == 100 ? 1 : 0;
         $this->taskRepo->update($data, $data['id']);
-        //$this->taskRepo->saveModel($saveData);
+        //$this->taskget countRepo->saveModel($saveData);
 
         // return success obj as json
         return new JsonResponse([
             'success' => true,
-            'message' => ''
+            'message' => $data
         ]);
     }
 

@@ -17,7 +17,7 @@ export class DashboardService {
   }
 
   public getUserCompletedTasksCount(id: number) {
-    return this.apiRequestService.get('dashboard/get-user-completed-tasks-count/' + id);
+    return this.apiRequestService.get('dashboard/get-user-uncompleted-tasks-count/' + id);
   }
 
   public getUserUncompletedTasksCount(id: number) {
