@@ -7,6 +7,7 @@ import { ComposedMail } from './composed-mail.model';
 import { User } from '../../users/user.model';
 import { UsersService } from '../../users/users.service';
 import { NotifyUserService } from '../../../shared/services/notify-user.service';
+import { UserInfoService } from '../../../shared/services/user-info.service';
 
 @Component({
   selector: 'app-compose',
@@ -17,6 +18,7 @@ export class ComposeComponent implements OnInit {
   public settings: Settings;
   public form: FormGroup;
   public users: User[];
+  public userId: number;
   public sending = false;
   public quillConfig = {
     toolbar: [
@@ -47,8 +49,12 @@ export class ComposeComponent implements OnInit {
     public formBuilder: FormBuilder,
     private mailboxService: MailboxService,
     private usersService: UsersService,
-    private notifyService: NotifyUserService
-  ) { this.settings = this.appSettings.settings; }
+    private notifyService: NotifyUserService,
+    private userInfoService: UserInfoService
+  ) {
+    this.settings = this.appSettings.settings;
+    this.userId = this.userInfoService.getUserInfo() !== null ? this.userInfoService.getUserInfo().id : null;
+  }
 
   ngOnInit() {
     this.getAllUsers();

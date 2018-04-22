@@ -12,6 +12,7 @@ import { RolesExceptRootPipe } from './roles/roles-except-root.pipe';
 import { TasksFilterPipe } from './tasks/tasks-filter.pipe';
 import { UserFilterPipe } from './users/user-filter.pipe';
 import { TaskSearchPipe } from './tasks/task-search.pipe';
+import { UsersExceptCurrentPipe } from './users/users-except-current.pipe';
 
 @NgModule({
     imports: [
@@ -28,7 +29,8 @@ import { TaskSearchPipe } from './tasks/task-search.pipe';
         TruncatePipe,
         MailSearchPipe,
         UserFilterPipe,
-        TaskSearchPipe
+        TaskSearchPipe,
+        UsersExceptCurrentPipe
     ],
     exports: [
         PaginationPipe,
@@ -41,7 +43,8 @@ import { TaskSearchPipe } from './tasks/task-search.pipe';
         TruncatePipe,
         MailSearchPipe,
         UserFilterPipe,
-        TaskSearchPipe
+        TaskSearchPipe,
+        UsersExceptCurrentPipe
     ]
 })
 export class PipesModule { }
