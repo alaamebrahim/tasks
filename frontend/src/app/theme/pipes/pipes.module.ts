@@ -10,6 +10,7 @@ import { MailSearchPipe } from './search/mail-search.pipe';
 import { UsersExceptRootPipe } from './users/users-except-root.pipe';
 import { RolesExceptRootPipe } from './roles/roles-except-root.pipe';
 import { TasksFilterPipe } from './tasks/tasks-filter.pipe';
+import { UserFilterPipe } from './users/user-filter.pipe';
 
 @NgModule({
     imports: [
@@ -24,7 +25,8 @@ import { TasksFilterPipe } from './tasks/tasks-filter.pipe';
         RolesExceptRootPipe,
         TasksFilterPipe,
         TruncatePipe,
-        MailSearchPipe
+        MailSearchPipe,
+        UserFilterPipe
     ],
     exports: [
         PaginationPipe,
@@ -35,7 +37,8 @@ import { TasksFilterPipe } from './tasks/tasks-filter.pipe';
         RolesExceptRootPipe,
         TasksFilterPipe,
         TruncatePipe,
-        MailSearchPipe
+        MailSearchPipe,
+        UserFilterPipe
     ]
 })
 export class PipesModule { }

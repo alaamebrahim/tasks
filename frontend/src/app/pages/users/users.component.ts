@@ -10,6 +10,7 @@ import { LocaleService } from '../../shared/services/locale.service';
 import { NotifyUserService } from '../../shared/services/notify-user.service';
 import { environment } from '../../../environments/environment';
 import { Router } from '@angular/router';
+import { UserInfoService } from '../../shared/services/user-info.service';
 
 @Component({
     selector: 'app-users',
@@ -21,6 +22,7 @@ import { Router } from '@angular/router';
 export class UsersComponent implements OnInit {
     public users: User[];
     public searchText: string;
+    public currentUserRole: string;
     public page: any;
     public settings: Settings;
     private userPicPath = environment.userPicPath;
@@ -30,11 +32,13 @@ export class UsersComponent implements OnInit {
         public usersService: UsersService,
         private translator: TranslateService,
         private notifyService: NotifyUserService,
-        private router: Router
+        private router: Router,
+        private userInfoService: UserInfoService
     ) {
         this.settings = this.appSettings.settings;
         this.translator.setDefaultLang(sessionStorage.getItem('locale'));
         this.translator.use(sessionStorage.getItem('locale'));
+        this.currentUserRole = this.userInfoService.getUserInfo() !== null ? this.userInfoService.getUserInfo().role : '';
     }
 
     ngOnInit() {
