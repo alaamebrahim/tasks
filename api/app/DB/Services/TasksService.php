@@ -8,6 +8,7 @@ use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\DB\Repositories\TasksRepository as TaskRepo;
 use App\DB\Repositories\RoleRepository as RoleRepo;
+use Intervention\Image\Facades\Image;
 
 class TasksService {
 
@@ -70,11 +71,18 @@ class TasksService {
      * @return String
      */
     public function uploadTaskAttachment($image) {
-        $name = time().'.'.$image->getClientOriginalExtension();
-        $destinationPath = storage_path('/app/images');
+        /*$name = time().'.'.$image->getClientOriginalExtension();
         $path = 'uploads' . DIRECTORY_SEPARATOR . 'tasks_files' . DIRECTORY_SEPARATOR;
         $destinationPath = public_path($path); // upload path
         $image->move($destinationPath, $name);
+        return $name;*/
+        $name = time().'.'.$image->getClientOriginalExtension();
+        $path = 'uploads' . DIRECTORY_SEPARATOR . 'tasks_files' . DIRECTORY_SEPARATOR;
+        $destinationPath = public_path($path);
+        $img = Image::make($image->getRealPath());
+        $img->resize(800, null, function ($constraint) {
+		    $constraint->aspectRatio();
+        })->save($destinationPath.$name);
         return $name;
     }
 
