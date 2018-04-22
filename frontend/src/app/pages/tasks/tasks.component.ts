@@ -30,6 +30,7 @@ export class TasksComponent {
   public page: any;
   public step = 0;
   public searchText: number;
+  public taskTitle: string;
   public currentUserRole: string;
   public currentUserId: number;
 

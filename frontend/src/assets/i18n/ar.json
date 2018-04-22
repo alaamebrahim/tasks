@@ -211,7 +211,8 @@
 			"responsibleuser": "المستخدم المكلف"
 		},
 		"labels": {
-			"filter-by-user": "عرض حسب المستخدم"
+			"filter-by-user": "عرض حسب المستخدم",
+			"search": "بحث"
 		}
 	},
 	"notifications": {

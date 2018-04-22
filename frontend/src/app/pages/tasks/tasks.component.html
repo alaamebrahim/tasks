@@ -4,6 +4,13 @@
             <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.add-new' |translate}}
         </button>
     </div>
+    <div fxLayout="row">
+        <form class="user-search">
+            <mat-form-field>
+                <input matInput placeholder="{{'tasks.labels.search' | translate}}" [(ngModel)]="taskTitle" name="search">
+            </mat-form-field>
+        </form>
+    </div>
 </div>
 
 <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="flex-p">
@@ -29,7 +36,7 @@
 </div>
 <div fxFlex="100">
     <mat-accordion displayMode="default" [multi]="false" [hideToggle]="true">
-        <mat-expansion-panel *ngFor="let task of tasks | TasksFilterPipe: searchText | paginate: { itemsPerPage: 30, currentPage: page }">
+        <mat-expansion-panel *ngFor="let task of (tasks | TasksFilterPipe: searchText) | TaskSearchPipe: taskTitle | paginate: { itemsPerPage: 30, currentPage: page }">
             <mat-expansion-panel-header>
                 <mat-panel-title>
                     <mat-icon *ngIf="task.progress === 100" class="mat-18 p-1" color="primary">verified_user</mat-icon>
