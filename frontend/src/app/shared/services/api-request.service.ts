@@ -5,6 +5,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/catch';
 import { UserInfoService, LoginInfoInStorage } from './user-info.service';
 import { AppConfig } from '../../app-config';
+import { NotifyUserService } from './notify-user.service';
 
 
 @Injectable()
@@ -14,7 +15,8 @@ export class ApiRequestService {
         private appConfig: AppConfig,
         private http: HttpClient,
         private router: Router,
-        private userInfoService: UserInfoService
+        private userInfoService: UserInfoService,
+        private notifyService: NotifyUserService
     ) {
     }
 
@@ -37,7 +39,8 @@ export class ApiRequestService {
             .catch(function (error: any) {
                 console.log('Some error in catch');
                 if (error.status === 401 || error.status === 403) {
-                    me.router.navigate(['/login']);
+                    // me.router.navigate(['/login']);
+                    me.notifyService.notifyUser('user.unauthorized');
                 }
                 return [];
             });
@@ -49,7 +52,8 @@ export class ApiRequestService {
         return this.http.post(this.appConfig.baseApiPath + url, JSON.stringify(body), { headers: this.getHeaders() })
             .catch(function (error: any) {
                 if (error.status === 401) {
-                    me.router.navigate(['/login']);
+                    // me.router.navigate(['/login']);
+                    me.notifyService.notifyUser('user.unauthorized');
                 }
                 return [];
             });
@@ -60,7 +64,8 @@ export class ApiRequestService {
         return this.http.put(this.appConfig.baseApiPath + url, JSON.stringify(body), { headers: this.getHeaders() })
             .catch(function (error: any) {
                 if (error.status === 401) {
-                    me.router.navigate(['/login']);
+                    // me.router.navigate(['/login']);
+                    me.notifyService.notifyUser('user.unauthorized');
                 }
                 return [];
             });
@@ -71,7 +76,8 @@ export class ApiRequestService {
         return this.http.delete(this.appConfig.baseApiPath + url, { headers: this.getHeaders() })
             .catch(function (error: any) {
                 if (error.status === 401) {
-                    me.router.navigate(['/login']);
+                    // me.router.navigate(['/login']);
+                    me.notifyService.notifyUser('user.unauthorized');
                 }
                 return [];
             });
@@ -87,7 +93,8 @@ export class ApiRequestService {
         return this.http.post(this.appConfig.baseApiPath + url, formData, { headers: headers })
             .catch(function (error: any) {
                 if (error.status === 401) {
-                    me.router.navigate(['/login']);
+                    // me.router.navigate(['/login']);
+                    me.notifyService.notifyUser('user.unauthorized');
                 }
                 return [];
             });
