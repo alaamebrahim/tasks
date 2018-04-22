@@ -11,14 +11,15 @@ class NotificationsAddedMail extends Mailable
 {
     use Queueable, SerializesModels;
 
+    public $data;
     /**
      * Create a new message instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(array $data)
     {
-        //
+        $this->data = $data;
     }
 
     /**
@@ -28,6 +29,6 @@ class NotificationsAddedMail extends Mailable
      */
     public function build()
     {
-        return $this->from(env(MAIL_FROM))->view('mails.notifications-add');
+        return $this->subject(trans('messages.notifications.mail.message',['title' => $this->data['title']]))->view('emails.notifications-add');
     }
 }

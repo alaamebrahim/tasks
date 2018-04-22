@@ -98,7 +98,7 @@ class TasksController extends Controller
 
         
         $message .= trans('messages.notifications.mail.message2');
-        $this->notificationsService->sendNotificationByMail($users_emails, $message);
+        $this->notificationsService->sendNotificationByMail($users_emails, $data);
         //$this->taskRepo->saveModel($dataForSave);
 
         // return success obj as json

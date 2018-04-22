@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\DB\Repositories\MailboxRepository as MailboxRepo;
 use App\Mail\NewMail;
+use App\Mail\NotificationsAddedMail;
+
 class MailboxService {
 
     private $userRepo;
@@ -42,14 +44,14 @@ class MailboxService {
 
     public function sendMailWithTemplate ($to, $data){
         $this->to = $to;
-        // $this->subject = $subject;
         Mail::to($this->to)
             ->send(new NewMail($data));
-        /*$message, function($msg) { 
-            $msg->to($this->to); 
-            $msg->subject($this->subject);
-            $msg->from([$this->from]); 
-        });*/
+    }
+
+    public function sendNotification ($to = [], $data){
+        $this->to = $to;
+        Mail::to($this->to)
+            ->send(new NotificationsAddedMail($data));
     }
 
     /**

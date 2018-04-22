@@ -39,8 +39,8 @@ class NotificationsService {
         $notification->save();
     }
 
-    public function sendNotificationByMail($to = [], $message) {
-        $this->mailboxService->sendMail($to, trans('messages.notifications.mail.subject'), $message);
+    public function sendNotificationByMail($to = [], $data) {
+        $this->mailboxService->sendNotification($to, $data);
     }
 
     public function sendSingleNotification($request) {
