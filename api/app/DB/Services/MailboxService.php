@@ -9,6 +9,7 @@ use Tymon\JWTAuth\Facades\JWTAuth;
 use App\DB\Repositories\MailboxRepository as MailboxRepo;
 use App\Mail\NewMail;
 use App\Mail\NotificationsAddedMail;
+use App\Mail\SendSingleNotificationMail;
 
 class MailboxService {
 
@@ -52,6 +53,12 @@ class MailboxService {
         $this->to = $to;
         Mail::to($this->to)
             ->send(new NotificationsAddedMail($data));
+    }
+
+    public function sendSingleNotification ($to = [], $data){
+        $this->to = $to;
+        Mail::to($this->to)
+            ->send(new SendSingleNotificationMail($data));
     }
 
     /**

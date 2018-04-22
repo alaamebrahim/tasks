@@ -49,9 +49,7 @@ class NotificationsService {
         // Get user email
         $user_email = $this->userRepo->find($request->user_id)->email;
         // Send mail to user
-        $message = trans('messages.notifications.mail.remember.body') . "\n";
-        $message .= trans('messages.notifications.mail.remember.text') . "\n";
-        $message .= $request->text;
-        $this->mailboxService->sendMail($user_email, trans('messages.notifications.mail.remember.title'), $message);
+        $data = $request->all();
+        $this->mailboxService->sendSingleNotification($user_email, $data);
     }
 }
