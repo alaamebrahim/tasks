@@ -30,7 +30,7 @@
 </div>
 
 <div *ngIf="viewType.value == 'grid'" fxLayout="row wrap">
-    <div *ngFor="let user of (users | UserFilterPipe: currentUserRole)  | paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100"
+    <div *ngFor="let user of (users | UserFilterPipe: currentUserRole)  | UserSearchPipe: searchText |  paginate: { itemsPerPage: 10, currentPage: page }" fxFlex="100"
         fxFlex.gt-md="33.3" fxFlex.md="50" class="flex-p">
         <mat-card class="p-0">
             <div class="bg-primary" fxLayout="row" fxLayoutAlign="space-between center">
