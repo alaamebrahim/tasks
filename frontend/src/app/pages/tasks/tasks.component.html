@@ -92,6 +92,12 @@
                     <mat-icon *ngIf="task.progress === 100" class="mat-icon-custom-size p-1" color="primary">verified_user</mat-icon>
                 </div>
             </div>
+            <div fxLayout.xs="column" fxLayoutGap="5px" *ngIf="task.progress === 100">
+                <button *ngxPermissionsOnly="['root','admin', 'user']" [disabled]="!task.attachment" (click)="onShowAttachment(task)" mat-raised-button
+                    color="primary" class="m-1">
+                    <mat-icon class="mat-18">visibility</mat-icon> {{'tasks.buttons.show-attachment' |translate}}
+                </button>
+            </div>
             <div fxLayout.xs="column" fxLayoutGap="5px" *ngIf="task.progress !== 100">
                 <button *ngxPermissionsOnly="['root','admin', 'user']" [disabled]="!task.attachment" (click)="onShowAttachment(task)" mat-raised-button
                     color="primary" class="m-1">
