@@ -1,15 +1,13 @@
-<div fxLayout="row" fxLayoutAlign="space-between center" class="flex-p" *ngxPermissionsOnly="['root','admin']">
-    <div fxLayout="row">
+<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3px" class="flex-p" *ngxPermissionsOnly="['root','admin']">
+    <div>
         <button (click)="onAddNewTaskClick()" mat-raised-button color="primary" class="m-1" *ngxPermissionsOnly="['task_add']">
             <mat-icon class="mat-18">alarm_add</mat-icon> {{'tasks.buttons.add-new' |translate}}
         </button>
     </div>
-    <div fxLayout="row">
-        <form class="user-search">
-            <mat-form-field>
-                <input matInput placeholder="{{'tasks.labels.search' | translate}}" [(ngModel)]="taskTitle" name="search">
-            </mat-form-field>
-        </form>
+    <div>
+        <mat-form-field>
+            <input matInput placeholder="{{'tasks.labels.search' | translate}}" [(ngModel)]="taskTitle" name="search">
+        </mat-form-field>
     </div>
 </div>
 
