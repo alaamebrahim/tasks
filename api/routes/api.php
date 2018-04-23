@@ -180,7 +180,7 @@ $api->version('v1', function ($api) {
             [
                 'uses' => 'UsersController@getAllUsers',
                 'as' => 'api.user.all',
-                'middleware' => ['permission:user_view']
+                'middleware' => ['permission:user_view|user_list_view']
             ]
         );
     });
