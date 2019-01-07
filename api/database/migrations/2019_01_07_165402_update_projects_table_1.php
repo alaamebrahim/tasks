@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateTasksTable extends Migration
+class UpdateProjectsTable1 extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,9 @@ class UpdateTasksTable extends Migration
      */
     public function up()
     {
-        Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedInteger('project_id')->unsigned()->index()->nullable();
-            $table->foreign('project_id')->references('id')->on('projects');
+        Schema::table('projects', function (Blueprint $table) {
+            $table->unsignedInteger('created_by')->unsigned()->index()->nullabel();
+            $table->foreign('created_at')->references('id')->on('users');
         });
     }
 
