@@ -2,11 +2,8 @@ import { Routes, RouterModule, PreloadAllModules } from '@angular/router';
 import { ModuleWithProviders } from '@angular/core';
 
 import { PagesComponent } from './pages/pages.component';
-import { SearchComponent } from './pages/search/search.component';
 import { NotFoundComponent } from './pages/errors/not-found/not-found.component';
 import { ErrorComponent } from './pages/errors/error/error.component';
-import { RolesGuardService } from './shared/services/roles-guard.service';
-import { AuthGuard } from './shared/services/auth_guard.service';
 import { NgxPermissionsGuard } from 'ngx-permissions';
 
 export const routes: Routes = [
@@ -41,6 +38,14 @@ export const routes: Routes = [
                 canActivate: [NgxPermissionsGuard],
                 data: {
                     breadcrumb: 'المهام', permissions: { only: ['task_view'], redirectTo: '/' }
+                }
+            },
+            {
+                path: 'projects',
+                loadChildren: 'app/pages/projects/projects.module#ProjectsModule',
+                canActivate: [NgxPermissionsGuard],
+                data: {
+                    breadcrumb: 'المشاريع', permissions: { only: ['projects_view'], redirectTo: '/' }
                 }
             }
         ]

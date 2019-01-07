@@ -35,13 +35,8 @@ import {
   MatStepperModule,
 } from '@angular/material';
 import { TranslateModule } from '@ngx-translate/core';
-import { TranslateLoader } from '@ngx-translate/core';
-import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
-import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { LocaleService } from './services/locale.service';
-import { AuthGuard } from './services/auth_guard.service';
-import { RolesGuardService } from './services/roles-guard.service';
+import { HttpClientModule } from '@angular/common/http';
 import { NgxPermissionsModule } from 'ngx-permissions';
 
 

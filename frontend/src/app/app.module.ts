@@ -41,7 +41,6 @@ import { ApiRequestService } from './shared/services/api-request.service';
 import { LoginService } from './shared/services/login.service';
 import { TranslateService, TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NgxPermissionsModule } from 'ngx-permissions';
-import { Http } from '@angular/http';
 import { HttpClient } from '@angular/common/http';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AuthGuard } from './shared/services/auth_guard.service';
