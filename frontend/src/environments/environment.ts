@@ -5,7 +5,7 @@
 
 export const environment = {
   production: false,
-  apiUrl: 'http://localhost/tasks/api/public/',
-  userPicPath: 'http://localhost/tasks/api/public/uploads/user_files/',
-  attachmentsPath: 'http://localhost/tasks/api/public/uploads/tasks_files/'
+  apiUrl: 'http://tasks.test/',
+  userPicPath: 'http://tasks.test/uploads/user_files/',
+  attachmentsPath: 'http://tasks.test/uploads/tasks_files/'
 };
