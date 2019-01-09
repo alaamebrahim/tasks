@@ -215,6 +215,27 @@
 			"search": "بحث"
 		}
 	},
+	"projects": {
+		"general": {
+			"no-projects": "عفواً ، لم يتم إضافة مشاريع أو أنك لا تنتمى إلى أى مشروع..."
+		},
+		"addproject": {
+			"head": "إضافة مشروع جديد"
+		},
+		"form": {
+			"title": "اسم المشروع",
+			"description": "وصف المشروع",
+			"attachment": "صورة المشروع",
+			"allowed_users": "أعضاء المجموعة",
+			"opened":  "حالة المشروع"
+		},
+		"edit-title": "تعديل بيانات المشروع",
+		"buttons": {
+			"add-new": "إضافة مشروع جديد",
+			"all": "عرض الكل",
+			"delete": "حذف المشروع"
+		}
+	},
 	"notifications": {
 		"form": {
 			"text": "نص التنبيه"

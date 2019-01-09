@@ -308,6 +308,60 @@ $api->version('v1', function ($api) {
     });
 
     /*************************************************************
+     * Projects controller routes
+     ************************************************************/
+    $api->group([
+        'middleware' => 'api.auth',
+        'prefix'     => '/projects/',
+        'namespace'  => 'App\Http\Controllers\Tasks',
+    ], function ($api) {
+        // add | update project
+        $api->post('/add-project',
+            [
+                'uses' => 'ProjectController@AddOrUpdateProject',
+                'as' => 'api.project.addOrUpdate',
+                'middleware' => ['permission:projects_add|projects_update']
+            ]
+        );
+
+        // delete a project
+        $api->post('/delete-project',
+            [
+                'uses' => 'ProjectController@deleteExistingProject',
+                'as' => 'api.project.deleteExisting',
+                'middleware' => ['permission:projects_delete']
+            ]
+        );
+        // Get All project
+        $api->get('/get-projects',
+            [
+                'uses' => 'ProjectController@getAllProjects',
+                'as' => 'api.project.all',
+                'middleware' => ['permission:projects_view']
+            ]
+        );
+
+        // Get project by id
+        $api->get('/get-project/{id}',
+            [
+                'uses' => 'ProjectController@getProjectById',
+                'as' => 'api.project.one',
+                'middleware' => ['permission:projects_view']
+            ]
+        );
+
+        // Upload image
+        $api->post('/upload-image',
+            [
+                'uses' => 'ProjectController@UploadImage',
+                'as' => 'api.project.upload-image',
+                'middleware' => ['permission:projects_add|projects_update']
+            ]
+        );
+
+    });
+
+    /*************************************************************
      * Notifications controller routes
      ************************************************************/
     $api->group([

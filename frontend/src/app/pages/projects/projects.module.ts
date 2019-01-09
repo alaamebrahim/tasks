@@ -6,7 +6,9 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {NgxPaginationModule} from 'ngx-pagination';
 import {PipesModule} from '../../theme/pipes/pipes.module';
 import {ViewProjectsComponent} from './view-projects/view-projects.component';
-import {ProjectsService} from "./projects.service";
+import {ProjectsService} from './projects.service';
+import { AddProjectComponent } from './add-project/add-project.component';
+import { UpdateProjectComponent } from './update-project/update-project.component';
 
 export const routes = [
     {
@@ -17,13 +19,20 @@ export const routes = [
             breadcrumb: 'المشاريع', permissions: {only: ['projects_view'], redirectTo: '/'}
         }
     },
-    // {
-    //     path: 'add-project',
-    //     component: AddTaskComponent,
-    //     data: {
-    //         breadcrumb: 'مشروع جديد', permissions: {only: ['projects_add'], redirectTo: '/'}
-    //     }
-    // }
+    {
+        path: 'add-project',
+        component: AddProjectComponent,
+        data: {
+            breadcrumb: 'مشروع جديد', permissions: {only: ['projects_add'], redirectTo: '/'}
+        }
+    },
+    {
+        path: 'update-project/:id',
+        component: UpdateProjectComponent,
+        data: {
+            breadcrumb: 'تعديل بيانات مشروع', permissions: {only: ['projects_update'], redirectTo: '/'}
+        }
+    }
 ];
 
 @NgModule({
@@ -37,7 +46,9 @@ export const routes = [
         PipesModule
     ],
     declarations: [
-        ViewProjectsComponent
+        ViewProjectsComponent,
+        AddProjectComponent,
+        UpdateProjectComponent,
     ],
     providers: [
         ProjectsService

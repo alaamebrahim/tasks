@@ -1,0 +1,46 @@
+<div fxLayout="column" *ngIf="!loading">
+    <div class="flex-p">
+        <mat-card>
+            <mat-card-header fxLayoutAlign="center">
+                <mat-card-subtitle>
+                    <h2>{{'projects.edit-title' | translate}}</h2>
+                </mat-card-subtitle>
+            </mat-card-header>
+            <mat-card-content fxLayout="column" fxLayoutAlign="center">
+                <form [formGroup]="form">
+                    <div fxLayout="column" class="form-field-outer w-100">
+                        <mat-input-container>
+                            <mat-placeholder>
+                                <mat-icon>person</mat-icon> {{'projects.form.title' | translate}}</mat-placeholder>
+                            <input matInput formControlName="title" required>
+                        </mat-input-container>
+                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                                <textarea matInput formControlName="description" required placeholder="{{'projects.form.description' | translate}}" rows="5"></textarea>
+                            </mat-input-container>
+                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                            <mat-select formControlName="allowed_users" multiple required placeholder="{{'projects.form.allowed_users' | translate}}">
+                                <mat-option *ngFor="let user of users" [value]="user.id">
+                                    {{user.first_name === '' ? user.email : user.first_name}} {{user.last_name === '' ? '' : user.last_name}}
+                                </mat-option>
+                            </mat-select>
+                        </mat-input-container>
+                        <div class="w-100 text-right">
+                            <input #fileInput type="file" (change)="addFile()" style="display: none;" />
+                            <button class="bg-accent" mat-button (click)="fileInput.click()">{{'projects.form.attachment' | translate}}</button>
+                            <label>{{image}}</label>
+                        </div>
+                        <div class="w-100 text-right">
+                            <mat-checkbox formControlName="opened" color="primary">{{'projects.form.opened' | translate}}</mat-checkbox>
+                        </div>
+                    </div>
+                </form>
+            </mat-card-content>
+            <mat-card-footer fxLayout="column">
+                <button mat-raised-button color="primary" (click)="onSaveProject()" [disabled]="!form.valid || working">{{'buttons.save' | translate}}</button>
+            </mat-card-footer>
+        </mat-card>
+    </div>
+</div>
+<div *ngIf="loading" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
+</div>

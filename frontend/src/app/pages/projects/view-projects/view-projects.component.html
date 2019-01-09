@@ -1,3 +1,50 @@
-<p>
-  view-projects works!
-</p>
+<div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row wrap" class="bg-accent p-5 m-5">
+    يمكنك عرض / إضافة / تعديل / حذف المجموعات من خلال هذه الصفحة
+</div>
+<div fxLayout="row" fxLayoutAlign="center center" class="flex-p" *ngxPermissionsOnly="['root','admin']">
+    <div>
+        <button (click)="onAddNewProjectClick()" mat-raised-button color="primary" class="m-1" *ngxPermissionsOnly="['projects_add']">
+            <mat-icon class="mat-18">add_circle_outline</mat-icon> {{'projects.buttons.add-new' |translate}}
+        </button>
+    </div>
+</div>
+<div fxLayout="column" fxLayout.gt-sm="row wrap" *ngIf="!loading && projects && projects.length > 0">
+    <div fxFlex.md="50" fxFlex="33.3" class="flex-p" *ngFor="let project of projects">
+        <mat-card class="custom-card">
+            <mat-card-header class="bg-primary p-1" fxLayoutAlign="space-between center">
+                <mat-card-title class="m-0">
+                    <h3>{{project.title}}</h3>
+                </mat-card-title>
+            </mat-card-header>
+            <img mat-card-image [src]="project.image == '' ? 'assets/img/app/5.jpg' : imagePath + project.image" [alt]="project.title" height="240">
+            <mat-card-content class="p-">
+                <div class="pre-scrollable">{{project.description}}</div>
+            </mat-card-content>
+            <mat-divider></mat-divider>
+            <mat-card-actions fxLayoutAlign="center center">
+                <button mat-icon-button *ngxPermissionsOnly="['projects_delete']"
+                        matTooltip="{{'projects.buttons.delete' | translate}}"
+                        (click)="onDeleteProjectClick(project.id)">
+                    <mat-icon color="danger">delete</mat-icon>
+                </button>
+                <button mat-icon-button *ngxPermissionsOnly="['projects_update']"
+                        matTooltip="{{'projects.edit-title' | translate}}"
+                        (click)="onUpdateProjectClick(project.id)">
+                    <mat-icon>update</mat-icon>
+                </button>
+                <button mat-icon-button color="primary" >
+                    <mat-icon>arrow_back</mat-icon>
+                </button>
+            </mat-card-actions>
+        </mat-card>
+    </div>
+</div>
+
+<div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row wrap" *ngIf="!loading && (!projects || projects.length === 0)" class="p-5 m-5">
+    {{ 'projects.general.no-projects' | translate}}
+</div>
+
+
+<div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row wrap" *ngIf="loading" class="p-5 m-5">
+    <mat-spinner color="primary"></mat-spinner>
+</div>

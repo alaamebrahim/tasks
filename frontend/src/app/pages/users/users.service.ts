@@ -7,6 +7,7 @@ import { Role } from '../login/role.model';
 
 @Injectable()
 export class UsersService {
+
     constructor(
         public http: HttpClient,
         private apiRequestService: ApiRequestService

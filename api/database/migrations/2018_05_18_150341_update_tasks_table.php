@@ -14,8 +14,8 @@ class UpdateTasksTable extends Migration
     public function up()
     {
         Schema::table('tasks', function (Blueprint $table) {
-            $table->unsignedInteger('project_id')->unsigned()->index()->nullable();
-            $table->foreign('project_id')->references('id')->on('projects');
+            // $table->unsignedInteger('project_id')->unsigned()->index()->nullable();
+            // $table->foreign('project_id')->references('id')->on('projects');
         });
     }
 

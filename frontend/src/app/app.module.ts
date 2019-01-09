@@ -93,7 +93,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     FullScreenComponent,
     ApplicationsComponent,
     MessagesComponent,
-    UserMenuComponent
+    UserMenuComponent,
   ],
   providers: [
     AppSettings,

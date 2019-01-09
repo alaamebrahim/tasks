@@ -22,32 +22,27 @@ class ProjectsRepository extends Repository
     }
 
     /**
-     * Returns all tasks for an user
-     */
-    public function getAllProjectsByUser($id)
-    {
-        return DB::table($this->table)
-            ->leftJoin('users', 'projects.created_by', '=', 'users.id')
-            ->orderBy('projects.updated_at', 'desc')
-            ->where('projects.created_by', '=', $id)
-            ->orderBy('created_by.updated_at', 'desc')
-            ->select(['projects.*', 'users.first_name', 'users.last_name'])
-            ->groupBy('projects.id')
-            ->get();
-    }
-
-    /**
-     * Returns all tasks for an user
+     * Returns all Projects
      */
     public function getAllProjects()
     {
-        return DB::table($this->table)
-            ->leftJoin('users', 'projects.user_id', '=', 'users.id')
-            ->leftJoin('notifications', 'projects.id', '=', 'notifications.task_id')
-            ->orderBy('projects.updated_at', 'desc')
-            ->orderBy('projects.completed', 'desc')
-            ->select(['projects.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
-            ->groupBy('projects.id')
-            ->get();
+        return collect(parent::all())->toArray();
+    }
+
+    /**
+     * Get all projects by user
+     */
+    public function getAllProjectsByUser($userId)
+    {
+        return collect(DB::table('projects')
+            ->whereRow('json_contains(allowed_users, \'["' . $userId . '"]\')')
+            ->get())->toArray();
+    }
+
+    /**
+     * Get project by its id
+     */
+    public function getProjectById($id) {
+        return parent::findBy('id', $id);
     }
 }

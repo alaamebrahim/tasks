@@ -7,5 +7,6 @@ export const environment = {
   production: false,
   apiUrl: 'http://tasks.test/',
   userPicPath: 'http://tasks.test/uploads/user_files/',
+  projectsImagePath: 'http://tasks.test/uploads/projects_files/',
   attachmentsPath: 'http://tasks.test/uploads/tasks_files/'
 };

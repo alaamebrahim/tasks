@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class UpdateProjectsTable1 extends Migration
+class UpdateProjectsTable3 extends Migration
 {
     /**
      * Run the migrations.
@@ -14,8 +14,7 @@ class UpdateProjectsTable1 extends Migration
     public function up()
     {
         Schema::table('projects', function (Blueprint $table) {
-            // $table->unsignedInteger('created_by')->unsigned()->index()->nullabel();
-            // $table->foreign('created_at')->references('id')->on('users');
+            $table->json("allowed_users");
         });
     }
 

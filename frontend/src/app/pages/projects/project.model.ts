@@ -6,4 +6,6 @@ export class Project {
     created_at: Date;
     updated_at: Date;
     created_by: number;
+    allowed_users: any[];
+    image: string;
 }
