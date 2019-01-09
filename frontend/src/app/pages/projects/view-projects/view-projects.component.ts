@@ -1,8 +1,11 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, ViewChild} from '@angular/core';
 import {Router} from '@angular/router';
 import {ProjectsService} from '../projects.service';
 import {Project} from '../project.model';
 import {environment} from '../../../../environments/environment';
+import {ConfirmationDialogComponent} from '../../../theme/components/confirmation-dialog/confirmation-dialog.component';
+import {Confirm} from '../../../theme/components/confirmation-dialog/confirm.model';
+import {MatDialog} from "@angular/material";
 
 @Component({
     selector: 'app-view-projects',
@@ -15,7 +18,12 @@ export class ViewProjectsComponent implements OnInit {
     loading = true;
     public imagePath = environment.projectsImagePath;
 
+    /** Detect confirmation dialog action */
+    @ViewChild(ConfirmationDialogComponent) confirmationDialogComponent;
+
+
     constructor(
+        public dialog: MatDialog,
         private router: Router,
         private projectService: ProjectsService
     ) {
@@ -31,7 +39,7 @@ export class ViewProjectsComponent implements OnInit {
     async getProjectsList() {
         const me = this;
         await me.projectService.getProjectsList().then(response => {
-            me.projects = response
+            me.projects = response;
         });
         me.loading = false;
     }
@@ -50,7 +58,27 @@ export class ViewProjectsComponent implements OnInit {
         this.router.navigate(['/projects/update-project/' + projectId]);
     }
 
-    onDeleteProjectClick(projectId: any) {
+    async onDeleteProjectClick(project: any) {
 
+        /** confirm object */
+        const confirmation: Confirm = {
+            'title': 'تأكيد الحذف',
+            'message': 'هل أنت متأكد من حذف البيان؟ لا يمكن استرجاع البيانات المحذوفة'
+        };
+
+        const me = this;
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: confirmation,
+            minWidth: '50%',
+            direction: 'rtl',
+        }).componentInstance.accepted.subscribe((accepted) => {
+            if (accepted) {
+                me.projectService.deleteProject(project).then(data => {
+                    me.projects = data;
+                });
+            } else {
+                console.log('denied');
+            }
+        });
     }
 }

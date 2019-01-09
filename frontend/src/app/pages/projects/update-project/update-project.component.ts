@@ -39,7 +39,7 @@ export class UpdateProjectComponent implements OnInit {
             description: [null, Validators.compose([Validators.required])],
             image: null,
             allowed_users: [null],
-            opened: false,
+            opened: null,
             created_at: null,
             updated_at: null,
             created_by: null,
@@ -48,7 +48,6 @@ export class UpdateProjectComponent implements OnInit {
 
     ngOnInit() {
         const me = this;
-        console.log(this.id);
         me.getProjectById(this.id);
         this.getAllUsers();
     }
@@ -82,7 +81,7 @@ export class UpdateProjectComponent implements OnInit {
     async getProjectById(projectId: any) {
         const me = this;
         await me.projectService.getProjectById(projectId).then(response => {
-            console.log(response);
+            console.log(response.opened);
             me.image = response.image;
             me.form.setValue(response);
         }).catch(error => console.log(error));

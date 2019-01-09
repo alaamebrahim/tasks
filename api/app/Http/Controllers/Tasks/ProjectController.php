@@ -3,20 +3,13 @@
 namespace App\Http\Controllers\Tasks;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use Tymon\JWTAuth\Exceptions\JWTException;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exception\HttpResponseException;
-use App\DB\Repositories\UserRepository as UserRepo;
-use App\DB\Repositories\RoleRepository as RoleRepo;
-use App\DB\Repositories\ProjectsRepository as ProjectsRepo;
 use App\DB\Services\NotificationsService as NotificationsService;
 use App\DB\Services\ProjectsService as ProjectsService;
-use App\DB\Models\User;
-use Carbon\Carbon;
+use Illuminate\Support\Facades\Log;
 
 class ProjectController extends Controller
 {
@@ -63,6 +56,8 @@ class ProjectController extends Controller
     /**
      * Delete a project
      * @Returns JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function deleteExistingProject(Request $request)
     {       
@@ -73,6 +68,7 @@ class ProjectController extends Controller
             ]);
         } catch (ValidationException $e) {
             //var_dump($e);
+            Log::error($e->getMessage());
             return new JsonResponse([
                 'success' => false,
                 'message' => trans('messages.validations.error')
@@ -81,10 +77,15 @@ class ProjectController extends Controller
         $data = $request->all();
 
         $done = $this->projectsService->removeProject($data['id']);
+
+        if($done == true) {
+            $returnedData = $this->getAllProjects();
+        }
         // return success obj as json
         return new JsonResponse([
             'success' => $done,
-            'message' => ''
+            'message' => '',
+            'data'    => $returnedData ?? ''
         ]);
     }
 

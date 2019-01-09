@@ -39,6 +39,7 @@ class ProjectsService
             }
             $toBeSaved = [];
             $toBeSaved['image'] = $request->image ?? '';
+            $toBeSaved['opened'] = $request->opened ?? true;
             $toBeSaved['title'] = $request->title;
             $toBeSaved['description'] = $request->description;
             $toBeSaved['created_by'] = $current_user->id;
@@ -62,18 +63,14 @@ class ProjectsService
     {
         try {
             $current_user = JWTAuth::parseToken()->authenticate();
-
-            if (!$current_user) {
-                return false;
+            if ($current_user) {
+                $this->projectsRepo->delete($id);
+                return true;
             }
-
-            $this->projectsRepo->delete($id);
-            return true;
-
         } catch (\Throwable $th) {
             Log::error($th);
-            return false;
         }
+        return false;
     }
 
     /**

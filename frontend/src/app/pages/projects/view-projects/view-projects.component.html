@@ -11,7 +11,7 @@
 <div fxLayout="column" fxLayout.gt-sm="row wrap" *ngIf="!loading && projects && projects.length > 0">
     <div fxFlex.md="50" fxFlex="33.3" class="flex-p" *ngFor="let project of projects">
         <mat-card class="custom-card">
-            <mat-card-header class="bg-primary p-1" fxLayoutAlign="space-between center">
+            <mat-card-header [ngClass]="{'bg-primary' : project.opened, 'bg-accent': !project.opened, 'p-1': project.opened || !project.opened}" fxLayoutAlign="space-between center">
                 <mat-card-title class="m-0">
                     <h3>{{project.title}}</h3>
                 </mat-card-title>
@@ -24,7 +24,7 @@
             <mat-card-actions fxLayoutAlign="center center">
                 <button mat-icon-button *ngxPermissionsOnly="['projects_delete']"
                         matTooltip="{{'projects.buttons.delete' | translate}}"
-                        (click)="onDeleteProjectClick(project.id)">
+                        (click)="onDeleteProjectClick(project)">
                     <mat-icon color="danger">delete</mat-icon>
                 </button>
                 <button mat-icon-button *ngxPermissionsOnly="['projects_update']"

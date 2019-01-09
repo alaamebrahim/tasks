@@ -32,7 +32,7 @@ export class AddProjectComponent implements OnInit {
             description: [null, Validators.compose([Validators.required])],
             image: null,
             allowed_users: [null],
-            opened: true
+            opened: 1
         });
     }
 
