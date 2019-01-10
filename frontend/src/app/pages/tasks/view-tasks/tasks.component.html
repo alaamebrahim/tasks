@@ -154,6 +154,7 @@
         </mat-expansion-panel>
     </mat-accordion>
 </div>
+
 <div *ngIf="tasks" fxLayout="row wrap">
     <div fxFlex="100" class="flex-p">
         <mat-card class="p-0 text-center">
@@ -161,6 +162,10 @@
                                  (pageChange)="onPageChanged($event)"></pagination-controls>
         </mat-card>
     </div>
+</div>
+
+<div *ngIf="tasks && tasks.length == 0" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    {{'tasks.no-tasks' | translate}}
 </div>
 
 <div *ngIf="!tasks" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
