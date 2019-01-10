@@ -8,115 +8,143 @@ use App\DB\Models\Tasks as Task;
 use App\DB\Models\User;
 use Illuminate\Support\Facades\DB;
 
-class TasksRepository extends Repository {
-    public function model () {
+class TasksRepository extends Repository
+{
+    public function model()
+    {
         return 'App\DB\Models\Tasks';
     }
 
     /**
      * Returns all tasks for an user
      */
-    public function getAllTasksByUser ($id) {
+    public function getAllTasksByUser($id)
+    {
         return DB::table('tasks')
-                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
-                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
-                    ->orderBy('tasks.updated_at', 'desc')
-                    ->where('tasks.user_id', '=', $id)
-                    ->orderBy('tasks.updated_at','desc')
-                    ->orderBy('tasks.completed','desc')
-                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
-                    ->groupBy('tasks.id')
-                    ->get();
+            ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+            ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
+            ->orderBy('tasks.updated_at', 'desc')
+            ->where('tasks.user_id', '=', $id)
+            ->orderBy('tasks.updated_at', 'desc')
+            ->orderBy('tasks.completed', 'desc')
+            ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+            ->groupBy('tasks.id')
+            ->get();
     }
 
     /**
      * Returns all tasks for an user
+     * @param $projectId
+     * @return
      */
-    public function getAllTasks () {
+    public function getAllTasks($projectId)
+    {
         return DB::table('tasks')
-                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
-                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
-                    ->orderBy('tasks.updated_at','desc')
-                    ->orderBy('tasks.completed','desc')
-                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
-                    ->groupBy('tasks.id')
-                    ->get();
+            ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+            ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
+            ->leftJoin('projects', 'tasks.project_id', '=', 'projects.id')
+            ->orderBy('tasks.updated_at', 'desc')
+            ->orderBy('tasks.completed', 'desc')
+            ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+            ->where('projects.id', '=', $projectId)
+            ->groupBy('tasks.id')
+            ->get();
     }
 
     /**
      * Get completed/uncompleted tasks
+     * @param $status
+     * @param $projectId
+     * @return
      */
-    public function getTasksByStatus($status) {
+    public function getTasksByStatus($status, $projectId)
+    {
         return DB::table('tasks')
-                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
-                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
-                    ->where('completed', '=', $status)
-                    ->orderBy('tasks.updated_at','desc')
-                    ->orderBy('tasks.completed','desc')
-                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
-                    ->groupBy('tasks.id')
-                    ->get();
+            ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+            ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
+            ->leftJoin('projects', 'tasks.project_id', '=', 'projects.id')
+            ->where('completed', '=', $status)
+            ->where('projects.id', '=', $projectId)
+            ->orderBy('tasks.updated_at', 'desc')
+            ->orderBy('tasks.completed', 'desc')
+            ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+            ->groupBy('tasks.id')
+            ->get();
     }
 
     /**
      * Get completed/uncompleted tasks depending on current user
+     * @param $status
+     * @param $user_id
+     * @param $projectId
+     * @return
      */
-    public function getTasksByStatusAndUser($status, $user_id) {
+    public function getTasksByStatusAndUser($status, $user_id, $projectId)
+    {
         return DB::table('tasks')
-                    ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
-                    ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
-                    ->where('tasks.user_id', '=', $user_id)
-                    ->where('completed', '=', $status)
-                    ->orderBy('tasks.updated_at','desc')
-                    ->orderBy('tasks.completed','desc')
-                    ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
-                    ->groupBy('tasks.id')
-                    ->get();
+            ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
+            ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
+            ->leftJoin('projects', 'tasks.project_id', '=', 'projects.id')
+            ->where('tasks.user_id', '=', $user_id)
+            ->where('completed', '=', $status)
+            ->where('projects.id', '=', $projectId)
+            ->orderBy('tasks.updated_at', 'desc')
+            ->orderBy('tasks.completed', 'desc')
+            ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
+            ->groupBy('tasks.id')
+            ->get();
     }
 
-    public function getLastAddedTasksIdByDateCreated($created_at) {
+    public function getLastAddedTasksIdByDateCreated($created_at)
+    {
         return DB::table('tasks')
-                    ->where('created_at', '=', $created_at)
-                    ->select('tasks.id')
-                    ->get();
+            ->where('created_at', '=', $created_at)
+            ->select('tasks.id')
+            ->get();
     }
 
-    public function getCompletedTasksCount(){
+    public function getCompletedTasksCount()
+    {
         return Task::where('completed', '=', true)
-                    ->count();
+            ->count();
     }
 
-    public function getUncompletedTasksCount(){
+    public function getUncompletedTasksCount()
+    {
         return Task::where('completed', '=', false)
-                    ->count();
+            ->count();
     }
 
-    public function getUserCompletedTasksCount($id){
+    public function getUserCompletedTasksCount($id)
+    {
         return Task::where('completed', '=', true)
-                    ->where('user_id', '=', $id)
-                    ->count();
+            ->where('user_id', '=', $id)
+            ->count();
     }
 
-    public function getUserUncompletedTasksCount($id){
+    public function getUserUncompletedTasksCount($id)
+    {
         return Task::where('completed', '=', false)
-                    ->where('user_id', '=', $id)
-                    ->count();
+            ->where('user_id', '=', $id)
+            ->count();
     }
 
-    public function getLastTasks(){
+    public function getLastTasks()
+    {
         return DB::table('tasks')
-                ->orderBy('id', 'desc')
-                ->limit(18)
-                ->select('tasks.*')
-                ->get();
+            ->orderBy('id', 'desc')
+            ->limit(18)
+            ->select('tasks.*')
+            ->get();
     }
 
-    public function getUserLastTasks($id){
+    public function getUserLastTasks($id)
+    {
         return DB::table('tasks')
-                ->orderBy('id', 'desc')
-                ->where('user_id', '=', $id)
-                ->limit(18)
-                ->select('tasks.*')
-                ->get();
+            ->orderBy('id', 'desc')
+            ->where('user_id', '=', $id)
+            ->limit(18)
+            ->select('tasks.*')
+            ->get();
     }
 }

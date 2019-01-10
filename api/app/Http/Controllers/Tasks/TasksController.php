@@ -3,11 +3,9 @@
 namespace App\Http\Controllers\Tasks;
 
 use Illuminate\Http\Request;
-use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
-use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
-use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\ValidationException;
 use Illuminate\Http\Exception\HttpResponseException;
 use App\DB\Repositories\UserRepository as UserRepo;
@@ -15,7 +13,6 @@ use App\DB\Repositories\RoleRepository as RoleRepo;
 use App\DB\Repositories\TasksRepository as TaskRepo;
 use App\DB\Services\NotificationsService as NotificationsService;
 use App\DB\Services\TasksService as TasksService;
-use App\DB\Models\User;
 use App\DB\Models\Tasks;
 use Carbon\Carbon;
 
@@ -33,7 +30,8 @@ class TasksController extends Controller
         RoleRepo $roleRepo,
         NotificationsService $notificationsService,
         TasksService $tasksService
-    ) {
+    )
+    {
         $this->userRepo = $userRepo;
         $this->taskRepo = $taskRepo;
         $this->roleRepo = $roleRepo;
@@ -44,8 +42,11 @@ class TasksController extends Controller
     /**
      * Post add new user
      * @Returns JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function addNewTask(Request $request) {      
+    public function addNewTask(Request $request)
+    {
         // Validation rules
         try {
             $this->validate($request, [
@@ -74,29 +75,29 @@ class TasksController extends Controller
         $data['updated_at'] = Carbon::now();
 
         //Notifications and mails
-        $message = trans('messages.notifications.mail.message',['title' => $data['title']]) . "\n";
+        $message = trans('messages.notifications.mail.message', ['title' => $data['title']]) . "\n";
 
         //Loop data
-        $dataForSave = []; 
+        $dataForSave = [];
         $users_emails = [];
-        for($i=0; $i<count($userIds[0]); $i++) {
+        for ($i = 0; $i < count($userIds[0]); $i++) {
             // Extract users ids
             $data['user_id'] = $userIds[0][$i];
-            $dataForSave[]   = $data;
+            $dataForSave[] = $data;
             // Extract users emails
-            $user_email      = $this->userRepo->find($data['user_id'])->email;
-            $users_emails[]  = $user_email;
+            $user_email = $this->userRepo->find($data['user_id'])->email;
+            $users_emails[] = $user_email;
         }
         Tasks::insert($dataForSave);
 
         $added_ids = $this->taskRepo->getLastAddedTasksIdByDateCreated($data['created_at']);
 
         // Save notifications
-        foreach($added_ids as $key => $value) {
+        foreach ($added_ids as $key => $value) {
             $this->notificationsService->addNewNotification($data['user_id'], $value->id, $message);
         }
 
-        
+
         $message .= trans('messages.notifications.mail.message2');
         $this->notificationsService->sendNotificationByMail($users_emails, $data);
         //$this->taskRepo->saveModel($dataForSave);
@@ -111,8 +112,11 @@ class TasksController extends Controller
     /**
      * Post add new user
      * @Returns JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function updateExistingTask(Request $request) {
+    public function updateExistingTask(Request $request)
+    {
         // Validation rules
         try {
             $this->validate($request, [
@@ -135,7 +139,7 @@ class TasksController extends Controller
         unset($data['first_name']);
         unset($data['last_name']);
         unset($data['notifications']);
-        
+
         $data['completed'] = $data['progress'] == 100 ? 1 : 0;
         $this->taskRepo->update($data, $data['id']);
         //$this->taskget countRepo->saveModel($saveData);
@@ -150,8 +154,11 @@ class TasksController extends Controller
     /**
      * Delete a user
      * @Returns JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function deleteExistingTask(Request $request) {       
+    public function deleteExistingTask(Request $request)
+    {
         // Validation rules
         try {
             $this->validate($request, [
@@ -163,9 +170,9 @@ class TasksController extends Controller
                 'success' => false,
                 'message' => trans('messages.validations.error')
             ]);
-        } 
+        }
         $data = $request->all();
-        
+
         // save user object
         $this->taskRepo->delete($data['id']);
         // return success obj as json
@@ -177,29 +184,80 @@ class TasksController extends Controller
 
     /**
      * Get all tasks in db depending on current user
+     * @param $projectId
+     * @return JsonResponse
      */
-    public function getAllTasks() {
-        return $this->tasksService->getAllTasks();
+    public function getAllTasks($projectId)
+    {
+        $tasks = null;
+        try {
+            $tasks =  $this->tasksService->getAllTasks($projectId);
+            $success = ($tasks != null);
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $success = false;
+        }
+
+        return new JsonResponse([
+            'success' => $success,
+            'data' => $tasks
+        ]);
     }
 
     /**
      * Get list of completed tasks
+     * @param $projectId
+     * @return JsonResponse
      */
-    public function getCompletedTasks() {
-        return $this->tasksService->getAllTasksByStatus(1);
+    public function getCompletedTasks($projectId)
+    {
+        $tasks = null;
+        try {
+            $tasks =  $this->tasksService->getAllTasksByStatus(1, $projectId);
+            $success = ($tasks != null);
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $success = false;
+        }
+
+        return new JsonResponse([
+            'success' => $success,
+            'data' => $tasks
+        ]);
     }
 
     /**
      * Get list of uncompleted tasks
+     * @param $projectId
+     * @return JsonResponse
      */
-    public function getUncompletedTasks() {
-        return $this->tasksService->getAllTasksByStatus(0);
+    public function getUncompletedTasks($projectId)
+    {
+        $tasks = null;
+        try {
+            $tasks =  $this->tasksService->getAllTasksByStatus(0, $projectId);
+            $success = ($tasks != null);
+
+        } catch (\Exception $e) {
+            Log::error($e->getMessage());
+            $success = false;
+        }
+
+        return new JsonResponse([
+            'success' => $success,
+            'data' => $tasks
+        ]);
     }
 
     /**
      * Uploads attachment an return its name
+     * @param Request $request
+     * @return JsonResponse
      */
-    public function UploadAttachment(Request $request) {
+    public function UploadAttachment(Request $request)
+    {
         // Validation rules
         // var_dump($request);
         try {

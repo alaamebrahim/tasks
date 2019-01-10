@@ -273,7 +273,7 @@ $api->version('v1', function ($api) {
             ]
         );
         // Get All tasks
-        $api->get('/get-tasks',
+        $api->get('/get-tasks/{projectId}',
             [
                 'uses' => 'TasksController@getAllTasks',
                 'as' => 'api.task.all',
@@ -281,7 +281,7 @@ $api->version('v1', function ($api) {
             ]
         );
         // Get all completed tasks
-        $api->get('/get-completed-tasks',
+        $api->get('/get-completed-tasks/{projectId}',
             [
                 'uses' => 'TasksController@getCompletedTasks',
                 'as' => 'api.task.all.completed',
@@ -289,7 +289,7 @@ $api->version('v1', function ($api) {
             ]
         );
         // Get all uncompleted tasks
-        $api->get('/get-uncompleted-tasks',
+        $api->get('/get-uncompleted-tasks/{projectId}',
             [
                 'uses' => 'TasksController@getUncompletedTasks',
                 'as' => 'api.task.all.uncompleted',

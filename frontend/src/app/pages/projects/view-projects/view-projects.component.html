@@ -32,7 +32,8 @@
                         (click)="onUpdateProjectClick(project.id)">
                     <mat-icon>update</mat-icon>
                 </button>
-                <button mat-icon-button color="primary" >
+                <button mat-icon-button color="primary"
+                (click)="onOpenProjectTasksClick(project.id)">
                     <mat-icon>arrow_back</mat-icon>
                 </button>
             </mat-card-actions>

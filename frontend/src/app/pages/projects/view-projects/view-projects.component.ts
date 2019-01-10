@@ -5,7 +5,7 @@ import {Project} from '../project.model';
 import {environment} from '../../../../environments/environment';
 import {ConfirmationDialogComponent} from '../../../theme/components/confirmation-dialog/confirmation-dialog.component';
 import {Confirm} from '../../../theme/components/confirmation-dialog/confirm.model';
-import {MatDialog} from "@angular/material";
+import {MatDialog} from '@angular/material';
 
 @Component({
     selector: 'app-view-projects',
@@ -80,5 +80,9 @@ export class ViewProjectsComponent implements OnInit {
                 console.log('denied');
             }
         });
+    }
+
+    onOpenProjectTasksClick(id: number) {
+        this.router.navigate(['tasks/view-tasks', id]);
     }
 }

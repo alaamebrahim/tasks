@@ -1,0 +1,168 @@
+<div fxLayout.md="row wrap" fxLayoutAlign="center center" fxLayoutGap="3px" [ngClass]="{'bg-primary' : project.opened, 'bg-accent': !project.opened, 'flex-p p-5': project.opened || !project.opened}" *ngIf="project">
+    <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
+        <img src="{{projectImageDir}}{{project.image}}" alt="project.title" height="200">
+    </div>
+    <div fxFlex="40" fxLayout="column" fxLayoutAlign="center start">
+        <div><h2>{{project.title}}</h2></div>
+        <div><p>{{project.description}}</p></div>
+    </div>
+    <div fxFlex="30" fxLayout="column" fxLayoutGap="5" fxLayoutAlign="center center">
+        <div *ngIf="project.opened">
+            <button (click)="onAddNewTaskClick()" mat-raised-button color="accent" class="m-1"
+                    *ngxPermissionsOnly="['task_add']">
+                <mat-icon class="mat-18">alarm_add</mat-icon>
+                {{'tasks.buttons.add-new' |translate}}
+            </button>
+        </div>
+        <div>
+            <mat-form-field>
+                <input matInput placeholder="{{'tasks.labels.search' | translate}}" [(ngModel)]="taskTitle" name="search">
+            </mat-form-field>
+        </div>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<!--<div fxLayout="row" fxLayoutAlign="space-between center" fxLayoutGap="3px" class="flex-p"-->
+     <!--*ngxPermissionsOnly="['root','admin']">-->
+    <!---->
+<!--</div>-->
+<div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="flex-p">
+    <div fxLayout="row">
+        <mat-button-toggle-group #viewType="matButtonToggleGroup">
+            <mat-button-toggle (click)="getAllTasks()" matTooltip="{{'tasks.buttons.all' | translate}}">
+                <mat-icon color="basic">view_list</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="onFilterTasks(0)" matTooltip="{{'tasks.buttons.filter-completed' | translate}}">
+                <mat-icon color="warn">assignment_late</mat-icon>
+            </mat-button-toggle>
+            <mat-button-toggle (click)="onFilterTasks(1)"
+                               matTooltip="{{'tasks.buttons.filter-uncompleted' | translate}}">
+                <mat-icon color="primary">verified_user</mat-icon>
+            </mat-button-toggle>
+        </mat-button-toggle-group>
+    </div>
+    <div fxLayout="row" fxFlex="40%" fxLayoutAlign="space-between left" class="flex-p"
+         *ngxPermissionsOnly="['root', 'admin']">
+        <span>{{'tasks.labels.filter-by-user' | translate}}</span>
+        <mat-select placeholder="{{'users.form.username' | translate}}" [(ngModel)]="searchText">
+            <mat-option *ngFor="let user of users | UsersExceptRootPipe: currentUserRole" [value]="user.id">
+                {{user.first_name +' '+user.last_name}}
+            </mat-option>
+        </mat-select>
+    </div>
+</div>
+<mat-divider></mat-divider>
+<div fxFlex="100">
+    <mat-accordion displayMode="default" [multi]="false" [hideToggle]="true">
+        <mat-expansion-panel
+                *ngFor="let task of (tasks | TasksFilterPipe: searchText) | TaskSearchPipe: taskTitle | paginate: { itemsPerPage: 30, currentPage: page }">
+            <mat-expansion-panel-header>
+                <mat-panel-title>
+                    <mat-icon *ngIf="task.progress === 100" class="mat-18 p-1" color="primary">verified_user</mat-icon>
+                    <mat-icon *ngIf="task.progress < 100" class="mat-18 p-1" color="warn">assignment_late</mat-icon>
+                    <mat-icon class="p-1" *ngIf="task.attachment"
+                              matTooltip="{{'tasks.buttons.has-attachment' | translate}}">attachment
+                    </mat-icon>
+                    <h5 class="p-1">{{task.title}}</h5>
+                </mat-panel-title>
+                <mat-panel-description fxHide.xs="true">
+                </mat-panel-description>
+                <i class="p-1" fxHide.xs="true">
+                    <small>{{task.start_date}} : {{task.end_date}}</small>
+                </i>
+                <mat-chip-list class="p-1">
+                    <mat-chip color="primary">
+                        <i>
+                            <small>{{task.notifications}}</small>
+                        </i>
+                    </mat-chip>
+                </mat-chip-list>
+
+            </mat-expansion-panel-header>
+            <div fxLayout="row" fxLayout.xs="column" fxLayoutAlign="space-between center" class="flex-p">
+                <div fxLayout="column">
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">description</mat-icon>
+                        <span>
+                            <i>{{task.description}}</i>
+                        </span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">face</mat-icon>
+                        <span>
+                            <i>{{task.first_name + ' ' + task.last_name}}</i>
+                        </span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">low_priority</mat-icon>
+                        <span>
+                            <i>{{'tasks.form.priority.levels.' + task.priority | translate}}</i>
+                        </span>
+                    </p>
+                    <p fxLayout="row" fxLayoutAlign="start center">
+                        <mat-icon class="mat-18">hourglass_empty</mat-icon>
+                        <span>
+                            <mat-slider (change)="onProgressChange(task)" class="custom-slider w-50" [max]="100"
+                                        [min]="0" [step]="1" [thumb-label]="true"
+                                        [tick-interval]="tickInterval" [(ngModel)]="task.progress" [vertical]="false"
+                                        [disabled]="task.progress === 100 || task.user_id !== currentUserId">
+                            </mat-slider>
+                            <i>
+                                <small>{{task.progress}}%</small>
+                            </i>
+                        </span>
+                    </p>
+                </div>
+                <div fxLayout="row">
+                    <mat-icon *ngIf="task.progress === 100" class="mat-icon-custom-size p-1" color="primary">
+                        verified_user
+                    </mat-icon>
+                </div>
+            </div>
+            <div fxLayout.xs="column" fxLayoutGap="5px" *ngIf="task.progress === 100">
+                <button *ngxPermissionsOnly="['root','admin', 'user']" [disabled]="!task.attachment"
+                        (click)="onShowAttachment(task)" mat-raised-button
+                        color="primary" class="m-1">
+                    <mat-icon class="mat-18">visibility</mat-icon>
+                    {{'tasks.buttons.show-attachment' |translate}}
+                </button>
+            </div>
+            <div fxLayout.xs="column" fxLayoutGap="5px" *ngIf="task.progress !== 100">
+                <button *ngxPermissionsOnly="['root','admin', 'user']" [disabled]="!task.attachment"
+                        (click)="onShowAttachment(task)" mat-raised-button
+                        color="primary" class="m-1">
+                    <mat-icon class="mat-18">visibility</mat-icon>
+                    {{'tasks.buttons.show-attachment' |translate}}
+                </button>
+                <button *ngxPermissionsOnly="['task_update']" (click)="onEditTaskClick(task)" mat-raised-button
+                        color="primary" class="m-1">
+                    <mat-icon class="mat-18">update</mat-icon>
+                    {{'buttons.update' |translate}}
+                </button>
+                <button *ngxPermissionsOnly="['root','admin']" (click)="onSendNotificationClick(task)" mat-raised-button
+                        color="primary"
+                        class="m-1">
+                    <mat-icon class="mat-18">exposure_plus_1</mat-icon>
+                    {{'tasks.buttons.add-notification' |translate}}
+                </button>
+                <button *ngxPermissionsOnly="['task_delete']" (click)="onDeleteTaskClick(task)" mat-raised-button
+                        color="warn" class="m-1">
+                    <mat-icon class="mat-18">close</mat-icon>
+                    {{'buttons.delete' |translate}}
+                </button>
+            </div>
+        </mat-expansion-panel>
+    </mat-accordion>
+</div>
+<div *ngIf="tasks" fxLayout="row wrap">
+    <div fxFlex="100" class="flex-p">
+        <mat-card class="p-0 text-center">
+            <pagination-controls class="gradus-pagination" autoHide="true" maxSize="7"
+                                 (pageChange)="onPageChanged($event)"></pagination-controls>
+        </mat-card>
+    </div>
+</div>
+
+<div *ngIf="!tasks" fxLayout="column" fxLayoutAlign="center center" class="user-spinner">
+    <mat-spinner color="primary"></mat-spinner>
+</div>

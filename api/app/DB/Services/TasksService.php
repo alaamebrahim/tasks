@@ -20,6 +20,9 @@ class TasksService
 
     /**
      * Constructor
+     * @param UserRepo $userRepo
+     * @param TaskRepo $taskRepo
+     * @param RoleRepo $roleRepo
      */
     public function __construct(
         UserRepo $userRepo,
@@ -33,9 +36,10 @@ class TasksService
 
     /**
      * Get All tasks
+     * @param $projectId
      * @return Collection
      */
-    public function getAllTasks()
+    public function getAllTasks($projectId)
     {
         $current_user = JWTAuth::parseToken()->authenticate();
 
@@ -44,17 +48,19 @@ class TasksService
         }
         $role_name = $current_user['attributes']['role_name'];
         if ($role_name == 'root' || $role_name == 'admin') {
-            return $this->taskRepo->getAllTasks();
+            return $this->taskRepo->getAllTasks($projectId);
         } else {
-            return $this->taskRepo->getAllTasksByUser($current_user['attributes']['id']);
+            return $this->taskRepo->getAllTasksByUser($current_user['attributes']['id'], $projectId);
         }
     }
 
     /**
      * Get all tasks by its status
+     * @param $status
+     * @param $projectId
      * @return Collection
      */
-    public function getAllTasksByStatus($status)
+    public function getAllTasksByStatus($status, $projectId)
     {
         $current_user = JWTAuth::parseToken()->authenticate();
 
@@ -63,14 +69,15 @@ class TasksService
         }
         $role_name = $current_user['attributes']['role_name'];
         if ($role_name == 'root' || $role_name == 'admin') {
-            return $this->taskRepo->getTasksByStatus($status);
+            return $this->taskRepo->getTasksByStatus($status, $projectId);
         } else {
-            return $this->taskRepo->getTasksByStatusAndUser($status, $current_user['attributes']['id']);
+            return $this->taskRepo->getTasksByStatusAndUser($status, $current_user['attributes']['id'], $projectId);
         }
     }
 
     /**
      * upload task attachment
+     * @param $image
      * @return String
      */
     public function uploadTaskAttachment($image)
@@ -92,6 +99,9 @@ class TasksService
 
     /**
      * Get count of tasks
+     * @param $completed
+     * @param string $user
+     * @return
      */
     public function getTasksCount($completed, $user = "all")
     {

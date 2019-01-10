@@ -19,14 +19,6 @@ export class ProjectsService {
         return this.apiRequestService.post('projects/add-project', data);
     }
 
-    public getProjects() {
-        return this.apiRequestService.get('projects/get-projects');
-    }
-
-    public updateProject(project: Project) {
-        return this.apiRequestService.post('projects/update-project', project);
-    }
-
     public deleteProject(project: Project): Promise<Project[]> {
         const me = this;
         return new Promise((res, rej) => {

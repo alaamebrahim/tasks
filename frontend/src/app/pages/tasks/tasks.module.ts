@@ -1,63 +1,74 @@
-import { NgModule } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
-import { DragulaModule } from 'ng2-dragula';
-import { SharedModule } from '../../shared/shared.module';
-import { TasksComponent } from './tasks.component';
-import { AddTaskComponent } from './add-task/add-task.component';
-import { EditTaskComponent } from './edit-task/edit-task.component';
+import {NgModule} from '@angular/core';
+import {CommonModule} from '@angular/common';
+import {RouterModule} from '@angular/router';
+import {DragulaModule} from 'ng2-dragula';
+import {SharedModule} from '../../shared/shared.module';
+import {TasksComponent} from './view-tasks/tasks.component';
+import {AddTaskComponent} from './add-task/add-task.component';
+import {EditTaskComponent} from './edit-task/edit-task.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import { TasksService } from './tasks.service';
-import { NgxPaginationModule } from 'ngx-pagination';
-import { PipesModule } from '../../theme/pipes/pipes.module';
-import { AddNotificationComponent } from './add-notification/add-notification.component';
-import { NotificationsService } from '../../shared/services/notifications.service';
-import { ShowAttachmentComponent } from './show-attachment/show-attachment.component';
+import {TasksService} from './tasks.service';
+import {NgxPaginationModule} from 'ngx-pagination';
+import {PipesModule} from '../../theme/pipes/pipes.module';
+import {AddNotificationComponent} from './add-notification/add-notification.component';
+import {NotificationsService} from '../../shared/services/notifications.service';
+import {ShowAttachmentComponent} from './show-attachment/show-attachment.component';
+import {ProjectsService} from "../projects/projects.service";
+
 export const routes = [
-  {
-    path: '',
-    component: TasksComponent,
-    pathMatch: 'full',
-    data: {
-        breadcrumb: 'المهام', permissions: { only: ['task_view'], redirectTo: '/' }
+    {
+        path: '',
+        component: TasksComponent,
+        pathMatch: 'full',
+        data: {
+            breadcrumb: 'المهام', permissions: {only: [], redirectTo: '/projects'}
+        }
+    },
+    {
+        path: 'add-task',
+        component: AddTaskComponent,
+        data: {
+            breadcrumb: 'تكليف بمهمة جديدة', permissions: {only: ['task_add'], redirectTo: '/'}
+        }
+    },
+    {
+        path: 'view-tasks/:projectId',
+        component: TasksComponent,
+        data: {
+            breadcrumb: 'عرض المهام', permissions: {only: ['task_view'], redirectTo: '/projects'}
+        }
     }
-  },
-  {
-    path: 'add-task',
-    component: AddTaskComponent,
-    data: {
-      breadcrumb: 'تكليف بمهمة جديدة', permissions: { only: ['task_add'], redirectTo: '/' }
-  }
-  }
 ];
 
 @NgModule({
-  imports: [
-    CommonModule,
-    RouterModule.forChild(routes),
-    DragulaModule,
-    SharedModule,
-    FormsModule,
-    ReactiveFormsModule,
-    NgxPaginationModule,
-    PipesModule
-  ],
-  declarations: [
-    TasksComponent,
-    AddTaskComponent,
-    EditTaskComponent,
-    AddNotificationComponent,
-    ShowAttachmentComponent,
-    ShowAttachmentComponent
-  ],
-  providers: [
-    TasksService,
-    NotificationsService
-  ],
-  entryComponents: [
-    EditTaskComponent,
-    AddNotificationComponent,
-    ShowAttachmentComponent
-  ]
+    imports: [
+        CommonModule,
+        RouterModule.forChild(routes),
+        DragulaModule,
+        SharedModule,
+        FormsModule,
+        ReactiveFormsModule,
+        NgxPaginationModule,
+        PipesModule
+    ],
+    declarations: [
+        TasksComponent,
+        AddTaskComponent,
+        EditTaskComponent,
+        AddNotificationComponent,
+        ShowAttachmentComponent,
+        ShowAttachmentComponent
+    ],
+    providers: [
+        TasksService,
+        NotificationsService,
+        ProjectsService
+    ],
+    entryComponents: [
+        EditTaskComponent,
+        AddNotificationComponent,
+        ShowAttachmentComponent
+    ]
 })
-export class TasksModule { }
+export class TasksModule {
+}
