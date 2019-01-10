@@ -100,7 +100,7 @@ export class TasksComponent {
     }
 
     onAddNewTaskClick(): void {
-        this.router.navigate(['tasks/add-task']);
+        this.router.navigate(['tasks/add-task/', this.projectId]);
     }
 
     onProgressChange(task: Task) {

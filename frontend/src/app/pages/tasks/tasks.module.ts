@@ -25,7 +25,7 @@ export const routes = [
         }
     },
     {
-        path: 'add-task',
+        path: 'add-task/:projectId',
         component: AddTaskComponent,
         data: {
             breadcrumb: 'تكليف بمهمة جديدة', permissions: {only: ['task_add'], redirectTo: '/'}

@@ -1,6 +1,6 @@
-<div fxLayout.md="row wrap" fxLayoutAlign="center center" fxLayoutGap="3px" [ngClass]="{'bg-primary' : project.opened, 'bg-accent': !project.opened, 'flex-p p-5': project.opened || !project.opened}" *ngIf="project">
+<div fxLayout.lt-lg="column wrap" fxLayout.gt-md="row" fxLayoutAlign="center center" fxLayoutGap="3px" [ngClass]="{'bg-primary' : project.opened, 'bg-accent': !project.opened, 'flex-p p-5': project.opened || !project.opened}" *ngIf="project">
     <div fxFlex="30" fxLayout="row" fxLayoutAlign="center center">
-        <img src="{{projectImageDir}}{{project.image}}" alt="project.title" height="200">
+        <img class="project-image" [src]="project.image == '' ? 'assets/img/app/5.jpg' : projectImageDir + project.image" alt="project.title" height="200">
     </div>
     <div fxFlex="40" fxLayout="column" fxLayoutAlign="center start">
         <div><h2>{{project.title}}</h2></div>
