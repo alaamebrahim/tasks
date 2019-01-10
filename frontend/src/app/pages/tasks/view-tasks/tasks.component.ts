@@ -17,6 +17,7 @@ import {UserInfoService} from '../../../shared/services/user-info.service';
 import {ProjectsService} from '../../projects/projects.service';
 import {Project} from '../../projects/project.model';
 import {environment} from '../../../../environments/environment';
+
 @Component({
     selector: 'app-tasks',
     templateUrl: './tasks.component.html',
@@ -75,7 +76,17 @@ export class TasksComponent {
     async getProjectById(projectId: any) {
         const me = this;
         await me.projectService.getProjectById(projectId).then(data => {
-            me.project = data;
+            console.log(data.allowed_users);
+            console.log(data.allowed_users.indexOf(me.currentUserId))
+            if (['root', 'admin'].indexOf(this.currentUserRole) !== -1) {
+                me.project = data;
+            } else {
+                if (data.allowed_users.indexOf(me.currentUserId) !== -1) {
+                    me.project = data;
+                } else {
+                    me.router.navigate(['/projects']);
+                }
+            }
         }).catch(error => console.log(error));
     }
 

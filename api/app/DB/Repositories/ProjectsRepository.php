@@ -31,16 +31,21 @@ class ProjectsRepository extends Repository
 
     /**
      * Get all projects by user
+     * @param $userId
+     * @return array
      */
     public function getAllProjectsByUser($userId)
     {
-        return collect(DB::table('projects')
-            ->whereRow('json_contains(allowed_users, \'["' . $userId . '"]\')')
-            ->get())->toArray();
+        $data = DB::table('projects')
+            ->whereRaw('JSON_CONTAINS(allowed_users, \'[' . $userId . ']\')')
+            ->get();
+        return collect($data)->toArray();
     }
 
     /**
      * Get project by its id
+     * @param $id
+     * @return mixed
      */
     public function getProjectById($id) {
         return parent::findBy('id', $id);

@@ -17,14 +17,19 @@ class TasksRepository extends Repository
 
     /**
      * Returns all tasks for an user
+     * @param $id
+     * @param $
+     * @param $projectId
+     * @return
      */
-    public function getAllTasksByUser($id)
+    public function getAllTasksByUser($id, $projectId)
     {
         return DB::table('tasks')
             ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
             ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
             ->orderBy('tasks.updated_at', 'desc')
             ->where('tasks.user_id', '=', $id)
+            ->where('tasks.project_id', '=', $projectId)
             ->orderBy('tasks.updated_at', 'desc')
             ->orderBy('tasks.completed', 'desc')
             ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
@@ -42,11 +47,10 @@ class TasksRepository extends Repository
         return DB::table('tasks')
             ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
             ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
-            ->leftJoin('projects', 'tasks.project_id', '=', 'projects.id')
             ->orderBy('tasks.updated_at', 'desc')
             ->orderBy('tasks.completed', 'desc')
             ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
-            ->where('projects.id', '=', $projectId)
+            ->where('tasks.project_id', '=', $projectId)
             ->groupBy('tasks.id')
             ->get();
     }
@@ -62,9 +66,8 @@ class TasksRepository extends Repository
         return DB::table('tasks')
             ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
             ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
-            ->leftJoin('projects', 'tasks.project_id', '=', 'projects.id')
-            ->where('completed', '=', $status)
-            ->where('projects.id', '=', $projectId)
+            ->where('tasks.completed', '=', $status)
+            ->where('tasks.project_id', '=', $projectId)
             ->orderBy('tasks.updated_at', 'desc')
             ->orderBy('tasks.completed', 'desc')
             ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
@@ -84,10 +87,9 @@ class TasksRepository extends Repository
         return DB::table('tasks')
             ->leftJoin('users', 'tasks.user_id', '=', 'users.id')
             ->leftJoin('notifications', 'tasks.id', '=', 'notifications.task_id')
-            ->leftJoin('projects', 'tasks.project_id', '=', 'projects.id')
+            ->where('tasks.completed', '=', $status)
             ->where('tasks.user_id', '=', $user_id)
-            ->where('completed', '=', $status)
-            ->where('projects.id', '=', $projectId)
+            ->where('tasks.project_id', '=', $projectId)
             ->orderBy('tasks.updated_at', 'desc')
             ->orderBy('tasks.completed', 'desc')
             ->select(['tasks.*', 'users.first_name', 'users.last_name', DB::raw('count(notifications.task_id) as notifications')])
