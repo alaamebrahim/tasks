@@ -39,6 +39,8 @@ class DashboardController extends Controller
 
     /**
      * Get count of user completed tasks
+     * @param $id
+     * @return
      */
     public function getUserCompletedTasksCount($id){
         return $this->tasksService->getTasksCount(true, $id);
@@ -46,6 +48,8 @@ class DashboardController extends Controller
 
     /**
      * Get count of user uncompleted tasks
+     * @param $id
+     * @return
      */
     public function getUserUncompletedTasksCount($id){
         return $this->tasksService->getTasksCount(false, $id);
@@ -60,6 +64,8 @@ class DashboardController extends Controller
 
     /**
      * Get last tasks for a user (18)
+     * @param $id
+     * @return
      */
     public function getUserLastTasks($id){
         return $this->tasksService->getUserLastTasks($id);

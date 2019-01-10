@@ -14,9 +14,12 @@ class NotificationsService {
     private $userRepo;
     private $mailboxService;
 
-    
+
     /**
      * Constructor
+     * @param NotifyRepo $notifyRepo
+     * @param UserRepo $userRepo
+     * @param \App\DB\Services\MailboxService $mailboxService
      */
     public function __construct (
         NotifyRepo $notifyRepo,
@@ -30,6 +33,9 @@ class NotificationsService {
 
     /**
      * Adds new notification to database.
+     * @param $user_id
+     * @param $task_id
+     * @param $text
      */
     public function addNewNotification($user_id, $task_id, $text) {
         $notification = new Notifications();

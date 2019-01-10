@@ -69,6 +69,8 @@ class NotificationsController extends Controller
 
     /**
      * Get all Notifications for a user in db
+     * @param $id
+     * @return
      */
     public function getUserNotifications($id) {
         return $this->notifyRepo->getAllNotificationsByUser($id);
@@ -76,6 +78,8 @@ class NotificationsController extends Controller
 
     /**
      * Send custom notification to a user
+     * @param Request $request
+     * @return JsonResponse
      */
     public function sendSingleNotification(Request $request) {
         // Validation rules

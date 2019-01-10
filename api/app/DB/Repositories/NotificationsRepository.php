@@ -14,6 +14,8 @@ class NotificationsRepository extends Repository {
 
     /**
      * Returns all notifications for an user
+     * @param $id
+     * @return
      */
     public function getAllNotificationsByUser ($id) {
         return DB::table('notifications')
