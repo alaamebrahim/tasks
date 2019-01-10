@@ -11,14 +11,14 @@
                         <p>{{userInfo.displayName}} <br> <small>{{userInfo.position}}</small></p>
             </div>  
         </mat-toolbar>
-        <a mat-menu-item routerLink="profile"> 
-            <mat-icon>person</mat-icon>
-            <span>Profile</span> 
-        </a>
-        <div class="divider"></div>
+        <!--<a mat-menu-item routerLink="profile"> -->
+            <!--<mat-icon>person</mat-icon>-->
+            <!--<span>Profile</span> -->
+        <!--</a>-->
+        <!--<div class="divider"></div>-->
         <a mat-menu-item routerLink="/login"> 
             <mat-icon>power_settings_new</mat-icon>
-            <span>Log out</span> 
+            <span>{{'user.buttons.logout' | translate}}</span>
         </a>
     <!--</span>-->
 </mat-menu>

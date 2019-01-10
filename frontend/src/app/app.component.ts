@@ -4,8 +4,6 @@ import { Settings } from './app.settings.model';
 import { LocaleService } from './shared/services/locale.service';
 import { TranslateService } from '@ngx-translate/core';
 import { AppConfig } from './app-config';
-import { UsersService } from './pages/users/users.service';
-import { ApiRequestService } from './shared/services/api-request.service';
 import { PermissionsService } from './shared/services/permissions.service';
 
 @Component({

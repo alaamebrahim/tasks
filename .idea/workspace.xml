@@ -2,8 +2,12 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cebc6ad-983f-4548-b50d-5a375c9d1d0c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/i18n/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/i18n/ar.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.component.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/pages.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/pages.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/theme/components/menu/menu.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/theme/components/menu/menu.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/theme/components/sidenav/sidenav.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/theme/components/sidenav/sidenav.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/theme/components/user-menu/user-menu.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/theme/components/user-menu/user-menu.component.html" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -38,28 +42,29 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="env" value="3" />
-          <entry key="html" value="32" />
-          <entry key="json" value="6" />
+          <entry key="html" value="39" />
+          <entry key="json" value="8" />
           <entry key="php" value="41" />
-          <entry key="scss" value="7" />
-          <entry key="ts" value="92" />
+          <entry key="scss" value="8" />
+          <entry key="ts" value="94" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="3" />
-          <entry key="HTML" value="32" />
-          <entry key="JSON" value="6" />
+          <entry key="HTML" value="39" />
+          <entry key="JSON" value="8" />
           <entry key="PHP" value="41" />
-          <entry key="SCSS" value="7" />
-          <entry key="TypeScript" value="92" />
+          <entry key="SCSS" value="8" />
+          <entry key="TypeScript" value="94" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
+          <entry key="dummy" value="33" />
           <entry key="env" value="16" />
-          <entry key="html" value="1317" />
-          <entry key="json" value="163" />
+          <entry key="html" value="1388" />
+          <entry key="json" value="190" />
           <entry key="php" value="961" />
           <entry key="scss" value="53" />
           <entry key="ts" value="2528" />
@@ -68,9 +73,10 @@
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="16" />
-          <entry key="HTML" value="1317" />
-          <entry key="JSON" value="163" />
+          <entry key="HTML" value="1388" />
+          <entry key="JSON" value="190" />
           <entry key="PHP" value="961" />
+          <entry key="PLAIN_TEXT" value="33" />
           <entry key="SCSS" value="53" />
           <entry key="TypeScript" value="2528" />
         </counts>
@@ -79,35 +85,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="249">
-              <caret line="167" column="13" selection-start-line="167" selection-start-column="13" selection-end-line="167" selection-end-column="21" />
-              <folding>
-                <element signature="n#div#1;n#!!top" />
-                <element signature="n#div#2;n#!!top" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/app/app-config.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state>
-              <folding>
-                <element signature="e#0#41#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/src/assets/i18n/ar.json">
+        <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/sidenav/sidenav.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="212">
-              <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
+            <state relative-caret-position="340">
+              <caret line="26" column="45" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="45" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/user-menu/user-menu.component.html">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="267">
+              <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -126,6 +117,8 @@
       <find>ngF</find>
       <find>&quot;</find>
       <find>tasks</find>
+      <find>Users</find>
+      <find>logout</find>
     </findStrings>
     <replaceStrings>
       <replace>tasks.test/</replace>
@@ -140,7 +133,6 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/frontend/src/environments/environment.ts" />
-        <option value="$PROJECT_DIR$/frontend/src/app/theme/components/sidenav/sidenav.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/theme/components/menu/horizontal-menu/horizontal-menu.component.html" />
         <option value="$PROJECT_DIR$/api/app/DB/Models/Project.php" />
         <option value="$PROJECT_DIR$/api/app/DB/Models/User.php" />
@@ -149,7 +141,6 @@
         <option value="$PROJECT_DIR$/api/.env" />
         <option value="$PROJECT_DIR$/api/app/DB/Repositories/ProjectsRepository.php" />
         <option value="$PROJECT_DIR$/frontend/src/app/app.routing.ts" />
-        <option value="$PROJECT_DIR$/frontend/src/app/theme/components/menu/menu.ts" />
         <option value="$PROJECT_DIR$/api/resources/lang/ar/messages.php" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/add-project/add-project.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/theme/components/loading/loading/loading.component.scss" />
@@ -182,7 +173,13 @@
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.scss" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/edit-task/edit-task.component.ts" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html" />
+        <option value="$PROJECT_DIR$/frontend/src/app/theme/components/menu/menu.ts" />
+        <option value="$PROJECT_DIR$/frontend/src/app/theme/components/user-menu/user-menu.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/assets/i18n/ar.json" />
+        <option value="$PROJECT_DIR$/frontend/src/app/theme/components/applications/applications.component.html" />
+        <option value="$PROJECT_DIR$/frontend/src/app/app.component.ts" />
+        <option value="$PROJECT_DIR$/frontend/src/app/pages/pages.component.html" />
+        <option value="$PROJECT_DIR$/frontend/src/app/theme/components/sidenav/sidenav.component.html" />
       </list>
     </option>
   </component>
@@ -418,7 +415,7 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -426,8 +423,8 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -435,24 +432,19 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="view-tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="sidenav" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
               <item name="tasks" type="462c0819:PsiDirectoryNode" />
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="assets" type="462c0819:PsiDirectoryNode" />
-              <item name="i18n" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="user-menu" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -510,12 +502,12 @@
       <workItem from="1547046500807" duration="4083000" />
       <workItem from="1547050947322" duration="10660000" />
       <workItem from="1547063851753" duration="4081000" />
-      <workItem from="1547134529064" duration="3086000" />
+      <workItem from="1547134529064" duration="4095000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="35233000" />
+    <option name="totallyTimeSpent" value="36242000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -583,39 +575,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/sidenav/sidenav.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="308">
-          <caret line="34" column="40" selection-start-line="34" selection-start-column="40" selection-end-line="34" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/pages.component.html">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/loading/loading/loading.component.html" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/loading/loading/loading.component.scss" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/loading/loading/loading.component.ts" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/styles.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-309">
-          <caret column="59" selection-start-column="53" selection-end-column="59" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/_variables.scss">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/_base.scss">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/update-project/update-project.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="544">
-          <caret line="32" column="66" selection-start-line="32" selection-start-column="66" selection-end-line="32" selection-end-column="66" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/project.model.ts">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="51">
@@ -888,6 +847,15 @@
     <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/show-attachment/show-attachment.component.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/app-config.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#41#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="249">
@@ -899,19 +867,65 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/app-config.ts">
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/menu/menu.ts">
       <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#41#0" expanded="true" />
-          </folding>
+        <state relative-caret-position="85">
+          <caret line="5" column="43" lean-forward="true" selection-start-line="5" selection-start-column="43" selection-end-line="5" selection-end-column="43" />
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/messages/messages.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" column="11" selection-start-line="6" selection-start-column="11" selection-end-line="6" selection-end-column="11" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/applications/applications.component.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/assets/i18n/ar.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="212">
-          <caret line="180" column="42" selection-start-line="180" selection-start-column="42" selection-end-line="180" selection-end-column="42" />
+        <state relative-caret-position="110">
+          <caret line="121" column="33" lean-forward="true" selection-start-line="121" selection-start-column="33" selection-end-line="121" selection-end-column="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/applications/applications.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="23" column="32" lean-forward="true" selection-start-line="18" selection-start-column="16" selection-end-line="23" selection-end-column="32" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/app.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/app.component.html">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/pages.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="459">
+          <caret line="27" column="21" selection-start-line="27" selection-start-column="21" selection-end-line="27" selection-end-column="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/user-menu/user-menu.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="267">
+          <caret line="20" column="34" selection-start-line="20" selection-start-column="34" selection-end-line="20" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/sidenav/sidenav.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="26" column="45" selection-start-line="26" selection-start-column="40" selection-end-line="26" selection-end-column="45" />
         </state>
       </provider>
     </entry>
