@@ -1,0 +1,32 @@
+.comments {
+  margin: 10px auto;
+  padding: 10px;
+}
+
+.comment-container {
+  padding: 5px;
+  margin: 5px;
+  display: block;
+  border-radius: 5px;
+  background: lightgray;
+  border: darkgray;
+  font-family: 'Dosis', 'Tahoma', sans-serif;
+  font-size: 14px;
+
+  &h3{
+    font-weight: bold;
+    background: darkgray;
+  }
+  &p{
+    font-weight: normal;
+    font-size: 13px;
+    font-style: italic;
+  }
+}
+
+.img {
+  margin: 5px;
+  border-radius: 50%;
+  -moz-border-radius: 50%;
+  -webkit-border-radius: 50%;
+}

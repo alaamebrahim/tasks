@@ -13,7 +13,9 @@ import {PipesModule} from '../../theme/pipes/pipes.module';
 import {AddNotificationComponent} from './add-notification/add-notification.component';
 import {NotificationsService} from '../../shared/services/notifications.service';
 import {ShowAttachmentComponent} from './show-attachment/show-attachment.component';
-import {ProjectsService} from "../projects/projects.service";
+import {ProjectsService} from '../projects/projects.service';
+import {CommentsComponent} from './comments/comments.component';
+import {CommentsService} from './comments/comments.service';
 
 export const routes = [
     {
@@ -57,12 +59,14 @@ export const routes = [
         EditTaskComponent,
         AddNotificationComponent,
         ShowAttachmentComponent,
+        CommentsComponent,
         ShowAttachmentComponent
     ],
     providers: [
         TasksService,
         NotificationsService,
-        ProjectsService
+        ProjectsService,
+        CommentsService
     ],
     entryComponents: [
         EditTaskComponent,

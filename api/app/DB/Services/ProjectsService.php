@@ -28,6 +28,8 @@ class ProjectsService
 
     /**
      * Adds or updates data
+     * @param Request $request
+     * @return bool
      */
     public function updateOrNew(Request $request)
     {

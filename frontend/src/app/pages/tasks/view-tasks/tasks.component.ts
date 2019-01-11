@@ -1,4 +1,4 @@
-import {Component} from '@angular/core';
+import {Component, ViewChild} from '@angular/core';
 import {AppSettings} from '../../../app.settings';
 import {Settings} from '../../../app.settings.model';
 import {DragulaService} from 'ng2-dragula';
@@ -17,6 +17,8 @@ import {UserInfoService} from '../../../shared/services/user-info.service';
 import {ProjectsService} from '../../projects/projects.service';
 import {Project} from '../../projects/project.model';
 import {environment} from '../../../../environments/environment';
+import {ConfirmationDialogComponent} from "../../../theme/components/confirmation-dialog/confirmation-dialog.component";
+import {Confirm} from "../../../theme/components/confirmation-dialog/confirm.model";
 
 @Component({
     selector: 'app-tasks',
@@ -38,6 +40,8 @@ export class TasksComponent {
     public currentUserRole: string;
     public currentUserId: number;
     public projectImageDir = environment.projectsImagePath;
+    /** Detect confirmation dialog action */
+    @ViewChild(ConfirmationDialogComponent) confirmationDialogComponent;
 
     constructor(
         public appSettings: AppSettings,
@@ -144,15 +148,32 @@ export class TasksComponent {
     }
 
     onDeleteTaskClick(task: Task) {
-        this.tasksService.deleteTask(task).subscribe(response => {
-            if (response.success === true) {
-                // console.log(response.message);
-                this.notifyService.notifyUser('general.messages.saved');
-                this.getAllTasks();
+        /** confirm object */
+        const confirmation: Confirm = {
+            'title': 'تأكيد الحذف',
+            'message': 'هل أنت متأكد من حذف البيان؟ لا يمكن استرجاع البيانات المحذوفة'
+        };
+
+        const me = this;
+        const dialogRef = this.dialog.open(ConfirmationDialogComponent, {
+            data: confirmation,
+            minWidth: '50%',
+            direction: 'rtl',
+        }).componentInstance.accepted.subscribe((accepted) => {
+            if (accepted) {
+                me.tasksService.deleteTask(task).subscribe(response => {
+                    if (response.success === true) {
+                        // console.log(response.message);
+                        me.notifyService.notifyUser('general.messages.saved');
+                        me.getAllTasks();
+                    } else {
+                        me.notifyService.notifyUser('general.messages.error');
+                    }
+                    me.getUsers();
+                });
             } else {
-                this.notifyService.notifyUser('general.messages.error');
+                console.log('denied');
             }
-            this.getUsers();
         });
     }
 

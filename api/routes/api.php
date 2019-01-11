@@ -307,6 +307,51 @@ $api->version('v1', function ($api) {
 
     });
 
+
+    /*************************************************************
+     * Tasks controller routes
+     ************************************************************/
+    $api->group([
+        'middleware' => 'api.auth',
+        'prefix'     => '/comments/',
+        'namespace'  => 'App\Http\Controllers\Tasks',
+    ], function ($api) {
+        // add/update comment
+        $api->post('/add-update-comments',
+            [
+                'uses' => 'CommentsController@AddOrUpdateComment',
+                'as' => 'api.comments.addOrUpdate',
+                'middleware' => ['permission:comment_add|comment_update']
+            ]
+        );
+        // delete a comment
+        $api->post('/delete-comment',
+            [
+                'uses' => 'CommentsController@deleteExistingComment',
+                'as' => 'api.comments.deleteExisting',
+                'middleware' => ['permission:comment_delete']
+            ]
+        );
+        // Get All tasks
+        $api->get('/get-comments/{taskId}',
+            [
+                'uses' => 'CommentsController@getCommentById',
+                'as' => 'api.comments.all',
+                'middleware' => ['permission:comment_view']
+            ]
+        );
+
+        // Upload image
+        $api->post('/upload-attachment',
+            [
+                'uses' => 'CommentsController@UploadImage',
+                'as' => 'api.comment.upload-attachment',
+                'middleware' => ['permission:comment_add|comment_update']
+            ]
+        );
+
+    });
+
     /*************************************************************
      * Projects controller routes
      ************************************************************/

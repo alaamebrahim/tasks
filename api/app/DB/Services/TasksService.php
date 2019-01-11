@@ -3,8 +3,6 @@
 namespace App\DB\Services;
 
 use App\DB\Repositories\UserRepository as UserRepo;
-use App\DB\Models\Notifications;
-use Illuminate\Support\Facades\Mail;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\DB\Repositories\TasksRepository as TaskRepo;
 use App\DB\Repositories\RoleRepository as RoleRepo;
@@ -14,7 +12,6 @@ class TasksService
 {
 
     private $userRepo;
-    private $to = [];
     private $taskRepo;
     private $roleRepo;
 

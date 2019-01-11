@@ -1,0 +1,34 @@
+<div *ngxPermissionsOnly="['comment_view']" fxLayout="column no-wrap" class="comments w-100">
+    <div class="w-100" fxLayout="center center" *ngIf="comments">
+        <h3>{{'comments.title'|translate}}</h3>
+    </div>
+    <div fxLayout="column" class="w-100" fxLayoutGap="5px" *ngFor="let comment of comments">
+        <div fxLayout="row wrap" class="w-100 m-5">
+            <div fxFlexAlign="33.33" fxFlexAlign="center center">
+                <img class="img" [src]="comment.image == '' || comment.image === undefined ? 'assets/img/app/5.jpg' : userImageDir + comment.image"
+                     alt="{{comment.first_name + ' ' + comment.last_name}}" height="36" width="36">
+            </div>
+            <div fxFlex="66.66" fxLayout="column wrap" class="comment-container">
+                <h3>{{ comment.first_name + ' ' + comment.last_name }}</h3>
+                <p>{{ comment.message }}</p>
+            </div>
+            <mat-divider></mat-divider>
+        </div>
+    </div>
+    <div *ngIf="comments.length === 0">{{'comments.no-comments'|translate}}</div>
+</div>
+<div fxLayout="column wrap" class="w-100" *ngIf="project!== undefined && project.opened">
+    <form [formGroup]="form" *ngxPermissionsOnly="['comment_add']">
+        <div fxLayout="row" class="form-field-outer w-100">
+            <div fxFlex="60">
+                <mat-input-container class="w-100">
+                    <textarea matInput formControlName="message" required placeholder="{{'comments.message' | translate}}" rows="1"></textarea>
+                </mat-input-container>
+            </div>
+            <div fxFlex="10">
+                <button mat-raised-button color="accent" (click)="onAddComment()" [disabled]="!form.valid">{{'buttons.add-comment' | translate}}</button>
+            </div>
+        </div>
+
+    </form>
+</div>
