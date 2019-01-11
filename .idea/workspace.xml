@@ -3,19 +3,9 @@
   <component name="ChangeListManager">
     <list default="true" id="9cebc6ad-983f-4548-b50d-5a375c9d1d0c" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/DB/Services/ProjectsService.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/DB/Services/ProjectsService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/DB/Services/TasksService.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/DB/Services/TasksService.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/resources/lang/ar/messages.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/resources/lang/ar/messages.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/routes/api.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/routes/api.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/projects/add-project/add-project.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/projects/add-project/add-project.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/projects/update-project/update-project.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/projects/update-project/update-project.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/tasks/add-task/add-task.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/tasks/add-task/add-task.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/tasks/tasks.module.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/tasks/tasks.module.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/theme/components/confirmation-dialog/confirmation-dialog.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/theme/components/confirmation-dialog/confirmation-dialog.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/theme/styles/_base.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/theme/styles/_base.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/assets/i18n/ar.json" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/assets/i18n/ar.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/app.settings.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/app.settings.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.ts" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.ts" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -51,46 +41,46 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="env" value="4" />
-          <entry key="html" value="63" />
+          <entry key="html" value="64" />
           <entry key="json" value="15" />
           <entry key="log" value="1" />
           <entry key="php" value="81" />
-          <entry key="scss" value="15" />
-          <entry key="ts" value="123" />
+          <entry key="scss" value="22" />
+          <entry key="ts" value="126" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="4" />
-          <entry key="HTML" value="63" />
+          <entry key="HTML" value="64" />
           <entry key="JSON" value="15" />
           <entry key="Log" value="1" />
           <entry key="PHP" value="81" />
-          <entry key="SCSS" value="15" />
-          <entry key="TypeScript" value="123" />
+          <entry key="SCSS" value="22" />
+          <entry key="TypeScript" value="126" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="38" />
           <entry key="env" value="17" />
-          <entry key="html" value="2875" />
+          <entry key="html" value="2995" />
           <entry key="json" value="383" />
           <entry key="php" value="2485" />
-          <entry key="scss" value="427" />
-          <entry key="ts" value="4345" />
+          <entry key="scss" value="771" />
+          <entry key="ts" value="4413" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key=".env file" value="17" />
-          <entry key="HTML" value="2873" />
+          <entry key="HTML" value="2993" />
           <entry key="JSON" value="383" />
           <entry key="JavaScript" value="2" />
           <entry key="PHP" value="2485" />
           <entry key="PLAIN_TEXT" value="38" />
-          <entry key="SCSS" value="427" />
-          <entry key="TypeScript" value="4345" />
+          <entry key="SCSS" value="771" />
+          <entry key="TypeScript" value="4413" />
         </counts>
       </usages-collector>
     </session>
@@ -98,42 +88,20 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html">
+        <entry file="file://$PROJECT_DIR$/frontend/src/app/app.settings.ts">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="140">
-              <caret line="166" column="58" selection-start-line="166" selection-start-column="52" selection-end-line="166" selection-end-column="58" />
+            <state relative-caret-position="204">
+              <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
               <folding>
-                <element signature="n#div#1;n#!!top" />
-                <element signature="n#mat-expansion-panel-header#0;n#mat-expansion-panel#0;n#mat-accordion#0;n#div#2;n#!!top" />
-                <element signature="n#div#0;n#mat-expansion-panel#0;n#mat-accordion#0;n#div#2;n#!!top" />
-                <element signature="n#button#0;n#div#1;n#mat-expansion-panel#0;n#mat-accordion#0;n#div#2;n#!!top" />
+                <element signature="e#0#43#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="97">
-              <caret line="171" column="31" selection-start-line="171" selection-start-column="31" selection-end-line="171" selection-end-column="31" />
-              <folding>
-                <element signature="e#0#51#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.ts">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="306">
-              <caret line="81" column="11" lean-forward="true" selection-start-line="62" selection-start-column="8" selection-end-line="81" selection-end-column="11" />
-              <folding>
-                <element signature="e#0#59#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
+        <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/menu/menu.ts">
+          <provider selected="true" editor-type-id="text-editor" />
         </entry>
       </file>
     </leaf>
@@ -163,6 +131,7 @@
       <find>&quot;</find>
       <find>comments</find>
       <find>comment-container</find>
+      <find>delete</find>
       <find>dialo</find>
     </findStrings>
     <replaceStrings>
@@ -177,11 +146,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/projects.module.ts" />
-        <option value="$PROJECT_DIR$/../salaries/frontend/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/api/app/Http/Controllers/Tasks/ProjectController.php" />
-        <option value="$PROJECT_DIR$/frontend/src/app/app.module.ts" />
-        <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.ts" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/tasks.service.ts" />
         <option value="$PROJECT_DIR$/api/app/Http/Controllers/Tasks/TasksController.php" />
@@ -228,6 +192,11 @@
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/comments/comments.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.ts" />
+        <option value="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.ts" />
+        <option value="$PROJECT_DIR$/frontend/src/app/theme/styles/_variables.scss" />
+        <option value="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.scss" />
+        <option value="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.html" />
+        <option value="$PROJECT_DIR$/frontend/src/app/app.settings.ts" />
       </list>
     </option>
   </component>
@@ -460,7 +429,7 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -468,8 +437,8 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -477,36 +446,9 @@
               <item name="frontend" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="projects" type="462c0819:PsiDirectoryNode" />
-              <item name="view-projects" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="view-tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="shared" type="462c0819:PsiDirectoryNode" />
+              <item name="theme" type="462c0819:PsiDirectoryNode" />
+              <item name="components" type="462c0819:PsiDirectoryNode" />
+              <item name="menu" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -584,12 +526,12 @@
       <workItem from="1547050947322" duration="10660000" />
       <workItem from="1547063851753" duration="4081000" />
       <workItem from="1547134529064" duration="18500000" />
-      <workItem from="1547221227233" duration="14787000" />
+      <workItem from="1547221227233" duration="19895000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65434000" />
+    <option name="totallyTimeSpent" value="70542000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -602,8 +544,9 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="43" y="25" width="1323" height="743" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.21735731" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.21735731" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -617,7 +560,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" weight="0.182708" />
       <window_info anchor="bottom" id="Database Changes" order="9" show_stripe_button="false" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32901135" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="11" visible="true" weight="0.19448946" />
+      <window_info anchor="bottom" id="Terminal" order="11" visible="true" weight="0.24635333" />
       <window_info anchor="bottom" id="Event Log" order="12" side_tool="true" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
@@ -656,78 +599,10 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Tasks/TasksController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="138">
-          <caret line="193" column="47" lean-forward="true" selection-start-line="193" selection-start-column="47" selection-end-line="193" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/styles.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="16" column="23" selection-start-line="16" selection-start-column="20" selection-end-line="16" selection-end-column="25" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Dashboard/DashboardController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="315">
-          <caret line="69" column="40" selection-start-line="69" selection-start-column="40" selection-end-line="69" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-204" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/DB/Models/Notifications.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="102">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/DB/Services/NotificationsService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="629">
-          <caret line="41" column="30" lean-forward="true" selection-start-line="41" selection-start-column="30" selection-end-line="41" selection-end-column="30" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/dashboard/notifications/notifications.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="189">
-          <caret line="19" column="41" selection-start-line="19" selection-start-column="41" selection-end-line="19" selection-end-column="41" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/shared/services/notifications.service.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="264">
-          <caret line="22" column="53" selection-start-line="22" selection-start-column="53" selection-end-line="22" selection-end-column="75" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/DB/Repositories/NotificationsRepository.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="19" column="50" lean-forward="true" selection-start-line="19" selection-start-column="50" selection-end-line="19" selection-end-column="50" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Notifications/NotificationsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="110">
           <caret line="75" column="49" selection-start-line="75" selection-start-column="49" selection-end-line="75" selection-end-column="49" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/_base.scss">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="203">
-          <caret line="27" column="13" selection-start-line="27" selection-start-column="13" selection-end-line="27" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -1026,16 +901,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.ts">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="97">
-          <caret line="171" column="31" selection-start-line="171" selection-start-column="31" selection-end-line="171" selection-end-column="31" />
-          <folding>
-            <element signature="e#0#51#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="140">
@@ -1045,6 +910,81 @@
             <element signature="n#mat-expansion-panel-header#0;n#mat-expansion-panel#0;n#mat-accordion#0;n#div#2;n#!!top" />
             <element signature="n#div#0;n#mat-expansion-panel#0;n#mat-accordion#0;n#div#2;n#!!top" />
             <element signature="n#button#0;n#div#1;n#mat-expansion-panel#0;n#mat-accordion#0;n#div#2;n#!!top" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="131">
+          <caret line="173" column="20" lean-forward="true" selection-start-line="173" selection-start-column="20" selection-end-line="173" selection-end-column="20" />
+          <folding>
+            <element signature="e#0#51#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/login/login.component.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="119">
+          <caret line="16" column="26" selection-start-line="16" selection-start-column="26" selection-end-line="16" selection-end-column="26" />
+          <folding>
+            <element signature="e#0#42#0" expanded="true" />
+            <element signature="e#1789#3124#0" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/_theme.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/_mixins.scss">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/_base.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/skins/_green-dark.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/styles/_variables.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="184">
+          <caret line="15" column="28" lean-forward="true" selection-start-line="15" selection-start-column="28" selection-end-line="15" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/login/login.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="149">
+          <caret line="9" column="35" selection-start-line="9" selection-start-column="35" selection-end-line="9" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/login/login.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="10" column="98" selection-start-line="10" selection-start-column="98" selection-end-line="10" selection-end-column="98" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/theme/components/menu/menu.ts">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/app.settings.ts">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="204">
+          <caret line="12" column="17" selection-start-line="12" selection-start-column="17" selection-end-line="12" selection-end-column="17" />
+          <folding>
+            <element signature="e#0#43#0" expanded="true" />
           </folding>
         </state>
       </provider>

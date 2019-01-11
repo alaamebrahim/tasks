@@ -1,0 +1,24 @@
+@import '~@angular/material/theming';
+.login {
+  background: url('../../../assets/img/login.jpg') center center fixed/cover;
+}
+
+.box-header {
+  conent: '';
+  display: block;
+  z-index: 1;
+  background: rgba(24, 123, 46, 0.5) url('../../../assets/img/login-logo.jpg') center center;
+  background-size: cover;
+  //animation-name: animateBackground;
+  //animation-duration: 5s;
+
+  &h2 {
+    opacity: 1;
+  }
+}
+
+//
+//@keyframes animateBackground {
+//  from { background: url('assets/img/login.jpg') bottom right fixed/cover; }
+//  to { background: url('assets/img/login.jpg') center center fixed/cover; color: #388E3C }
+//}
