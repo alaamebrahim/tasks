@@ -50,7 +50,6 @@ export const routes: Routes = [
             }
         ]
     },
-    { path: 'landing', loadChildren: 'app/pages/landing/landing.module#LandingModule' },
     { path: 'login', loadChildren: 'app/pages/login/login.module#LoginModule' },
     { path: 'error', component: ErrorComponent, data: { breadcrumb: 'Error' } },
     { path: '**', component: NotFoundComponent }

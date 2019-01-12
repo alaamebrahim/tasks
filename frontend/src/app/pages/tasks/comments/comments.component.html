@@ -15,8 +15,9 @@
             <mat-divider></mat-divider>
         </div>
     </div>
-    <div *ngIf="comments.length === 0">{{'comments.no-comments'|translate}}</div>
+    <div *ngIf="comments.length === 0 && !loading">{{'comments.no-comments'|translate}}</div>
 </div>
+<mat-spinner *ngIf="loading"></mat-spinner>
 <div fxLayout="column wrap" class="w-100" *ngIf="project!== undefined && project.opened">
     <form [formGroup]="form" *ngxPermissionsOnly="['comment_add']">
         <div fxLayout="row" class="form-field-outer w-100">

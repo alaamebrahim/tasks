@@ -21,7 +21,6 @@ import {routing} from './app.routing';
 
 import {AppComponent} from './app.component';
 import {PagesComponent} from './pages/pages.component';
-import {SearchComponent} from './pages/search/search.component';
 import {NotFoundComponent} from './pages/errors/not-found/not-found.component';
 import {ErrorComponent} from './pages/errors/error/error.component';
 import {AppSettings} from './app.settings';
@@ -84,7 +83,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         AppComponent,
         PagesComponent,
         // BlankComponent,
-        SearchComponent,
         NotFoundComponent,
         ErrorComponent,
         SidenavComponent,

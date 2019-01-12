@@ -21,6 +21,7 @@ export class CommentsComponent implements OnInit {
     public comments: Comment[] = [];
     public userImageDir = environment.userPicPath;
     public form: FormGroup;
+    public loading = true;
 
     constructor(
         public fb: FormBuilder,
@@ -48,8 +49,10 @@ export class CommentsComponent implements OnInit {
             await this.commentsService.getComments(this.task.id).then(data => {
                 me.comments = data;
             }, error => console.log(error));
+            me.loading = false;
         } else {
             me.comments = [];
+            me.loading = false;
         }
     }
 
