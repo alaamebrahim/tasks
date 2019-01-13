@@ -19,6 +19,7 @@ import {Project} from '../../projects/project.model';
 import {environment} from '../../../../environments/environment';
 import {ConfirmationDialogComponent} from "../../../theme/components/confirmation-dialog/confirmation-dialog.component";
 import {Confirm} from "../../../theme/components/confirmation-dialog/confirm.model";
+import {UserPermissions} from "../user-permissions.model";
 
 @Component({
     selector: 'app-tasks',
@@ -33,6 +34,7 @@ export class TasksComponent {
     public tasks: Task[];
     public project: Project = new Project();
     public users: any[];
+    public userIds: number[];
     public page: any;
     public step = 0;
     public searchText: number;
@@ -80,8 +82,6 @@ export class TasksComponent {
     async getProjectById(projectId: any) {
         const me = this;
         await me.projectService.getProjectById(projectId).then(data => {
-            console.log(data.allowed_users);
-            console.log(data.allowed_users.indexOf(me.currentUserId))
             if (['root', 'admin'].indexOf(this.currentUserRole) !== -1) {
                 me.project = data;
             } else {
@@ -99,8 +99,8 @@ export class TasksComponent {
      */
     public getUsers(): void {
         this.users = null; // for show spinner each time
-        this.usersService.getUsers().subscribe((user) => {
-            this.users = user.users;
+        this.usersService.getUsersByProjectId(this.projectId).subscribe((response) => {
+            this.users = response.data;
             // console.log(this.users);
         });
     }
@@ -130,21 +130,28 @@ export class TasksComponent {
 
     onSendNotificationClick(task: Task) {
         // console.log(task);
-        const notification = new Notification();
-        notification.task_id = task.id;
-        notification.user_id = task.user_id;
-        notification.id = null;
-        notification.text = null;
-        // console.log(notification);
+        this.userIds = this.tasksService.getAllowedUsersPerTask(task);
+        if(this.userIds.length) {
+            const notification = new Notification();
+            notification.task_id = task.id;
+            notification.user_ids = this.userIds
+            notification.id = null;
+            notification.text = null;
+            // console.log(notification);
 
-        const dialogRef = this.dialog.open(AddNotificationComponent, {
-            data: notification,
-            minWidth: '50%'
-        });
+            const dialogRef = this.dialog.open(AddNotificationComponent, {
+                data: notification,
+                direction: 'rtl',
+                minWidth: '50%'
+            });
 
-        dialogRef.afterClosed().subscribe(response => {
-            this.getAllTasks();
-        });
+            dialogRef.afterClosed().subscribe(response => {
+                this.getAllTasks();
+            });
+        } else {
+            this.notifyService.notifyUser('tasks.no-notifications');
+        }
+
     }
 
     onDeleteTaskClick(task: Task) {
@@ -177,6 +184,11 @@ export class TasksComponent {
         });
     }
 
+
+    getUserPermissionOnTask(task: Task, permission: string): boolean {
+        return this.tasksService.getUserPermissionOnTask(task, permission);
+    }
+
     /**
      * Even listener for changes in pagination
      * @param event
@@ -191,8 +203,9 @@ export class TasksComponent {
      */
     public onEditTaskClick(taskData: Task) {
         const dialogRef = this.dialog.open(EditTaskComponent, {
-            data: taskData,
-            minWidth: '50%'
+            data: [{'task': taskData, 'projectId': this.projectId}],
+            direction: 'rtl',
+            minWidth: '80%'
         });
 
         dialogRef.afterClosed().subscribe(user => {
@@ -207,6 +220,7 @@ export class TasksComponent {
     public onShowAttachment(taskData: Task) {
         const dialogRef = this.dialog.open(ShowAttachmentComponent, {
             data: taskData,
+            direction: 'rtl',
             minWidth: '80%'
         });
     }

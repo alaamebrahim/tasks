@@ -1,4 +1,4 @@
-import {Component, OnInit, Inject} from '@angular/core';
+import {Component, OnInit, Inject, ViewChild} from '@angular/core';
 import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material';
 import {User} from '../../users/user.model';
@@ -7,6 +7,7 @@ import {TasksService} from '../tasks.service';
 import {Task} from '../task.model';
 import {NotifyUserService} from '../../../shared/services/notify-user.service';
 import {Router} from '@angular/router';
+import {UserPermissions} from "../user-permissions.model";
 
 @Component({
     // tslint:disable-next-line:component-selector
@@ -19,10 +20,15 @@ export class EditTaskComponent implements OnInit {
     public form: FormGroup;
     public users: User[];
     public saved = false;
+    public usersPermissions: UserPermissions[] = [];
+    @ViewChild('fileInput') fileInput;
+    public attachment: string;
+    public working = false;
+
 
     constructor(
         private dialogRef: MatDialogRef<EditTaskComponent>,
-        @Inject(MAT_DIALOG_DATA) private task: Task,
+        @Inject(MAT_DIALOG_DATA) private data: any,
         private fb: FormBuilder,
         private usersService: UsersService,
         private tasksService: TasksService,
@@ -46,46 +52,78 @@ export class EditTaskComponent implements OnInit {
             completed: null, // thi will be removed on save
             notifications: null, // thi will be removed on save
             attachment: null,
-            project_id: null
+            project_id: null,
+            permissions: [[]]
         });
     }
 
     ngOnInit() {
-        this.getAllUsers(); // Gets users for dropdown list
-        // this.clearUnusedTaskItems(); // Clears unused items
-        // this.prepareUserId();
-        this.form.setValue(this.task);
-        // console.log(this.task);
+        this.createUserPermissionsObject(JSON.parse(this.data[0].task.permissions));
+        this.form.setValue(this.data[0].task);
     }
 
     prepareUserId() {
         const user_ids: any[] = [];
-        user_ids.push(this.task['user_id']);
-        this.task['user_id'] = user_ids;
+        user_ids.push(this.data[0].task['user_id']);
+        this.data[0].task['user_id'] = user_ids;
     }
 
     onSaveTask() {
-        this.tasksService.updateTask(this.form.value)
-            .subscribe((response) => {
-                if (response.success === true) {
-                    this.saved = true;
-                    // console.log(response.message);
-                    this.notifyService.notifyUser('general.messages.saved');
-                    this.router.navigate(['tasks/view-tasks/', this.form.controls['project_id'].value]);
-                } else {
-                    this.notifyService.notifyUser('general.messages.error');
-                }
-            });
+        const me = this;
+        if (me.form.controls['start_date'].value > me.form.controls['end_date'].value) {
+            me.notifyService.notifyUser('tasks.start-end-date-error')
+        } else {
+            me.form.controls['permissions'].setValue(me.usersPermissions);
+            this.tasksService.updateTask(this.form.value)
+                .subscribe((response) => {
+                    if (response.success === true) {
+                        this.saved = true;
+                        // console.log(response.message);
+                        this.notifyService.notifyUser('general.messages.saved');
+                        this.router.navigate(['tasks/view-tasks/', this.form.controls['project_id'].value]);
+                    } else {
+                        this.notifyService.notifyUser('general.messages.error');
+                    }
+                });
+        }
+
     }
 
     /**
      * Get users for dropdown menu
      */
-    getAllUsers(): void {
-        this.usersService.getUsers().subscribe((response) => {
-            // console.log(response);
-            this.users = response['users'];
-        });
+    // getAllUsers(): void {
+    //     this.usersService.getUsersByProjectId(this.data.projectId).subscribe((response) => {
+    //         if (response.success === true) {
+    //             this.users = response.data;
+    //             this.createUserPermissionsObject(JSON.parse(response.data[0].permissions));
+    //         }
+    //     });
+    // }
+
+    private createUserPermissionsObject(data: UserPermissions[]) {
+        this.usersPermissions = data;
     }
 
+
+    addFile(): void {
+        this.working = true;
+        const fi = this.fileInput.nativeElement;
+        if (fi.files && fi.files[0]) {
+            const fileToUpload = fi.files[0];
+            // this.form.controls['picture'].setValue(fileToUpload);
+            // console.log(fileToUpload);
+            this.usersService.uploadTaskAttachment(fileToUpload).subscribe(response => {
+                if (response.success === true) {
+                    this.form.controls['attachment'].setValue(response.message);
+                    // console.log(this.form.value);
+                    this.attachment = response.message;
+                }
+                this.working = false;
+            });
+        } else {
+            this.working = false;
+        }
+
+    }
 }

@@ -183,6 +183,21 @@ $api->version('v1', function ($api) {
                 'middleware' => ['permission:user_view|user_list_view']
             ]
         );
+        $api->get('/get-non-admin-users',
+            [
+                'uses' => 'UsersController@getNonAdminUsers',
+                'as' => 'api.user.all-except-admins',
+                'middleware' => ['permission:user_view|user_list_view']
+            ]
+        );
+        // Get users per project
+        $api->get('/get-users-by-project-id/{projectId}',
+            [
+                'uses' => 'UsersController@getUsersByProjectId',
+                'as' => 'api.user.by-project-id',
+                'middleware' => ['permission:task_add|task_update']
+            ]
+        );
     });
 
     /*************************************************************
@@ -260,8 +275,8 @@ $api->version('v1', function ($api) {
         // update existing task progress
         $api->post('/update-task-progress',
             [
-                'uses' => 'TasksController@updateExistingTask',
-                'as' => 'api.task.updateExisting'
+                'uses' => 'TasksController@updateTaskProgress',
+                'as' => 'api.task.updateProgress'
             ]
         );
         // delete a user

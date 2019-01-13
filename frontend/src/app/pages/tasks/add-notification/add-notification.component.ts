@@ -25,7 +25,7 @@ export class AddNotificationComponent implements OnInit {
   ) {
     this.form = this.fb.group({
       id: null,
-      user_id: null,
+      user_ids: [],
       task_id: null,
       text: null,
     });

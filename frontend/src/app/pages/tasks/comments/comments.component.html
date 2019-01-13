@@ -19,7 +19,7 @@
 </div>
 <mat-spinner *ngIf="loading"></mat-spinner>
 <div fxLayout="column wrap" class="w-100" *ngIf="project!== undefined && project.opened">
-    <form [formGroup]="form" *ngxPermissionsOnly="['comment_add']">
+    <form [formGroup]="form" *ngIf="getUserPermissionOnTask(task, 'can_comment')">
         <div fxLayout="row" class="form-field-outer w-100">
             <div fxFlex="60">
                 <mat-input-container class="w-100">

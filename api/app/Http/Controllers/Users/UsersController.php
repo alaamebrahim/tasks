@@ -181,6 +181,13 @@ class UsersController extends Controller
     }
 
     /**
+     * @return mixed
+     */
+    public function getNonAdminUsers() {
+        return $this->usersService->getNonAdminUsers();
+    }
+
+    /**
      * Uploads an attachment and return reponse
      * @return JsonResponse
      */
@@ -207,6 +214,23 @@ class UsersController extends Controller
         return new JsonResponse([
             'success' => false,
             'message' => ''
+        ]);
+    }
+
+    /**
+     * @param $projectId
+     * @return JsonResponse
+     */
+    public function getUsersByProjectId($projectId) {
+        $success = false;
+        $users = $this->usersService->getUsersByProjectId($projectId);
+        if($users != null) {
+            $success = true;
+        }
+
+        return new JsonResponse([
+           'success' => $success,
+           'data'    => $users
         ]);
     }
 }

@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs/Observable';
-import { User } from './user.model';
-import { ApiRequestService } from '../../shared/services/api-request.service';
-import { Role } from '../login/role.model';
+import {Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable} from 'rxjs/Observable';
+import {User} from './user.model';
+import {ApiRequestService} from '../../shared/services/api-request.service';
+import {Role} from '../login/role.model';
 
 @Injectable()
 export class UsersService {
@@ -11,10 +11,20 @@ export class UsersService {
     constructor(
         public http: HttpClient,
         private apiRequestService: ApiRequestService
-    ) { }
+    ) {
+    }
 
     getUsers() {
         return this.apiRequestService.get('users/get-users');
+    }
+
+
+    getNonAdminsUsers() {
+        return this.apiRequestService.get('users/get-non-admin-users');
+    }
+
+    getUsersByProjectId(projectId: any) {
+        return this.apiRequestService.get('users/get-users-by-project-id/' + projectId);
     }
 
     addUser(user: User) {

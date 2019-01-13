@@ -8,6 +8,7 @@ import {UserInfoService} from '../../../shared/services/user-info.service';
 import {NotifyUserService} from '../../../shared/services/notify-user.service';
 import {Project} from '../../projects/project.model';
 import {NgxPermissionsService} from 'ngx-permissions';
+import {TasksService} from "../tasks.service";
 
 @Component({
     selector: 'app-comments',
@@ -28,7 +29,9 @@ export class CommentsComponent implements OnInit {
         private commentsService: CommentsService,
         private userInfoService: UserInfoService,
         private notifyService: NotifyUserService,
-        private permissionService: NgxPermissionsService
+        private permissionService: NgxPermissionsService,
+        private tasksService: TasksService,
+
     ) {
         this.form = this.fb.group({
             id: null,
@@ -67,5 +70,9 @@ export class CommentsComponent implements OnInit {
         }, error => {
             me.notifyService.notifyUser('general.messages.error');
         });
+    }
+
+    getUserPermissionOnTask(task: Task, permission: string): boolean {
+        return this.tasksService.getUserPermissionOnTask(task, permission);
     }
 }

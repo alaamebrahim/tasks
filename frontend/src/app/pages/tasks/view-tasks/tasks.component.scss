@@ -9,3 +9,21 @@
     -moz-border-radius: 50%;
     -webkit-border-radius: 50%;
 }
+
+.comments-container {
+    padding: 10px;
+    margin: 10px auto;
+    border: lightgray 1px solid;
+}
+
+.part {
+    margin-bottom: 10px;
+    font-size: 15px;
+    font-weight: normal;
+    font-family: Arial;
+}
+
+.description {
+    font-size: 14px;
+    font-weight: bold;
+}

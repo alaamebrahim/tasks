@@ -21,6 +21,7 @@ export const routes = [
     {
         path: '',
         component: TasksComponent,
+        redirectTo: '/projects',
         pathMatch: 'full',
         data: {
             breadcrumb: 'المهام', permissions: {only: [], redirectTo: '/projects'}

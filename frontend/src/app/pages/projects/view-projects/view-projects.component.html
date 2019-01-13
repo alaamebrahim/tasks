@@ -1,5 +1,5 @@
-<div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row wrap" class="bg-accent p-5 m-5">
-    يمكنك عرض / إضافة / تعديل / حذف المجموعات من خلال هذه الصفحة
+<div fxLayout="column" fxLayoutAlign="center center" fxLayout.gt-sm="row wrap" class="bg-accent p-5 m-5 help" *ngxPermissionsOnly="['root', 'admin']">
+    {{ 'help.projects.view' | translate }}
 </div>
 <div fxLayout="row" fxLayoutAlign="center center" class="flex-p" *ngxPermissionsOnly="['root','admin']">
     <div>
@@ -16,7 +16,7 @@
                     <h3>{{project.title}}</h3>
                 </mat-card-title>
             </mat-card-header>
-            <img mat-card-image [src]="project.image == '' ? 'assets/img/app/5.jpg' : imagePath + project.image" [alt]="project.title" height="240">
+            <img mat-card-image [src]="project.image == '' ? 'assets/img/login-logo.jpg' : imagePath + project.image" [alt]="project.title" height="240">
             <mat-card-content class="p-">
                 <div class="pre-scrollable">{{project.description}}</div>
             </mat-card-content>

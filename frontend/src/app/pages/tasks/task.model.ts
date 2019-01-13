@@ -1,3 +1,5 @@
+import {UserPermissions} from "./user-permissions.model";
+
 export class Task {
     id: number;
     title: string;
@@ -12,4 +14,5 @@ export class Task {
     attachment: string;
     created_at: Date;
     updated_at: Date;
+    permissions: string;
   }

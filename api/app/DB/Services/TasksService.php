@@ -3,6 +3,7 @@
 namespace App\DB\Services;
 
 use App\DB\Repositories\UserRepository as UserRepo;
+use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\DB\Repositories\TasksRepository as TaskRepo;
 use App\DB\Repositories\RoleRepository as RoleRepo;
@@ -25,7 +26,8 @@ class TasksService
         UserRepo $userRepo,
         TaskRepo $taskRepo,
         RoleRepo $roleRepo
-    ) {
+    )
+    {
         $this->userRepo = $userRepo;
         $this->taskRepo = $taskRepo;
         $this->roleRepo = $roleRepo;
@@ -47,8 +49,38 @@ class TasksService
         if ($role_name == 'root' || $role_name == 'admin') {
             return $this->taskRepo->getAllTasks($projectId);
         } else {
-            return $this->taskRepo->getAllTasksByUser($current_user['attributes']['id'], $projectId);
+            $tasks = $this->taskRepo->getAllTasksByUser($current_user['attributes']['id'], $projectId);
+            if ($tasks == null) {
+                return null;
+            }
+            return $this->getAllowedTasks($tasks);
         }
+    }
+
+    /**
+     * @param $tasks
+     * @return array
+     */
+    public function getAllowedTasks($tasks) {
+        $current_user = JWTAuth::parseToken()->authenticate();
+
+        $filteredTasks = [];
+        foreach ($tasks as $task) {
+            $permissions = json_decode($task->permissions, true);
+            if (is_array($permissions)) {
+                foreach ($permissions as $permission) {
+                    if ($permission['user_id'] == $current_user->id &&
+                        array_key_exists('enabled', $permission)) {
+                        //-----
+                        if($permission['enabled'] == true) {
+                            $filteredTasks[] = $task;
+                        }
+                    }
+                }
+            }
+
+        }
+        return $filteredTasks;
     }
 
     /**
@@ -68,7 +100,11 @@ class TasksService
         if ($role_name == 'root' || $role_name == 'admin') {
             return $this->taskRepo->getTasksByStatus($status, $projectId);
         } else {
-            return $this->taskRepo->getTasksByStatusAndUser($status, $current_user['attributes']['id'], $projectId);
+            $tasks = $this->taskRepo->getTasksByStatusAndUser($status, $current_user['attributes']['id'], $projectId);
+            if ($tasks == null) {
+                return null;
+            }
+            return $this->getAllowedTasks($tasks);
         }
     }
 

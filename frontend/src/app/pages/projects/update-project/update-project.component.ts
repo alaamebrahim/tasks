@@ -72,9 +72,9 @@ export class UpdateProjectComponent implements OnInit {
      * Get users for dropdown menu
      */
     getAllUsers(): void {
-        this.usersService.getUsers().subscribe((response) => {
+        this.usersService.getNonAdminsUsers().subscribe((response) => {
             // console.log(response);
-            this.users = response['users'];
+            this.users = response;
         });
     }
 

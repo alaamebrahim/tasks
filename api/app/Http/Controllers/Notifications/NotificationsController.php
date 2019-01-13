@@ -29,6 +29,8 @@ class NotificationsController extends Controller
     /**
      * Post add new notification
      * @Returns JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function addNewNotification(Request $request) {
         // Validation rules
@@ -49,6 +51,8 @@ class NotificationsController extends Controller
     /**
      * Post add new user
      * @Returns JsonResponse
+     * @param Request $request
+     * @return JsonResponse
      */
     public function updateExistingNotification(Request $request) {
         // Validation rules
@@ -85,7 +89,7 @@ class NotificationsController extends Controller
         // Validation rules
         try {
             $this->validate($request, [
-                'user_id' => 'required',
+                'user_ids' => 'required',
                 'task_id' => 'required',
                 'text' => 'required',
             ]);
@@ -97,7 +101,14 @@ class NotificationsController extends Controller
             ]);
         }
         $data = $request->all();
-        $this->notificationsService->sendSingleNotification($request);
+
+        $userIds = $data['user_ids'];
+
+        foreach ($userIds as $userId) {
+            $request->user_id = $userId;
+            $this->notificationsService->sendSingleNotification($request);
+        }
+
         return new JsonResponse([
             'success' => true,
             'message' => ''

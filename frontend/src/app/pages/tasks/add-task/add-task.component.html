@@ -8,50 +8,113 @@
             </mat-card-header>
             <mat-card-content fxLayout="column" fxLayoutAlign="center">
                 <form [formGroup]="form">
-                    <div fxLayout="column" class="form-field-outer w-100">
-                        <mat-input-container>
-                            <mat-placeholder>
-                                <mat-icon>person</mat-icon> {{'tasks.form.title' | translate}}</mat-placeholder>
-                            <input matInput formControlName="title" required>
-                        </mat-input-container>
-                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
-                            <mat-select formControlName="user_id" multiple required placeholder="{{'tasks.form.user' | translate}}">
-                                <mat-option *ngFor="let user of users" [value]="user.id">{{user.first_name === '' ? user.email : user.first_name}} {{user.last_name === '' ? '' :
-                                    user.last_name}}
-                                </mat-option>
-                            </mat-select>
-                        </mat-input-container>
-                        <mat-input-container floatPlaceholder="auto">
-                            <input matInput [matDatepicker]="startdate" required placeholder="{{'tasks.form.start_date' | translate}}" formControlName="start_date">
-                            <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
-                            <mat-datepicker #startdate></mat-datepicker>
-                        </mat-input-container>
-                        <mat-input-container floatPlaceholder="auto">
-                            <input matInput [matDatepicker]="enddate" required placeholder="{{'tasks.form.end_date' | translate}}" formControlName="end_date">
-                            <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
-                            <mat-datepicker #enddate></mat-datepicker>
-                        </mat-input-container>
-                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
-                            <textarea matInput formControlName="description" required placeholder="{{'tasks.form.description' | translate}}" rows="5"></textarea>
-                        </mat-input-container>
-                        <mat-input-container floatPlaceholder="auto" dividerColor="primary">
-                            <mat-select formControlName="priority" placeholder="{{'tasks.form.priority.title' | translate}}">
-                                <mat-option [value]="1">{{'tasks.form.priority.levels.1' | translate}}</mat-option>
-                                <mat-option [value]="2">{{'tasks.form.priority.levels.2' | translate}}</mat-option>
-                                <mat-option [value]="3">{{'tasks.form.priority.levels.3' | translate}}</mat-option>
-                                <mat-option [value]="4">{{'tasks.form.priority.levels.4' | translate}}</mat-option>
-                            </mat-select>
-                        </mat-input-container>
-                        <div class="w-100 text-right">
-                            <input #fileInput type="file" (change)="addFile()" style="display: none;" />
-                            <button class="bg-accent" mat-button (click)="fileInput.click()">{{'tasks.form.attachment' | translate}}</button>
-                            <label>{{attachment}}</label>
-                        </div>
-                    </div>
+                    <mat-horizontal-stepper>
+                        <mat-step [editable]="true" label="{{'tasks.addtask.step1' | translate}}">
+                            <div fxLayout="column" class="form-field-outer w-100">
+                                <mat-input-container>
+                                    <mat-placeholder>
+                                        <mat-icon>person</mat-icon>
+                                        {{'tasks.form.title' | translate}}
+                                    </mat-placeholder>
+                                    <input matInput formControlName="title" required>
+                                </mat-input-container>
+                                <mat-input-container floatPlaceholder="auto">
+                                    <input matInput [matDatepicker]="startdate" required
+                                           placeholder="{{'tasks.form.start_date' | translate}}"
+                                           formControlName="start_date">
+                                    <mat-datepicker-toggle matSuffix [for]="startdate"></mat-datepicker-toggle>
+                                    <mat-datepicker #startdate></mat-datepicker>
+                                </mat-input-container>
+                                <mat-input-container floatPlaceholder="auto">
+                                    <input matInput [matDatepicker]="enddate" required
+                                           placeholder="{{'tasks.form.end_date' | translate}}"
+                                           formControlName="end_date">
+                                    <mat-datepicker-toggle matSuffix [for]="enddate"></mat-datepicker-toggle>
+                                    <mat-datepicker #enddate></mat-datepicker>
+                                </mat-input-container>
+                                <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                                    <textarea matInput formControlName="description" required
+                                              placeholder="{{'tasks.form.description' | translate}}"
+                                              rows="5"></textarea>
+                                </mat-input-container>
+                                <mat-input-container floatPlaceholder="auto" dividerColor="primary">
+                                    <mat-select formControlName="priority"
+                                                placeholder="{{'tasks.form.priority.title' | translate}}">
+                                        <mat-option [value]="1">{{'tasks.form.priority.levels.1' | translate}}
+                                        </mat-option>
+                                        <mat-option [value]="2">{{'tasks.form.priority.levels.2' | translate}}
+                                        </mat-option>
+                                        <mat-option [value]="3">{{'tasks.form.priority.levels.3' | translate}}
+                                        </mat-option>
+                                        <mat-option [value]="4">{{'tasks.form.priority.levels.4' | translate}}
+                                        </mat-option>
+                                    </mat-select>
+                                </mat-input-container>
+                                <div class="w-100 text-right">
+                                    <input #fileInput type="file" (change)="addFile()" style="display: none;"/>
+                                    <button class="bg-accent" mat-button (click)="fileInput.click()">
+                                        <mat-icon>attachment</mat-icon>
+                                        {{'tasks.form.attachment' | translate}}
+                                    </button>
+                                    <label>{{attachment}}</label>
+                                </div>
+                            </div>
+                        </mat-step>
+                        <mat-step [editable]="true" label="{{'tasks.addtask.step2' | translate}}">
+                            <div fxLayout="column" class="form-field-outer w-100">
+                                <!--<mat-input-container floatPlaceholder="auto" dividerColor="primary">-->
+                                <!--<mat-select formControlName="user_id" multiple required-->
+                                <!--placeholder="{{'tasks.form.user' | translate}}">-->
+                                <!--<mat-option *ngFor="let user of users"-->
+                                <!--[value]="user.id">{{user.first_name ===-->
+                                <!--'' ? user.email : user.first_name}} {{user.last_name === '' ? '' :-->
+                                <!--user.last_name}}-->
+                                <!--</mat-option>-->
+                                <!--</mat-select>-->
+                                <!--</mat-input-container>-->
+                                <div class="help"> {{ 'help.tasks.users' | translate }}</div>
+                                <div fxLayout="row nowrap" fxLayout.lt-md="column wrap" class="permissions-box"
+                                     *ngFor="let userPermission of usersPermissions">
+                                    <div fxFlex="35%" class="bg-primary username">
+                                        <mat-checkbox [(ngModel)]="userPermission.enabled"
+                                                      [ngModelOptions]="{standalone: true}">{{ userPermission.username
+                                            }}
+                                        </mat-checkbox>
+                                    </div>
+                                    <div fxFlex="65" class="permissions">
+                                        <mat-checkbox *ngIf="userPermission.enabled"
+                                                      [(ngModel)]="userPermission.permissions.send_notifications"
+                                                      [ngModelOptions]="{standalone: true}">
+                                            {{'tasks.addtask.permissions.send_notifications' | translate}}
+                                        </mat-checkbox>
+                                        <mat-checkbox *ngIf="userPermission.enabled"
+                                                      [(ngModel)]="userPermission.permissions.can_comment"
+                                                      [ngModelOptions]="{standalone: true}">
+                                            {{'tasks.addtask.permissions.can_comment' | translate}}
+                                        </mat-checkbox>
+                                        <mat-checkbox *ngIf="userPermission.enabled"
+                                                      [(ngModel)]="userPermission.permissions.update_progress"
+                                                      [ngModelOptions]="{standalone: true}">
+                                            {{'tasks.addtask.permissions.update_progress' | translate}}
+                                        </mat-checkbox>
+                                        <mat-checkbox *ngIf="userPermission.enabled"
+                                                      [(ngModel)]="userPermission.permissions.view_attachments"
+                                                      [ngModelOptions]="{standalone: true}">
+                                            {{'tasks.addtask.permissions.view_attachments' | translate}}
+                                        </mat-checkbox>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </mat-step>
+                    </mat-horizontal-stepper>
+
                 </form>
             </mat-card-content>
             <mat-card-footer fxLayout="column">
-                <button mat-raised-button color="primary" (click)="onSaveTask()" [disabled]="!form.valid || working">{{'buttons.save' | translate}}</button>
+                <button mat-raised-button color="primary" (click)="onSaveTask()" [disabled]="!form.valid || working">
+                    {{'buttons.save' | translate}}
+                </button>
             </mat-card-footer>
         </mat-card>
     </div>

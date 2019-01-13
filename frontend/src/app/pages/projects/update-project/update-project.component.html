@@ -11,32 +11,46 @@
                     <div fxLayout="column" class="form-field-outer w-100">
                         <mat-input-container>
                             <mat-placeholder>
-                                <mat-icon>person</mat-icon> {{'projects.form.title' | translate}}</mat-placeholder>
+                                <mat-icon>person</mat-icon>
+                                {{'projects.form.title' | translate}}
+                            </mat-placeholder>
                             <input matInput formControlName="title" required>
                         </mat-input-container>
                         <mat-input-container floatPlaceholder="auto" dividerColor="primary">
-                                <textarea matInput formControlName="description" required placeholder="{{'projects.form.description' | translate}}" rows="5"></textarea>
-                            </mat-input-container>
+                            <textarea matInput formControlName="description" required
+                                      placeholder="{{'projects.form.description' | translate}}" rows="5"></textarea>
+                        </mat-input-container>
                         <mat-input-container floatPlaceholder="auto" dividerColor="primary">
-                            <mat-select formControlName="allowed_users" multiple required placeholder="{{'projects.form.allowed_users' | translate}}">
+                            <mat-select formControlName="allowed_users" multiple required
+                                        placeholder="{{'projects.form.allowed_users' | translate}}">
                                 <mat-option *ngFor="let user of users" [value]="user.id">
-                                    {{user.first_name === '' ? user.email : user.first_name}} {{user.last_name === '' ? '' : user.last_name}}
+                                    {{user.first_name === '' ? user.email : user.first_name}} {{user.last_name === '' ?
+                                    '' : user.last_name}}
                                 </mat-option>
                             </mat-select>
+                            <div class="help bg-accent">{{'help.projects.users' | translate}}</div>
                         </mat-input-container>
                         <div class="w-100 text-right">
-                            <input #fileInput type="file" (change)="addFile()" style="display: none;" />
-                            <button class="bg-accent" mat-button (click)="fileInput.click()">{{'projects.form.attachment' | translate}}</button>
+                            <input #fileInput type="file" (change)="addFile()" style="display: none;"/>
+                            <button class="bg-accent" mat-button (click)="fileInput.click()">
+                                <mat-icon>attachment</mat-icon>
+                                {{'projects.form.attachment' | translate}}
+                            </button>
                             <label>{{image}}</label>
                         </div>
                         <div class="w-100 text-right">
-                            <mat-checkbox formControlName="opened" color="primary">{{'projects.form.opened' | translate}}</mat-checkbox>
+                            <mat-checkbox formControlName="opened" color="primary">{{'projects.form.opened' |
+                                translate}}
+                            </mat-checkbox>
+                            <div class="help bg-accent" *ngIf="form.controls['opened'].value === false">{{'help.projects.opened' | translate}}</div>
                         </div>
                     </div>
                 </form>
             </mat-card-content>
             <mat-card-footer fxLayout="column">
-                <button mat-raised-button color="primary" (click)="onSaveProject()" [disabled]="!form.valid || working">{{'buttons.save' | translate}}</button>
+                <button mat-raised-button color="primary" (click)="onSaveProject()" [disabled]="!form.valid || working">
+                    {{'buttons.save' | translate}}
+                </button>
             </mat-card-footer>
         </mat-card>
     </div>

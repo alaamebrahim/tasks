@@ -37,7 +37,7 @@ export class ApiRequestService {
         const me = this;
         return this.http.get(this.appConfig.baseApiPath + url, { headers: this.getHeaders(), params: urlParams })
             .catch(function (error: any) {
-                console.log('Some error in catch');
+                console.log('Some error in catch ' + error);
                 if (error.status === 401 || error.status === 403) {
                     // me.router.navigate(['/login']);
                     me.notifyService.notifyUser('user.unauthorized');

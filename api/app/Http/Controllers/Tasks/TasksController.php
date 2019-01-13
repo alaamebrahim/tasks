@@ -53,7 +53,7 @@ class TasksController extends Controller
                 'title' => 'required',
                 'start_date' => 'required',
                 'end_date' => 'required',
-                'user_id' => 'required',
+                'permissions' => 'required',
                 'description' => 'required'
             ]);
         } catch (ValidationException $e) {
@@ -65,8 +65,6 @@ class TasksController extends Controller
         }
         $data = $request->all();
 
-        // Put user id in separate var
-        $userIds[] = $data['user_id'];
         // Remove user id from object so we can deal with it individually
         unset($data['user_id']);
 
@@ -74,21 +72,29 @@ class TasksController extends Controller
         $data['created_at'] = Carbon::now();
         $data['updated_at'] = Carbon::now();
 
+
+
+        // Put user id in separate var
+        $userIds = [];
+        foreach ($data['permissions'] as $permission) {
+            $userIds[] = $permission['user_id'];
+        };
+
+        $data['permissions'] = json_encode($data['permissions']);
+        $this->taskRepo->saveModel($data);
+
         //Notifications and mails
         $message = trans('messages.notifications.mail.message', ['title' => $data['title']]) . "\n";
 
         //Loop data
-        $dataForSave = [];
         $users_emails = [];
-        for ($i = 0; $i < count($userIds[0]); $i++) {
+        for ($i = 0; $i < count($userIds); $i++) {
             // Extract users ids
-            $data['user_id'] = $userIds[0][$i];
-            $dataForSave[] = $data;
+            $data['user_id'] = $userIds[$i];
             // Extract users emails
             $user_email = $this->userRepo->find($data['user_id'])->email;
             $users_emails[] = $user_email;
         }
-        Tasks::insert($dataForSave);
 
         $added_ids = $this->taskRepo->getLastAddedTasksIdByDateCreated($data['created_at']);
 
@@ -141,6 +147,45 @@ class TasksController extends Controller
         unset($data['notifications']);
 
         $data['completed'] = $data['progress'] == 100 ? 1 : 0;
+        $data['permissions'] = json_encode($data['permissions']);
+        $this->taskRepo->update($data, $data['id']);
+        //$this->taskget countRepo->saveModel($saveData);
+
+        // return success obj as json
+        return new JsonResponse([
+            'success' => true,
+            'message' => $data
+        ]);
+    }
+
+
+    public function updateTaskProgress(Request $request)
+    {
+        // Validation rules
+        try {
+            $this->validate($request, [
+                'title' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+                'user_id' => 'required',
+                'description' => 'required'
+            ]);
+        } catch (ValidationException $e) {
+            //var_dump($e);
+            return new JsonResponse([
+                'success' => false,
+                'message' => trans('messages.validations.error')
+            ]);
+        }
+        $data = $request->all();
+
+        $data['updated_at'] = Carbon::now();
+        unset($data['first_name']);
+        unset($data['last_name']);
+        unset($data['notifications']);
+
+        $data['completed'] = $data['progress'] == 100 ? 1 : 0;
+        unset($data['permissions']);
         $this->taskRepo->update($data, $data['id']);
         //$this->taskget countRepo->saveModel($saveData);
 
@@ -191,8 +236,8 @@ class TasksController extends Controller
     {
         $tasks = null;
         try {
-            $tasks =  $this->tasksService->getAllTasks($projectId);
-            $success = ($tasks != null);
+            $tasks = $this->tasksService->getAllTasks($projectId);
+            $success = true;
 
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -214,8 +259,8 @@ class TasksController extends Controller
     {
         $tasks = null;
         try {
-            $tasks =  $this->tasksService->getAllTasksByStatus(1, $projectId);
-            $success = ($tasks != null);
+            $tasks = $this->tasksService->getAllTasksByStatus(1, $projectId);
+            $success = true;
 
         } catch (\Exception $e) {
             Log::error($e->getMessage());
@@ -237,8 +282,8 @@ class TasksController extends Controller
     {
         $tasks = null;
         try {
-            $tasks =  $this->tasksService->getAllTasksByStatus(0, $projectId);
-            $success = ($tasks != null);
+            $tasks = $this->tasksService->getAllTasksByStatus(0, $projectId);
+            $success = true;
 
         } catch (\Exception $e) {
             Log::error($e->getMessage());

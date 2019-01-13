@@ -2,36 +2,42 @@
 @import url('https://fonts.googleapis.com/icon?family=Material+Icons');
 @import url('https://cdn.quilljs.com/1.2.2/quill.snow.css');
 @import url('https://cdn.quilljs.com/1.2.2/quill.bubble.css');
-
 // indigo-pink, deeppurple-amber, purple-green and pink-bluegrey.
 @import '~@angular/material/prebuilt-themes/indigo-pink.css';
-
 @import "app/theme/styles/base";
 @import "app/theme/styles/theme";
 @import "app/theme/styles/libs-override";
 @import "app/theme/styles/rtl";
-
 // This part responsible for glolaizing font family for material
 @import '~@angular/material/theming';
+
 $custom-typography: mat-typography-config(
-    $font-family: '"GE SS Text Light", Roboto, "Helvetica Neue", sans-serif'
+        $font-family: '"GE SS Text Light", Roboto, "Helvetica Neue", sans-serif'
 );
 @include mat-core($custom-typography);
 
 i {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
 @font-face {
-    font-family:"GE SS Text Light";
-    src:/*url("./assets/fonts/ge-ss/GE_SS_Text_Light.eot?") format("eot"),*/
-        url("./assets/fonts/ge-ss/GE_SS_Two_Medium.otf") /*format("woff")*//*,
+  font-family: "GE SS Text Light";
+  src: /*url("./assets/fonts/ge-ss/GE_SS_Text_Light.eot?") format("eot"),*/
+          url("./assets/fonts/ge-ss/GE_SS_Two_Medium.otf") /*format("woff")*//*,
         url("./assets/fonts/ge-ss/GE_SS_Text_Light.ttf") format("truetype"),
-        url("./assets/fonts/ge-ss/GE_SS_Text_Light.svg#GESSTextLight-Light") format("svg")*/;
-    font-weight:normal;
-    font-style:normal;
+        url("./assets/fonts/ge-ss/GE_SS_Text_Light.svg#GESSTextLight-Light") format("svg")*/
+;
+  font-weight: normal;
+  font-style: normal;
 }
 
 .mat-icon-custom-size {
-    @include md-icon-size(64px);
-  }
+  @include md-icon-size(64px);
+}
+
+.help {
+  padding: 2px;
+  font-family: Arial;
+  font-size: 13px;
+  font-style: italic;
+}
