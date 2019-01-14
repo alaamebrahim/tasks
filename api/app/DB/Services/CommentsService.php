@@ -32,7 +32,7 @@ class CommentsService
     /**
      * Get all comments by its task
      * @param $taskId
-     * @return Collection
+     * @return array|null
      */
     public function getAllCommentsByTaskId($taskId)
     {
@@ -91,12 +91,34 @@ class CommentsService
         }
     }
 
+    /**
+     * @param $id
+     * @return bool
+     */
     public function removeComment($id)
     {
         try {
             $current_user = JWTAuth::parseToken()->authenticate();
             if ($current_user) {
                 $this->commentsRepo->delete($id);
+                return true;
+            }
+        } catch (\Throwable $th) {
+            Log::error($th);
+        }
+        return false;
+    }
+
+    /**
+     * @param $taskId
+     * @return bool
+     */
+    public function removeCommentsByTaskId($taskId)
+    {
+        try {
+            $current_user = JWTAuth::parseToken()->authenticate();
+            if ($current_user) {
+                $this->commentsRepo->deleteByTaskId($taskId);
                 return true;
             }
         } catch (\Throwable $th) {

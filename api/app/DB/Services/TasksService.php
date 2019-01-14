@@ -7,6 +7,7 @@ use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\DB\Repositories\TasksRepository as TaskRepo;
 use App\DB\Repositories\RoleRepository as RoleRepo;
+use App\DB\Repositories\CommentsRepository as CommentsRepo;
 use Intervention\Image\Facades\Image;
 
 class TasksService
@@ -15,22 +16,26 @@ class TasksService
     private $userRepo;
     private $taskRepo;
     private $roleRepo;
+    private $commentRepo;
 
     /**
      * Constructor
      * @param UserRepo $userRepo
      * @param TaskRepo $taskRepo
      * @param RoleRepo $roleRepo
+     * @param CommentsRepo $commentRepo
      */
     public function __construct(
         UserRepo $userRepo,
         TaskRepo $taskRepo,
-        RoleRepo $roleRepo
+        RoleRepo $roleRepo,
+        CommentsRepo $commentRepo
     )
     {
-        $this->userRepo = $userRepo;
-        $this->taskRepo = $taskRepo;
-        $this->roleRepo = $roleRepo;
+        $this->userRepo    = $userRepo;
+        $this->taskRepo    = $taskRepo;
+        $this->roleRepo    = $roleRepo;
+        $this->commentRepo = $commentRepo;
     }
 
     /**
@@ -161,5 +166,21 @@ class TasksService
     {
         $tasks = $this->taskRepo->getUserLastTasks($id);
         return $tasks;
+    }
+
+    /**
+     * @param $taskId
+     * @return bool
+     */
+    public function deleteTask($taskId)
+    {
+        //First remove comments
+        try {
+            $this->commentRepo->deleteByTaskId($taskId);
+            $this->taskRepo->delete($taskId);
+        } catch (\Exception $ex) {
+            Log::error($ex->getMessage());
+        }
+        return false;
     }
 }

@@ -219,7 +219,7 @@ class TasksController extends Controller
         $data = $request->all();
 
         // save user object
-        $this->taskRepo->delete($data['id']);
+        $this->tasksService->deleteTask($data['id']);
         // return success obj as json
         return new JsonResponse([
             'success' => true,

@@ -26,4 +26,13 @@ class CommentsRepository extends Repository
         return collect($comments)->toArray();
     }
 
+    /**
+     * @param $taskId
+     * @return mixed
+     */
+    public function deleteByTaskId($taskId) {
+        $deletedRows =  Comments::where('task_id', '=', $taskId)->delete();
+        return $deletedRows;
+    }
+
 }
