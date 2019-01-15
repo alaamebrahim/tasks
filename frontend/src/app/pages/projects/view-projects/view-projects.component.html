@@ -16,7 +16,7 @@
                     <h3>{{project.title}}</h3>
                 </mat-card-title>
             </mat-card-header>
-            <img mat-card-image [src]="project.image == '' ? 'assets/img/login-logo.jpg' : imagePath + project.image" [alt]="project.title" height="240">
+            <img mat-card-image [src]="project.image == '' ? (project.opened ? 'assets/img/projects-green.jpg' : 'assets/img/projects-yellow.jpg') : imagePath + project.image" [alt]="project.title" height="240">
             <mat-card-content class="p-">
                 <div class="pre-scrollable">{{project.description}}</div>
             </mat-card-content>

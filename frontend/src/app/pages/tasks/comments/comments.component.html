@@ -5,7 +5,7 @@
     <div fxLayout="column" class="w-100" fxLayoutGap="5px" *ngFor="let comment of comments">
         <div fxLayout="row wrap" class="w-100 m-5">
             <div fxFlexAlign="33.33" fxFlexAlign="center center">
-                <img class="img" [src]="comment.image == '' || comment.image === undefined ? 'assets/img/app/5.jpg' : userImageDir + comment.image"
+                <img class="img" [src]="comment.image === null || comment.image === '' || comment.image === undefined ? 'assets/img/app/5.jpg' : userImageDir + comment.image"
                      alt="{{comment.first_name + ' ' + comment.last_name}}" height="36" width="36">
             </div>
             <div fxFlex="66.66" fxLayout="column wrap" class="comment-container">
