@@ -2,6 +2,8 @@
 
 namespace App\DB\Services;
 
+use App\DB\Models\Project;
+use App\DB\Repositories\TasksRepository;
 use App\DB\Repositories\UserRepository as UserRepo;
 use App\DB\Models\Notifications;
 use Illuminate\Support\Facades\Mail;
@@ -16,14 +18,14 @@ class ProjectsService
 
     private $to = [];
     private $projectsRepo;
+    private $tasksRepo;
 
     /**
      * Constructor
      */
-    public function __construct(
-        ProjectsRepo $projectsRepo
-    ) {
+    public function __construct(ProjectsRepo $projectsRepo, TasksRepository $tasksRepo) {
         $this->projectsRepo = $projectsRepo;
+        $this->tasksRepo = $tasksRepo;
     }
 
     /**
@@ -66,7 +68,7 @@ class ProjectsService
         try {
             $current_user = JWTAuth::parseToken()->authenticate();
             if ($current_user) {
-                $this->projectsRepo->delete($id);
+                $this->projectsRepo->deleteById($id);
                 return true;
             }
         } catch (\Throwable $th) {

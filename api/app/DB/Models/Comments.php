@@ -10,10 +10,11 @@ class Comments extends Model
     protected $fillable = ['id'];
 
     public function user () {
-        return $this->hasOne('App\DB\Models\User');
+        return $this->belongsTo('App\DB\Models\User');
     }
 
     public function task () {
-        return $this->hasOne('App\DB\Models\Tasks');
+        return $this->belongsTo('App\DB\Models\Tasks', 'task_id', 'id');
     }
+
 }

@@ -10,4 +10,8 @@ class Project extends Model
     public function createdBy () {
         return $this->hasOne('App\DB\Models\User');
     }
+
+    public function tasks(){
+        return $this->hasMany(Tasks::class);
+    }
 }

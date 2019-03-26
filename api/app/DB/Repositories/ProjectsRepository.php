@@ -50,4 +50,13 @@ class ProjectsRepository extends Repository
     public function getProjectById($id) {
         return parent::findBy('id', $id);
     }
+
+    public function deleteById($id) {
+        $project = parent::find($id);
+        foreach ($project->tasks() as $task) {
+            $task->comments()->delete();
+        }
+        $project->tasks()->delete();
+        return $project->delete();
+    }
 }
