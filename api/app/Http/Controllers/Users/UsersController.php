@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Users;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Illuminate\Http\JsonResponse;
+use Illuminate\Support\Facades\Log;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use App\Http\Controllers\Controller;
 use Tymon\JWTAuth\Exceptions\JWTException;
@@ -45,6 +46,8 @@ class UsersController extends Controller
                 'password' => 'required|min:6'
             ]);
         } catch (ValidationException $e) {
+            Log::error($e->getMessage());
+            Log::error($e->getTraceAsString());
             return new JsonResponse([
                 'success' => false,
                 'message' => trans('messages.validations.error')
