@@ -19,9 +19,20 @@ export class TasksFilterPipe implements PipeTransform {
   transform(opt: any, sel?: any): any {
     // console.log('sel', sel);
     if (sel) {
-      return (opt || opt === '0') ? opt.filter(task => task.user_id === sel ) : opt;
-    } else {
-      return opt;
+      if (opt || opt === '0') {
+       return opt.filter(task => {
+          const permissions = JSON.parse(task.permissions);
+          let hasTask = false;
+          permissions.forEach(permission => {
+            if (permission.user_id === sel && permission.enabled === true) {
+              // console.log(task);
+              hasTask = true;
+            }
+          });
+          return hasTask;
+        });
+      }
     }
-}
+    return opt;
+  }
 }
