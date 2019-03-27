@@ -3,6 +3,7 @@
 namespace App\DB\Services;
 
 use App\DB\Repositories\UserRepository as UserRepo;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
 use App\DB\Repositories\ProjectsRepository as ProjectRepo;
 use Intervention\Image\Facades\Image;
@@ -80,7 +81,8 @@ class UsersService {
 
     public function getNonAdminUsers(){
        try {
-           $users = $this->userRepo->getNonAdminUsers();
+           $currentUserId = Auth::user()->id;
+           $users = $this->userRepo->getNonAdminUsers($currentUserId);
            return $users;
        }  catch (\Exception $e) {
            Log::error($e->getMessage());

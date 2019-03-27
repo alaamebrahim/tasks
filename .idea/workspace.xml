@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cebc6ad-983f-4548-b50d-5a375c9d1d0c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/api/app/Http/Controllers/Users/UsersController.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/Http/Controllers/Users/UsersController.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/DB/Repositories/UserRepository.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/DB/Repositories/UserRepository.php" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/api/app/DB/Services/UsersService.php" beforeDir="false" afterPath="$PROJECT_DIR$/api/app/DB/Services/UsersService.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -145,26 +145,26 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="php" value="775" />
+          <entry key="php" value="849" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PHP" value="775" />
+          <entry key="PHP" value="849" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="env" value="1" />
           <entry key="log" value="2" />
-          <entry key="php" value="9" />
+          <entry key="php" value="12" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="1" />
           <entry key="Log" value="2" />
-          <entry key="PHP" value="9" />
+          <entry key="PHP" value="12" />
         </counts>
       </usages-collector>
     </session>
@@ -183,25 +183,55 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/storage/logs/lumen.log">
           <provider selected="true" editor-type-id="LogFileEditorProvider">
-            <state relative-caret-position="352">
-              <caret line="11601" lean-forward="true" selection-start-line="11601" selection-end-line="11601" />
+            <state relative-caret-position="-1467">
+              <caret line="11600" column="12" selection-start-line="11600" selection-start-column="12" selection-end-line="11601" selection-end-column="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/api/app/DB/Services/UsersService.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="189">
+              <caret line="83" column="45" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
+              <folding>
+                <element signature="e#35#86#0#PHP" expanded="true" />
+              </folding>
             </state>
           </provider>
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/api/app/DB/Services/UsersService.php">
+        <entry file="file://$PROJECT_DIR$/api/app/DB/Repositories/UserRepository.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1137" />
+            <state relative-caret-position="284">
+              <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
+            </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Users/UsersController.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="340">
-              <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+            <state relative-caret-position="156">
+              <caret line="189" column="45" selection-start-line="189" selection-start-column="45" selection-end-line="189" selection-end-column="45" />
             </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/routes/api.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="173">
+              <caret line="187" column="59" selection-start-line="187" selection-start-column="43" selection-end-line="187" selection-end-column="59" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Tasks/ProjectController.php">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-1377" />
           </provider>
         </entry>
       </file>
@@ -209,8 +239,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>logout</find>
-      <find>no-task</find>
       <find>get-user-notifications</find>
       <find>getUserNotifications</find>
       <find>.m-</find>
@@ -239,6 +267,8 @@
       <find>send-notification</find>
       <find>attachme</find>
       <find>delete</find>
+      <find>get-non-ad</find>
+      <find>getNonAdminUsers</find>
     </findStrings>
     <replaceStrings>
       <replace>tasks.test/</replace>
@@ -270,8 +300,6 @@
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/view-tasks/tasks.component.scss" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/user-permissions.model.ts" />
         <option value="$PROJECT_DIR$/frontend/src/styles.scss" />
-        <option value="$PROJECT_DIR$/api/app/DB/Repositories/UserRepository.php" />
-        <option value="$PROJECT_DIR$/api/app/DB/Services/UsersService.php" />
         <option value="$PROJECT_DIR$/api/routes/api.php" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/users/users.service.ts" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/add-project/add-project.component.ts" />
@@ -303,6 +331,8 @@
         <option value="$PROJECT_DIR$/api/app/DB/Models/Comments.php" />
         <option value="$PROJECT_DIR$/api/app/DB/Models/Tasks.php" />
         <option value="$PROJECT_DIR$/api/app/Http/Controllers/Users/UsersController.php" />
+        <option value="$PROJECT_DIR$/api/app/DB/Repositories/UserRepository.php" />
+        <option value="$PROJECT_DIR$/api/app/DB/Services/UsersService.php" />
       </list>
     </option>
   </component>
@@ -485,6 +515,22 @@
               <item name="tasks" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="DB" type="462c0819:PsiDirectoryNode" />
+              <item name="Repositories" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="DB" type="462c0819:PsiDirectoryNode" />
+              <item name="Services" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -494,6 +540,15 @@
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="Http" type="462c0819:PsiDirectoryNode" />
               <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="app" type="462c0819:PsiDirectoryNode" />
+              <item name="Http" type="462c0819:PsiDirectoryNode" />
+              <item name="Controllers" type="462c0819:PsiDirectoryNode" />
+              <item name="Tasks" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -509,6 +564,12 @@
               <item name="tasks" type="462c0819:PsiDirectoryNode" />
               <item name="api" type="462c0819:PsiDirectoryNode" />
               <item name="bootstrap" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
+              <item name="tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="api" type="462c0819:PsiDirectoryNode" />
+              <item name="routes" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -603,12 +664,12 @@
       <workItem from="1547574585273" duration="576000" />
       <workItem from="1553611799537" duration="2594000" />
       <workItem from="1553634258746" duration="281000" />
-      <workItem from="1553698652550" duration="534000" />
+      <workItem from="1553698652550" duration="1217000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="125311000" />
+    <option name="totallyTimeSpent" value="125994000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -688,27 +749,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/edit-task/edit-task.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="60" column="60" selection-start-line="60" selection-start-column="60" selection-end-line="60" selection-end-column="60" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/add-task/add-task.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="289">
-          <caret line="74" column="70" lean-forward="true" selection-start-line="74" selection-start-column="70" selection-end-line="74" selection-end-column="70" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/routes/api.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="135">
-          <caret line="436" column="99" selection-start-line="436" selection-start-column="77" selection-end-line="436" selection-end-column="99" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/tasks/add-notification/add-notification.component.html">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -978,22 +1018,46 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Tasks/ProjectController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-1377" />
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/routes/api.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="173">
+          <caret line="187" column="59" selection-start-line="187" selection-start-column="43" selection-end-line="187" selection-end-column="59" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Users/UsersController.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="156">
+          <caret line="189" column="45" selection-start-line="189" selection-start-column="45" selection-end-line="189" selection-end-column="45" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/api/app/DB/Repositories/UserRepository.php">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="284">
+          <caret line="88" column="35" selection-start-line="88" selection-start-column="35" selection-end-line="88" selection-end-column="35" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/api/storage/logs/lumen.log">
       <provider selected="true" editor-type-id="LogFileEditorProvider">
-        <state relative-caret-position="352">
-          <caret line="11601" lean-forward="true" selection-start-line="11601" selection-end-line="11601" />
+        <state relative-caret-position="-1467">
+          <caret line="11600" column="12" selection-start-line="11600" selection-start-column="12" selection-end-line="11601" selection-end-column="35" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/api/app/DB/Services/UsersService.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1137" />
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Users/UsersController.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="340">
-          <caret line="48" column="39" selection-start-line="48" selection-start-column="39" selection-end-line="48" selection-end-column="39" />
+        <state relative-caret-position="189">
+          <caret line="83" column="45" selection-start-line="83" selection-start-column="45" selection-end-line="83" selection-end-column="45" />
+          <folding>
+            <element signature="e#35#86#0#PHP" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

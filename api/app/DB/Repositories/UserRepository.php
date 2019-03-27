@@ -57,37 +57,38 @@ class UserRepository extends Repository
         return $users;
     }
 
-    public function getNonAdminUsers()
+    public function getNonAdminUsers($currentUserId)
     {
         $users = collect(DB::table('users')
-        ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
-        ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
-        ->select(
-            'users.address',
-            'users.birthday',
-            'users.company',
-            'users.country',
-            'users.created_at',
-            'users.email',
-            'users.facebook',
-            'users.first_name',
-            'users.gender',
-            'users.google',
-            'users.id',
-            'users.is_active',
-            'users.is_blocked',
-            'users.last_name',
-            'users.phone_no',
-            'users.picture',
-            'users.position',
-            'users.twitter',
-            'users.updated_at',
-            'users.username',
-            'roles.name as role_name'
-        )
-        ->whereNotIn('roles.id', [4,5])
-        ->orderBy('users.created_at', 'desc')
-        ->get())->toArray();
+            ->leftJoin('model_has_roles', 'model_has_roles.model_id', '=', 'users.id')
+            ->leftJoin('roles', 'model_has_roles.role_id', '=', 'roles.id')
+            ->select(
+                'users.address',
+                'users.birthday',
+                'users.company',
+                'users.country',
+                'users.created_at',
+                'users.email',
+                'users.facebook',
+                'users.first_name',
+                'users.gender',
+                'users.google',
+                'users.id',
+                'users.is_active',
+                'users.is_blocked',
+                'users.last_name',
+                'users.phone_no',
+                'users.picture',
+                'users.position',
+                'users.twitter',
+                'users.updated_at',
+                'users.username',
+                'roles.name as role_name'
+            )
+            ->whereNotIn('roles.id', [4])
+            ->where('users.id', '<>', $currentUserId)
+            ->orderBy('users.created_at', 'desc')
+            ->get())->toArray();
 
         return $users;
     }
