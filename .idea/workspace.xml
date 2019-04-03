@@ -2,8 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="9cebc6ad-983f-4548-b50d-5a375c9d1d0c" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.scss" beforeDir="false" afterPath="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -148,37 +148,37 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="html" value="80" />
+          <entry key="html" value="118" />
           <entry key="php" value="874" />
-          <entry key="scss" value="45" />
+          <entry key="scss" value="51" />
           <entry key="ts" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="HTML" value="80" />
+          <entry key="HTML" value="118" />
           <entry key="PHP" value="874" />
-          <entry key="SCSS" value="45" />
+          <entry key="SCSS" value="51" />
           <entry key="TypeScript" value="31" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="env" value="1" />
-          <entry key="html" value="4" />
+          <entry key="html" value="5" />
           <entry key="log" value="2" />
           <entry key="php" value="19" />
-          <entry key="scss" value="1" />
+          <entry key="scss" value="2" />
           <entry key="ts" value="2" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key=".env file" value="1" />
-          <entry key="HTML" value="4" />
+          <entry key="HTML" value="5" />
           <entry key="Log" value="2" />
           <entry key="PHP" value="19" />
-          <entry key="SCSS" value="1" />
+          <entry key="SCSS" value="2" />
           <entry key="TypeScript" value="2" />
         </counts>
       </usages-collector>
@@ -192,20 +192,20 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.html">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="272">
-              <caret line="16" column="24" lean-forward="true" selection-start-line="16" selection-start-column="24" selection-end-line="16" selection-end-column="34" />
+            <state relative-caret-position="85">
+              <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
             </state>
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.scss">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.scss">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="119">
-              <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+            <state relative-caret-position="34">
+              <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
             </state>
           </provider>
         </entry>
@@ -260,7 +260,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/frontend/src/app/pages/dashboard/dashboard.module.ts" />
         <option value="$PROJECT_DIR$/frontend/src/app/app.module.ts" />
         <option value="$PROJECT_DIR$/frontend/src/app/shared/services/api-request.service.ts" />
         <option value="$PROJECT_DIR$/api/database/migrations/2019_01_12_160707_update_tasks_table_2.php" />
@@ -294,7 +293,6 @@
         <option value="$PROJECT_DIR$/api/app/Http/Controllers/Tasks/TasksController.php" />
         <option value="$PROJECT_DIR$/api/app/DB/Services/TasksService.php" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/tasks/comments/comments.component.html" />
-        <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.scss" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/login/login.component.html" />
         <option value="$PROJECT_DIR$/api/app/DB/Models/Project.php" />
@@ -311,6 +309,8 @@
         <option value="$PROJECT_DIR$/frontend/src/app/pages/dashboard/info-cards/info-cards.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.html" />
         <option value="$PROJECT_DIR$/frontend/src/app/pages/dashboard/tasks/tasks.component.scss" />
+        <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.scss" />
+        <option value="$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html" />
       </list>
     </option>
   </component>
@@ -567,7 +567,7 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -576,37 +576,8 @@
               <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="app" type="462c0819:PsiDirectoryNode" />
               <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="notifications" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="dashboard" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="frontend" type="462c0819:PsiDirectoryNode" />
-              <item name="src" type="462c0819:PsiDirectoryNode" />
-              <item name="app" type="462c0819:PsiDirectoryNode" />
-              <item name="pages" type="462c0819:PsiDirectoryNode" />
-              <item name="tasks" type="462c0819:PsiDirectoryNode" />
-              <item name="view-tasks" type="462c0819:PsiDirectoryNode" />
+              <item name="projects" type="462c0819:PsiDirectoryNode" />
+              <item name="view-projects" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="tasks" type="b2602c69:ProjectViewProjectNode" />
@@ -718,12 +689,12 @@
       <workItem from="1553698652550" duration="1403000" />
       <workItem from="1553705655185" duration="2095000" />
       <workItem from="1553784989548" duration="425000" />
-      <workItem from="1554303363303" duration="867000" />
+      <workItem from="1554303363303" duration="1489000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129567000" />
+    <option name="totallyTimeSpent" value="130189000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -752,7 +723,7 @@
       <window_info anchor="bottom" id="Version Control" order="8" sideWeight="0.49924356" weight="0.42114094" />
       <window_info anchor="bottom" id="Database Changes" order="9" />
       <window_info anchor="bottom" id="TypeScript" order="10" weight="0.32901135" />
-      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49924356" weight="0.2785235" />
+      <window_info anchor="bottom" id="Terminal" order="11" sideWeight="0.49924356" visible="true" weight="0.2785235" />
       <window_info anchor="bottom" id="Event Log" order="12" sideWeight="0.50075644" side_tool="true" weight="0.42114094" />
       <window_info anchor="bottom" id="Messages" order="13" />
       <window_info anchor="bottom" id="Database Console" order="14" weight="0.32901135" />
@@ -803,13 +774,6 @@
     <option name="myLimit" value="2678400000" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/api/app/DB/Services/NotificationsService.php">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="194">
-          <caret line="53" column="51" selection-start-line="53" selection-start-column="44" selection-end-line="53" selection-end-column="51" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/api/app/Http/Controllers/Notifications/NotificationsController.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="255">
@@ -914,13 +878,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/assets/img/project-yellow.jpg" />
-    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="357">
-          <caret line="21" column="31" lean-forward="true" selection-start-line="21" selection-start-column="31" selection-end-line="21" selection-end-column="31" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/login/login.component.html">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="34">
@@ -1113,6 +1070,20 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="119">
           <caret line="7" column="20" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.scss">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="20" selection-start-line="2" selection-start-column="20" selection-end-line="2" selection-end-column="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/frontend/src/app/pages/projects/view-projects/view-projects.component.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="11" column="54" selection-start-line="11" selection-start-column="54" selection-end-line="11" selection-end-column="54" />
         </state>
       </provider>
     </entry>

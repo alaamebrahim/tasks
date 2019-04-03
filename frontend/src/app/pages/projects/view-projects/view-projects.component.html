@@ -8,8 +8,8 @@
         </button>
     </div>
 </div>
-<div fxLayout="column" fxLayout.gt-sm="row wrap" *ngIf="!loading && projects && projects.length > 0">
-    <div fxFlex.md="50" fxFlex="33.3" class="flex-p" *ngFor="let project of projects">
+<div fxLayout="column" fxLayout.gt-xs="row wrap" *ngIf="!loading && projects && projects.length > 0">
+    <div fxFlex.sm="50" fxFlex.md="33.3" fxFlex.xl="20" fxFlex="25" class="flex-p" *ngFor="let project of projects">
         <mat-card class="custom-card">
             <mat-card-header [ngClass]="{'bg-primary' : project.opened, 'bg-accent': !project.opened, 'p-1': project.opened || !project.opened}" fxLayoutAlign="space-between center">
                 <mat-card-title class="m-0">
