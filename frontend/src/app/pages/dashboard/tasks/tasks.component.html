@@ -11,8 +11,11 @@
           <div fxLayout="row">
             {{task.title}}
           </div>
-          <mat-progress-bar matTooltip="{{'dashboard.labels.progress'| translate}} {{task.progress}}%" mode="buffer" [value]="task.progress"
-            [bufferValue]="100-task.progress" color="primary"></mat-progress-bar>
+          <div fxLayout="row" class="w-100">
+            <mat-progress-bar matTooltip="{{'dashboard.labels.progress'| translate}} {{task.progress}}%" mode="buffer" [value]="task.progress"
+                              [bufferValue]="100-task.progress" color="primary"></mat-progress-bar>
+            <div class="percentage" fxFlex="1">{{task.progress }}%</div>
+          </div>
         </div>
       </mat-nav-list>
     </div>
